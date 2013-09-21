@@ -40,7 +40,7 @@ public class Main extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(new MigLayout("", "[]", "[]"));
 		
-		JLabel lblAloysiusWasHere = new JLabel("Aloysius Was Here");
+		JLabel lblAloysiusWasHere = new JLabel("Aloysius Was Here - COMMIT");
 		contentPane.add(lblAloysiusWasHere, "cell 0 0");
 	}
 
