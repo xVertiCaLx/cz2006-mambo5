@@ -32,6 +32,27 @@ public class DBController {
 		}
 	}
 	
+	public ResultSet selectTable(String sqlSyntax) {
+		ResultSet rset = null;
+		
+		try {
+			getConnection();
+			
+			sql = "SELECT " + sqlSyntax + ";";
+			println("Attempting to: " + sql);
+			
+			rset = stmt.executeQuery(sql);
+			
+			println(sql + " executed successfully.");
+			
+		} catch (Exception e) {
+			println("SELECT failed. Attempting to print stack trace.");
+			e.printStackTrace();
+		}
+		return rset;
+	}
+	
+	
 	private void println(String string) {
 		System.out.println(string);
 	}
