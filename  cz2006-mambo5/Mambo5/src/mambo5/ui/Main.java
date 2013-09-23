@@ -76,6 +76,9 @@ public class Main extends JFrame {
 		btnLogin.setForeground(new Color(0, 0, 0));
 		btnLogin.setFont(new Font("Arial", Font.BOLD, 12));
 		panel_1.add(btnLogin);
+		
+		JButton btnNewButton = new JButton("New button");
+		panel_1.add(btnNewButton);
 	}
 
 	private static void addPopup(Component component, final JPopupMenu popup) {
