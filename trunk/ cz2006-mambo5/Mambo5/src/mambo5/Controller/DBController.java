@@ -18,26 +18,26 @@ public class DBController { // Save as "JdbcSelectTest.java"
 
 	public static void main(String[] args) {
 
-		try
-
-		// Step 1: Allocate a database "Connection" object
-		// Connection conn = DriverManager.getConnection(
-		// "jdbc:mysql://mysql1100.shared-servers.com:1091/MamboJumbo",
-		// "mambo5", "anything"); // MySQL
-		// Connection conn = DriverManager.getConnection(
-		// "jdbc:odbc:ebookshopODBC"); // Access
-
-		// getCon();
-
-		// Step 2: Allocate a "Statement" object in the Connection
-		// Statement stmt = conn.createStatement();
-		{
+		try		{
 			getCon();
-			String syntax = "CREATE TABLE books (id int, title varchar(255), price double, qty int, primary key (id));";
-			System.out.println("CREATE TABLE");
-			stmt.executeQuery(syntax);
-
-			System.out.println("TABLE CREATED");
+			String strSelect = "select title, price, qty from books";
+	         System.out.println("The SQL query is: " + strSelect); // Echo For debugging
+	         System.out.println();
+	 
+	         ResultSet rset = stmt.executeQuery(strSelect);
+	 
+	         // Step 4: Process the ResultSet by scrolling the cursor forward via next().
+	         //  For each row, retrieve the contents of the cells with getXxx(columnName).
+	         System.out.println("The records selected are:");
+	         int rowCount = 0;
+	         while(rset.next()) {   // Move the cursor to the next row
+	            String title = rset.getString("title");
+	            double price = rset.getDouble("price");
+	            int    qty   = rset.getInt("qty");
+	            System.out.println(title + ", " + price + ", " + qty);
+	            ++rowCount;
+	         }
+	         System.out.println("Total number of records = " + rowCount);
 
 		} catch (Exception ex) {
 			ex.printStackTrace();
