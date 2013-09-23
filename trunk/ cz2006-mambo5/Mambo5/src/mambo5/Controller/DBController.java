@@ -8,7 +8,7 @@ public class DBController { // Save as "JdbcSelectTest.java"
 	static Statement stmt;
 
 	public static void getCon() throws SQLException, ClassNotFoundException {
-		Class.forName("com.mysql.jdbc.Driver");
+		//Class.forName("com.mysql.jdbc.Driver");
 		Connection conn = DriverManager.getConnection(
 				"jdbc:mysql://mysql1100.shared-servers.com:1091/MamboJumbo",
 				"mambo5", "anything");
