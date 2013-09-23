@@ -86,7 +86,7 @@ public class Main extends JFrame {
 				if (e.isPopupTrigger()) {
 					showMenu(e);
 				}
-			}
+			}//
 			public void mouseReleased(MouseEvent e) {
 				if (e.isPopupTrigger()) {
 					showMenu(e);
