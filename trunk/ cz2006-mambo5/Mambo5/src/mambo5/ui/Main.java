@@ -7,6 +7,17 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import java.awt.Color;
+import java.awt.Panel;
+import java.awt.Label;
+import java.awt.Font;
+import javax.swing.JLabel;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import javax.swing.JPopupMenu;
+import java.awt.Component;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class Main extends JFrame {
 
@@ -38,8 +49,52 @@ public class Main extends JFrame {
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.WHITE);
 		contentPane.setBorder(new EmptyBorder(0, 0, 0, 0));
-		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
+		contentPane.setLayout(new BorderLayout(0, 0));
+		
+		Panel panel = new Panel();
+		panel.setBackground(new Color(47, 79, 79));
+		contentPane.add(panel, BorderLayout.NORTH);
+		
+		Label label = new Label("Canteen A");
+		label.setFont(new Font("Arial", Font.BOLD, 12));
+		label.setForeground(new Color(240, 255, 255));
+		panel.add(label);
+		
+		Label label_1 = new Label("Date Time Information");
+		label_1.setForeground(new Color(240, 255, 255));
+		label_1.setFont(new Font("Arial", Font.BOLD, 12));
+		panel.add(label_1);
+		
+		Panel panel_1 = new Panel();
+		contentPane.add(panel_1, BorderLayout.CENTER);
+		
+		JButton btnLogin = new JButton("LOGIN");
+		btnLogin.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+			}
+		});
+		btnLogin.setForeground(new Color(0, 0, 0));
+		btnLogin.setFont(new Font("Arial", Font.BOLD, 12));
+		panel_1.add(btnLogin);
 	}
 
+	private static void addPopup(Component component, final JPopupMenu popup) {
+		component.addMouseListener(new MouseAdapter() {
+			public void mousePressed(MouseEvent e) {
+				if (e.isPopupTrigger()) {
+					showMenu(e);
+				}
+			}
+			public void mouseReleased(MouseEvent e) {
+				if (e.isPopupTrigger()) {
+					showMenu(e);
+				}
+			}
+			private void showMenu(MouseEvent e) {
+				popup.show(e.getComponent(), e.getX(), e.getY());
+			}
+		});
+	}
 }
