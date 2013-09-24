@@ -52,6 +52,50 @@ public class DBController {
 		return rset;
 	}
 	
+	public void insertData(String tableName, String columns, String values) {
+		try {
+			getConnection();
+			
+			sql = "INSERT INTO " + tableName + "(" + columns + ") VALUES (" + values + ");";
+			println("Attempting to: " + sql);
+			
+			stmt.execute(sql);
+			
+			println("Data successfully added into " + tableName);
+			
+		} catch (Exception e) {
+			println(tableName + " failed to add data. Attempting to print stack trace.");
+			e.printStackTrace();
+		}
+	}
+	
+	public void executeNonQuery(String sql){
+		try {
+			getConnection();
+			println("Attempting to: " + sql);
+			stmt.execute(sql);
+			println(sql + "\nSuccessfully queried MamboJumbo.");
+		} catch (Exception e) {
+			println(sql + "\nFailed to query MamboJumb. Printing Stacktrace...");
+			e.printStackTrace();
+		}
+	}
+	
+	public ResultSet executeQuery(String sql){
+		ResultSet rset = null;
+		
+		try {
+			getConnection();
+			println("Attempting to: " + sql);
+			rset = stmt.executeQuery(sql);
+			println(sql + "\nSuccessfully queried MamboJumbo.");
+		} catch (Exception e) {
+			println(sql + "\nFailed to query MamboJumb. Printing Stacktrace...");
+			e.printStackTrace();
+		}
+		
+		return rset;
+	}
 	
 	private void println(String string) {
 		System.out.println(string);
