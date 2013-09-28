@@ -9,6 +9,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JTextArea;
+import javax.swing.JButton;
 
 public class CreateCanteenForm extends JFrame {
 
@@ -70,5 +71,9 @@ public class CreateCanteenForm extends JFrame {
 		JTextArea descriptionText = new JTextArea();
 		descriptionText.setBounds(119, 61, 288, 148);
 		contentPane.add(descriptionText);
+		
+		JButton createCanteenBtn = new JButton("Create");
+		createCanteenBtn.setBounds(318, 220, 89, 23);
+		contentPane.add(createCanteenBtn);
 	}
 }
