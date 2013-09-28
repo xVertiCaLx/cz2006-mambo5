@@ -83,5 +83,9 @@ public class UpdateCanteenForm extends JFrame {
 		JButton updateBtn = new JButton("Update");
 		updateBtn.setBounds(329, 230, 89, 23);
 		contentPane.add(updateBtn);
+		
+		JButton retrieveBtn = new JButton("Retrieve");
+		retrieveBtn.setBounds(168, 7, 89, 23);
+		contentPane.add(retrieveBtn);
 	}
 }
