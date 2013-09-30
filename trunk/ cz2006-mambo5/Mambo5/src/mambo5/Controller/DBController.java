@@ -20,60 +20,6 @@ public class DBController {
 		println("Connection to MamboJumbo established.");
 		stmt = conn.createStatement();
 	}
-
-	public void createTable(String tableName, String columns, String primaryKey) {
-		try {
-			getConnection();
-			
-			sql = "CREATE " + tableName + "(" + columns + ", primary key (" + primaryKey + "));";
-			println("Attempting to: " + sql);
-			
-			stmt.execute(sql);
-			
-			println(tableName + " created successfully.");
-			
-		} catch (Exception e) {
-			println(tableName + " was not created. Attempting to print stack trace.");
-			e.printStackTrace();
-		}
-	}
-	
-	public ResultSet selectTable(String sqlSyntax) {
-		ResultSet rset = null;
-		
-		try {
-			getConnection();
-			
-			sql = "SELECT " + sqlSyntax + ";";
-			println("Attempting to: " + sql);
-			
-			rset = stmt.executeQuery(sql);
-			
-			println(sql + " executed successfully.");
-			
-		} catch (Exception e) {
-			println("SELECT failed. Attempting to print stack trace.");
-			e.printStackTrace();
-		}
-		return rset;
-	}
-	
-	public void insertData(String tableName, String columns, String values) {
-		try {
-			getConnection();
-			
-			sql = "INSERT INTO " + tableName + "(" + columns + ") VALUES (" + values + ");";
-			println("Attempting to: " + sql);
-			
-			stmt.execute(sql);
-			
-			println("Data successfully added into " + tableName);
-			
-		} catch (Exception e) {
-			println(tableName + " failed to add data. Attempting to print stack trace.");
-			e.printStackTrace();
-		}
-	}
 	
 	public void executeNonQuery(String sql){
 		try {
