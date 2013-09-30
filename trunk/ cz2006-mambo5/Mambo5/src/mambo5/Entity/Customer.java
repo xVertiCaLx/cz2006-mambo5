@@ -65,7 +65,6 @@ public class Customer {
 		
 		if(rs != null) {
 	        try {
-	        	//cust = new Customer();
 	        	if(rs.next()) {   // Move the cursor to the next row
 	        		cust = new Customer(rs.getInt("custID"),rs.getDouble("cardBalance"),rs.getString("fullName"),rs.getInt("accessID"));
 				    System.out.println(cust.custID + ", " + cust.cardBalance + ", " + cust.fullName);
