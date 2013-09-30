@@ -7,6 +7,12 @@ public class DBController {
 	private Statement stmt;
 	private String sql;
 	
+	//Server: mysql1100.shared-servers.com
+	//Port:   1091
+	//User:	  mambo5
+	//Password: anything
+	//Schema: MamboJumbo
+	
 	private void getConnection() throws SQLException, ClassNotFoundException {
 		Connection conn = DriverManager.getConnection(
 				"jdbc:mysql://mysql1100.shared-servers.com:1091/MamboJumbo",
