@@ -6,15 +6,23 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
 import java.awt.Color;
 import java.awt.Panel;
 import java.awt.Label;
 import java.awt.Font;
+
 import javax.swing.JLabel;
 import javax.swing.JButton;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+
 import javax.swing.JPopupMenu;
+
+import mambo5.Controller.LoginController;
+import mambo5.Entity.Customer;
+
 import java.awt.Component;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -70,7 +78,14 @@ public class Main extends JFrame {
 		JButton btnLogin = new JButton("LOGIN");
 		btnLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				
+				LoginController login = new LoginController();
+				Customer c;			
+				c = login.validateLoginDetail(1, 2);
+				if(c != null) {
+					System.out.println(c.getCustID() + " " + c.getCardBalance() + " " + c.getFullName() + " ");
+				}
+				else
+					System.out.println("ERROR");
 			}
 		});
 		btnLogin.setForeground(new Color(0, 0, 0));
@@ -79,23 +94,5 @@ public class Main extends JFrame {
 		
 		JButton btnNewButton = new JButton("New button");
 		panel_1.add(btnNewButton);
-	}
-
-	private static void addPopup(Component component, final JPopupMenu popup) {
-		component.addMouseListener(new MouseAdapter() {
-			public void mousePressed(MouseEvent e) {
-				if (e.isPopupTrigger()) {
-					showMenu(e);
-				}
-			}
-			public void mouseReleased(MouseEvent e) {
-				if (e.isPopupTrigger()) {
-					showMenu(e);
-				}
-			}
-			private void showMenu(MouseEvent e) {
-				popup.show(e.getComponent(), e.getX(), e.getY());
-			}
-		});
 	}
 }

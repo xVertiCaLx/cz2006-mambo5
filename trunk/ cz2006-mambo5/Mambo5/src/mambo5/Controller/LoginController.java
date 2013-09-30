@@ -7,7 +7,8 @@ public class LoginController {
 	
 	private Customer cust;
 	public Customer validateLoginDetail(int accessID, int custID) {
-		cust = null;
+		
+		cust = new Customer();
 		cust = cust.retrieveCustomerDetail(custID);
 		return cust;		
 	}
