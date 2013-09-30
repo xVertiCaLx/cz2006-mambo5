@@ -65,7 +65,7 @@ public class CamsLoginForm extends JFrame {
 		label.setBounds(10, 0, 103, 39);
 		panel.add(label);
 		
-		JLabel label_1 = new JLabel("#Canteen");
+		JLabel label_1 = new JLabel("#Store Name | #CaMS Page");
 		label_1.setHorizontalAlignment(SwingConstants.CENTER);
 		label_1.setForeground(Color.WHITE);
 		label_1.setFont(new Font("Arial", Font.BOLD, 12));
