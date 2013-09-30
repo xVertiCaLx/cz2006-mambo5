@@ -36,6 +36,7 @@ public class CustomerPurchaseCard extends JFrame {
 	 * Create the frame.
 	 */
 	public CustomerPurchaseCard() {
+		setTitle("Purchase Card");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -71,8 +72,8 @@ public class CustomerPurchaseCard extends JFrame {
 		lblInserted.setBounds(39, 81, 108, 27);
 		contentPane.add(lblInserted);
 		
-		JButton btnCancel = new JButton("Cancel");
-		btnCancel.setBounds(315, 224, 109, 27);
+		JButton btnCancel = new JButton("Back to main");
+		btnCancel.setBounds(315, 231, 109, 20);
 		contentPane.add(btnCancel);
 		
 		JLabel lblMinimumOfSgd = new JLabel("Minimum of SGD$10.00");
@@ -102,7 +103,7 @@ public class CustomerPurchaseCard extends JFrame {
 		contentPane.add(lblSgd_4);
 		
 		JButton btnOk = new JButton("Ok");
-		btnOk.setBounds(177, 224, 109, 27);
+		btnOk.setBounds(184, 231, 109, 20);
 		contentPane.add(btnOk);
 		
 		JLabel lblMessage = new JLabel("Please collect your card.");
