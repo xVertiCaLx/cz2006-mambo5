@@ -36,6 +36,7 @@ public class CamsMainMenuForm extends JFrame {
 	}
 	
 	public CamsMainMenuForm() {
+		setResizable(false);
 		setTitle("CaMS");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(0, 0, 800, 600);
@@ -47,7 +48,7 @@ public class CamsMainMenuForm extends JFrame {
 		
 		JPanel panel = new JPanel();
 		panel.setBackground(new Color(0, 0, 102));
-		panel.setBounds(0, 0, 784, 39);
+		panel.setBounds(0, 0, 794, 39);
 		contentPane.add(panel);
 		panel.setLayout(null);
 		
@@ -57,16 +58,19 @@ public class CamsMainMenuForm extends JFrame {
 		label.setBounds(10, 0, 103, 39);
 		panel.add(label);
 		
-		JLabel label_1 = new JLabel("#Canteen");
+		JLabel label_1 = new JLabel("#Store Name | #CaMS Page");
 		label_1.setHorizontalAlignment(SwingConstants.CENTER);
 		label_1.setForeground(Color.WHITE);
 		label_1.setFont(new Font("Arial", Font.BOLD, 12));
-		label_1.setBounds(0, 0, 784, 39);
+		label_1.setBounds(0, 0, 794, 39);
 		panel.add(label_1);
 		
 		JButton btnLogin = new JButton("LOGOUT");
 		btnLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				CamsLoginForm form = new CamsLoginForm();
+				form.show();
+				dispose();
 			}
 		});
 		btnLogin.setForeground(new Color(255, 255, 255));
