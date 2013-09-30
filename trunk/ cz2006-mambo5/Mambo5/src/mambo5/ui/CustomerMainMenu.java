@@ -67,7 +67,12 @@ public class CustomerMainMenu extends JFrame {
 		
 		JLabel lblWelcomeToThe = new JLabel("Welcome to the CaMs Ticketing Machine");
 		lblWelcomeToThe.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblWelcomeToThe.setBounds(82, 46, 298, 40);
+		lblWelcomeToThe.setBounds(81, 11, 298, 40);
 		contentPane.add(lblWelcomeToThe);
+		
+		JLabel lblSelectAnOption = new JLabel("Select an option");
+		lblSelectAnOption.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lblSelectAnOption.setBounds(163, 62, 134, 40);
+		contentPane.add(lblSelectAnOption);
 	}
 }
