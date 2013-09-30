@@ -13,6 +13,38 @@ public class Customer {
 	private Customer cust;
 	DBController dbc;
 	
+	public int getCustID() {
+		return custID;
+	}
+
+	public void setCustID(int custID) {
+		this.custID = custID;
+	}
+
+	public double getCardBalance() {
+		return cardBalance;
+	}
+
+	public void setCardBalance(double cardBalance) {
+		this.cardBalance = cardBalance;
+	}
+
+	public String getFullName() {
+		return fullName;
+	}
+
+	public void setFullName(String fullName) {
+		this.fullName = fullName;
+	}
+
+	public int getAccessID() {
+		return accessID;
+	}
+
+	public void setAccessID(int accessID) {
+		this.accessID = accessID;
+	}
+	
 	public Customer() {}
 	
 	public Customer(int custID, double cardBalance, String fullName, int accessID){
@@ -23,19 +55,20 @@ public class Customer {
 	}
 	
 	public Customer retrieveCustomerDetail(int custID) {
+		System.out.println("TEST2");
 		dbc = new DBController();
 		cust = null;
 		ResultSet rs = null;
-		rs = dbc.executeQuery("Select * from Customer where custID = '" + custID + "';");
+		String sql = "Select * from Customer where custID = '" + custID + "';";
+		System.out.println(sql);
+		rs = dbc.executeQuery(sql);
+		
 		if(rs != null) {
 	        try {
-	        	cust = new Customer();
-	        	while(rs.next()) {   // Move the cursor to the next row
-	        		this.custID = rs.getInt("custID");
-				    this.cardBalance = rs.getDouble("cardBalance");
-				    this.fullName= rs.getString("fullName");
-				    this.accessID = rs.getInt("accessID");
-				    System.out.println(custID + ", " + cardBalance + ", " + fullName);
+	        	//cust = new Customer();
+	        	if(rs.next()) {   // Move the cursor to the next row
+	        		cust = new Customer(rs.getInt("custID"),rs.getDouble("cardBalance"),rs.getString("fullName"),rs.getInt("accessID"));
+				    System.out.println(cust.custID + ", " + cust.cardBalance + ", " + cust.fullName);
 				 }
 			} catch (SQLException e) {
 				e.printStackTrace();
