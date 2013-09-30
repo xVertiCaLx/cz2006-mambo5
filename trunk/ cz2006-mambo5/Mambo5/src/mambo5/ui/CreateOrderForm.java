@@ -9,14 +9,20 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import javax.swing.JTextPane;
 import javax.swing.JButton;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+
 import javax.swing.JSeparator;
+
 import java.awt.Color;
 import java.awt.Font;
+
 import javax.swing.JTextArea;
 import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
+import javax.swing.JList;
+import javax.swing.SwingConstants;
 
 public class CreateOrderForm extends JFrame {
 
@@ -46,46 +52,66 @@ public class CreateOrderForm extends JFrame {
 	 * Create the frame.
 	 */
 	public CreateOrderForm() {
-		setTitle("Create Order");
+		setTitle("CaMS");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(400, 400, 800, 600);
+		setBounds(0, 0, 800, 600);
 		contentPane = new JPanel();
+		contentPane.setBackground(Color.WHITE);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
+		JPanel panel = new JPanel();
+		panel.setBackground(new Color(0, 0, 102));
+		panel.setBounds(0, 0, 784, 39);
+		contentPane.add(panel);
+		panel.setLayout(null);
+		
+		JLabel label = new JLabel("#Canteen");
+		label.setForeground(Color.WHITE);
+		label.setFont(new Font("Arial", Font.BOLD, 12));
+		label.setBounds(10, 0, 103, 39);
+		panel.add(label);
+		
+		JLabel label_1 = new JLabel("#Canteen");
+		label_1.setHorizontalAlignment(SwingConstants.CENTER);
+		label_1.setForeground(Color.WHITE);
+		label_1.setFont(new Font("Arial", Font.BOLD, 12));
+		label_1.setBounds(0, 0, 784, 39);
+		panel.add(label_1);
+		
 		JButton btnNewButton = new JButton("Chicken Chop");
-		btnNewButton.setBounds(336, 26, 120, 52);
+		btnNewButton.setBounds(336, 53, 120, 52);
 		btnNewButton.setBackground(new Color(105, 105, 105));
 		btnNewButton.setForeground(Color.WHITE);
 		contentPane.add(btnNewButton);
 		
 		JButton btnLambChop = new JButton("Lamb Chop");
-		btnLambChop.setBounds(463, 26, 120, 52);
+		btnLambChop.setBounds(463, 53, 120, 52);
 		btnLambChop.setBackground(new Color(105, 105, 105));
 		btnLambChop.setForeground(Color.WHITE);
 		contentPane.add(btnLambChop);
 		
 		JButton btnPorkChop = new JButton("Pork Chop");
-		btnPorkChop.setBounds(592, 26, 120, 52);
+		btnPorkChop.setBounds(592, 53, 120, 52);
 		btnPorkChop.setBackground(new Color(105, 105, 105));
 		btnPorkChop.setForeground(Color.WHITE);
 		contentPane.add(btnPorkChop);
 		
 		JButton btnRibeyeSteak = new JButton("Ribeye Steak");
-		btnRibeyeSteak.setBounds(336, 97, 120, 52);
+		btnRibeyeSteak.setBounds(336, 124, 120, 52);
 		btnRibeyeSteak.setBackground(new Color(105, 105, 105));
 		btnRibeyeSteak.setForeground(Color.WHITE);
 		contentPane.add(btnRibeyeSteak);
 		
 		JButton btnLambChop_1 = new JButton("Sirloin Steak");
-		btnLambChop_1.setBounds(463, 97, 120, 52);
+		btnLambChop_1.setBounds(463, 124, 120, 52);
 		btnLambChop_1.setBackground(new Color(105, 105, 105));
 		btnLambChop_1.setForeground(Color.WHITE);
 		contentPane.add(btnLambChop_1);
 		
 		JButton btnBeefSteak = new JButton("Beef Steak");
-		btnBeefSteak.setBounds(592, 97, 120, 52);
+		btnBeefSteak.setBounds(592, 124, 120, 52);
 		btnBeefSteak.setBackground(new Color(105, 105, 105));
 		btnBeefSteak.setForeground(Color.WHITE);
 		contentPane.add(btnBeefSteak);
@@ -94,18 +120,19 @@ public class CreateOrderForm extends JFrame {
 		btnEatIn.setFont(new Font("Tahoma", Font.BOLD, 11));
 		btnEatIn.setForeground(Color.WHITE);
 		btnEatIn.setBackground(new Color(0, 128, 0));
-		btnEatIn.setBounds(336, 260, 89, 23);
+		btnEatIn.setBounds(339, 276, 89, 23);
 		contentPane.add(btnEatIn);
 		
 		JButton btnTakeOut = new JButton("TAKE OUT");
 		btnTakeOut.setForeground(Color.WHITE);
 		btnTakeOut.setFont(new Font("Tahoma", Font.BOLD, 11));
 		btnTakeOut.setBackground(new Color(0, 128, 0));
-		btnTakeOut.setBounds(453, 260, 89, 23);
+		btnTakeOut.setBounds(456, 276, 89, 23);
 		contentPane.add(btnTakeOut);
 		
 		JTextArea textArea = new JTextArea();
-		textArea.setBounds(24, 26, 293, 525);
+		textArea.setBackground(new Color(245, 245, 245));
+		textArea.setBounds(21, 50, 290, 501);
 		JTextArea card = new JTextArea(24, 26);
 		contentPane.add(textArea);
 		contentPane.add(new JScrollPane(card));
@@ -175,36 +202,29 @@ public class CreateOrderForm extends JFrame {
 		contentPane.add(button_7);
 		
 		JButton btnChickenCutlet = new JButton("Chicken Cutlet");
-		btnChickenCutlet.setBounds(336, 170, 120, 52);
+		btnChickenCutlet.setBounds(336, 197, 120, 52);
 		btnChickenCutlet.setBackground(new Color(105, 105, 105));
 		btnChickenCutlet.setForeground(Color.WHITE);
 		contentPane.add(btnChickenCutlet);
 		
 		JButton btnPorkCutlet = new JButton("Pork Cutlet");
-		btnPorkCutlet.setBounds(592, 170, 120, 52);
+		btnPorkCutlet.setBounds(592, 197, 120, 52);
 		btnPorkCutlet.setBackground(new Color(105, 105, 105));
 		btnPorkCutlet.setForeground(Color.WHITE);
 		contentPane.add(btnPorkCutlet);
 		
 		JButton btnFishCutlet = new JButton("Fish Cutlet");
-		btnFishCutlet.setBounds(463, 170, 120, 52);
+		btnFishCutlet.setBounds(463, 197, 120, 52);
 		btnFishCutlet.setBackground(new Color(105, 105, 105));
 		btnFishCutlet.setForeground(Color.WHITE);
 		contentPane.add(btnFishCutlet);
 		
-		JButton btnX = new JButton("Backspace");
+		JButton btnX = new JButton("DELETE");
 		btnX.setForeground(Color.WHITE);
 		btnX.setFont(new Font("Tahoma", Font.BOLD, 12));
-		btnX.setBackground(Color.BLACK);
+		btnX.setBackground(new Color(0, 0, 0));
 		btnX.setBounds(557, 323, 100, 98);
 		contentPane.add(btnX);
-		
-		JButton btnWhitespace = new JButton("whitespace");
-		btnWhitespace.setForeground(Color.WHITE);
-		btnWhitespace.setFont(new Font("Tahoma", Font.BOLD, 12));
-		btnWhitespace.setBackground(Color.BLACK);
-		btnWhitespace.setBounds(368, 507, 139, 44);
-		contentPane.add(btnWhitespace);
 		
 		JButton btnMainPage = new JButton("Main Page");
 		btnMainPage.setForeground(Color.WHITE);
@@ -227,11 +247,18 @@ public class CreateOrderForm extends JFrame {
 		btnPrevPage.setBounds(673, 488, 100, 23);
 		contentPane.add(btnPrevPage);
 		
-		JButton btnEnter = new JButton("Enter");
+		JButton btnEnter = new JButton("ENTER");
 		btnEnter.setForeground(Color.WHITE);
 		btnEnter.setFont(new Font("Tahoma", Font.BOLD, 12));
 		btnEnter.setBackground(Color.BLACK);
 		btnEnter.setBounds(557, 452, 100, 98);
 		contentPane.add(btnEnter);
+		
+		JButton button_8 = new JButton("");
+		button_8.setForeground(Color.WHITE);
+		button_8.setFont(new Font("Tahoma", Font.BOLD, 12));
+		button_8.setBackground(Color.BLACK);
+		button_8.setBounds(336, 507, 197, 44);
+		contentPane.add(button_8);
 	}
 }
