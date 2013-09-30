@@ -15,7 +15,7 @@ import java.awt.SystemColor;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class CamsPosLoginForm extends JFrame {
+public class CamsMainMenuForm extends JFrame {
 
 	private JPanel contentPane;
 
@@ -26,7 +26,7 @@ public class CamsPosLoginForm extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					CamsPosLoginForm frame = new CamsPosLoginForm();
+					CamsMainMenuForm frame = new CamsMainMenuForm();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -34,11 +34,8 @@ public class CamsPosLoginForm extends JFrame {
 			}
 		});
 	}
-
-	/**
-	 * Create the frame.
-	 */
-	public CamsPosLoginForm() {
+	
+	public CamsMainMenuForm() {
 		setTitle("CaMS");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(0, 0, 800, 600);
@@ -60,7 +57,14 @@ public class CamsPosLoginForm extends JFrame {
 		label.setBounds(10, 0, 103, 39);
 		panel.add(label);
 		
-		JButton btnLogin = new JButton("LOGIN");
+		JLabel label_1 = new JLabel("#Canteen");
+		label_1.setHorizontalAlignment(SwingConstants.CENTER);
+		label_1.setForeground(Color.WHITE);
+		label_1.setFont(new Font("Arial", Font.BOLD, 12));
+		label_1.setBounds(0, 0, 784, 39);
+		panel.add(label_1);
+		
+		JButton btnLogin = new JButton("LOGOUT");
 		btnLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 			}
@@ -93,11 +97,13 @@ public class CamsPosLoginForm extends JFrame {
 		contentPane.add(btnPending);
 
 		JButton btnRefund = new JButton("REFUND");
+		btnRefund.setEnabled(false);
 		btnRefund.setForeground(Color.WHITE);
 		btnRefund.setFont(new Font("Arial", Font.BOLD, 16));
 		btnRefund.setBackground(SystemColor.controlDkShadow);
 		btnRefund.setBounds(274, 251, 234, 80);
 		contentPane.add(btnRefund);
+
 	}
 
 }
