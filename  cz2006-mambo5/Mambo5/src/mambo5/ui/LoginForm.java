@@ -80,7 +80,7 @@ public class LoginForm extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				LoginController login = new LoginController();
 				Customer c;			
-				c = login.validateLoginDetail(1, 2);
+				c = login.validateLoginDetail(1, 5);
 				if(c != null) {
 					System.out.println(c.getCustID() + " " + c.getCardBalance() + " " + c.getFullName() + " ");
 				}
