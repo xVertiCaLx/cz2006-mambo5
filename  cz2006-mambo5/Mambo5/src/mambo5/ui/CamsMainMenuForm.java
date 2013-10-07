@@ -48,7 +48,7 @@ public class CamsMainMenuForm extends JFrame {
 		
 		JPanel panel = new JPanel();
 		panel.setBackground(new Color(0, 0, 102));
-		panel.setBounds(0, 0, 794, 39);
+		panel.setBounds(0, 0, 800, 39);
 		contentPane.add(panel);
 		panel.setLayout(null);
 		
@@ -68,9 +68,11 @@ public class CamsMainMenuForm extends JFrame {
 		JButton btnLogin = new JButton("LOGOUT");
 		btnLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				CamsLoginForm form = new CamsLoginForm();
-				form.show();
-				dispose();
+				CamsLoginForm loginPanel = new CamsLoginForm();
+				contentPane.removeAll();
+				contentPane.add(loginPanel);
+				contentPane.revalidate();
+				contentPane.repaint();
 			}
 		});
 		btnLogin.setForeground(new Color(255, 255, 255));
