@@ -82,6 +82,15 @@ public class CamsMainMenuForm extends JFrame {
 		contentPane.add(btnLogin);
 		
 		JButton btnNewOrder = new JButton("NEW ORDER");
+		btnNewOrder.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				CreateOrderForm newOrder = new CreateOrderForm();
+				contentPane.removeAll();
+				contentPane.add(newOrder);
+				contentPane.revalidate();
+				contentPane.repaint();
+			}
+		});
 		btnNewOrder.setForeground(Color.WHITE);
 		btnNewOrder.setFont(new Font("Arial", Font.BOLD, 16));
 		btnNewOrder.setBackground(SystemColor.controlDkShadow);
