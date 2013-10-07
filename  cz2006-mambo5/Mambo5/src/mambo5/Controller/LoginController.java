@@ -13,7 +13,7 @@ public class LoginController {
 		return cust;		
 	}
 	
-	public int stallLogin(int accessID, int custID) {
+	public int stallLogin() {
 		
 		return 0;	
 	}
