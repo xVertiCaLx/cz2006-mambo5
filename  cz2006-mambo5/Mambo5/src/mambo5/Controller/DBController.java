@@ -5,7 +5,6 @@ import java.sql.*;
 
 public class DBController {
 	private Statement stmt;
-	private String sql;
 	
 	//Server: mysql1100.shared-servers.com
 	//Port:   1091

@@ -16,4 +16,28 @@ public class Stall {
 		this.stallDesc = stallDesc;
 		this.stallStatus = stallStatus;
 	}
+	
+	public int getStallId() {
+		return stallID;
+	}
+	
+	public int getCanteenId() {
+		return canteenID;
+	}
+	
+	public String getStallUnit() {
+		return stallUnit;
+	}
+	
+	public String getStallName() {
+		return stallName;
+	}
+	
+	public String getStallDesc() {
+		return stallDesc;
+	}
+	
+	public Boolean getStallStatus() {
+		return stallStatus;
+	}
 }
