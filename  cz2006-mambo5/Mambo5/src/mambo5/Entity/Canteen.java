@@ -29,6 +29,18 @@ public class Canteen {
 		this.canteenAddress = canteenAddress;
 	}
 
+	public int getCanteenID() {
+		return canteenID;
+	}
+
+	public String getCanteenDesc() {
+		return canteenDesc;
+	}
+
+	public String getCanteenAddress() {
+		return canteenAddress;
+	}
+
 	public String getCanteenName() {
 		return canteenName;
 	}

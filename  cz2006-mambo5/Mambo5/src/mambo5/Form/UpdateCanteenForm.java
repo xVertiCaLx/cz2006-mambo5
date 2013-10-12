@@ -2,6 +2,8 @@ package mambo5.Form;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.util.ArrayList;
 
 import javax.swing.JFrame;
@@ -9,6 +11,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import javax.swing.JComboBox;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JTextArea;
 import javax.swing.JButton;
@@ -24,6 +27,7 @@ public class UpdateCanteenForm extends JFrame {
 	private CanteenController cc;
 	private JComboBox<String> availableCB;
 	private ArrayList<Canteen> retrieveCanteenList;
+	private JTextArea descriptionText;
 
 	/**
 	 * Launch the application.
@@ -69,21 +73,17 @@ public class UpdateCanteenForm extends JFrame {
 		descriptionLabel.setBounds(10, 87, 104, 14);
 		contentPane.add(descriptionLabel);
 		
-		availableCB = getCanteenList();
-		availableCB.setBounds(130, 8, 47, 20);
-		contentPane.add(availableCB);
-		
 		nameText = new JTextField();
 		nameText.setBounds(130, 33, 86, 20);
 		contentPane.add(nameText);
 		nameText.setColumns(10);
 		
 		addressText = new JTextField();
-		addressText.setBounds(130, 59, 86, 20);
+		addressText.setBounds(130, 59, 288, 20);
 		contentPane.add(addressText);
 		addressText.setColumns(10);
 		
-		JTextArea descriptionText = new JTextArea();
+		descriptionText = new JTextArea();
 		descriptionText.setBounds(130, 82, 288, 137);
 		contentPane.add(descriptionText);
 		
@@ -94,15 +94,42 @@ public class UpdateCanteenForm extends JFrame {
 		JButton retrieveBtn = new JButton("Retrieve");
 		retrieveBtn.setBounds(217, 7, 89, 23);
 		contentPane.add(retrieveBtn);
+		
+		availableCB = getCanteenList();
+		availableCB.setBounds(130, 8, 47, 20);
+		availableCB.addItemListener(new ItemListener(){
+            @Override
+            public void itemStateChanged(ItemEvent e)
+            {
+            	int index = availableCB.getSelectedIndex();
+
+            	nameText.setText(retrieveCanteenList.get(index).getCanteenName());
+            	addressText.setText(retrieveCanteenList.get(index).getCanteenAddress());
+            	descriptionText.setText(retrieveCanteenList.get(index).getCanteenDesc());
+            }
+        });
+
+		contentPane.add(availableCB);
+
 	}
 	
 	private JComboBox<String> getCanteenList() {
 		JComboBox<String> canteenList = new JComboBox<String>();
 		cc = new CanteenController();
 		retrieveCanteenList = cc.processRetrieveCanteenList();
-		for(int i = 0; i<retrieveCanteenList.size();i++) {
-			canteenList.addItem(retrieveCanteenList.get(i).getCanteenName());
+		
+		if(retrieveCanteenList.size() != 0) {
+			
+			for(int i = 0; i<retrieveCanteenList.size();i++) 
+				canteenList.addItem(retrieveCanteenList.get(i).getCanteenName());
+			
+	    	nameText.setText(retrieveCanteenList.get(0).getCanteenName());
+	    	addressText.setText(retrieveCanteenList.get(0).getCanteenAddress());
+	    	descriptionText.setText(retrieveCanteenList.get(0).getCanteenDesc());
 		}
+		else
+			JOptionPane.showMessageDialog(null, "No Canteen Available");
+    	
 		return canteenList;
 	}
 }
