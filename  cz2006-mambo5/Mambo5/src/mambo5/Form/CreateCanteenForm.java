@@ -106,7 +106,7 @@ public class CreateCanteenForm extends JFrame {
 			JOptionPane.showMessageDialog(null, "Please Enter Canteen Description");
 		else {
 			cc = new CanteenController(canteenName, canteenAddress, canteenDesc);
-			if(cc.validateCanteenDetail()==0)
+			if(cc.validateCanteenDetail(1)==0)
 				JOptionPane.showMessageDialog(null, "Error when insertion to database");
 			else
 				JOptionPane.showMessageDialog(null, "Canteen successfully created");

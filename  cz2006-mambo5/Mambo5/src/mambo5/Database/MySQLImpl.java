@@ -17,7 +17,7 @@ public class MySQLImpl implements DataStoreInterface {
 	SystemConfiguration sc = new SystemConfiguration();
 	DBController dbc = new DBController(sc.getDatabase(), sc.getDbuser(), sc.getDbpassword());
 	
-	//OFS
+	//-----------------------------------------Canteen-------------------------------------------
 	@Override
 	public ArrayList<Canteen> retrieveCanteenList() {
 		Canteen c;
@@ -37,6 +37,20 @@ public class MySQLImpl implements DataStoreInterface {
 			dbc.terminate();
 		}
 		return canteenList;
+	}
+
+	@Override
+	public int updateCanteenDetail(int canteenID, String canteenName, String canteenDesc, String canteenAddress) {
+		dbc = new DBController();
+		int result = 0;
+		
+		String sql = "UPDATE canteen "
+					+ "SET canteenName = '" + canteenName + "' , canteenDesc = '" + canteenDesc + "' , canteenAddress = '" +canteenAddress +"' "
+					+ "WHERE canteenID = " + canteenID + ";";
+		
+		result = dbc.executeNonQuery(sql);
+				
+		return result;
 	}
 	
 }
