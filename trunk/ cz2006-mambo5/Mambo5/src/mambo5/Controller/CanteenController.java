@@ -1,13 +1,18 @@
 package mambo5.Controller;
 
+import java.util.ArrayList;
+
 import mambo5.Entity.Canteen;
 
-public class CreateCanteenController {
+public class CanteenController {
 	private String canteenName;
 	private String canteenAddress;
 	private String canteenDesc;
+	private Canteen c;
 	
-	public CreateCanteenController(String canteenName, String canteenAddress, String canteenDesc) {
+	public CanteenController() {}
+	
+	public CanteenController(String canteenName, String canteenAddress, String canteenDesc) {
 		this.canteenName = canteenName;
 		this.canteenAddress = canteenAddress;
 		this.canteenDesc = canteenDesc;
@@ -15,9 +20,14 @@ public class CreateCanteenController {
 	
 	public int validateCanteenDetail(){
 		int validate = 0;
-		Canteen c = new Canteen(canteenName, canteenDesc, canteenAddress);
+		c = new Canteen(canteenName, canteenDesc, canteenAddress);
 		validate = c.createCanteen();
 				
 		return validate;
+	}
+	
+	public ArrayList<Canteen> processRetrieveCanteenList() {
+		c = new Canteen();
+		return c.retrieveCanteenList();		
 	}
 }
