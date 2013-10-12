@@ -14,6 +14,7 @@ public class Canteen {
 	private ArrayList<Canteen> canteenList;
 	private ResultSet rs;
 	
+	
 	public Canteen(){}
 	
 	public Canteen(String canteenName, String canteenDesc, String canteenAddress) {
@@ -56,7 +57,7 @@ public class Canteen {
 				
 		return result;
 	}
-	
+	/*
 	public ArrayList<Canteen> retrieveCanteenList() {
 		dbc = new DBController();
 		Canteen c;
@@ -78,5 +79,5 @@ public class Canteen {
 		}
 		return canteenList;
 	}
-
+	 */
 }

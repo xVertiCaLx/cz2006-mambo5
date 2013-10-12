@@ -1,7 +1,7 @@
 package mambo5.Controller;
 
 import java.util.ArrayList;
-
+import mambo5.Database.*;
 import mambo5.Entity.Canteen;
 
 public class CanteenController {
@@ -9,6 +9,8 @@ public class CanteenController {
 	private String canteenAddress;
 	private String canteenDesc;
 	private Canteen c;
+	DataStoreInterface dataStore;
+	private SystemConfiguration sysConfig;
 	
 	public CanteenController() {}
 	
@@ -27,7 +29,9 @@ public class CanteenController {
 	}
 	
 	public ArrayList<Canteen> processRetrieveCanteenList() {
-		c = new Canteen();
-		return c.retrieveCanteenList();		
+		sysConfig = new SystemConfiguration();
+		dataStore = DataStoreFactory.createDataStore(sysConfig);
+		
+		return dataStore.retrieveCanteenList();		
 	}
 }
