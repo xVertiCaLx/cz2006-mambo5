@@ -65,13 +65,11 @@ public class DBController {
 		} catch (Exception e) {
 			System.out.println("Failed to query MamboJumb. Printing Stacktrace...");
 			e.printStackTrace();
-		} finally {
-			terminate();
-		}
+		} 
 		return rset;
 	}
 	
-	private void terminate() {
+	public void terminate() {
 		// close connection
 		try {
 			conn.close();
