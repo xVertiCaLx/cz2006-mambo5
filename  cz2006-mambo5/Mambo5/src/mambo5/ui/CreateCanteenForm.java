@@ -10,6 +10,7 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JTextArea;
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 
 import mambo5.Controller.CreateCanteenController;
 
@@ -74,7 +75,7 @@ public class CreateCanteenForm extends JFrame {
 		nameText.setColumns(10);
 		
 		addressText = new JTextField();
-		addressText.setBounds(119, 33, 86, 20);
+		addressText.setBounds(119, 33, 288, 20);
 		contentPane.add(addressText);
 		addressText.setColumns(10);
 		
@@ -98,7 +99,18 @@ public class CreateCanteenForm extends JFrame {
 		canteenAddress = addressText.getText();
 		canteenDesc = descriptionText.getText();
 
-		cc = new CreateCanteenController(canteenName, canteenAddress, canteenDesc);
-		System.out.println(cc.validateCanteenDetail());
+		if(canteenName.equals("")) 
+			JOptionPane.showMessageDialog(null, "Please Enter Canteen Name");
+		else if(canteenAddress.equals(""))
+			JOptionPane.showMessageDialog(null, "Please Enter Canteen Address");
+		else if (canteenDesc.equals(""))
+			JOptionPane.showMessageDialog(null, "Please Enter Canteen Description");
+		else {
+			cc = new CreateCanteenController(canteenName, canteenAddress, canteenDesc);
+			if(cc.validateCanteenDetail()==0)
+				JOptionPane.showMessageDialog(null, "Error when insertion to database");
+			else
+				JOptionPane.showMessageDialog(null, "Canteen successfully created");
+		}
 	}
 }
