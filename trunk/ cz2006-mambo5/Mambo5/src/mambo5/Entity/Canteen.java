@@ -24,12 +24,16 @@ public class Canteen {
 		this.canteenAddress = canteenAddress;
 	}
 	
-	public void createCanteen() {
+	public int createCanteen() {
 		dbc = new DBController();
+		int result = 0;
 		
 		String sql = "INSERT INTO canteen ( canteenName, canteenDesc, canteenAddress) "
 					+ "VALUES ( '" + canteenName + "' , '" + canteenDesc + "' , '" +canteenAddress +"');";
-		System.out.println(sql);
-		dbc.executeNonQuery(sql);
+		
+		result = dbc.executeNonQuery(sql);
+		dbc.terminate();
+		
+		return result;
 	}
 }

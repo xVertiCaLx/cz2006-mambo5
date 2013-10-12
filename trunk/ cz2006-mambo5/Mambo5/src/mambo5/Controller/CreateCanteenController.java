@@ -13,11 +13,10 @@ public class CreateCanteenController {
 		this.canteenDesc = canteenDesc;
 	}
 	
-	public boolean validateCanteenDetail(){
-		boolean validate = false;
+	public int validateCanteenDetail(){
+		int validate = 0;
 		Canteen c = new Canteen(canteenName, canteenDesc, canteenAddress);
-		c.createCanteen();
-		validate = true;
+		validate = c.createCanteen();
 				
 		return validate;
 	}
