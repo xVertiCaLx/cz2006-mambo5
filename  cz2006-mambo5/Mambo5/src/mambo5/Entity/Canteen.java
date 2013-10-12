@@ -32,8 +32,7 @@ public class Canteen {
 					+ "VALUES ( '" + canteenName + "' , '" + canteenDesc + "' , '" +canteenAddress +"');";
 		
 		result = dbc.executeNonQuery(sql);
-		dbc.terminate();
-		
+				
 		return result;
 	}
 }
