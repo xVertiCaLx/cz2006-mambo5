@@ -11,11 +11,21 @@ import javax.swing.JTextField;
 import javax.swing.JTextArea;
 import javax.swing.JButton;
 
+import mambo5.Controller.CreateCanteenController;
+
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
 public class CreateCanteenForm extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField nameText;
 	private JTextField addressText;
+	private JTextArea descriptionText;
+	private String canteenName;
+	private String canteenAddress;
+	private String canteenDesc;
+	private CreateCanteenController cc;
 
 	/**
 	 * Launch the application.
@@ -68,12 +78,27 @@ public class CreateCanteenForm extends JFrame {
 		contentPane.add(addressText);
 		addressText.setColumns(10);
 		
-		JTextArea descriptionText = new JTextArea();
+		descriptionText = new JTextArea();
+		descriptionText.setLineWrap(true);
 		descriptionText.setBounds(119, 61, 288, 148);
 		contentPane.add(descriptionText);
 		
 		JButton createCanteenBtn = new JButton("Create");
+		createCanteenBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				submitsCanteenDetails(e);
+			}
+		});
 		createCanteenBtn.setBounds(318, 220, 89, 23);
 		contentPane.add(createCanteenBtn);
+	}
+	
+	public void submitsCanteenDetails(ActionEvent e) {
+		canteenName = nameText.getText();
+		canteenAddress = addressText.getText();
+		canteenDesc = descriptionText.getText();
+
+		cc = new CreateCanteenController(canteenName, canteenAddress, canteenDesc);
+		System.out.println(cc.validateCanteenDetail());
 	}
 }
