@@ -1,4 +1,4 @@
-package mambo5.ui;
+package mambo5.Form;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
@@ -10,7 +10,7 @@ import javax.swing.JLabel;
 import javax.swing.JComboBox;
 import javax.swing.JButton;
 
-public class DeleteStallForm extends JFrame {
+public class DeleteCenteenForm extends JFrame {
 
 	private JPanel contentPane;
 
@@ -21,7 +21,7 @@ public class DeleteStallForm extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					DeleteStallForm frame = new DeleteStallForm();
+					DeleteCenteenForm frame = new DeleteCenteenForm();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -33,7 +33,7 @@ public class DeleteStallForm extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public DeleteStallForm() {
+	public DeleteCenteenForm() {
 		setTitle("CaMs");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
@@ -43,28 +43,16 @@ public class DeleteStallForm extends JFrame {
 		contentPane.setLayout(null);
 		
 		JLabel availableLabel = new JLabel("Available Canteen:");
-		availableLabel.setBounds(10, 15, 99, 14);
+		availableLabel.setBounds(10, 11, 105, 14);
 		contentPane.add(availableLabel);
 		
 		JComboBox availableCB = new JComboBox();
-		availableCB.setBounds(119, 12, 28, 20);
+		availableCB.setBounds(125, 8, 28, 20);
 		contentPane.add(availableCB);
 		
-		JButton retrieveBtn = new JButton("Retrieve");
-		retrieveBtn.setBounds(164, 11, 89, 23);
-		contentPane.add(retrieveBtn);
-		
 		JButton deleteBtn = new JButton("Delete");
-		deleteBtn.setBounds(164, 36, 89, 23);
+		deleteBtn.setBounds(180, 7, 89, 23);
 		contentPane.add(deleteBtn);
-		
-		JComboBox stallCB = new JComboBox();
-		stallCB.setBounds(119, 37, 28, 20);
-		contentPane.add(stallCB);
-		
-		JLabel stallLabel = new JLabel("Available Stall:");
-		stallLabel.setBounds(10, 40, 99, 14);
-		contentPane.add(stallLabel);
 	}
 
 }

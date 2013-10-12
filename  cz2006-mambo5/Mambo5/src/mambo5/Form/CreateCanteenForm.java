@@ -1,4 +1,4 @@
-package mambo5.ui;
+package mambo5.Form;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
@@ -7,12 +7,11 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
-import javax.swing.JComboBox;
 import javax.swing.JTextField;
 import javax.swing.JTextArea;
 import javax.swing.JButton;
 
-public class UpdateCanteenForm extends JFrame {
+public class CreateCanteenForm extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField nameText;
@@ -25,8 +24,9 @@ public class UpdateCanteenForm extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					UpdateCanteenForm frame = new UpdateCanteenForm();
+					CreateCanteenForm frame = new CreateCanteenForm();
 					frame.setVisible(true);
+					//frame.setTitle("HELLO");
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -37,7 +37,7 @@ public class UpdateCanteenForm extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public UpdateCanteenForm() {
+	public CreateCanteenForm() {
 		setTitle("CaMs");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
@@ -46,46 +46,34 @@ public class UpdateCanteenForm extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel availableLabel = new JLabel("Available Canteen:");
-		availableLabel.setBounds(10, 11, 91, 14);
-		contentPane.add(availableLabel);
-		
 		JLabel nameLabel = new JLabel("Canteen Name:");
-		nameLabel.setBounds(10, 36, 91, 14);
+		nameLabel.setBounds(10, 11, 87, 14);
 		contentPane.add(nameLabel);
 		
 		JLabel addressLabel = new JLabel("Canteen Address:");
-		addressLabel.setBounds(10, 62, 91, 14);
+		addressLabel.setBounds(10, 36, 87, 14);
 		contentPane.add(addressLabel);
 		
 		JLabel descriptionLabel = new JLabel("Canteen Description:");
-		descriptionLabel.setBounds(10, 87, 104, 14);
+		descriptionLabel.setBounds(10, 61, 103, 14);
 		contentPane.add(descriptionLabel);
 		
-		JComboBox availableCB = new JComboBox();
-		availableCB.setBounds(130, 8, 28, 20);
-		contentPane.add(availableCB);
-		
 		nameText = new JTextField();
-		nameText.setBounds(130, 33, 86, 20);
+		nameText.setBounds(119, 8, 86, 20);
 		contentPane.add(nameText);
 		nameText.setColumns(10);
 		
 		addressText = new JTextField();
-		addressText.setBounds(130, 59, 86, 20);
+		addressText.setBounds(119, 33, 86, 20);
 		contentPane.add(addressText);
 		addressText.setColumns(10);
 		
 		JTextArea descriptionText = new JTextArea();
-		descriptionText.setBounds(130, 82, 288, 137);
+		descriptionText.setBounds(119, 61, 288, 148);
 		contentPane.add(descriptionText);
 		
-		JButton updateBtn = new JButton("Update");
-		updateBtn.setBounds(329, 230, 89, 23);
-		contentPane.add(updateBtn);
-		
-		JButton retrieveBtn = new JButton("Retrieve");
-		retrieveBtn.setBounds(168, 7, 89, 23);
-		contentPane.add(retrieveBtn);
+		JButton createCanteenBtn = new JButton("Create");
+		createCanteenBtn.setBounds(318, 220, 89, 23);
+		contentPane.add(createCanteenBtn);
 	}
 }
