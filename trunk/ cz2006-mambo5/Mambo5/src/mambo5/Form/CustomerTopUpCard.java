@@ -1,4 +1,4 @@
-package mambo5.ui;
+package mambo5.Form;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;

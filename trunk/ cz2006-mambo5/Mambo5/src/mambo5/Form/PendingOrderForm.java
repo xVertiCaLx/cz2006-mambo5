@@ -1,4 +1,4 @@
-package mambo5.ui;
+package mambo5.Form;
 
 import javax.swing.JPanel;
 import javax.swing.JLabel;
