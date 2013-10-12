@@ -19,6 +19,9 @@ import javax.swing.JButton;
 import mambo5.Controller.CanteenController;
 import mambo5.Entity.Canteen;
 
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
 public class UpdateCanteenForm extends JFrame {
 
 	private JPanel contentPane;
@@ -28,6 +31,10 @@ public class UpdateCanteenForm extends JFrame {
 	private JComboBox<String> availableCB;
 	private ArrayList<Canteen> retrieveCanteenList;
 	private JTextArea descriptionText;
+	private String canteenName;
+	private String canteenAddress;
+	private String canteenDesc;
+	private int canteenID;
 
 	/**
 	 * Launch the application.
@@ -88,6 +95,13 @@ public class UpdateCanteenForm extends JFrame {
 		contentPane.add(descriptionText);
 		
 		JButton updateBtn = new JButton("Update");
+		updateBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				submitsCanteenDetails(e);
+			}
+			
+		});
+		
 		updateBtn.setBounds(329, 230, 89, 23);
 		contentPane.add(updateBtn);
 		
@@ -106,6 +120,7 @@ public class UpdateCanteenForm extends JFrame {
             	nameText.setText(retrieveCanteenList.get(index).getCanteenName());
             	addressText.setText(retrieveCanteenList.get(index).getCanteenAddress());
             	descriptionText.setText(retrieveCanteenList.get(index).getCanteenDesc());
+            	canteenID = retrieveCanteenList.get(index).getCanteenID();
             }
         });
 
@@ -126,10 +141,36 @@ public class UpdateCanteenForm extends JFrame {
 	    	nameText.setText(retrieveCanteenList.get(0).getCanteenName());
 	    	addressText.setText(retrieveCanteenList.get(0).getCanteenAddress());
 	    	descriptionText.setText(retrieveCanteenList.get(0).getCanteenDesc());
+	    	canteenID = retrieveCanteenList.get(0).getCanteenID();
 		}
 		else
 			JOptionPane.showMessageDialog(null, "No Canteen Available");
     	
 		return canteenList;
+	}
+	
+	public void submitsCanteenDetails(ActionEvent e) {
+		canteenName = nameText.getText();
+		canteenAddress = addressText.getText();
+		canteenDesc = descriptionText.getText();
+
+		if(canteenName.equals("")) 
+			JOptionPane.showMessageDialog(null, "Please Enter Canteen Name");
+		else if(canteenAddress.equals(""))
+			JOptionPane.showMessageDialog(null, "Please Enter Canteen Address");
+		else if (canteenDesc.equals(""))
+			JOptionPane.showMessageDialog(null, "Please Enter Canteen Description");
+		else {
+			cc = new CanteenController(canteenID, canteenName, canteenAddress, canteenDesc);
+			if(cc.validateCanteenDetail(2)==0)
+				JOptionPane.showMessageDialog(null, "Error when updating to database");
+			else {
+				JOptionPane.showMessageDialog(null, "Canteen successfully updated");
+				this.dispose();
+				UpdateCanteenForm c = new UpdateCanteenForm();
+				c.setVisible(true);
+			}
+		}
+	
 	}
 }

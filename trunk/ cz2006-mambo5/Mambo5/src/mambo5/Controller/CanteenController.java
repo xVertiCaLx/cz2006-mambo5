@@ -8,6 +8,7 @@ public class CanteenController {
 	private String canteenName;
 	private String canteenAddress;
 	private String canteenDesc;
+	private int canteenID;
 	private Canteen c;
 	DataStoreInterface dataStore;
 	private SystemConfiguration sysConfig;
@@ -20,11 +21,26 @@ public class CanteenController {
 		this.canteenDesc = canteenDesc;
 	}
 	
-	public int validateCanteenDetail(){
+	public CanteenController(int canteenID, String canteenName, String canteenAddress, String canteenDesc) {
+		this.canteenID = canteenID;
+		this.canteenName = canteenName;
+		this.canteenAddress = canteenAddress;
+		this.canteenDesc = canteenDesc;
+	}
+	
+	public int validateCanteenDetail(int method){
 		int validate = 0;
-		c = new Canteen(canteenName, canteenDesc, canteenAddress);
-		validate = c.createCanteen();
-				
+		if (method == 1) {
+			c = new Canteen(canteenName, canteenDesc, canteenAddress);
+			validate = c.createCanteen();
+		}
+		else if (method == 2) {
+			sysConfig = new SystemConfiguration();
+			dataStore = DataStoreFactory.createDataStore(sysConfig);
+			validate = dataStore.updateCanteenDetail(canteenID, canteenName, canteenDesc, canteenAddress);
+		}
+			
+			
 		return validate;
 	}
 	
