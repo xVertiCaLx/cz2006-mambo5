@@ -2,6 +2,7 @@ package mambo5.Form;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.util.ArrayList;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -12,11 +13,17 @@ import javax.swing.JTextField;
 import javax.swing.JTextArea;
 import javax.swing.JButton;
 
+import mambo5.Controller.CanteenController;
+import mambo5.Entity.Canteen;
+
 public class UpdateCanteenForm extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField nameText;
 	private JTextField addressText;
+	private CanteenController cc;
+	private JComboBox<String> availableCB;
+	private ArrayList<Canteen> retrieveCanteenList;
 
 	/**
 	 * Launch the application.
@@ -62,8 +69,8 @@ public class UpdateCanteenForm extends JFrame {
 		descriptionLabel.setBounds(10, 87, 104, 14);
 		contentPane.add(descriptionLabel);
 		
-		JComboBox availableCB = new JComboBox();
-		availableCB.setBounds(130, 8, 28, 20);
+		availableCB = getCanteenList();
+		availableCB.setBounds(130, 8, 47, 20);
 		contentPane.add(availableCB);
 		
 		nameText = new JTextField();
@@ -85,7 +92,17 @@ public class UpdateCanteenForm extends JFrame {
 		contentPane.add(updateBtn);
 		
 		JButton retrieveBtn = new JButton("Retrieve");
-		retrieveBtn.setBounds(168, 7, 89, 23);
+		retrieveBtn.setBounds(217, 7, 89, 23);
 		contentPane.add(retrieveBtn);
+	}
+	
+	private JComboBox<String> getCanteenList() {
+		JComboBox<String> canteenList = new JComboBox<String>();
+		cc = new CanteenController();
+		retrieveCanteenList = cc.processRetrieveCanteenList();
+		for(int i = 0; i<retrieveCanteenList.size();i++) {
+			canteenList.addItem(retrieveCanteenList.get(i).getCanteenName());
+		}
+		return canteenList;
 	}
 }
