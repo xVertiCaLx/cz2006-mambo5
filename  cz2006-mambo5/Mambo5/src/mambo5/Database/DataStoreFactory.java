@@ -5,7 +5,7 @@ public class DataStoreFactory {
 	public static DataStoreInterface createDataStore(SystemConfiguration sysConfig) {
 		String dataStoreConfig = sysConfig.getAccess();
 		if(dataStoreConfig.equals("MYSQL")) {
-			return new MySQLImpl();
+			return new MySQLImpl(sysConfig);
 		} 
 		else {
 			return null;

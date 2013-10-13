@@ -14,8 +14,13 @@ public class MySQLImpl implements DataStoreInterface {
 	private ResultSet rs;
 	
 	//setup Connections
-	SystemConfiguration sc = new SystemConfiguration();
-	DBController dbc = new DBController(sc.getDatabase(), sc.getDbuser(), sc.getDbpassword());
+	SystemConfiguration sc;
+	DBController dbc;
+	
+	public MySQLImpl(SystemConfiguration sysConfig) {
+		this.sc = sysConfig;
+		dbc = new DBController(sc.getDatabase(), sc.getDbuser(), sc.getDbpassword());
+	}
 	
 	//-----------------------------------------Canteen-------------------------------------------
 	@Override
