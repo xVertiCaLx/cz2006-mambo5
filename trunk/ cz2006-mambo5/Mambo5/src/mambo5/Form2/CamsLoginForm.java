@@ -4,13 +4,18 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 
 import javax.swing.JPanel;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JTextField;
 import javax.swing.JTextPane;
 
 public class CamsLoginForm extends JPanel {
+	JTextField idTextField, pwdTextField;
+	boolean id_select = true, pwd_select = false;
 
 	public CamsLoginForm() {
 		init();
@@ -38,13 +43,34 @@ public class CamsLoginForm extends JPanel {
 		txtpnEmployee.setBounds(156, 134, 198, 19);
 		add(txtpnEmployee);
 		
-		JTextPane textPane = new JTextPane();
-		textPane.setBounds(156, 164, 297, 30);
-		add(textPane);
+		idTextField = new JTextField();
+		idTextField.setBackground(Color.ORANGE);
+		idTextField.setBounds(156, 164, 297, 30);
+		add(idTextField);
 		
-		JTextPane textPane_1 = new JTextPane();
-		textPane_1.setBounds(156, 240, 297, 30);
-		add(textPane_1);
+		idTextField.addFocusListener(new FocusListener(){
+	        @Override
+	        public void focusLost(FocusEvent arg0) {}
+	        @Override
+	        public void focusGained(FocusEvent arg0) {
+	        	 id_select = true;
+	        }
+	    });
+
+		
+		pwdTextField = new JTextField();
+		pwdTextField.setBounds(156, 240, 297, 30);
+		add(pwdTextField);
+		
+		pwdTextField.addFocusListener(new FocusListener(){
+	        @Override
+	        public void focusLost(FocusEvent arg0) {}
+	        @Override
+	        public void focusGained(FocusEvent arg0) {
+	        	id_select = false;
+		         
+	        }
+	    });
 		
 		JTextPane textPane_2 = new JTextPane();
 		textPane_2.setFont(new Font("Tahoma", Font.PLAIN, 12));
@@ -106,6 +132,14 @@ public class CamsLoginForm extends JPanel {
 		add(button_8);
 		
 		JButton button_9 = new JButton("q");
+		button_9.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				if (id_select)
+					idTextField.setText(idTextField.getText() + "q");
+				else
+					pwdTextField.setText("q");
+			}
+		});
 		button_9.setBounds(109, 414, 52, 41);
 		add(button_9);
 		
