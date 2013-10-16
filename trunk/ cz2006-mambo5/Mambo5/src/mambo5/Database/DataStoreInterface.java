@@ -9,5 +9,8 @@ public interface DataStoreInterface {
 	//methods
 	
 	ArrayList<Canteen> retrieveCanteenList();
-	int updateCanteenDetail(int canteenID, String canteenName, String canteenDesc, String canteenAddress); 
-}
+	int updateCanteenDetail(int canteenID, String canteenName, String canteenDesc, String canteenAddress);
+	
+	int updateCustomerDetail(int custID, double cardBalance, String fullName, int accessID);
+	
+	}

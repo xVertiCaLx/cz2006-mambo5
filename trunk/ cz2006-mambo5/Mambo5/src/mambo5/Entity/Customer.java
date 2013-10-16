@@ -75,4 +75,16 @@ public class Customer {
 		}
 		return cust;
 	}
+	
+	public int createCustomer() {
+		dbc = new DBController();
+		int result = 0;
+		
+		String sql = "INSERT INTO customer (fullName, cardBalance, accessID) "
+					+ "VALUES ( '" + fullName + "' , '" + cardBalance + "' , '" + accessID +"');";
+		
+		result = dbc.executeNonQuery(sql);
+				
+		return result;
+	}
 }
