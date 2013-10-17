@@ -34,7 +34,7 @@ public class CustomerController {
 		else if (method == 2) {
 			sysConfig = new SystemConfiguration();
 			dataStore = DataStoreFactory.createDataStore(sysConfig);
-			validate = dataStore.updateCustomerDetail(custID, cardBalance,  fullName, accessID);
+			//validate = dataStore.updateCustomerDetail(custID, cardBalance,  fullName, accessID);
 		}
 			
 			
