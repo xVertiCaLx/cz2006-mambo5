@@ -57,5 +57,18 @@ public class MySQLImpl implements DataStoreInterface {
 				
 		return result;
 	}
+
+	@Override
+	public int deleteCanteen(int canteenID) {
+		dbc = new DBController();
+		int result = 0;
+		
+		String sql = "DELETE FROM canteen "
+					+ "WHERE canteenID = " + canteenID + ";";
+	
+		result = dbc.executeNonQuery(sql);
+		
+		return result;
+	}
 	
 }

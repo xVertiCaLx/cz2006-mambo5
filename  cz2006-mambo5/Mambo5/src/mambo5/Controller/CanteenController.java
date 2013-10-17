@@ -15,6 +15,10 @@ public class CanteenController {
 	
 	public CanteenController() {}
 	
+	public CanteenController(int canteenID) {
+		this.canteenID = canteenID;
+	}
+	
 	public CanteenController(String canteenName, String canteenAddress, String canteenDesc) {
 		this.canteenName = canteenName;
 		this.canteenAddress = canteenAddress;
@@ -30,10 +34,12 @@ public class CanteenController {
 	
 	public int validateCanteenDetail(int method){
 		int validate = 0;
+		//follow this method
 		if (method == 1) {
 			c = new Canteen(canteenName, canteenDesc, canteenAddress);
 			validate = c.createCanteen();
 		}
+		//this is later on
 		else if (method == 2) {
 			sysConfig = new SystemConfiguration();
 			dataStore = DataStoreFactory.createDataStore(sysConfig);
@@ -50,4 +56,12 @@ public class CanteenController {
 		
 		return dataStore.retrieveCanteenList();		
 	}
+	
+	public int processDeleteCanteen(int canteenID) {
+		sysConfig = new SystemConfiguration();
+		dataStore = DataStoreFactory.createDataStore(sysConfig);
+		
+		return dataStore.deleteCanteen(canteenID);
+	}
+
 }
