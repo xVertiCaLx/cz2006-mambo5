@@ -18,7 +18,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 
-public class DeleteCenteenForm extends JFrame {
+public class DeleteCanteenForm extends JFrame {
 
 	private JPanel contentPane;
 	private CanteenController cc;
@@ -33,7 +33,7 @@ public class DeleteCenteenForm extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					DeleteCenteenForm frame = new DeleteCenteenForm();
+					DeleteCanteenForm frame = new DeleteCanteenForm();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -45,7 +45,7 @@ public class DeleteCenteenForm extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public DeleteCenteenForm() {
+	public DeleteCanteenForm() {
 		setTitle("CaMs");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
@@ -94,7 +94,7 @@ public class DeleteCenteenForm extends JFrame {
 			if(cc.processDeleteCanteen(retrieveCanteenList.get(index).getCanteenID()) == 1) {
 				JOptionPane.showMessageDialog(null, "Canteen successfully updated");
 				this.dispose();
-				DeleteCenteenForm c = new DeleteCenteenForm();
+				DeleteCanteenForm c = new DeleteCanteenForm();
 				c.setVisible(true);
 			}
 			else {
