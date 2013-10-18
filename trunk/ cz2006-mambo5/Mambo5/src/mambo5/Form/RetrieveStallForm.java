@@ -2,6 +2,7 @@ package mambo5.Form;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.util.ArrayList;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -9,12 +10,23 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
+
+import mambo5.Controller.CanteenController;
+import mambo5.Controller.StallController;
+import mambo5.Entity.Canteen;
+import mambo5.Entity.Stall;
 
 public class RetrieveStallForm extends JFrame {
 
 	private JPanel contentPane;
-
+	private CanteenController cc;
+	private StallController sc;
+	private JComboBox<String> availableCB;
+	private JComboBox<String> stallCB;
+	private ArrayList<Canteen> retrieveCanteenList;
+	private ArrayList<Stall> retrieveStallList;
 	/**
 	 * Launch the application.
 	 */
@@ -47,16 +59,8 @@ public class RetrieveStallForm extends JFrame {
 		availableLabel.setBounds(10, 15, 99, 14);
 		contentPane.add(availableLabel);
 		
-		JButton retrieveBtn = new JButton("Retrieve");
-		retrieveBtn.setBounds(164, 11, 89, 23);
-		contentPane.add(retrieveBtn);
-		
-		JButton stallBtn = new JButton("Retrieve");
-		stallBtn.setBounds(164, 36, 89, 23);
-		contentPane.add(stallBtn);
-		
-		JComboBox stallCB = new JComboBox();
-		stallCB.setBounds(119, 37, 28, 20);
+		stallCB = getStallList();
+		stallCB.setBounds(119, 37, 109, 20);
 		contentPane.add(stallCB);
 		
 		JLabel stallLabel = new JLabel("Available Stall:");
@@ -79,8 +83,8 @@ public class RetrieveStallForm extends JFrame {
 		descriptionLabel.setBounds(10, 142, 109, 14);
 		contentPane.add(descriptionLabel);
 		
-		JComboBox availableCB = new JComboBox();
-		availableCB.setBounds(119, 12, 28, 20);
+		availableCB = getCanteenList();
+		availableCB.setBounds(119, 12, 62, 20);
 		contentPane.add(availableCB);
 		
 		JTextArea textArea = new JTextArea();
@@ -100,5 +104,36 @@ public class RetrieveStallForm extends JFrame {
 		statusText.setBounds(119, 117, 46, 14);
 		contentPane.add(statusText);
 	}
-
+	
+	private JComboBox<String> getCanteenList() {
+		JComboBox<String> canteenList = new JComboBox<String>();
+		cc = new CanteenController();
+		retrieveCanteenList = cc.processRetrieveCanteenList();
+		
+		if(retrieveCanteenList.size() != 0) {
+			
+			for(int i = 0; i<retrieveCanteenList.size();i++) 
+				canteenList.addItem(retrieveCanteenList.get(i).getCanteenName());
+		}
+		else
+			JOptionPane.showMessageDialog(null, "No Canteen Available");
+    	
+		return canteenList;
+	}
+	
+	private JComboBox<String> getStallList() {
+		JComboBox<String> canteenList = new JComboBox<String>();
+		sc = new StallController();
+		retrieveStallList = sc.processRetrieveStallList();
+		
+		if(retrieveStallList.size() != 0) {
+			
+			for(int i = 0; i<retrieveStallList.size();i++) 
+				canteenList.addItem(retrieveStallList.get(i).getStallUnit());
+		}
+		else
+			JOptionPane.showMessageDialog(null, "No Stall Available");
+    	
+		return canteenList;
+	}
 }
