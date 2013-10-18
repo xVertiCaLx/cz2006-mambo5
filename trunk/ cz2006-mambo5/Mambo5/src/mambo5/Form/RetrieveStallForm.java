@@ -2,6 +2,10 @@ package mambo5.Form;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.util.ArrayList;
 
 import javax.swing.JFrame;
@@ -27,6 +31,8 @@ public class RetrieveStallForm extends JFrame {
 	private JComboBox<String> stallCB;
 	private ArrayList<Canteen> retrieveCanteenList;
 	private ArrayList<Stall> retrieveStallList;
+	
+	private JLabel unitText;
 	/**
 	 * Launch the application.
 	 */
@@ -59,10 +65,6 @@ public class RetrieveStallForm extends JFrame {
 		availableLabel.setBounds(10, 15, 99, 14);
 		contentPane.add(availableLabel);
 		
-		stallCB = getStallList();
-		stallCB.setBounds(119, 37, 109, 20);
-		contentPane.add(stallCB);
-		
 		JLabel stallLabel = new JLabel("Available Stall:");
 		stallLabel.setBounds(10, 40, 99, 14);
 		contentPane.add(stallLabel);
@@ -85,14 +87,19 @@ public class RetrieveStallForm extends JFrame {
 		
 		availableCB = getCanteenList();
 		availableCB.setBounds(119, 12, 62, 20);
+		availableCB.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				submitsCanteen(e);
+			}
+		});
 		contentPane.add(availableCB);
 		
-		JTextArea textArea = new JTextArea();
-		textArea.setEditable(false);
-		textArea.setBounds(119, 142, 305, 99);
-		contentPane.add(textArea);
+		JTextArea descArea = new JTextArea();
+		descArea.setEditable(false);
+		descArea.setBounds(119, 142, 305, 99);
+		contentPane.add(descArea);
 		
-		JLabel unitText = new JLabel("text");
+		unitText = new JLabel("text");
 		unitText.setBounds(119, 68, 46, 14);
 		contentPane.add(unitText);
 		
@@ -103,6 +110,15 @@ public class RetrieveStallForm extends JFrame {
 		JLabel statusText = new JLabel("text");
 		statusText.setBounds(119, 117, 46, 14);
 		contentPane.add(statusText);
+		
+		stallCB = new JComboBox<String>();
+		stallCB.setBounds(119, 37, 109, 20);
+		stallCB.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				displayStallDetail(e);
+			}
+		});
+		contentPane.add(stallCB);
 	}
 	
 	private JComboBox<String> getCanteenList() {
@@ -114,6 +130,8 @@ public class RetrieveStallForm extends JFrame {
 			
 			for(int i = 0; i<retrieveCanteenList.size();i++) 
 				canteenList.addItem(retrieveCanteenList.get(i).getCanteenName());
+			
+			getStallList(retrieveCanteenList.get(0).getCanteenID());
 		}
 		else
 			JOptionPane.showMessageDialog(null, "No Canteen Available");
@@ -121,19 +139,28 @@ public class RetrieveStallForm extends JFrame {
 		return canteenList;
 	}
 	
-	private JComboBox<String> getStallList() {
-		JComboBox<String> canteenList = new JComboBox<String>();
+	private void getStallList(int canteenID) {
 		sc = new StallController();
-		retrieveStallList = sc.processRetrieveStallList();
+		stallCB.removeAllItems();
+		retrieveStallList = sc.processRetrieveStallList(canteenID);
 		
 		if(retrieveStallList.size() != 0) {
-			
 			for(int i = 0; i<retrieveStallList.size();i++) 
-				canteenList.addItem(retrieveStallList.get(i).getStallUnit());
+				stallCB.addItem(retrieveStallList.get(i).getStallUnit());
 		}
-		else
+		else 
 			JOptionPane.showMessageDialog(null, "No Stall Available");
     	
-		return canteenList;
+	}
+	
+	private void submitsCanteen(ActionEvent e) {
+		int index = availableCB.getSelectedIndex();
+    	getStallList(retrieveCanteenList.get(index).getCanteenID());
+	}
+	
+	private void displayStallDetail(ActionEvent e) {
+		int index = availableCB.getSelectedIndex();
+		unitText.setText(retrieveStallList.get(index).getStallUnit());
+		
 	}
 }

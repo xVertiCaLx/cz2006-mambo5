@@ -74,11 +74,11 @@ public class MySQLImpl implements DataStoreInterface {
 	}
 
 	@Override
-	public ArrayList<Stall> retrieveStallList() {
+	public ArrayList<Stall> retrieveStallList(int canteenID) {
 		Stall s;
 		stallList = new ArrayList<Stall>();
 		boolean status = false; 
-		String sql = "SELECT * FROM Stall;";
+		String sql = "SELECT * FROM Stall WHERE canteenID = " + canteenID + " and stallStatus = 'T';";
 		rs = dbc.executeQuery(sql);
 		
 		try{
