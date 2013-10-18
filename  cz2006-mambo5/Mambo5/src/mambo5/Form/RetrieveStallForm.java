@@ -159,7 +159,7 @@ public class RetrieveStallForm extends JFrame {
 	}
 	
 	private void displayStallDetail(ActionEvent e) {
-		int index = availableCB.getSelectedIndex();
+		int index = stallCB.getSelectedIndex();
 		unitText.setText(retrieveStallList.get(index).getStallUnit());
 		
 	}
