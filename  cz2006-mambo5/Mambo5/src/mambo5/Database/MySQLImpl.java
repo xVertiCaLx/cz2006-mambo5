@@ -5,12 +5,14 @@ import java.util.ArrayList;
 
 import mambo5.Controller.DBController;
 import mambo5.Entity.Canteen;
+import mambo5.Entity.Stall;
 
 //Concrete data store object for data access in MySQL database
 
 public class MySQLImpl implements DataStoreInterface {
 	//methods
 	private ArrayList<Canteen> canteenList;
+	private ArrayList<Stall> stallList;
 	private ResultSet rs;
 	
 	//setup Connections
@@ -69,6 +71,31 @@ public class MySQLImpl implements DataStoreInterface {
 		result = dbc.executeNonQuery(sql);
 		
 		return result;
+	}
+
+	@Override
+	public ArrayList<Stall> retrieveStallList() {
+		Stall s;
+		stallList = new ArrayList<Stall>();
+		boolean status = false; 
+		String sql = "SELECT * FROM Stall;";
+		rs = dbc.executeQuery(sql);
+		
+		try{
+			while(rs.next()) {
+				if(rs.getString("stallStatus").equals("T")) 
+					status = true;
+				else
+					status = false;
+				s = new Stall(rs.getInt("stallID"), rs.getInt("canteenID"), rs.getString("stallUnit"),rs.getString("stallName"), rs.getString("stallDesc"),status);
+				stallList.add(s);
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			dbc.terminate();
+		}
+		return stallList;
 	}
 	
 }

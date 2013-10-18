@@ -10,7 +10,7 @@ public class CanteenController {
 	private String canteenDesc;
 	private int canteenID;
 	private Canteen c;
-	DataStoreInterface dataStore;
+	private DataStoreInterface dataStore;
 	private SystemConfiguration sysConfig;
 	
 	public CanteenController() {}
