@@ -14,7 +14,7 @@ public interface DataStoreInterface {
 	int deleteCanteen(int canteenID);
 	
 	//STALL
-	ArrayList<Stall> retrieveStallList();
+	ArrayList<Stall> retrieveStallList(int canteenID);
 	
 	//int updateCustomerDetail(int custID, double cardBalance, String fullNddame, int accessID);
 	

@@ -13,10 +13,10 @@ public class StallController {
 	private SystemConfiguration sysConfig;
 	
 	
-	public ArrayList<Stall> processRetrieveStallList() {
+	public ArrayList<Stall> processRetrieveStallList(int canteenID) {
 		sysConfig = new SystemConfiguration();
 		dataStore = DataStoreFactory.createDataStore(sysConfig);
 		
-		return dataStore.retrieveStallList();		
+		return dataStore.retrieveStallList(canteenID);		
 	}
 }
