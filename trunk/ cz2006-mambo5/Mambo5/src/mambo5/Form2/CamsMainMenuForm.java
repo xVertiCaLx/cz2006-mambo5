@@ -23,9 +23,8 @@ public class CamsMainMenuForm extends JPanel {
 		JButton btnLogin = new JButton("LOGOUT");
 		btnLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				CamsLoginForm loginPanel = new CamsLoginForm();
 				removeAll();
-				add(loginPanel);
+				add(new CamsLoginForm());
 				revalidate();
 				repaint();
 			}
@@ -39,11 +38,10 @@ public class CamsMainMenuForm extends JPanel {
 		JButton btnNewOrder = new JButton("NEW ORDER");
 		btnNewOrder.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				/*CreateOrderForm newOrder = new CreateOrderForm();
-				contentPane.removeAll();
-				contentPane.add(newOrder);
-				contentPane.revalidate();
-				contentPane.repaint();*/
+				removeAll();
+				add(new CamsCreateOrderForm());
+				revalidate();
+				repaint();
 			}
 		});
 		btnNewOrder.setForeground(Color.WHITE);
@@ -53,6 +51,15 @@ public class CamsMainMenuForm extends JPanel {
 		add(btnNewOrder);
 		
 		JButton btnLock = new JButton("LOCK");
+		btnLogin.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				CamsLoginForm loginPanel = new CamsLoginForm();
+				removeAll();
+				add(loginPanel);
+				revalidate();
+				repaint();
+			}
+		});
 		btnLock.setForeground(Color.WHITE);
 		btnLock.setFont(new Font("Arial", Font.BOLD, 16));
 		btnLock.setBackground(SystemColor.controlDkShadow);
