@@ -99,9 +99,9 @@ public class CreateCanteenForm extends JFrame {
 		contentPane.add(maxStallText);
 		maxStallText.setColumns(10);
 		
-		JLabel lblMaxStalls = new JLabel("Max Stalls");
-		lblMaxStalls.setBounds(10, 224, 87, 14);
-		contentPane.add(lblMaxStalls);
+		JLabel maxStallLabel = new JLabel("Max Stalls");
+		maxStallLabel.setBounds(10, 224, 87, 14);
+		contentPane.add(maxStallLabel);
 	}
 	
 	public void submitsCanteenDetails(ActionEvent e) {

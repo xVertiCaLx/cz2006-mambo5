@@ -27,6 +27,7 @@ public class UpdateCanteenForm extends JFrame {
 	private JPanel contentPane;
 	private JTextField nameText;
 	private JTextField addressText;
+	private JTextField maxStallText;
 	private CanteenController cc;
 	private JComboBox<String> availableCB;
 	private ArrayList<Canteen> retrieveCanteenList;
@@ -35,6 +36,7 @@ public class UpdateCanteenForm extends JFrame {
 	private String canteenAddress;
 	private String canteenDesc;
 	private int canteenID;
+	private int maxStall;
 
 	/**
 	 * Launch the application.
@@ -94,6 +96,15 @@ public class UpdateCanteenForm extends JFrame {
 		descriptionText.setBounds(130, 82, 288, 137);
 		contentPane.add(descriptionText);
 		
+		JLabel maxStallLabel = new JLabel("Max Stall:");
+		maxStallLabel.setBounds(240, 36, 65, 14);
+		contentPane.add(maxStallLabel);
+		
+		maxStallText = new JTextField();
+		maxStallText.setBounds(315, 33, 86, 20);
+		contentPane.add(maxStallText);
+		maxStallText.setColumns(10);
+		
 		JButton updateBtn = new JButton("Update");
 		updateBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -117,11 +128,11 @@ public class UpdateCanteenForm extends JFrame {
             	addressText.setText(retrieveCanteenList.get(index).getCanteenAddress());
             	descriptionText.setText(retrieveCanteenList.get(index).getCanteenDesc());
             	canteenID = retrieveCanteenList.get(index).getCanteenID();
+            	maxStallText.setText(Integer.toString(retrieveCanteenList.get(index).getMaxStall()));
             }
         });
 
 		contentPane.add(availableCB);
-
 	}
 	
 	private JComboBox<String> getCanteenList() {
@@ -138,6 +149,7 @@ public class UpdateCanteenForm extends JFrame {
 	    	addressText.setText(retrieveCanteenList.get(0).getCanteenAddress());
 	    	descriptionText.setText(retrieveCanteenList.get(0).getCanteenDesc());
 	    	canteenID = retrieveCanteenList.get(0).getCanteenID();
+        	maxStallText.setText(Integer.toString(retrieveCanteenList.get(0).getMaxStall()));
 		}
 		else
 			JOptionPane.showMessageDialog(null, "No Canteen Available");
@@ -149,6 +161,7 @@ public class UpdateCanteenForm extends JFrame {
 		canteenName = nameText.getText();
 		canteenAddress = addressText.getText();
 		canteenDesc = descriptionText.getText();
+		
 
 		if(canteenName.equals("")) 
 			JOptionPane.showMessageDialog(null, "Please Enter Canteen Name");
@@ -156,17 +169,24 @@ public class UpdateCanteenForm extends JFrame {
 			JOptionPane.showMessageDialog(null, "Please Enter Canteen Address");
 		else if (canteenDesc.equals(""))
 			JOptionPane.showMessageDialog(null, "Please Enter Canteen Description");
-		else {
-			cc = new CanteenController();
-			if(cc.validateCanteenDetail(canteenID, canteenName, canteenDesc, canteenAddress )==0)
-				JOptionPane.showMessageDialog(null, "Error when updating to database");
-			else {
-				JOptionPane.showMessageDialog(null, "Canteen successfully updated");
-				this.dispose();
-				UpdateCanteenForm c = new UpdateCanteenForm();
-				c.setVisible(true);
+		else if (!maxStallText.getText().equals("")){
+			try {
+				maxStall = Integer.parseInt(maxStallText.getText());
+				cc = new CanteenController();
+				if(cc.validateCanteenDetail(canteenID, canteenName, canteenDesc, canteenAddress, maxStall) == 0)
+					JOptionPane.showMessageDialog(null, "Error when updating to database");
+				else {
+					JOptionPane.showMessageDialog(null, "Canteen successfully updated");
+					this.dispose();
+					UpdateCanteenForm c = new UpdateCanteenForm();
+					c.setVisible(true);
+				}
+			} catch (NumberFormatException exception) {
+				JOptionPane.showMessageDialog(null, "Please Enter Only Integer Value for Max Stalls");
 			}
 		}
+		else
+			JOptionPane.showMessageDialog(null, "Please Enter Max Stalls");
 	
 	}
 }

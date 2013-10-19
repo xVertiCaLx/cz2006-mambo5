@@ -23,12 +23,12 @@ public class CanteenController {
 	}
 	
 	//this is later on
-	public int validateCanteenDetail(int canteenID, String canteenName, String canteenDesc, String canteenAddress){
+	public int validateCanteenDetail(int canteenID, String canteenName, String canteenDesc, String canteenAddress, int maxStall){
 		int validate = 0;
 		
 		sysConfig = new SystemConfiguration();
 		dataStore = DataStoreFactory.createDataStore(sysConfig);
-		validate = dataStore.updateCanteenDetail(canteenID, canteenName, canteenDesc, canteenAddress);
+		validate = dataStore.updateCanteenDetail(canteenID, canteenName, canteenDesc, canteenAddress, maxStall);
 			
 		return validate;
 	}
