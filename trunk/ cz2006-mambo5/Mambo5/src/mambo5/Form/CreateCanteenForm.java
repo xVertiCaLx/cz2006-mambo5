@@ -36,7 +36,6 @@ public class CreateCanteenForm extends JFrame {
 				try {
 					CreateCanteenForm frame = new CreateCanteenForm();
 					frame.setVisible(true);
-					//frame.setTitle("HELLO");
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -107,7 +106,7 @@ public class CreateCanteenForm extends JFrame {
 		else {
 			cc = new CanteenController();
 			if(cc.validateCanteenDetail(canteenName, canteenDesc, canteenAddress)==0)
-				JOptionPane.showMessageDialog(null, "Error when insertion to database");
+				JOptionPane.showMessageDialog(null, "Canteen cannot be created");
 			else
 				JOptionPane.showMessageDialog(null, "Canteen successfully created");
 		}

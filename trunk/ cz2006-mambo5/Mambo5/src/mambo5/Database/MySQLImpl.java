@@ -95,5 +95,17 @@ public class MySQLImpl implements DataStoreInterface {
 		}
 		return stallList;
 	}
+
+	//-------------------------------------------STALL----------------------------------------------------------------
+	@Override
+	public int createStall(int canteenID, String stallUnit, String stallName, String stallDesc, String stallStatus) {
+		int result = 0;
+		
+		String sql = "INSERT INTO stall ( canteenID, stallUnit, stallName, stallDesc, stallStatus) "
+					+ "VALUES ( '" + canteenID + "' , '" + stallUnit + "' , '" + stallName + "' , '" + stallDesc +"' , '" + stallStatus + "');";
+		
+		result = dbc.executeNonQuery(sql);
+		return result;
+	}
 	
 }

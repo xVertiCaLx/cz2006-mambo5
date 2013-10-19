@@ -15,6 +15,7 @@ public interface DataStoreInterface {
 	
 	//STALL
 	ArrayList<Stall> retrieveStallList(int canteenID);
+	int createStall(int canteenID, String stallUnit, String stallName, String stallDesc, String stallStatus);
 	
 	//int updateCustomerDetail(int custID, double cardBalance, String fullNddame, int accessID);
 	
