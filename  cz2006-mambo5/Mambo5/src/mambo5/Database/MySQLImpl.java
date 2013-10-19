@@ -35,7 +35,7 @@ public class MySQLImpl implements DataStoreInterface {
 		
 		try{
 			while(rs.next()) {
-				c = new Canteen(rs.getInt("canteenID"),rs.getString("canteenName"),rs.getString("canteenDesc"), rs.getString("canteenAddress"));
+				c = new Canteen(rs.getInt("canteenID"),rs.getString("canteenName"),rs.getString("canteenDesc"), rs.getString("canteenAddress"), rs.getInt("maxStall"));
 				canteenList.add(c);
 			}
 		} catch(Exception e) {

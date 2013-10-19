@@ -13,11 +13,11 @@ public class CanteenController {
 	public CanteenController() {}
 	
 	// FOLLOW THIS METHOD FIRST
-	public int validateCanteenDetail(String canteenName, String canteenDesc, String canteenAddress){
+	public int validateCanteenDetail(String canteenName, String canteenDesc, String canteenAddress, int maxStall){
 		int validate = 0;
 		
 		c = new Canteen();
-		validate = c.createCanteen(canteenName, canteenDesc, canteenAddress);
+		validate = c.createCanteen(canteenName, canteenDesc, canteenAddress, maxStall);
 		
 		return validate;
 	}

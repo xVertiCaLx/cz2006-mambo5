@@ -7,6 +7,7 @@ public class Canteen {
 	private String canteenName;
 	private String canteenDesc;
 	private String canteenAddress;
+	private int maxStall;
 	private DBController dbc;
 	
 	
@@ -18,11 +19,12 @@ public class Canteen {
 		this.canteenAddress = canteenAddress;
 	}
 	
-	public Canteen(int canteenID, String canteenName, String canteenDesc, String canteenAddress) {
+	public Canteen(int canteenID, String canteenName, String canteenDesc, String canteenAddress, int maxStall) {
 		this.canteenID = canteenID;
 		this.canteenName = canteenName;
 		this.canteenDesc = canteenDesc;
 		this.canteenAddress = canteenAddress;
+		this.maxStall = maxStall;
 	}
 
 	public int getCanteenID() {
@@ -41,12 +43,16 @@ public class Canteen {
 		return canteenName;
 	}
 	
-	public int createCanteen( String canteenName, String canteenDesc, String canteenAddress) {
+	public int getMaxStall() {
+		return maxStall;
+	}
+
+	public int createCanteen( String canteenName, String canteenDesc, String canteenAddress, int  maxStall) {
 		dbc = new DBController();
 		int result = 0;
 		
-		String sql = "INSERT INTO canteen ( canteenName, canteenDesc, canteenAddress) "
-					+ "VALUES ( '" + canteenName + "' , '" + canteenDesc + "' , '" +canteenAddress +"');";
+		String sql = "INSERT INTO canteen ( canteenName, canteenDesc, canteenAddress, maxStall) "
+					+ "VALUES ( '" + canteenName + "' , '" + canteenDesc + "' , '" + canteenAddress + "' , '" + maxStall +"');";
 		
 		result = dbc.executeNonQuery(sql);
 				
