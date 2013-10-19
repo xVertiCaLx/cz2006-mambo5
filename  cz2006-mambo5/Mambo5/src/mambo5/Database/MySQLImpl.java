@@ -48,7 +48,6 @@ public class MySQLImpl implements DataStoreInterface {
 
 	@Override
 	public int updateCanteenDetail(int canteenID, String canteenName, String canteenDesc, String canteenAddress) {
-		dbc = new DBController();
 		int result = 0;
 		
 		String sql = "UPDATE canteen "
@@ -62,7 +61,6 @@ public class MySQLImpl implements DataStoreInterface {
 
 	@Override
 	public int deleteCanteen(int canteenID) {
-		dbc = new DBController();
 		int result = 0;
 		
 		String sql = "DELETE FROM canteen "

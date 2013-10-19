@@ -5,47 +5,30 @@ import mambo5.Database.*;
 import mambo5.Entity.Canteen;
 
 public class CanteenController {
-	private String canteenName;
-	private String canteenAddress;
-	private String canteenDesc;
-	private int canteenID;
+
 	private Canteen c;
 	private DataStoreInterface dataStore;
 	private SystemConfiguration sysConfig;
 	
 	public CanteenController() {}
 	
-	public CanteenController(int canteenID) {
-		this.canteenID = canteenID;
-	}
-	
-	public CanteenController(String canteenName, String canteenAddress, String canteenDesc) {
-		this.canteenName = canteenName;
-		this.canteenAddress = canteenAddress;
-		this.canteenDesc = canteenDesc;
-	}
-	
-	public CanteenController(int canteenID, String canteenName, String canteenAddress, String canteenDesc) {
-		this.canteenID = canteenID;
-		this.canteenName = canteenName;
-		this.canteenAddress = canteenAddress;
-		this.canteenDesc = canteenDesc;
-	}
-	
-	public int validateCanteenDetail(int method){
+	// FOLLOW THIS METHOD FIRST
+	public int validateCanteenDetail(String canteenName, String canteenDesc, String canteenAddress){
 		int validate = 0;
-		//follow this method
-		if (method == 1) {
-			c = new Canteen(canteenName, canteenDesc, canteenAddress);
-			validate = c.createCanteen();
-		}
-		//this is later on
-		else if (method == 2) {
-			sysConfig = new SystemConfiguration();
-			dataStore = DataStoreFactory.createDataStore(sysConfig);
-			validate = dataStore.updateCanteenDetail(canteenID, canteenName, canteenDesc, canteenAddress);
-		}
-			
+		
+		c = new Canteen();
+		validate = c.createCanteen(canteenName, canteenDesc, canteenAddress);
+		
+		return validate;
+	}
+	
+	//this is later on
+	public int validateCanteenDetail(int canteenID, String canteenName, String canteenDesc, String canteenAddress){
+		int validate = 0;
+		
+		sysConfig = new SystemConfiguration();
+		dataStore = DataStoreFactory.createDataStore(sysConfig);
+		validate = dataStore.updateCanteenDetail(canteenID, canteenName, canteenDesc, canteenAddress);
 			
 		return validate;
 	}
