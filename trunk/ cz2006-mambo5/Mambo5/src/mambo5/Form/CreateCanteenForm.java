@@ -22,10 +22,13 @@ public class CreateCanteenForm extends JFrame {
 	private JTextField nameText;
 	private JTextField addressText;
 	private JTextArea descriptionText;
+	private JTextField maxStallText;
 	private String canteenName;
 	private String canteenAddress;
 	private String canteenDesc;
+	private int maxStall;
 	private CanteenController cc;
+
 
 	/**
 	 * Launch the application.
@@ -90,12 +93,22 @@ public class CreateCanteenForm extends JFrame {
 		});
 		createCanteenBtn.setBounds(318, 220, 89, 23);
 		contentPane.add(createCanteenBtn);
+		
+		maxStallText = new JTextField();
+		maxStallText.setBounds(119, 220, 86, 20);
+		contentPane.add(maxStallText);
+		maxStallText.setColumns(10);
+		
+		JLabel lblMaxStalls = new JLabel("Max Stalls");
+		lblMaxStalls.setBounds(10, 224, 87, 14);
+		contentPane.add(lblMaxStalls);
 	}
 	
 	public void submitsCanteenDetails(ActionEvent e) {
 		canteenName = nameText.getText();
 		canteenAddress = addressText.getText();
 		canteenDesc = descriptionText.getText();
+		
 
 		if(canteenName.equals("")) 
 			JOptionPane.showMessageDialog(null, "Please Enter Canteen Name");
@@ -103,12 +116,19 @@ public class CreateCanteenForm extends JFrame {
 			JOptionPane.showMessageDialog(null, "Please Enter Canteen Address");
 		else if (canteenDesc.equals(""))
 			JOptionPane.showMessageDialog(null, "Please Enter Canteen Description");
-		else {
-			cc = new CanteenController();
-			if(cc.validateCanteenDetail(canteenName, canteenDesc, canteenAddress)==0)
-				JOptionPane.showMessageDialog(null, "Canteen cannot be created");
-			else
-				JOptionPane.showMessageDialog(null, "Canteen successfully created");
+		else if (!maxStallText.getText().equals("")){
+			try {
+				maxStall = Integer.parseInt(maxStallText.getText());
+				cc = new CanteenController();
+				if(cc.validateCanteenDetail(canteenName, canteenDesc, canteenAddress, maxStall)==0)
+					JOptionPane.showMessageDialog(null, "Canteen cannot be created");
+				else
+					JOptionPane.showMessageDialog(null, "Canteen successfully created");
+			}catch (NumberFormatException exception) {
+				JOptionPane.showMessageDialog(null, "Please Enter Only Integer Value for Max Stalls");
+			}
 		}
+		else 
+			JOptionPane.showMessageDialog(null, "Please Enter Max Stalls");
 	}
 }
