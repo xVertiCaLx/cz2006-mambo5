@@ -105,10 +105,6 @@ public class UpdateCanteenForm extends JFrame {
 		updateBtn.setBounds(329, 230, 89, 23);
 		contentPane.add(updateBtn);
 		
-		JButton retrieveBtn = new JButton("Retrieve");
-		retrieveBtn.setBounds(217, 7, 89, 23);
-		contentPane.add(retrieveBtn);
-		
 		availableCB = getCanteenList();
 		availableCB.setBounds(130, 8, 47, 20);
 		availableCB.addItemListener(new ItemListener(){
@@ -161,8 +157,8 @@ public class UpdateCanteenForm extends JFrame {
 		else if (canteenDesc.equals(""))
 			JOptionPane.showMessageDialog(null, "Please Enter Canteen Description");
 		else {
-			cc = new CanteenController(canteenID, canteenName, canteenAddress, canteenDesc);
-			if(cc.validateCanteenDetail(2)==0)
+			cc = new CanteenController();
+			if(cc.validateCanteenDetail(canteenID, canteenName, canteenDesc, canteenAddress )==0)
 				JOptionPane.showMessageDialog(null, "Error when updating to database");
 			else {
 				JOptionPane.showMessageDialog(null, "Canteen successfully updated");

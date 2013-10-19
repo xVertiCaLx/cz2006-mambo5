@@ -31,8 +31,9 @@ public class RetrieveStallForm extends JFrame {
 	private JComboBox<String> stallCB;
 	private ArrayList<Canteen> retrieveCanteenList;
 	private ArrayList<Stall> retrieveStallList;
-	
-	private JLabel unitText;
+	private JLabel nameText = new JLabel();
+	private JLabel statusText = new JLabel();
+	private JTextArea descArea = new JTextArea();
 	/**
 	 * Launch the application.
 	 */
@@ -69,10 +70,6 @@ public class RetrieveStallForm extends JFrame {
 		stallLabel.setBounds(10, 40, 99, 14);
 		contentPane.add(stallLabel);
 		
-		JLabel unitLabel = new JLabel("Stall Unit:");
-		unitLabel.setBounds(10, 67, 46, 14);
-		contentPane.add(unitLabel);
-		
 		JLabel nameLabel = new JLabel("Stall Name");
 		nameLabel.setBounds(10, 92, 99, 14);
 		contentPane.add(nameLabel);
@@ -94,30 +91,34 @@ public class RetrieveStallForm extends JFrame {
 		});
 		contentPane.add(availableCB);
 		
-		JTextArea descArea = new JTextArea();
+		
 		descArea.setEditable(false);
 		descArea.setBounds(119, 142, 305, 99);
 		contentPane.add(descArea);
 		
-		unitText = new JLabel("text");
-		unitText.setBounds(119, 68, 46, 14);
-		contentPane.add(unitText);
-		
-		JLabel nameText = new JLabel("text");
-		nameText.setBounds(119, 92, 46, 14);
+		nameText.setBounds(119, 92, 169, 14);
 		contentPane.add(nameText);
 		
-		JLabel statusText = new JLabel("text");
-		statusText.setBounds(119, 117, 46, 14);
+		
+		statusText.setBounds(119, 117, 169, 14);
 		contentPane.add(statusText);
 		
-		stallCB = new JComboBox<String>();
 		stallCB.setBounds(119, 37, 109, 20);
+		
 		stallCB.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				displayStallDetail(e);
+				int index = stallCB.getSelectedIndex();
+				if(index >= 0)
+					displayStallDetail(index);
+				else {
+					nameText.setText("");
+					statusText.setText("");
+					descArea.setText("");
+				}
+					
 			}
 		});
+		
 		contentPane.add(stallCB);
 	}
 	
@@ -130,8 +131,9 @@ public class RetrieveStallForm extends JFrame {
 			
 			for(int i = 0; i<retrieveCanteenList.size();i++) 
 				canteenList.addItem(retrieveCanteenList.get(i).getCanteenName());
-			
+			stallCB = new JComboBox<String>();
 			getStallList(retrieveCanteenList.get(0).getCanteenID());
+			displayStallDetail(0);
 		}
 		else
 			JOptionPane.showMessageDialog(null, "No Canteen Available");
@@ -158,9 +160,11 @@ public class RetrieveStallForm extends JFrame {
     	getStallList(retrieveCanteenList.get(index).getCanteenID());
 	}
 	
-	private void displayStallDetail(ActionEvent e) {
-		int index = stallCB.getSelectedIndex();
-		unitText.setText(retrieveStallList.get(index).getStallUnit());
+	private void displayStallDetail(int index) {
+		
+		nameText.setText(retrieveStallList.get(index).getStallName());
+		statusText.setText(retrieveStallList.get(index).getStallStatus().toString());
+		descArea.setText(retrieveStallList.get(index).getStallDesc());
 		
 	}
 }
