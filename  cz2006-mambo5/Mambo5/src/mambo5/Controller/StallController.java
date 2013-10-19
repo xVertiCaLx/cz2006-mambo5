@@ -19,4 +19,14 @@ public class StallController {
 		
 		return dataStore.retrieveStallList(canteenID);		
 	}
+	
+	public int validateStallDetail(int canteenID, String stallUnit, String stallName, String stallDesc, String stallStatus){
+		int validate = 0;
+		
+		sysConfig = new SystemConfiguration();
+		dataStore = DataStoreFactory.createDataStore(sysConfig);
+		validate = dataStore.createStall(canteenID, stallUnit, stallName, stallDesc, stallStatus);
+			
+		return validate;
+	}
 }
