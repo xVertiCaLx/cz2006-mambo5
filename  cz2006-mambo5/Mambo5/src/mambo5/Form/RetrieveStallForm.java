@@ -107,19 +107,22 @@ public class RetrieveStallForm extends JFrame {
 		
 		stallCB.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				int index = stallCB.getSelectedIndex();
-				if(index >= 0)
-					displayStallDetail(index);
-				else {
-					nameText.setText("");
-					statusText.setText("");
-					descArea.setText("");
-				}
-					
+				submitsStall(e);
 			}
 		});
 		
 		contentPane.add(stallCB);
+	}
+	
+	private void submitsStall(ActionEvent e) {
+		int index = stallCB.getSelectedIndex();
+		if(index >= 0)
+			displayStallDetail(index);
+		else {
+			nameText.setText("");
+			statusText.setText("");
+			descArea.setText("");
+		}
 	}
 	
 	private JComboBox<String> getCanteenList() {
@@ -163,8 +166,11 @@ public class RetrieveStallForm extends JFrame {
 	private void displayStallDetail(int index) {
 		
 		nameText.setText(retrieveStallList.get(index).getStallName());
-		statusText.setText(retrieveStallList.get(index).getStallStatus().toString());
-		descArea.setText(retrieveStallList.get(index).getStallDesc());
 		
+		descArea.setText(retrieveStallList.get(index).getStallDesc());
+		if(retrieveStallList.get(index).getStallStatus() == true) 
+			statusText.setText("Open");
+		else
+			statusText.setText("Closed");
 	}
 }
