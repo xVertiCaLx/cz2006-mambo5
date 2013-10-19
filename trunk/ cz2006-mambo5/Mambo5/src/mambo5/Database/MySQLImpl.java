@@ -47,11 +47,11 @@ public class MySQLImpl implements DataStoreInterface {
 	}
 
 	@Override
-	public int updateCanteenDetail(int canteenID, String canteenName, String canteenDesc, String canteenAddress) {
+	public int updateCanteenDetail(int canteenID, String canteenName, String canteenDesc, String canteenAddress, int maxStall) {
 		int result = 0;
 		
 		String sql = "UPDATE canteen "
-					+ "SET canteenName = '" + canteenName + "' , canteenDesc = '" + canteenDesc + "' , canteenAddress = '" +canteenAddress +"' "
+					+ "SET canteenName = '" + canteenName + "' , canteenDesc = '" + canteenDesc + "' , canteenAddress = '" + canteenAddress + "' , maxStall = " + maxStall + " "
 					+ "WHERE canteenID = " + canteenID + ";";
 		
 		result = dbc.executeNonQuery(sql);

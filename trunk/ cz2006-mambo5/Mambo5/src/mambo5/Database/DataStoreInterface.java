@@ -10,7 +10,7 @@ public interface DataStoreInterface {
 	
 	//CANTEEN
 	ArrayList<Canteen> retrieveCanteenList();
-	int updateCanteenDetail(int canteenID, String canteenName, String canteenDesc, String canteenAddress);
+	int updateCanteenDetail(int canteenID, String canteenName, String canteenDesc, String canteenAddress, int maxStall);
 	int deleteCanteen(int canteenID);
 	
 	//STALL
