@@ -19,6 +19,7 @@ import javax.swing.JTextArea;
 import mambo5.Controller.CanteenController;
 import mambo5.Controller.StallController;
 import mambo5.Entity.Canteen;
+import mambo5.Entity.Stall;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -27,16 +28,14 @@ public class CreateStallForm extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField nameText;
-	private JTextField levelText;
-	private JTextField unitText;
 	private JComboBox<String> availableCB;
 	private JTextArea descriptionText;
 	private JRadioButton openRB; 
+	private JComboBox<String> unitCB;
+	private JButton createBtn;
 	
 	
 	private String stallUnit;
-	private String level;
-	private String unit;
 	private String stallName;
 	private String stallDesc;
 	private String stallStatus;
@@ -45,7 +44,8 @@ public class CreateStallForm extends JFrame {
 	
 	private CanteenController cc;
 	private ArrayList<Canteen> retrieveCanteenList;
-
+	private ArrayList<Stall> retrieveStallList;
+	
 	/**
 	 * Launch the application.
 	 */
@@ -80,6 +80,11 @@ public class CreateStallForm extends JFrame {
 		
 		availableCB = getCanteenList();
 		availableCB.setBounds(119, 12, 76, 20);
+		availableCB.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				submitsCanteen(e);
+			}
+		});
 		contentPane.add(availableCB);
 		
 		JLabel unitLabel = new JLabel("Stall Unit:");
@@ -120,7 +125,10 @@ public class CreateStallForm extends JFrame {
 		descriptionText.setBounds(119, 110, 305, 117);
 		contentPane.add(descriptionText);
 		
-		JButton createBtn = new JButton("Create");
+		unitCB.setBounds(119, 37, 76, 20);
+		contentPane.add(unitCB);
+		
+		
 		createBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				submitsStallDetail(e);
@@ -129,27 +137,12 @@ public class CreateStallForm extends JFrame {
 		createBtn.setBounds(335, 238, 89, 23);
 		contentPane.add(createBtn);
 		
-		JLabel hexLabel = new JLabel("#");
-		hexLabel.setBounds(119, 43, 13, 14);
-		contentPane.add(hexLabel);
-		
-		levelText = new JTextField();
-		levelText.setBounds(129, 37, 19, 20);
-		contentPane.add(levelText);
-		levelText.setColumns(10);
-		
-		JLabel dashLabel = new JLabel("-");
-		dashLabel.setBounds(157, 40, 13, 14);
-		contentPane.add(dashLabel);
-		
-		unitText = new JTextField();
-		unitText.setBounds(167, 37, 28, 20);
-		contentPane.add(unitText);
-		unitText.setColumns(10);
+
 	}
 	
 	private JComboBox<String> getCanteenList() {
 		JComboBox<String> canteenList = new JComboBox<String>();
+		createBtn = new JButton("Create");
 		cc = new CanteenController();
 		retrieveCanteenList = cc.processRetrieveCanteenList();
 		
@@ -157,6 +150,8 @@ public class CreateStallForm extends JFrame {
 			
 			for(int i = 0; i<retrieveCanteenList.size();i++) 
 				canteenList.addItem(retrieveCanteenList.get(i).getCanteenName());
+			unitCB = new JComboBox<String>();
+			getAvailableStallList(retrieveCanteenList.get(0).getCanteenID(), retrieveCanteenList.get(0).getMaxStall(), retrieveCanteenList.get(0).getCanteenName());
 
 		}
 		else
@@ -166,40 +161,65 @@ public class CreateStallForm extends JFrame {
 	}
 	
 	public void submitsStallDetail(ActionEvent e) {
-		level = levelText.getText();
-		unit = unitText.getText();
+
 		stallName = nameText.getText();
 		stallDesc = descriptionText.getText();
 		stallStatus = "F";
 		int index = availableCB.getSelectedIndex();
-		
-		if(level.equals("") || unit.equals("")) 
-			JOptionPane.showMessageDialog(null, "Please Enter Stall Unit");
+		stallUnit = unitCB.getSelectedItem().toString();
+		if (openRB.isSelected())
+			stallStatus = "T";
+		if(stallName.equals("")) 
+			JOptionPane.showMessageDialog(null, "Please Enter Stall Name");
+		else if (stallDesc.equals(""))
+			JOptionPane.showMessageDialog(null, "Please Enter Stall Description");
 		else {
-			try{
-				Integer.parseInt(level);
-				Integer.parseInt(unit);
-				stallUnit = "#" + level + "-" + unit;
-				if (openRB.isSelected())
-					stallStatus = "T";
-				if(stallName.equals("")) 
-					JOptionPane.showMessageDialog(null, "Please Enter Stall Name");
-				else if (stallDesc.equals(""))
-					JOptionPane.showMessageDialog(null, "Please Enter Stall Description");
-				else {
-					sc = new StallController();
-					canteenID = retrieveCanteenList.get(index).getCanteenID();
-					if(sc.validateStallDetail(canteenID, stallUnit, stallName, stallDesc, stallStatus) == 0) 
-						JOptionPane.showMessageDialog(null, "Stall cannot be created");
-					else
-						JOptionPane.showMessageDialog(null, "Stall successfully created");
-				}
-				
-			} catch (NumberFormatException exception) {
-				JOptionPane.showMessageDialog(null, "Please Enter Only Integer Value for Stall Unit");
+			sc = new StallController();
+			canteenID = retrieveCanteenList.get(index).getCanteenID();
+			if(sc.validateStallDetail(canteenID, stallUnit, stallName, stallDesc, stallStatus) == 0) 
+				JOptionPane.showMessageDialog(null, "Stall cannot be created");
+			else {
+				JOptionPane.showMessageDialog(null, "Stall successfully created");
+				this.dispose();
+				CreateStallForm c = new CreateStallForm();
+				c.setVisible(true);
 			}
 		}
+	}
+	
+	private void getAvailableStallList(int canteenID, int maxStall, String canteenName) {
+		sc = new StallController();
+		unitCB.removeAllItems();
+		retrieveStallList = sc.processRetrieveStallList(canteenID);
+		ArrayList<String> availableStallList = new ArrayList<String>();
 		
-
+		for(int i = 1; i<=maxStall; i++) {
+			String addStall = "#"+ canteenName + "-" + i;
+			availableStallList.add(addStall);
+		}
+		
+		if(retrieveStallList.size() != maxStall) {
+			for(int i = 0; i<retrieveStallList.size();i++) {
+				if(retrieveStallList.get(i).getStallStatus()) {
+					availableStallList.remove(retrieveStallList.get(i).getStallUnit());
+				}
+			}
+		}
+		else {
+			JOptionPane.showMessageDialog(null, "No Available Stall");
+			availableStallList.removeAll(availableStallList);
+			createBtn.setEnabled(false);
+		}
+		if(availableStallList.size() > 0) {
+			createBtn.setEnabled(true);
+			for(int i = 0; i<availableStallList.size(); i++) {
+				unitCB.addItem(availableStallList.get(i));
+			}    	
+		}
+	}
+	
+	private void submitsCanteen(ActionEvent e) {
+		int index = availableCB.getSelectedIndex();
+    	getAvailableStallList(retrieveCanteenList.get(index).getCanteenID(), retrieveCanteenList.get(index).getMaxStall(), retrieveCanteenList.get(index).getCanteenName());
 	}
 }
