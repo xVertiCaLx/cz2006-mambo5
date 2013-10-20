@@ -29,6 +29,7 @@ public class RefundOrderForm extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField txtOrderId;
+	private int num;
 
 	/**
 	 * Launch the application.
@@ -82,7 +83,7 @@ public class RefundOrderForm extends JFrame {
 		btnRefund.setBounds(424, 182, 89, 23);
 		contentPane.add(btnRefund);
 		
-		txtOrderId = new JTextField();
+		final JTextField txtOrderId = new JTextField();
 		txtOrderId.setBounds(297, 124, 211, 30);
 		contentPane.add(txtOrderId);
 		txtOrderId.setColumns(10);
@@ -91,88 +92,159 @@ public class RefundOrderForm extends JFrame {
 		lblOrderId.setBounds(223, 132, 64, 22);
 		contentPane.add(lblOrderId);
 		
-		JButton button = new JButton("1");
-		button.setForeground(Color.WHITE);
-		button.setFont(new Font("Tahoma", Font.BOLD, 12));
-		button.setBackground(Color.BLACK);
-		button.setBounds(250, 249, 57, 44);
-		contentPane.add(button);
+		final JButton numPad_1 = new JButton("1");
+		numPad_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (e.getSource() == numPad_1) {
+			        num=1;
+			        txtOrderId.setText(txtOrderId.getText() + num);
+			    }
+			}
+		});
+		numPad_1.setForeground(Color.WHITE);
+		numPad_1.setFont(new Font("Tahoma", Font.BOLD, 12));
+		numPad_1.setBackground(Color.BLACK);
+		numPad_1.setBounds(251, 285, 57, 44);
+		contentPane.add(numPad_1);
 		
-		JButton button_1 = new JButton("2");
-		button_1.setForeground(Color.WHITE);
-		button_1.setFont(new Font("Tahoma", Font.BOLD, 12));
-		button_1.setBackground(Color.BLACK);
-		button_1.setBounds(320, 249, 57, 44);
-		contentPane.add(button_1);
+		final JButton numPad_2 = new JButton("2");
+		numPad_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (e.getSource() == numPad_2) {
+			        num=2;
+			        txtOrderId.setText(txtOrderId.getText() + num);
+			    }
+			}
+		});
+		numPad_2.setForeground(Color.WHITE);
+		numPad_2.setFont(new Font("Tahoma", Font.BOLD, 12));
+		numPad_2.setBackground(Color.BLACK);
+		numPad_2.setBounds(321, 285, 57, 44);
+		contentPane.add(numPad_2);
 		
-		JButton button_2 = new JButton("3");
-		button_2.setForeground(Color.WHITE);
-		button_2.setFont(new Font("Tahoma", Font.BOLD, 12));
-		button_2.setBackground(Color.BLACK);
-		button_2.setBounds(390, 249, 57, 44);
-		contentPane.add(button_2);
+		final JButton numPad_3 = new JButton("3");
+		numPad_3.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (e.getSource() == numPad_3) {
+			        num=3;
+			        txtOrderId.setText(txtOrderId.getText() + num);
+			    }
+			}
+		});
+		numPad_3.setForeground(Color.WHITE);
+		numPad_3.setFont(new Font("Tahoma", Font.BOLD, 12));
+		numPad_3.setBackground(Color.BLACK);
+		numPad_3.setBounds(391, 285, 57, 44);
+		contentPane.add(numPad_3);
+		
+		final JButton numPad_4 = new JButton("4");
+		numPad_4.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (e.getSource() == numPad_4) {
+			        num=4;
+			        txtOrderId.setText(txtOrderId.getText() + num);
+			    }
+			}
+		});
+		numPad_4.setForeground(Color.WHITE);
+		numPad_4.setFont(new Font("Tahoma", Font.BOLD, 12));
+		numPad_4.setBackground(Color.BLACK);
+		numPad_4.setBounds(251, 344, 57, 44);
+		contentPane.add(numPad_4);
+		
+		final JButton numPad_5 = new JButton("5");
+		numPad_5.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (e.getSource() == numPad_5) {
+			        num=5;
+			        txtOrderId.setText(txtOrderId.getText() + num);
+			    }
+			}
+		});
+		numPad_5.setForeground(Color.WHITE);
+		numPad_5.setFont(new Font("Tahoma", Font.BOLD, 12));
+		numPad_5.setBackground(Color.BLACK);
+		numPad_5.setBounds(321, 344, 57, 44);
+		contentPane.add(numPad_5);
+		
+		final JButton numPad_6 = new JButton("6");
+		numPad_6.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (e.getSource() == numPad_6) {
+			        num=6;
+			        txtOrderId.setText(txtOrderId.getText() + num);
+			    }
+			}
+		});
+		numPad_6.setForeground(Color.WHITE);
+		numPad_6.setFont(new Font("Tahoma", Font.BOLD, 12));
+		numPad_6.setBackground(Color.BLACK);
+		numPad_6.setBounds(391, 344, 57, 44);
+		contentPane.add(numPad_6);
+		
+		final JButton numPad_7 = new JButton("7");
+		numPad_7.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (e.getSource() == numPad_7) {
+			        num=7;
+			        txtOrderId.setText(txtOrderId.getText() + num);
+			    }
+			}
+		});
+		numPad_7.setForeground(Color.WHITE);
+		numPad_7.setFont(new Font("Tahoma", Font.BOLD, 12));
+		numPad_7.setBackground(Color.BLACK);
+		numPad_7.setBounds(251, 407, 57, 44);
+		contentPane.add(numPad_7);
+		
+		final JButton numPad_8 = new JButton("8");
+		numPad_8.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (e.getSource() == numPad_8) {
+			        num=8;
+			        txtOrderId.setText(txtOrderId.getText() + num);
+			    }
+			}
+		});
+		numPad_8.setForeground(Color.WHITE);
+		numPad_8.setFont(new Font("Tahoma", Font.BOLD, 12));
+		numPad_8.setBackground(Color.BLACK);
+		numPad_8.setBounds(321, 407, 57, 44);
+		contentPane.add(numPad_8);
+		
+		final JButton numPad_9 = new JButton("9");
+		numPad_9.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (e.getSource() == numPad_9) {
+			        num=9;
+			        txtOrderId.setText(txtOrderId.getText() + num);
+			    }
+			}
+		});
+		numPad_9.setForeground(Color.WHITE);
+		numPad_9.setFont(new Font("Tahoma", Font.BOLD, 12));
+		numPad_9.setBackground(Color.BLACK);
+		numPad_9.setBounds(391, 407, 57, 44);
+		contentPane.add(numPad_9);
 		
 		JButton btnBackspace = new JButton("DELETE");
+		btnBackspace.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(!txtOrderId.getText().equals(""))
+				txtOrderId.setText(txtOrderId.getText().substring(0, txtOrderId.getText().length()-1)); 
+			}
+		});
 		btnBackspace.setForeground(Color.WHITE);
 		btnBackspace.setFont(new Font("Tahoma", Font.BOLD, 12));
 		btnBackspace.setBackground(Color.BLACK);
-		btnBackspace.setBounds(469, 249, 100, 98);
+		btnBackspace.setBounds(469, 301, 100, 58);
 		contentPane.add(btnBackspace);
-		
-		JButton button_4 = new JButton("6");
-		button_4.setForeground(Color.WHITE);
-		button_4.setFont(new Font("Tahoma", Font.BOLD, 12));
-		button_4.setBackground(Color.BLACK);
-		button_4.setBounds(390, 308, 57, 44);
-		contentPane.add(button_4);
-		
-		JButton button_5 = new JButton("5");
-		button_5.setForeground(Color.WHITE);
-		button_5.setFont(new Font("Tahoma", Font.BOLD, 12));
-		button_5.setBackground(Color.BLACK);
-		button_5.setBounds(320, 308, 57, 44);
-		contentPane.add(button_5);
-		
-		JButton button_6 = new JButton("4");
-		button_6.setForeground(Color.WHITE);
-		button_6.setFont(new Font("Tahoma", Font.BOLD, 12));
-		button_6.setBackground(Color.BLACK);
-		button_6.setBounds(250, 308, 57, 44);
-		contentPane.add(button_6);
-		
-		JButton button_7 = new JButton("7");
-		button_7.setForeground(Color.WHITE);
-		button_7.setFont(new Font("Tahoma", Font.BOLD, 12));
-		button_7.setBackground(Color.BLACK);
-		button_7.setBounds(250, 371, 57, 44);
-		contentPane.add(button_7);
-		
-		JButton button_8 = new JButton("8");
-		button_8.setForeground(Color.WHITE);
-		button_8.setFont(new Font("Tahoma", Font.BOLD, 12));
-		button_8.setBackground(Color.BLACK);
-		button_8.setBounds(320, 371, 57, 44);
-		contentPane.add(button_8);
-		
-		JButton button_9 = new JButton("9");
-		button_9.setForeground(Color.WHITE);
-		button_9.setFont(new Font("Tahoma", Font.BOLD, 12));
-		button_9.setBackground(Color.BLACK);
-		button_9.setBounds(390, 371, 57, 44);
-		contentPane.add(button_9);
-		
-		JButton button_10 = new JButton("");
-		button_10.setForeground(Color.WHITE);
-		button_10.setFont(new Font("Tahoma", Font.BOLD, 12));
-		button_10.setBackground(Color.BLACK);
-		button_10.setBounds(250, 433, 197, 44);
-		contentPane.add(button_10);
 		
 		JButton btnEnter = new JButton("ENTER");
 		btnEnter.setForeground(Color.WHITE);
 		btnEnter.setFont(new Font("Tahoma", Font.BOLD, 12));
 		btnEnter.setBackground(Color.BLACK);
-		btnEnter.setBounds(469, 378, 100, 98);
+		btnEnter.setBounds(469, 378, 100, 58);
 		contentPane.add(btnEnter);
 		
 		JButton button_12 = new JButton("Main Page");
