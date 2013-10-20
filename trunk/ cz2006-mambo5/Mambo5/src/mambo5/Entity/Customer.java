@@ -54,6 +54,18 @@ public class Customer {
 		this.accessID = accessID;
 	}
 	
+	public int createCustomer() {
+		dbc = new DBController();
+		int result = 0;
+		
+		String sql = "INSERT INTO customer (fullName, cardBalance, accessID) "
+					+ "VALUES ( '" + fullName + "' , '" + cardBalance + "' , '" + accessID +"');";
+		
+		result = dbc.executeNonQuery(sql);
+				
+		return result;
+	}
+	
 	public Customer retrieveCustomerDetail(int custID) {
 		System.out.println("TEST2");
 		dbc = new DBController();
@@ -76,15 +88,29 @@ public class Customer {
 		return cust;
 	}
 	
-	public int createCustomer() {
+	public int updateCustomerCardValue(int custID)
+	{
 		dbc = new DBController();
 		int result = 0;
 		
-		String sql = "INSERT INTO customer (fullName, cardBalance, accessID) "
-					+ "VALUES ( '" + fullName + "' , '" + cardBalance + "' , '" + accessID +"');";
-		
+		String sql = "UPDATE customer SET cardBalance = '" + cardBalance + "' WHERE custID = '" + custID + "';";
+				
 		result = dbc.executeNonQuery(sql);
 				
 		return result;
+		}	
+	
+	public int refundCustomerCard(int custID)
+	{	
+		dbc = new DBController();
+		int result = 0;
+		
+		String sql = "DELETE FROM customer WHERE custID = '" + custID + "';";
+				
+		result = dbc.executeNonQuery(sql);
+		return result;
 	}
 }
+	
+	
+
