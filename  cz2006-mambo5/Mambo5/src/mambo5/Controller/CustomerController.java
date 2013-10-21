@@ -23,21 +23,17 @@ public class CustomerController {
 		this.cardBalance = cardBalance;
 		this.fullName = fullName;
 		this.accessID = accessID;
+		
 	}
 	
-	public int validateCustomerDetail(int method){
+	public int validateCustomerDetail(double cardBalance, String fullName, int accessID){
 		int validate = 0;
-		if (method == 1) {
-			cust = new Customer(custID, cardBalance, fullName, accessID);
-			validate = cust.createCustomer();
-		}
-		else if (method == 2) {
-			sysConfig = new SystemConfiguration();
-			dataStore = DataStoreFactory.createDataStore(sysConfig);
-			//validate = dataStore.updateCustomerDetail(custID, cardBalance,  fullName, accessID);
-		}
-			
-			
+		
+		cust = new Customer();
+		validate = cust.createCustomer(cardBalance, fullName, 6);
+				
 		return validate;
 	}
+	
+	
 }

@@ -54,12 +54,12 @@ public class Customer {
 		this.accessID = accessID;
 	}
 	
-	public int createCustomer() {
+	public int createCustomer(double cardBalance, String fullName, int accessID) {
 		dbc = new DBController();
 		int result = 0;
 		
 		String sql = "INSERT INTO customer (fullName, cardBalance, accessID) "
-					+ "VALUES ( '" + fullName + "' , '" + cardBalance + "' , " + 6 + ");";
+					+ "VALUES ( '" + fullName + "' , '" + cardBalance + "' , " + accessID + ");";
 		
 		result = dbc.executeNonQuery(sql);
 				

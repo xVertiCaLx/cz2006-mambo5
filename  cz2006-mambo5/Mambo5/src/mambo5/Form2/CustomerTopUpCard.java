@@ -1,4 +1,4 @@
-package mambo5.Form;
+package mambo5.Form2;
 
 import java.awt.Color;
 import java.awt.Font;
