@@ -101,6 +101,15 @@ public class OFSFunction extends JPanel {
 		add(deleteCanteenBtn);
 		
 		JButton createStallBtn = new JButton("Create Stall");
+		createStallBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				mainFrame.remove(mainFrame.getSelectPanel());
+				mainFrame.setSelectPanel(new CreateStallForm(mainFrame));
+				mainFrame.getContentPane().add(mainFrame.getSelectPanel());
+				mainFrame.revalidate();
+				mainFrame.repaint();
+			}
+		});
 		createStallBtn.setFont(new Font("Arial", Font.BOLD, 16));
 		createStallBtn.setBounds(20, 251, 170, 80);
 		add(createStallBtn);
