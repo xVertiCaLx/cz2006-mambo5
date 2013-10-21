@@ -14,6 +14,7 @@ import javax.swing.border.EmptyBorder;
 public class CamsMainFrame extends JFrame {
 
 	private JPanel contentPane, titlePanel;
+	JPanel selectPanel;
 	public static JLabel titleLabel = new JLabel("#Canteen");;
 
 	public CamsMainFrame() {
@@ -42,12 +43,14 @@ public class CamsMainFrame extends JFrame {
 		titleLabel.setBounds(10, 0, 103, 39);
 		titlePanel.add(titleLabel);
 
+		
+		selectPanel = new SelectPanel(this);
 		JLabel label_1 = new JLabel("#Store Name | #CaMS Page");
 		label_1.setHorizontalAlignment(SwingConstants.CENTER);
 		label_1.setForeground(Color.WHITE);
 		label_1.setFont(new Font("Arial", Font.BOLD, 12));
 		label_1.setBounds(0, 0, 794, 39);
-		contentPane.add(new SelectPanel());
+		contentPane.add(selectPanel);
 	}
 	
 }
