@@ -1,12 +1,17 @@
 package mambo5.Entity;
 
-public class Stall {
+import mambo5.Form3.LoginFormEvent;
+import mambo5.Form3.LoginListener;
+
+public class Stall implements LoginListener {
 	private int stallID;
 	private int canteenID;
 	private String stallUnit;
 	private String stallName;
 	private String stallDesc;
 	private Boolean stallStatus;
+	
+	public Stall(){}
 	
 	public Stall(int stallID, int canteenID, String stallUnit, String stallName, String stallDesc, Boolean stallStatus) {
 		this.stallID = stallID;
@@ -39,5 +44,11 @@ public class Stall {
 	
 	public Boolean getStallStatus() {
 		return stallStatus;
+	}
+
+	@Override
+	public void loginListener(LoginFormEvent event) {
+		// TODO Auto-generated method stub
+		
 	}
 }

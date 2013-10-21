@@ -19,7 +19,7 @@ public class DeleteStallForm extends JPanel {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
+	/*public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -31,15 +31,15 @@ public class DeleteStallForm extends JPanel {
 			}
 		});
 	}
-
+*/
 	/**
 	 * Create the frame.
 	 */
 	public DeleteStallForm() {
 		
-		setBounds(0,40,800,560);
+		setBounds(0, 40, 800, 560);
 		setLayout(null);
-		setBackground(new Color(255,255,255));
+		setBackground(new Color(255, 255, 255));
 		
 		JLabel availableLabel = new JLabel("Available Canteen:");
 		availableLabel.setBounds(10, 15, 99, 14);

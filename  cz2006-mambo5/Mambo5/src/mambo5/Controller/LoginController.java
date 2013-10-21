@@ -1,7 +1,6 @@
 package mambo5.Controller;
-import java.sql.*;
-
 import mambo5.Entity.Customer;
+import mambo5.Entity.Stall;
 
 public class LoginController {
 	
@@ -13,9 +12,10 @@ public class LoginController {
 		return cust;		
 	}
 	
-	public int stallLogin() {
-		
-		return 0;	
+	private Stall stall;
+	
+	public Stall stallLogin(int stallId, int employeeId, String password) {
+		System.out.println("entered login method");
+		return stall;	
 	}
-
 }
