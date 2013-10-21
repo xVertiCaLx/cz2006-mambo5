@@ -17,12 +17,12 @@ public class SelectPanel extends JPanel {
 	private JPasswordField passwordField;
 
 	public SelectPanel() {
-		// Pnael Size
+		// Panel Size
 		setBounds(0, 40, 800, 560);
 		setLayout(null);
 		setBackground(new Color(255, 255, 255));
-
-		// things specific to your layout
+		//mainFrame.setTitle("Selectio2222n");
+		CamsMainFrame.titleLabel.setText("Selec222tion");
 
 		JButton CAMSButton = new JButton("Enter Canteen Management System");
 		CAMSButton.addActionListener(new ActionListener() {
@@ -39,6 +39,7 @@ public class SelectPanel extends JPanel {
 		JButton OFSButton = new JButton("Enter OFS System");
 		OFSButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
 				removeAll();
 				add(new OFSFunction());
 				revalidate();
