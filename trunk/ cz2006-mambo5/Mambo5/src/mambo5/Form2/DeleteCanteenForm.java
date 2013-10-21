@@ -25,14 +25,17 @@ public class DeleteCanteenForm extends JPanel {
 	private JComboBox<String> availableCB;
 	private ArrayList<Canteen> retrieveCanteenList;
 	private JFrame frame;
-
+	private CamsMainFrame mainFrame;
 	/**
 	 * Create the frame.
 	 */
-	public DeleteCanteenForm() {
+	public DeleteCanteenForm(final CamsMainFrame mainFrame) {
 		setBounds(0, 40, 800, 560);
 		setLayout(null);
 		setBackground(new Color(240, 240, 240));
+		
+		this.mainFrame = mainFrame;
+		mainFrame.titleLabel.setText("Delete Canteen");
 		
 		JLabel availableLabel = new JLabel("Available Canteen:");
 		availableLabel.setBounds(10, 11, 105, 14);
@@ -73,10 +76,11 @@ public class DeleteCanteenForm extends JPanel {
 			int index = availableCB.getSelectedIndex();
 			if(cc.processDeleteCanteen(retrieveCanteenList.get(index).getCanteenID()) == 1) {
 				JOptionPane.showMessageDialog(null, "Canteen successfully updated");
-				
-				//this.dispose();
-				//DeleteCanteenForm c = new DeleteCanteenForm();
-				//c.setVisible(true);
+				mainFrame.remove(mainFrame.getSelectPanel());
+				mainFrame.setSelectPanel(new OFSFunction(mainFrame));
+				mainFrame.add(mainFrame.getSelectPanel());
+				mainFrame.revalidate();
+				mainFrame.repaint();
 			}
 			else {
 				JOptionPane.showMessageDialog(null, "Error when updating to database");

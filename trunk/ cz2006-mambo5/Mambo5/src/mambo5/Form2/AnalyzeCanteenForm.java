@@ -14,14 +14,18 @@ import javax.swing.JButton;
 public class AnalyzeCanteenForm extends JPanel {
 
 	private JTable menuTable;
+	private CamsMainFrame mainFrame;
 
 	/**
 	 * Create the frame.
 	 */
-	public AnalyzeCanteenForm() {
+	public AnalyzeCanteenForm(final CamsMainFrame mainFrame) {
 		setBounds(0, 40, 800, 560);
 		setLayout(null);
 		setBackground(new Color(240, 240, 240));
+		
+		this.mainFrame = mainFrame;
+		mainFrame.titleLabel.setText("Analyze Canteen");
 		
 		JLabel availableLabel = new JLabel("Available Canteen:");
 		availableLabel.setBounds(10, 11, 99, 14);
