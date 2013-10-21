@@ -59,7 +59,7 @@ public class Customer {
 		int result = 0;
 		
 		String sql = "INSERT INTO customer (fullName, cardBalance, accessID) "
-					+ "VALUES ( '" + fullName + "' , '" + cardBalance + "' , '" + accessID +"');";
+					+ "VALUES ( '" + fullName + "' , '" + cardBalance + "' , " + 6 + ");";
 		
 		result = dbc.executeNonQuery(sql);
 				
@@ -71,7 +71,7 @@ public class Customer {
 		dbc = new DBController();
 		cust = null;
 		ResultSet rs = null;
-		String sql = "Select * from Customer where custID = '" + custID + "';";
+		String sql = "Select * from Customer where custID = " + custID + ";";
 		System.out.println(sql);
 		rs = dbc.executeQuery(sql);
 		
@@ -93,7 +93,7 @@ public class Customer {
 		dbc = new DBController();
 		int result = 0;
 		
-		String sql = "UPDATE customer SET cardBalance = '" + cardBalance + "' WHERE custID = '" + custID + "';";
+		String sql = "UPDATE customer SET cardBalance = '" + cardBalance + "' WHERE custID = " + custID + ";";
 				
 		result = dbc.executeNonQuery(sql);
 				
@@ -105,7 +105,7 @@ public class Customer {
 		dbc = new DBController();
 		int result = 0;
 		
-		String sql = "DELETE FROM customer WHERE custID = '" + custID + "';";
+		String sql = "DELETE FROM customer WHERE custID = " + custID + ";";
 				
 		result = dbc.executeNonQuery(sql);
 		return result;
