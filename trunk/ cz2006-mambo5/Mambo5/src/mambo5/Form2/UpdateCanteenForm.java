@@ -1,6 +1,7 @@
-package mambo5.Form;
+package mambo5.Form2;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
@@ -22,9 +23,8 @@ import mambo5.Entity.Canteen;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class UpdateCanteenForm extends JFrame {
+public class UpdateCanteenForm extends JPanel {
 
-	private JPanel contentPane;
 	private JTextField nameText;
 	private JTextField addressText;
 	private JTextField maxStallText;
@@ -37,72 +37,56 @@ public class UpdateCanteenForm extends JFrame {
 	private String canteenDesc;
 	private int canteenID;
 	private int maxStall;
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					UpdateCanteenForm frame = new UpdateCanteenForm();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+	private CamsMainFrame mainFrame;
 
 	/**
 	 * Create the frame.
 	 */
-	public UpdateCanteenForm() {
-		setTitle("CaMs");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
-		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		setContentPane(contentPane);
-		contentPane.setLayout(null);
+	public UpdateCanteenForm(final CamsMainFrame mainFrame) {
+		setBounds(0, 40, 800, 560);
+		setLayout(null);
+		setBackground(new Color(240, 240, 240));
+		
+		this.mainFrame = mainFrame;
+		mainFrame.titleLabel.setText("Update Canteen");
 		
 		JLabel availableLabel = new JLabel("Available Canteen:");
-		availableLabel.setBounds(10, 11, 91, 14);
-		contentPane.add(availableLabel);
+		availableLabel.setBounds(213, 147, 112, 14);
+		add(availableLabel);
 		
 		JLabel nameLabel = new JLabel("Canteen Name:");
-		nameLabel.setBounds(10, 36, 91, 14);
-		contentPane.add(nameLabel);
+		nameLabel.setBounds(213, 178, 112, 14);
+		add(nameLabel);
 		
 		JLabel addressLabel = new JLabel("Canteen Address:");
-		addressLabel.setBounds(10, 62, 91, 14);
-		contentPane.add(addressLabel);
+		addressLabel.setBounds(213, 241, 112, 14);
+		add(addressLabel);
 		
 		JLabel descriptionLabel = new JLabel("Canteen Description:");
-		descriptionLabel.setBounds(10, 87, 104, 14);
-		contentPane.add(descriptionLabel);
+		descriptionLabel.setBounds(213, 266, 125, 14);
+		add(descriptionLabel);
 		
 		nameText = new JTextField();
-		nameText.setBounds(130, 33, 86, 20);
-		contentPane.add(nameText);
+		nameText.setBounds(338, 175, 86, 20);
+		add(nameText);
 		nameText.setColumns(10);
 		
 		addressText = new JTextField();
-		addressText.setBounds(130, 59, 288, 20);
-		contentPane.add(addressText);
+		addressText.setBounds(338, 238, 288, 20);
+		add(addressText);
 		addressText.setColumns(10);
 		
 		descriptionText = new JTextArea();
-		descriptionText.setBounds(130, 82, 288, 137);
-		contentPane.add(descriptionText);
+		descriptionText.setBounds(338, 266, 288, 137);
+		add(descriptionText);
 		
 		JLabel maxStallLabel = new JLabel("Max Stall:");
-		maxStallLabel.setBounds(240, 36, 65, 14);
-		contentPane.add(maxStallLabel);
+		maxStallLabel.setBounds(213, 209, 86, 14);
+		add(maxStallLabel);
 		
 		maxStallText = new JTextField();
-		maxStallText.setBounds(315, 33, 86, 20);
-		contentPane.add(maxStallText);
+		maxStallText.setBounds(338, 206, 86, 20);
+		add(maxStallText);
 		maxStallText.setColumns(10);
 		
 		JButton updateBtn = new JButton("Update");
@@ -113,11 +97,11 @@ public class UpdateCanteenForm extends JFrame {
 			
 		});
 		
-		updateBtn.setBounds(329, 230, 89, 23);
-		contentPane.add(updateBtn);
+		updateBtn.setBounds(537, 414, 89, 23);
+		add(updateBtn);
 		
 		availableCB = getCanteenList();
-		availableCB.setBounds(130, 8, 47, 20);
+		availableCB.setBounds(339, 144, 47, 20);
 		availableCB.addItemListener(new ItemListener(){
             @Override
             public void itemStateChanged(ItemEvent e)
@@ -132,7 +116,7 @@ public class UpdateCanteenForm extends JFrame {
             }
         });
 
-		contentPane.add(availableCB);
+		add(availableCB);
 	}
 	
 	private JComboBox<String> getCanteenList() {
@@ -177,9 +161,11 @@ public class UpdateCanteenForm extends JFrame {
 					JOptionPane.showMessageDialog(null, "Error when updating to database");
 				else {
 					JOptionPane.showMessageDialog(null, "Canteen successfully updated");
-					this.dispose();
-					UpdateCanteenForm c = new UpdateCanteenForm();
-					c.setVisible(true);
+					mainFrame.remove(mainFrame.getSelectPanel());
+					mainFrame.setSelectPanel(new OFSFunction(mainFrame));
+					mainFrame.getContentPane().add(mainFrame.getSelectPanel());
+					mainFrame.revalidate();
+					mainFrame.repaint();
 				}
 			} catch (NumberFormatException exception) {
 				JOptionPane.showMessageDialog(null, "Please Enter Only Integer Value for Max Stalls");
