@@ -1,9 +1,7 @@
 package mambo5.Entity;
 
-import mambo5.Form3.LoginFormEvent;
-import mambo5.Form3.LoginListener;
 
-public class Stall implements LoginListener {
+public class Stall {
 	private int stallID;
 	private int canteenID;
 	private String stallUnit;
@@ -46,9 +44,4 @@ public class Stall implements LoginListener {
 		return stallStatus;
 	}
 
-	@Override
-	public void loginListener(LoginFormEvent event) {
-		// TODO Auto-generated method stub
-		
-	}
 }
