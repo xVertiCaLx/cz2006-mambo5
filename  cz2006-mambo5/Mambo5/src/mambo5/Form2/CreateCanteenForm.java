@@ -39,30 +39,30 @@ public class CreateCanteenForm extends JPanel {
 		setBackground(new Color(240, 240, 240));
 		
 		JLabel nameLabel = new JLabel("Canteen Name:");
-		nameLabel.setBounds(10, 11, 87, 14);
+		nameLabel.setBounds(147, 171, 127, 14);
 		add(nameLabel);
 		
 		JLabel addressLabel = new JLabel("Canteen Address:");
-		addressLabel.setBounds(10, 36, 87, 14);
+		addressLabel.setBounds(147, 196, 127, 14);
 		add(addressLabel);
 		
 		JLabel descriptionLabel = new JLabel("Canteen Description:");
-		descriptionLabel.setBounds(10, 61, 103, 14);
+		descriptionLabel.setBounds(147, 221, 127, 14);
 		add(descriptionLabel);
 		
 		nameText = new JTextField();
-		nameText.setBounds(119, 8, 86, 20);
+		nameText.setBounds(284, 168, 288, 20);
 		add(nameText);
 		nameText.setColumns(10);
 		
 		addressText = new JTextField();
-		addressText.setBounds(119, 33, 288, 20);
+		addressText.setBounds(284, 193, 288, 20);
 		add(addressText);
 		addressText.setColumns(10);
 		
 		descriptionText = new JTextArea();
 		descriptionText.setLineWrap(true);
-		descriptionText.setBounds(119, 61, 288, 148);
+		descriptionText.setBounds(284, 221, 288, 148);
 		add(descriptionText);
 		
 		JButton createCanteenBtn = new JButton("Create");
@@ -71,16 +71,16 @@ public class CreateCanteenForm extends JPanel {
 				submitsCanteenDetails(e);
 			}
 		});
-		createCanteenBtn.setBounds(318, 220, 89, 23);
+		createCanteenBtn.setBounds(483, 425, 89, 23);
 		add(createCanteenBtn);
 		
 		maxStallText = new JTextField();
-		maxStallText.setBounds(119, 220, 86, 20);
+		maxStallText.setBounds(284, 380, 45, 20);
 		add(maxStallText);
 		maxStallText.setColumns(10);
 		
 		JLabel maxStallLabel = new JLabel("Max Stalls");
-		maxStallLabel.setBounds(10, 224, 87, 14);
+		maxStallLabel.setBounds(147, 383, 127, 14);
 		add(maxStallLabel);
 	}
 	
