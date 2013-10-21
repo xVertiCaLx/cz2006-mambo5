@@ -48,18 +48,6 @@ public class SelectPanel extends JPanel {
 		});
 		CAMSButton.setBounds(274, 151, 234, 80);
 		add(CAMSButton);
-		
-		JButton OFSButton = new JButton("Enter OFS System");
-		OFSButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				removeAll();
-				add(new DeleteStallForm());
-				revalidate();
-				repaint();
-			}
-		});
-		OFSButton.setBounds(20, 151, 234, 80);
-		add(OFSButton);
 
 		JButton TixButton = new JButton("Enter Ticketing System");
 		TixButton.addActionListener(new ActionListener() {
