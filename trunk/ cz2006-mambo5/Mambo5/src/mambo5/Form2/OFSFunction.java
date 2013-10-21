@@ -120,6 +120,15 @@ public class OFSFunction extends JPanel {
 		add(retrieveStallBtn);
 		
 		JButton updateStallBtn = new JButton("Update Stall");
+		updateStallBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				mainFrame.remove(mainFrame.getSelectPanel());
+				mainFrame.setSelectPanel(new UpdateStallForm(mainFrame));
+				mainFrame.getContentPane().add(mainFrame.getSelectPanel());
+				mainFrame.revalidate();
+				mainFrame.repaint();
+			}
+		});
 		updateStallBtn.setFont(new Font("Arial", Font.BOLD, 16));
 		updateStallBtn.setBounds(400, 251, 170, 80);
 		add(updateStallBtn);
