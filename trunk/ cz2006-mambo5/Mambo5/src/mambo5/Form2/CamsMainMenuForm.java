@@ -11,7 +11,7 @@ import javax.swing.JPanel;
 
 public class CamsMainMenuForm extends JPanel {
 
-	public CamsMainMenuForm() {
+	public CamsMainMenuForm(final CamsMainFrame mainFrame) {
 		setBounds(0, 40, 800, 560);
 		setLayout(null);
 		setBackground(new Color(255, 255, 255));
@@ -20,10 +20,7 @@ public class CamsMainMenuForm extends JPanel {
 		JButton btnLogin = new JButton("LOGOUT");
 		btnLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				removeAll();
-				add(new CamsLoginForm());
-				revalidate();
-				repaint();
+				mainFrame.replacePanel(new CamsLoginForm());
 			}
 		});
 		btnLogin.setForeground(new Color(255, 255, 255));

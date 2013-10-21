@@ -25,7 +25,7 @@ public class AnalyzeCanteenForm extends JPanel {
 		setBackground(new Color(240, 240, 240));
 		
 		this.mainFrame = mainFrame;
-		mainFrame.titleLabel.setText("Analyze Canteen");
+		mainFrame.setTitle("Analyze Canteen");
 		
 		JLabel availableLabel = new JLabel("Available Canteen:");
 		availableLabel.setBounds(10, 11, 99, 14);

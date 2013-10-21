@@ -40,7 +40,7 @@ public class CreateCanteenForm extends JPanel {
 		setBackground(new Color(240, 240, 240));
 		
 		this.mainFrame = mainFrame;
-		mainFrame.titleLabel.setText("Create Canteen");
+		mainFrame.setTitle("Create Canteen");
 		
 		JPanel titlePanel2 = new JPanel();
 		titlePanel2.setBackground(new Color(0, 0, 102));
