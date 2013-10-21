@@ -5,6 +5,8 @@ public class Menu {
 	private int stallID;
 	private String menuType;
 	
+	public Menu(){}
+	
 	public Menu(int menuID, int stallID, String menuType) {
 		this.menuID = menuID;
 		this.stallID = stallID;

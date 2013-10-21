@@ -1,20 +1,21 @@
 package mambo5.Form2;
 
-import java.awt.Color;
-import java.awt.EventQueue;
-import java.awt.Font;
+import java.awt.*;
+//import java.awt.EventQueue;
+//import javax.swing.JComboBox;
+//import java.awt.Font;
 
-import javax.swing.JFrame;
+/*import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.SwingConstants;
+import javax.swing.JPanel;*/
+import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
-public class CamsMainMenuFrame extends JFrame {
+public class CamsMainFrame extends JFrame {
 
 	JPanel contentPane;
 
-	public static void main(String[] args) {
+	/*public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -25,11 +26,12 @@ public class CamsMainMenuFrame extends JFrame {
 				}
 			}
 		});
-	}
+	}*/
 	
-	public CamsMainMenuFrame() {
+	public CamsMainFrame() {
 		//the frame
 				setResizable(false);
+				setVisible(true);
 				setTitle("Canteen Management System");
 				setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 				setBounds(0, 0, 800, 600);
@@ -57,6 +59,6 @@ public class CamsMainMenuFrame extends JFrame {
 				label_1.setForeground(Color.WHITE);
 				label_1.setFont(new Font("Arial", Font.BOLD, 12));
 				label_1.setBounds(0, 0, 794, 39);
-				contentPane.add(new CamsMainMenuForm());
+				contentPane.add(new SelectPanel());
 	}
 }
