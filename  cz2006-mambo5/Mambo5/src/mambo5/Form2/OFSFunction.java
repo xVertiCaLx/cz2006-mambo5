@@ -61,10 +61,11 @@ public class OFSFunction extends JPanel {
 		JButton analyzeCanteenBtn = new JButton("Analyze Canteen");
 		analyzeCanteenBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				removeAll();
-				add(new AnalyzeCanteenForm());
-				revalidate();
-				repaint();
+				mainFrame.remove(mainFrame.getSelectPanel());
+				mainFrame.setSelectPanel(new AnalyzeCanteenForm(mainFrame));
+				mainFrame.add(mainFrame.getSelectPanel());
+				mainFrame.revalidate();
+				mainFrame.repaint();
 			}
 		});
 		analyzeCanteenBtn.setFont(new Font("Arial", Font.BOLD, 16));
@@ -79,6 +80,11 @@ public class OFSFunction extends JPanel {
 		JButton deleteCanteenBtn = new JButton("Delete Canteen");
 		deleteCanteenBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				mainFrame.remove(mainFrame.getSelectPanel());
+				mainFrame.setSelectPanel(new DeleteCanteenForm(mainFrame));
+				mainFrame.add(mainFrame.getSelectPanel());
+				mainFrame.revalidate();
+				mainFrame.repaint();
 			}
 		});
 		deleteCanteenBtn.setFont(new Font("Arial", Font.BOLD, 16));
