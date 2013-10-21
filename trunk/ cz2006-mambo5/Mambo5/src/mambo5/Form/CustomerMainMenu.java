@@ -35,19 +35,23 @@ public class CustomerMainMenu extends JPanel {
 		setBackground(new Color(255, 255, 255));
 		
 		JButton btnPurchaseCard = new JButton("Purchase Card");
-		btnPurchaseCard.setBounds(35, 114, 163, 40);
+		btnPurchaseCard.setFont(new Font("Arial", Font.BOLD, 16));
+		btnPurchaseCard.setBounds(120, 151, 234, 80);
 		add(btnPurchaseCard);
 		
 		JButton btnCheckHistory = new JButton("Check History");
-		btnCheckHistory.setBounds(35, 185, 163, 40);
+		btnCheckHistory.setFont(new Font("Arial", Font.BOLD, 16));
+		btnCheckHistory.setBounds(120, 301, 234, 80);
 		add(btnCheckHistory);
 		
 		JButton btnTopUpCard = new JButton("Top-up Card");
-		btnTopUpCard.setBounds(242, 114, 163, 40);
+		btnTopUpCard.setFont(new Font("Arial", Font.BOLD, 16));
+		btnTopUpCard.setBounds(474, 151, 234, 80);
 		add(btnTopUpCard);
 		
 		JButton btnRefundCard = new JButton("Refund Card");
-		btnRefundCard.setBounds(242, 185, 163, 40);
+		btnRefundCard.setFont(new Font("Arial", Font.BOLD, 16));
+		btnRefundCard.setBounds(474, 301, 234, 80);
 		add(btnRefundCard);
 		
 		JSeparator separator = new JSeparator();
@@ -55,13 +59,13 @@ public class CustomerMainMenu extends JPanel {
 		add(separator);
 		
 		JLabel lblWelcomeToThe = new JLabel("Welcome to the CaMs Ticketing Machine");
-		lblWelcomeToThe.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblWelcomeToThe.setBounds(81, 11, 298, 40);
+		lblWelcomeToThe.setFont(new Font("Arial", Font.BOLD, 18));
+		lblWelcomeToThe.setBounds(225, 11, 385, 40);
 		add(lblWelcomeToThe);
 		
 		JLabel lblSelectAnOption = new JLabel("Select an option");
-		lblSelectAnOption.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblSelectAnOption.setBounds(163, 62, 134, 40);
+		lblSelectAnOption.setFont(new Font("Arial", Font.BOLD, 17));
+		lblSelectAnOption.setBounds(346, 44, 134, 40);
 		add(lblSelectAnOption);
 	}
 }
