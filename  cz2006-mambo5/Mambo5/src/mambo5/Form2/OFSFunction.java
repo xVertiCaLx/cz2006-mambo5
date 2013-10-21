@@ -15,7 +15,7 @@ public class OFSFunction extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public OFSFunction() {
+	public OFSFunction(final CamsMainFrame mainFrame) {
 		setBounds(0, 40, 800, 560);
 		setLayout(null);
 		setBackground(new Color(240, 240, 240));
@@ -47,10 +47,12 @@ public class OFSFunction extends JPanel {
 		JButton createCanteenBtn = new JButton("Create Canteen");
 		createCanteenBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				removeAll();
-				add(new CreateCanteenForm());
-				revalidate();
-				repaint();
+				mainFrame.remove(mainFrame.getSelectPanel());
+				mainFrame.setSelectPanel(new CreateCanteenForm(mainFrame));
+				//mainFrame.removeAll();
+				mainFrame.add(mainFrame.getSelectPanel());
+				mainFrame.revalidate();
+				mainFrame.repaint();
 			}
 		});
 		createCanteenBtn.setFont(new Font("Arial", Font.BOLD, 16));
