@@ -36,7 +36,7 @@ public class CreateCanteenForm extends JPanel {
 	public CreateCanteenForm() {
 		setBounds(0, 40, 800, 560);
 		setLayout(null);
-		setBackground(new Color(255, 255, 255));
+		setBackground(new Color(240, 240, 240));
 		
 		JLabel nameLabel = new JLabel("Canteen Name:");
 		nameLabel.setBounds(10, 11, 87, 14);
