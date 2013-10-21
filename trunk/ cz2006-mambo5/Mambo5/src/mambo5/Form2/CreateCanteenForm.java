@@ -19,7 +19,6 @@ import mambo5.Controller.CanteenController;
 
 public class CreateCanteenForm extends JPanel {
 
-	//private JPanel contentPane;
 	private JTextField nameText;
 	private JTextField addressText;
 	private JTextArea descriptionText;
@@ -29,6 +28,7 @@ public class CreateCanteenForm extends JPanel {
 	private String canteenDesc;
 	private int maxStall;
 	private CanteenController cc;
+	private CamsMainFrame mainFrame;
 
 	/**
 	 * Create the frame.
@@ -36,7 +36,9 @@ public class CreateCanteenForm extends JPanel {
 	public CreateCanteenForm(final CamsMainFrame mainFrame) {
 		setBounds(0, 40, 800, 560);
 		setLayout(null);
-		setBackground(new Color(255, 255, 255));
+		setBackground(new Color(240, 240, 240));
+		
+		this.mainFrame = mainFrame;
 		
 		JLabel nameLabel = new JLabel("Canteen Name:");
 		nameLabel.setBounds(147, 171, 127, 14);
@@ -102,8 +104,14 @@ public class CreateCanteenForm extends JPanel {
 				cc = new CanteenController();
 				if(cc.validateCanteenDetail(canteenName, canteenDesc, canteenAddress, maxStall)==0)
 					JOptionPane.showMessageDialog(null, "Canteen cannot be created");
-				else
+				else {
 					JOptionPane.showMessageDialog(null, "Canteen successfully created");
+					mainFrame.remove(mainFrame.getSelectPanel());
+					mainFrame.setSelectPanel(new OFSFunction(mainFrame));
+					mainFrame.add(mainFrame.getSelectPanel());
+					mainFrame.revalidate();
+					mainFrame.repaint();
+				}
 			}catch (NumberFormatException exception) {
 				JOptionPane.showMessageDialog(null, "Please Enter Only Integer Value for Max Stalls");
 			}

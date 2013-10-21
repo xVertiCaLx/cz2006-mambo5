@@ -49,7 +49,6 @@ public class OFSFunction extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				mainFrame.remove(mainFrame.getSelectPanel());
 				mainFrame.setSelectPanel(new CreateCanteenForm(mainFrame));
-				//mainFrame.removeAll();
 				mainFrame.add(mainFrame.getSelectPanel());
 				mainFrame.revalidate();
 				mainFrame.repaint();
