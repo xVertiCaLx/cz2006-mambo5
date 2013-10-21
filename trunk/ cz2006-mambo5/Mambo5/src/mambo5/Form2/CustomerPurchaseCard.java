@@ -1,4 +1,4 @@
-package mambo5.Form;
+package mambo5.Form2;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -13,6 +13,8 @@ import java.awt.Font;
 
 import javax.swing.JTextField;
 import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class CustomerPurchaseCard extends JPanel {
 
@@ -94,6 +96,14 @@ public class CustomerPurchaseCard extends JPanel {
 		add(lblSgd_4);
 		
 		JButton btnOk = new JButton("Ok");
+		btnOk.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) 
+			
+			{	
+				//implement the controller
+				System.out.print("test");
+			}
+		});
 		btnOk.setBounds(184, 231, 109, 20);
 		add(btnOk);
 		
