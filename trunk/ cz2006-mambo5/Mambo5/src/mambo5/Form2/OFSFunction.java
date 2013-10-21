@@ -18,7 +18,7 @@ public class OFSFunction extends JPanel {
 	public OFSFunction() {
 		setBounds(0, 40, 800, 560);
 		setLayout(null);
-		setBackground(new Color(255, 255, 255));
+		setBackground(new Color(240, 240, 240));
 		
 		JPanel titlePanel = new JPanel();
 		titlePanel.setBackground(new Color(0, 0, 102));
