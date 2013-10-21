@@ -15,6 +15,7 @@ public class CamsMainMenuForm extends JPanel {
 		setBounds(0, 40, 800, 560);
 		setLayout(null);
 		setBackground(new Color(255, 255, 255));
+		//mainFrame.setTitle("Canteen Management System");
 		
 		JButton btnLogin = new JButton("LOGOUT");
 		btnLogin.addActionListener(new ActionListener() {
