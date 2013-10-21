@@ -26,19 +26,35 @@ public class OFSFunction extends JPanel {
 		analyzeCanteenBtn.setBounds(210, 151, 170, 80);
 		add(analyzeCanteenBtn);
 		
-		JButton btnNewButton_2 = new JButton("Update Canteen");
-		btnNewButton_2.setFont(new Font("Arial", Font.BOLD, 16));
-		btnNewButton_2.setBounds(400, 151, 170, 80);
-		add(btnNewButton_2);
+		JButton updateCanteenBtn = new JButton("Update Canteen");
+		updateCanteenBtn.setFont(new Font("Arial", Font.BOLD, 16));
+		updateCanteenBtn.setBounds(400, 151, 170, 80);
+		add(updateCanteenBtn);
 		
-		JButton btnNewButton = new JButton("Delete Canteen");
-		btnNewButton.setFont(new Font("Arial", Font.BOLD, 16));
-		btnNewButton.setBounds(590, 151, 170, 80);
-		add(btnNewButton);
+		JButton deleteCanteenBtn = new JButton("Delete Canteen");
+		deleteCanteenBtn.setFont(new Font("Arial", Font.BOLD, 16));
+		deleteCanteenBtn.setBounds(590, 151, 170, 80);
+		add(deleteCanteenBtn);
 		
-		JButton btnNewButton_1 = new JButton("New button");
-		btnNewButton_1.setBounds(20, 282, 89, 23);
-		add(btnNewButton_1);
+		JButton createStallBtn = new JButton("Create Stall");
+		createStallBtn.setFont(new Font("Arial", Font.BOLD, 16));
+		createStallBtn.setBounds(20, 251, 170, 80);
+		add(createStallBtn);
+		
+		JButton retrieveStallBtn = new JButton("Retrieve Stall");
+		retrieveStallBtn.setFont(new Font("Arial", Font.BOLD, 16));
+		retrieveStallBtn.setBounds(210, 251, 170, 80);
+		add(retrieveStallBtn);
+		
+		JButton updateStallBtn = new JButton("Update Stall");
+		updateStallBtn.setFont(new Font("Arial", Font.BOLD, 16));
+		updateStallBtn.setBounds(400, 251, 170, 80);
+		add(updateStallBtn);
+		
+		JButton deleteStallBtn = new JButton("Delete Stall");
+		deleteStallBtn.setFont(new Font("Arial", Font.BOLD, 16));
+		deleteStallBtn.setBounds(590, 251, 170, 80);
+		add(deleteStallBtn);
 
 	}
 }
