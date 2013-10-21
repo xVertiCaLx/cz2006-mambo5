@@ -58,6 +58,14 @@ public class OFSFunction extends JPanel {
 		add(createCanteenBtn);
 		
 		JButton analyzeCanteenBtn = new JButton("Analyze Canteen");
+		analyzeCanteenBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				removeAll();
+				add(new AnalyzeCanteenForm());
+				revalidate();
+				repaint();
+			}
+		});
 		analyzeCanteenBtn.setFont(new Font("Arial", Font.BOLD, 16));
 		analyzeCanteenBtn.setBounds(210, 80, 170, 80);
 		add(analyzeCanteenBtn);
