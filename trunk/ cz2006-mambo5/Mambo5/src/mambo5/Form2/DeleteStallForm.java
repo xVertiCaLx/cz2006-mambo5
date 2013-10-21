@@ -14,27 +14,6 @@ import javax.swing.JButton;
 
 public class DeleteStallForm extends JPanel {
 
-	//private JPanel contentPane;
-
-	/**
-	 * Launch the application.
-	 */
-	/*public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					DeleteStallForm frame = new DeleteStallForm();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-*/
-	/**
-	 * Create the frame.
-	 */
 	public DeleteStallForm() {
 		
 		setBounds(0, 40, 800, 560);
