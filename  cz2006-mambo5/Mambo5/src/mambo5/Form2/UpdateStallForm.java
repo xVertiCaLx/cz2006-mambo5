@@ -45,7 +45,7 @@ public class UpdateStallForm extends JPanel {
 		setBackground(new Color(240, 240, 240));
 		
 		this.mainFrame = mainFrame;
-		mainFrame.titleLabel.setText("Update Stall");
+		mainFrame.setTitle("Update Stall");
 		
 		JPanel titlePanel2 = new JPanel();
 		titlePanel2.setBackground(new Color(0, 0, 102));

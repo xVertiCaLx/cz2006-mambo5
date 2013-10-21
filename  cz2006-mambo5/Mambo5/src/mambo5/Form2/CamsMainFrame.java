@@ -14,15 +14,7 @@ import javax.swing.border.EmptyBorder;
 public class CamsMainFrame extends JFrame {
 
 	private JPanel titlePanel, contentPane, selectPanel;
-	public JLabel titleLabel = new JLabel("#Canteen");;
-
-	public void setSelectPanel(JPanel selectPanel) {
-		this.selectPanel = selectPanel;
-	}
-
-	public JPanel getSelectPanel() {
-		return selectPanel;
-	}
+	private JLabel titleLabel = new JLabel("#Canteen");;
 
 	public CamsMainFrame() {
 		// the frame
@@ -47,16 +39,31 @@ public class CamsMainFrame extends JFrame {
 		
 		titleLabel.setForeground(Color.WHITE);
 		titleLabel.setFont(new Font("Arial", Font.BOLD, 12));
-		titleLabel.setBounds(10, 0, 400, 39);
+		titleLabel.setBounds(10, 1, 780, 38);
 		titlePanel.add(titleLabel);
 
-		
 		selectPanel = new SelectPanel(this);
-		JLabel label_1 = new JLabel("#Store Name | #CaMS Page");
-		label_1.setHorizontalAlignment(SwingConstants.CENTER);
-		label_1.setForeground(Color.WHITE);
-		label_1.setFont(new Font("Arial", Font.BOLD, 12));
-		label_1.setBounds(0, 0, 794, 39);
 		contentPane.add(selectPanel);
 	}
+	
+	public void setSelectPanel(JPanel selectPanel) {
+		this.selectPanel = selectPanel;
+	}
+
+	public JPanel getSelectPanel() {
+		return selectPanel;
+	}
+
+	public void setTitle(String title) {
+		titleLabel.setText(title);
+	}
+	
+	public void replacePanel(JPanel panel) {
+		contentPane.remove(selectPanel);
+		selectPanel = panel;
+		contentPane.add(selectPanel);
+		contentPane.revalidate();
+		contentPane.repaint();
+	}
+	
 }
