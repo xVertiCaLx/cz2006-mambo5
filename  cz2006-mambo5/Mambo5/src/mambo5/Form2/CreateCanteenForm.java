@@ -3,6 +3,7 @@ package mambo5.Form2;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.EventQueue;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -40,6 +41,18 @@ public class CreateCanteenForm extends JPanel {
 		
 		this.mainFrame = mainFrame;
 		mainFrame.titleLabel.setText("Create Canteen");
+		
+		JPanel titlePanel2 = new JPanel();
+		titlePanel2.setBackground(new Color(0, 0, 102));
+		titlePanel2.setBounds(147, 107, 424, 40);
+		add(titlePanel2);
+		titlePanel2.setLayout(null);
+		
+		JLabel canteenTitle = new JLabel("Please fill up all the fields");
+		canteenTitle.setBounds(10, 0, 200, 50);
+		titlePanel2.add(canteenTitle);
+		canteenTitle.setForeground(Color.WHITE);
+		canteenTitle.setFont(new Font("Arial", Font.BOLD, 16));
 		
 		JLabel nameLabel = new JLabel("Canteen Name:");
 		nameLabel.setBounds(147, 171, 127, 14);
@@ -109,7 +122,7 @@ public class CreateCanteenForm extends JPanel {
 					JOptionPane.showMessageDialog(null, "Canteen successfully created");
 					mainFrame.remove(mainFrame.getSelectPanel());
 					mainFrame.setSelectPanel(new OFSFunction(mainFrame));
-					mainFrame.add(mainFrame.getSelectPanel());
+					mainFrame.getContentPane().add(mainFrame.getSelectPanel());
 					mainFrame.revalidate();
 					mainFrame.repaint();
 				}

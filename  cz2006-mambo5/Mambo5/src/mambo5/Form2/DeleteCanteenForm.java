@@ -3,6 +3,7 @@ package mambo5.Form2;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.EventQueue;
+import java.awt.Font;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -37,12 +38,24 @@ public class DeleteCanteenForm extends JPanel {
 		this.mainFrame = mainFrame;
 		mainFrame.titleLabel.setText("Delete Canteen");
 		
+		JPanel titlePanel2 = new JPanel();
+		titlePanel2.setBackground(new Color(0, 0, 102));
+		titlePanel2.setBounds(147, 107, 424, 40);
+		add(titlePanel2);
+		titlePanel2.setLayout(null);
+		
+		JLabel canteenTitle = new JLabel("Please select the canteen to delete");
+		canteenTitle.setBounds(10, 0, 292, 50);
+		titlePanel2.add(canteenTitle);
+		canteenTitle.setForeground(Color.WHITE);
+		canteenTitle.setFont(new Font("Arial", Font.BOLD, 16));
+		
 		JLabel availableLabel = new JLabel("Available Canteen:");
-		availableLabel.setBounds(10, 11, 105, 14);
+		availableLabel.setBounds(147, 158, 105, 14);
 		add(availableLabel);
 		
 		availableCB = getCanteenList();
-		availableCB.setBounds(125, 8, 62, 20);
+		availableCB.setBounds(283, 155, 288, 20);
 		add(availableCB);
 		
 		JButton deleteBtn = new JButton("Delete");
@@ -51,7 +64,7 @@ public class DeleteCanteenForm extends JPanel {
 				submitsDeleteCanteen(e);
 			}
 		});
-		deleteBtn.setBounds(277, 7, 89, 23);
+		deleteBtn.setBounds(482, 192, 89, 23);
 		add(deleteBtn);
 	}
 	
@@ -78,7 +91,7 @@ public class DeleteCanteenForm extends JPanel {
 				JOptionPane.showMessageDialog(null, "Canteen successfully updated");
 				mainFrame.remove(mainFrame.getSelectPanel());
 				mainFrame.setSelectPanel(new OFSFunction(mainFrame));
-				mainFrame.add(mainFrame.getSelectPanel());
+				mainFrame.getContentPane().add(mainFrame.getSelectPanel());
 				mainFrame.revalidate();
 				mainFrame.repaint();
 			}

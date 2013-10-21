@@ -3,6 +3,7 @@ package mambo5.Form2;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.EventQueue;
+import java.awt.Font;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.util.ArrayList;
@@ -50,42 +51,55 @@ public class UpdateCanteenForm extends JPanel {
 		this.mainFrame = mainFrame;
 		mainFrame.titleLabel.setText("Update Canteen");
 		
+		JPanel titlePanel2 = new JPanel();
+		titlePanel2.setBackground(new Color(0, 0, 102));
+		titlePanel2.setBounds(147, 107, 424, 40);
+		add(titlePanel2);
+		titlePanel2.setLayout(null);
+		
+		JLabel canteenTitle = new JLabel("Please fill up all the fields");
+		canteenTitle.setBounds(10, 0, 200, 50);
+		titlePanel2.add(canteenTitle);
+		canteenTitle.setForeground(Color.WHITE);
+		canteenTitle.setFont(new Font("Arial", Font.BOLD, 16));
+		
 		JLabel availableLabel = new JLabel("Available Canteen:");
-		availableLabel.setBounds(213, 147, 112, 14);
+		availableLabel.setBounds(147, 158, 112, 14);
 		add(availableLabel);
 		
 		JLabel nameLabel = new JLabel("Canteen Name:");
-		nameLabel.setBounds(213, 178, 112, 14);
+		nameLabel.setBounds(147, 183, 112, 14);
 		add(nameLabel);
 		
 		JLabel addressLabel = new JLabel("Canteen Address:");
-		addressLabel.setBounds(213, 241, 112, 14);
+		addressLabel.setBounds(147, 233, 112, 14);
 		add(addressLabel);
 		
 		JLabel descriptionLabel = new JLabel("Canteen Description:");
-		descriptionLabel.setBounds(213, 266, 125, 14);
+		descriptionLabel.setBounds(147, 258, 125, 14);
 		add(descriptionLabel);
 		
 		nameText = new JTextField();
-		nameText.setBounds(338, 175, 86, 20);
+		nameText.setBounds(280, 180, 291, 20);
 		add(nameText);
 		nameText.setColumns(10);
 		
 		addressText = new JTextField();
-		addressText.setBounds(338, 238, 288, 20);
+		addressText.setBounds(280, 230, 291, 20);
 		add(addressText);
 		addressText.setColumns(10);
 		
 		descriptionText = new JTextArea();
-		descriptionText.setBounds(338, 266, 288, 137);
+		descriptionText.setLineWrap(true);
+		descriptionText.setBounds(282, 263, 289, 137);
 		add(descriptionText);
 		
 		JLabel maxStallLabel = new JLabel("Max Stall:");
-		maxStallLabel.setBounds(213, 209, 86, 14);
+		maxStallLabel.setBounds(147, 208, 86, 14);
 		add(maxStallLabel);
 		
 		maxStallText = new JTextField();
-		maxStallText.setBounds(338, 206, 86, 20);
+		maxStallText.setBounds(280, 205, 86, 20);
 		add(maxStallText);
 		maxStallText.setColumns(10);
 		
@@ -97,11 +111,11 @@ public class UpdateCanteenForm extends JPanel {
 			
 		});
 		
-		updateBtn.setBounds(537, 414, 89, 23);
+		updateBtn.setBounds(537, 507, 89, 23);
 		add(updateBtn);
 		
 		availableCB = getCanteenList();
-		availableCB.setBounds(339, 144, 47, 20);
+		availableCB.setBounds(280, 155, 291, 20);
 		availableCB.addItemListener(new ItemListener(){
             @Override
             public void itemStateChanged(ItemEvent e)
