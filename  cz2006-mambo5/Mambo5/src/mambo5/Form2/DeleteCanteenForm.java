@@ -73,9 +73,10 @@ public class DeleteCanteenForm extends JPanel {
 			int index = availableCB.getSelectedIndex();
 			if(cc.processDeleteCanteen(retrieveCanteenList.get(index).getCanteenID()) == 1) {
 				JOptionPane.showMessageDialog(null, "Canteen successfully updated");
+				
 				//this.dispose();
-				DeleteCanteenForm c = new DeleteCanteenForm();
-				c.setVisible(true);
+				//DeleteCanteenForm c = new DeleteCanteenForm();
+				//c.setVisible(true);
 			}
 			else {
 				JOptionPane.showMessageDialog(null, "Error when updating to database");
