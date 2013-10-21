@@ -3,6 +3,7 @@ package mambo5.Form2;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.EventQueue;
+import java.awt.Font;
 import java.util.ArrayList;
 
 import javax.swing.JFrame;
@@ -58,12 +59,24 @@ public class CreateStallForm extends JPanel {
 		this.mainFrame = mainFrame;
 		mainFrame.titleLabel.setText("Create Stall");
 		
+		JPanel titlePanel2 = new JPanel();
+		titlePanel2.setBackground(new Color(0, 0, 102));
+		titlePanel2.setBounds(147, 107, 424, 40);
+		add(titlePanel2);
+		titlePanel2.setLayout(null);
+		
+		JLabel canteenTitle = new JLabel("Please fill up all the fields");
+		canteenTitle.setBounds(10, 0, 200, 50);
+		titlePanel2.add(canteenTitle);
+		canteenTitle.setForeground(Color.WHITE);
+		canteenTitle.setFont(new Font("Arial", Font.BOLD, 16));
+		
 		JLabel availableLabel = new JLabel("Available Canteen:");
-		availableLabel.setBounds(10, 15, 99, 14);
+		availableLabel.setBounds(147, 158, 119, 14);
 		add(availableLabel);
 		
 		availableCB = getCanteenList();
-		availableCB.setBounds(119, 12, 76, 20);
+		availableCB.setBounds(276, 158, 295, 20);
 		availableCB.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				submitsCanteen(e);
@@ -72,29 +85,29 @@ public class CreateStallForm extends JPanel {
 		add(availableCB);
 		
 		JLabel unitLabel = new JLabel("Stall Unit:");
-		unitLabel.setBounds(10, 40, 46, 14);
+		unitLabel.setBounds(147, 194, 99, 14);
 		add(unitLabel);
 		
 		JLabel nameLabel = new JLabel("Stall Name");
-		nameLabel.setBounds(10, 65, 99, 14);
+		nameLabel.setBounds(147, 222, 99, 14);
 		add(nameLabel);
 		
 		nameText = new JTextField();
-		nameText.setBounds(119, 62, 86, 20);
+		nameText.setBounds(276, 219, 295, 20);
 		add(nameText);
 		nameText.setColumns(10);
 		
 		JLabel stallStatus = new JLabel("Stall Status");
-		stallStatus.setBounds(10, 90, 109, 14);
+		stallStatus.setBounds(147, 254, 109, 14);
 		add(stallStatus);
 		
 		openRB = new JRadioButton("Open");
 		openRB.setSelected(true);
-		openRB.setBounds(119, 86, 76, 23);
+		openRB.setBounds(276, 250, 76, 23);
 		add(openRB);
 		
 		JRadioButton closeRB = new JRadioButton("Close");
-		closeRB.setBounds(207, 86, 109, 23);
+		closeRB.setBounds(354, 250, 109, 23);
 		add(closeRB);
 		
 		ButtonGroup group = new ButtonGroup();
@@ -102,14 +115,15 @@ public class CreateStallForm extends JPanel {
 		group.add(closeRB);
 		
 		JLabel descriptionLabel = new JLabel("Stall Description:");
-		descriptionLabel.setBounds(10, 115, 109, 14);
+		descriptionLabel.setBounds(147, 279, 109, 14);
 		add(descriptionLabel);
 		
 		descriptionText = new JTextArea();
-		descriptionText.setBounds(119, 110, 305, 117);
+		descriptionText.setBounds(276, 280, 295, 117);
 		add(descriptionText);
 		
-		unitCB.setBounds(119, 37, 76, 20);
+		
+		unitCB.setBounds(276, 191, 295, 20);
 		add(unitCB);
 		
 		
@@ -118,7 +132,7 @@ public class CreateStallForm extends JPanel {
 				submitsStallDetail(e);
 			}
 		});
-		createBtn.setBounds(335, 238, 89, 23);
+		createBtn.setBounds(482, 408, 89, 23);
 		add(createBtn);
 		
 

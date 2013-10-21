@@ -44,7 +44,7 @@ public class DeleteCanteenForm extends JPanel {
 		add(titlePanel2);
 		titlePanel2.setLayout(null);
 		
-		JLabel canteenTitle = new JLabel("Please select the canteen to delete");
+		JLabel canteenTitle = new JLabel("Please select the Canteen to delete");
 		canteenTitle.setBounds(10, 0, 292, 50);
 		titlePanel2.add(canteenTitle);
 		canteenTitle.setForeground(Color.WHITE);

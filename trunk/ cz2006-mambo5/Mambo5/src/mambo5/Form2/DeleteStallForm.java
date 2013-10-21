@@ -5,6 +5,8 @@ import java.awt.Color;
 import java.awt.EventQueue;
 
 
+import java.awt.Font;
+
 //import javax.swing.JFrame;
 import javax.swing.JPanel;
 //import javax.swing.border.EmptyBorder;
@@ -24,28 +26,36 @@ public class DeleteStallForm extends JPanel {
 		this.mainFrame = mainFrame;
 		mainFrame.titleLabel.setText("Delete Stall");
 		
+		JPanel titlePanel2 = new JPanel();
+		titlePanel2.setBackground(new Color(0, 0, 102));
+		titlePanel2.setBounds(147, 107, 424, 40);
+		add(titlePanel2);
+		titlePanel2.setLayout(null);
+		
+		JLabel canteenTitle = new JLabel("Please select Stall to delete");
+		canteenTitle.setBounds(10, 0, 279, 50);
+		titlePanel2.add(canteenTitle);
+		canteenTitle.setForeground(Color.WHITE);
+		canteenTitle.setFont(new Font("Arial", Font.BOLD, 16));
+		
 		JLabel availableLabel = new JLabel("Available Canteen:");
-		availableLabel.setBounds(10, 15, 99, 14);
+		availableLabel.setBounds(147, 160, 118, 14);
 		add(availableLabel);
 		
 		JComboBox availableCB = new JComboBox();
-		availableCB.setBounds(119, 12, 28, 20);
+		availableCB.setBounds(275, 158, 296, 20);
 		add(availableCB);
 		
-		JButton retrieveBtn = new JButton("Retrieve");
-		retrieveBtn.setBounds(164, 11, 89, 23);
-		add(retrieveBtn);
-		
 		JButton deleteBtn = new JButton("Delete");
-		deleteBtn.setBounds(164, 36, 89, 23);
+		deleteBtn.setBounds(482, 213, 89, 23);
 		add(deleteBtn);
 		
 		JComboBox stallCB = new JComboBox();
-		stallCB.setBounds(119, 37, 28, 20);
+		stallCB.setBounds(275, 182, 296, 20);
 		add(stallCB);
 		
 		JLabel stallLabel = new JLabel("Available Stall:");
-		stallLabel.setBounds(10, 40, 99, 14);
+		stallLabel.setBounds(147, 185, 99, 14);
 		add(stallLabel);
 	}
 

@@ -3,11 +3,13 @@ package mambo5.Form2;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.EventQueue;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.util.ArrayList;
+import java.util.Collections;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -48,28 +50,40 @@ public class RetrieveStallForm extends JPanel {
 		this.mainFrame = mainFrame;
 		mainFrame.titleLabel.setText("Retrieve Stall");
 		
+		JPanel titlePanel2 = new JPanel();
+		titlePanel2.setBackground(new Color(0, 0, 102));
+		titlePanel2.setBounds(147, 107, 424, 40);
+		add(titlePanel2);
+		titlePanel2.setLayout(null);
+		
+		JLabel canteenTitle = new JLabel("Please select Stall to retrieve");
+		canteenTitle.setBounds(10, 0, 279, 50);
+		titlePanel2.add(canteenTitle);
+		canteenTitle.setForeground(Color.WHITE);
+		canteenTitle.setFont(new Font("Arial", Font.BOLD, 16));
+		
 		JLabel availableLabel = new JLabel("Available Canteen:");
-		availableLabel.setBounds(10, 15, 99, 14);
+		availableLabel.setBounds(147, 161, 123, 14);
 		add(availableLabel);
 		
 		JLabel stallLabel = new JLabel("Available Stall:");
-		stallLabel.setBounds(10, 40, 99, 14);
+		stallLabel.setBounds(147, 196, 123, 14);
 		add(stallLabel);
 		
 		JLabel nameLabel = new JLabel("Stall Name");
-		nameLabel.setBounds(10, 92, 99, 14);
+		nameLabel.setBounds(147, 223, 99, 14);
 		add(nameLabel);
 		
 		JLabel statusLabel = new JLabel("Stall Status");
-		statusLabel.setBounds(10, 117, 109, 14);
+		statusLabel.setBounds(147, 247, 109, 14);
 		add(statusLabel);
 		
 		JLabel descriptionLabel = new JLabel("Stall Description:");
-		descriptionLabel.setBounds(10, 142, 109, 14);
+		descriptionLabel.setBounds(147, 272, 109, 14);
 		add(descriptionLabel);
 		
 		availableCB = getCanteenList();
-		availableCB.setBounds(119, 12, 62, 20);
+		availableCB.setBounds(280, 158, 291, 20);
 		availableCB.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				submitsCanteen(e);
@@ -79,17 +93,17 @@ public class RetrieveStallForm extends JPanel {
 		
 		
 		descArea.setEditable(false);
-		descArea.setBounds(119, 142, 305, 99);
+		descArea.setBounds(280, 272, 291, 99);
 		add(descArea);
 		
-		nameText.setBounds(119, 92, 169, 14);
+		nameText.setBounds(280, 223, 291, 14);
 		add(nameText);
 		
 		
-		statusText.setBounds(119, 117, 169, 14);
+		statusText.setBounds(280, 247, 291, 14);
 		add(statusText);
 		
-		stallCB.setBounds(119, 37, 109, 20);
+		stallCB.setBounds(280, 193, 291, 20);
 		
 		stallCB.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -117,7 +131,6 @@ public class RetrieveStallForm extends JPanel {
 		retrieveCanteenList = cc.processRetrieveCanteenList();
 		
 		if(retrieveCanteenList.size() != 0) {
-			
 			for(int i = 0; i<retrieveCanteenList.size();i++) 
 				canteenList.addItem(retrieveCanteenList.get(i).getCanteenName());
 			stallCB = new JComboBox<String>();
