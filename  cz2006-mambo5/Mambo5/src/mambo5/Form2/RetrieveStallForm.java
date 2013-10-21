@@ -1,6 +1,7 @@
-package mambo5.Form;
+package mambo5.Form2;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -22,9 +23,8 @@ import mambo5.Controller.StallController;
 import mambo5.Entity.Canteen;
 import mambo5.Entity.Stall;
 
-public class RetrieveStallForm extends JFrame {
+public class RetrieveStallForm extends JPanel {
 
-	private JPanel contentPane;
 	private CanteenController cc;
 	private StallController sc;
 	private JComboBox<String> availableCB;
@@ -34,53 +34,39 @@ public class RetrieveStallForm extends JFrame {
 	private JLabel nameText = new JLabel();
 	private JLabel statusText = new JLabel();
 	private JTextArea descArea = new JTextArea();
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					RetrieveStallForm frame = new RetrieveStallForm();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+	private CamsMainFrame mainFrame;
+
 
 	/**
 	 * Create the frame.
 	 */
-	public RetrieveStallForm() {
-		setTitle("CaMs");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
-		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		setContentPane(contentPane);
-		contentPane.setLayout(null);
+	public RetrieveStallForm(final CamsMainFrame mainFrame) {
+		setBounds(0, 40, 800, 560);
+		setLayout(null);
+		setBackground(new Color(240, 240, 240));
+		
+		this.mainFrame = mainFrame;
+		mainFrame.titleLabel.setText("Retrieve Stall");
 		
 		JLabel availableLabel = new JLabel("Available Canteen:");
 		availableLabel.setBounds(10, 15, 99, 14);
-		contentPane.add(availableLabel);
+		add(availableLabel);
 		
 		JLabel stallLabel = new JLabel("Available Stall:");
 		stallLabel.setBounds(10, 40, 99, 14);
-		contentPane.add(stallLabel);
+		add(stallLabel);
 		
 		JLabel nameLabel = new JLabel("Stall Name");
 		nameLabel.setBounds(10, 92, 99, 14);
-		contentPane.add(nameLabel);
+		add(nameLabel);
 		
 		JLabel statusLabel = new JLabel("Stall Status");
 		statusLabel.setBounds(10, 117, 109, 14);
-		contentPane.add(statusLabel);
+		add(statusLabel);
 		
 		JLabel descriptionLabel = new JLabel("Stall Description:");
 		descriptionLabel.setBounds(10, 142, 109, 14);
-		contentPane.add(descriptionLabel);
+		add(descriptionLabel);
 		
 		availableCB = getCanteenList();
 		availableCB.setBounds(119, 12, 62, 20);
@@ -89,19 +75,19 @@ public class RetrieveStallForm extends JFrame {
 				submitsCanteen(e);
 			}
 		});
-		contentPane.add(availableCB);
+		add(availableCB);
 		
 		
 		descArea.setEditable(false);
 		descArea.setBounds(119, 142, 305, 99);
-		contentPane.add(descArea);
+		add(descArea);
 		
 		nameText.setBounds(119, 92, 169, 14);
-		contentPane.add(nameText);
+		add(nameText);
 		
 		
 		statusText.setBounds(119, 117, 169, 14);
-		contentPane.add(statusText);
+		add(statusText);
 		
 		stallCB.setBounds(119, 37, 109, 20);
 		
@@ -111,7 +97,7 @@ public class RetrieveStallForm extends JFrame {
 			}
 		});
 		
-		contentPane.add(stallCB);
+		add(stallCB);
 	}
 	
 	private void submitsStall(ActionEvent e) {
