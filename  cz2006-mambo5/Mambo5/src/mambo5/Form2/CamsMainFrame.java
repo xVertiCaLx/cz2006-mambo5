@@ -14,7 +14,7 @@ import javax.swing.border.EmptyBorder;
 public class CamsMainFrame extends JFrame {
 
 	private JPanel titlePanel, contentPane, selectPanel;
-	public static JLabel titleLabel = new JLabel("#Canteen");;
+	public JLabel titleLabel = new JLabel("#Canteen");;
 
 	public void setSelectPanel(JPanel selectPanel) {
 		this.selectPanel = selectPanel;
@@ -47,7 +47,7 @@ public class CamsMainFrame extends JFrame {
 		
 		titleLabel.setForeground(Color.WHITE);
 		titleLabel.setFont(new Font("Arial", Font.BOLD, 12));
-		titleLabel.setBounds(10, 0, 103, 39);
+		titleLabel.setBounds(10, 0, 400, 39);
 		titlePanel.add(titleLabel);
 
 		
