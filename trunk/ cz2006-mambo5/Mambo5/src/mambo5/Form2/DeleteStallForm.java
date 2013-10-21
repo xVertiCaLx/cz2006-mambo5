@@ -13,12 +13,16 @@ import javax.swing.JComboBox;
 import javax.swing.JButton;
 
 public class DeleteStallForm extends JPanel {
+	private CamsMainFrame mainFrame;
 
-	public DeleteStallForm() {
+	public DeleteStallForm(final CamsMainFrame mainFrame) {
 		
 		setBounds(0, 40, 800, 560);
 		setLayout(null);
-		setBackground(new Color(255, 255, 255));
+		setBackground(new Color(240, 240, 240));
+		
+		this.mainFrame = mainFrame;
+		mainFrame.titleLabel.setText("Delete Stall");
 		
 		JLabel availableLabel = new JLabel("Available Canteen:");
 		availableLabel.setBounds(10, 15, 99, 14);
