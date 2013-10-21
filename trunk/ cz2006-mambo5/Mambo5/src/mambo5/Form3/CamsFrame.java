@@ -34,11 +34,11 @@ public class CamsFrame extends JFrame {
 		contentPane.add(titlePanel);
 		titlePanel.setLayout(null);
 		
-		JLabel label = new JLabel("#Canteen");
-		label.setForeground(Color.WHITE);
-		label.setFont(new Font("Arial", Font.BOLD, 12));
-		label.setBounds(10, 0, 103, 39);
-		titlePanel.add(label);
+		JLabel titleLabel = new JLabel("Canteen Management System");
+		titleLabel.setForeground(Color.WHITE);
+		titleLabel.setFont(new Font("Arial", Font.BOLD, 12));
+		titleLabel.setBounds(10, 0, 103, 39);
+		titlePanel.add(titleLabel);
 		
 		JLabel label_1 = new JLabel("#Store Name | #CaMS Page");
 		label_1.setHorizontalAlignment(SwingConstants.CENTER);
@@ -46,10 +46,6 @@ public class CamsFrame extends JFrame {
 		label_1.setFont(new Font("Arial", Font.BOLD, 12));
 		label_1.setBounds(0, 0, 794, 39);
 		contentPane.add(new CamsMainMenuForm());
-	}
-
-	public void setLoginListener(LoginFormEvent event) {
-
 	}
 	
 }
