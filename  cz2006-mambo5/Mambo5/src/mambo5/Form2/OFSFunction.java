@@ -145,10 +145,11 @@ public class OFSFunction extends JPanel {
 		JButton deleteStallBtn = new JButton("Delete Stall");
 		deleteStallBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				removeAll();
-				add(new DeleteStallForm());
-				revalidate();
-				repaint();
+				mainFrame.remove(mainFrame.getSelectPanel());
+				mainFrame.setSelectPanel(new DeleteStallForm(mainFrame));
+				mainFrame.getContentPane().add(mainFrame.getSelectPanel());
+				mainFrame.revalidate();
+				mainFrame.repaint();
 			}
 		});
 		deleteStallBtn.setFont(new Font("Arial", Font.BOLD, 16));
