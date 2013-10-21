@@ -9,6 +9,8 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
+//231 + y 254+x
+
 public class SelectPanel extends JPanel {
 	JTextField idTextField, pwdTextField;
 	boolean id_select = true, pwd_select = false;
@@ -32,10 +34,10 @@ public class SelectPanel extends JPanel {
 				repaint();
 			}
 		});
-		OFSButton.setBounds(0, 40, 248, 41);
+		OFSButton.setBounds(20, 151, 234, 80);
 		add(OFSButton);
 
-		JButton CAMSButton = new JButton("Enter CaMS");
+		JButton CAMSButton = new JButton("Enter Canteen Management System");
 		CAMSButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				removeAll();
@@ -44,7 +46,31 @@ public class SelectPanel extends JPanel {
 				repaint();
 			}
 		});
-		CAMSButton.setBounds(450, 492, 248, 41);
+		CAMSButton.setBounds(274, 151, 234, 80);
+		add(CAMSButton);
+		
+		JButton OFSButton = new JButton("Enter OFS System");
+		OFSButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				removeAll();
+				add(new DeleteStallForm());
+				revalidate();
+				repaint();
+			}
+		});
+		OFSButton.setBounds(20, 151, 234, 80);
+		add(OFSButton);
+
+		JButton TixButton = new JButton("Enter Ticketing System");
+		TixButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				removeAll();
+				add(new CustomerMainMenu());
+				revalidate();
+				repaint();
+			}
+		});
+		TixButton.setBounds(274, 151, 234, 80);
 		add(CAMSButton);
 
 	}
