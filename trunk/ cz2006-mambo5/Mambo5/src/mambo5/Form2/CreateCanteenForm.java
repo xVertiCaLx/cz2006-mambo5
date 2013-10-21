@@ -33,10 +33,10 @@ public class CreateCanteenForm extends JPanel {
 	/**
 	 * Create the frame.
 	 */
-	public CreateCanteenForm() {
+	public CreateCanteenForm(final CamsMainFrame mainFrame) {
 		setBounds(0, 40, 800, 560);
 		setLayout(null);
-		setBackground(new Color(240, 240, 240));
+		setBackground(new Color(255, 255, 255));
 		
 		JLabel nameLabel = new JLabel("Canteen Name:");
 		nameLabel.setBounds(147, 171, 127, 14);

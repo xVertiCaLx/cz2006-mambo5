@@ -28,10 +28,10 @@ public class SelectPanel extends JPanel {
 		JButton CAMSButton = new JButton("Enter Canteen Management System");
 		CAMSButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				mainFrame.remove(mainFrame.selectPanel);
-				mainFrame.add(new CamsMainMenuForm());
-				mainFrame.revalidate();
-				mainFrame.repaint();
+				//mainFrame.remove(mainFrame.selectPanel);
+				//mainFrame.add(new CamsMainMenuForm());
+				//mainFrame.revalidate();
+				//mainFrame.repaint();
 				/*CamsMainMenuForm mainmenu = new CamsMainMenuForm();
 				//setVisible(false);
 				removeAll();
@@ -47,8 +47,9 @@ public class SelectPanel extends JPanel {
 		OFSButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				mainFrame.remove(mainFrame.selectPanel);
-				mainFrame.add(new OFSFunction());
+				mainFrame.remove(mainFrame.getSelectPanel());
+				mainFrame.setSelectPanel(new OFSFunction(mainFrame));
+				mainFrame.add(mainFrame.getSelectPanel());
 				mainFrame.revalidate();
 				mainFrame.repaint();
 			}
