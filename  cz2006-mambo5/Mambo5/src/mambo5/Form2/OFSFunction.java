@@ -49,7 +49,7 @@ public class OFSFunction extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				mainFrame.remove(mainFrame.getSelectPanel());
 				mainFrame.setSelectPanel(new CreateCanteenForm(mainFrame));
-				mainFrame.add(mainFrame.getSelectPanel());
+				mainFrame.getContentPane().add(mainFrame.getSelectPanel());
 				mainFrame.revalidate();
 				mainFrame.repaint();
 			}
@@ -63,7 +63,7 @@ public class OFSFunction extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				mainFrame.remove(mainFrame.getSelectPanel());
 				mainFrame.setSelectPanel(new AnalyzeCanteenForm(mainFrame));
-				mainFrame.add(mainFrame.getSelectPanel());
+				mainFrame.getContentPane().add(mainFrame.getSelectPanel());
 				mainFrame.revalidate();
 				mainFrame.repaint();
 			}
@@ -73,6 +73,15 @@ public class OFSFunction extends JPanel {
 		add(analyzeCanteenBtn);
 		
 		JButton updateCanteenBtn = new JButton("Update Canteen");
+		updateCanteenBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				mainFrame.remove(mainFrame.getSelectPanel());
+				mainFrame.setSelectPanel(new UpdateCanteenForm(mainFrame));
+				mainFrame.getContentPane().add(mainFrame.getSelectPanel());
+				mainFrame.revalidate();
+				mainFrame.repaint();
+			}
+		});
 		updateCanteenBtn.setFont(new Font("Arial", Font.BOLD, 16));
 		updateCanteenBtn.setBounds(400, 80, 170, 80);
 		add(updateCanteenBtn);
@@ -82,7 +91,7 @@ public class OFSFunction extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				mainFrame.remove(mainFrame.getSelectPanel());
 				mainFrame.setSelectPanel(new DeleteCanteenForm(mainFrame));
-				mainFrame.add(mainFrame.getSelectPanel());
+				mainFrame.getContentPane().add(mainFrame.getSelectPanel());
 				mainFrame.revalidate();
 				mainFrame.repaint();
 			}
