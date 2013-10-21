@@ -75,4 +75,8 @@ public class CamsFrame extends JFrame {
 		titlePanel.add(titleLabel);
 	}
 	
+	public void setTitle(String title){
+		titleLabel.setText(title);
+	}
+	
 }
