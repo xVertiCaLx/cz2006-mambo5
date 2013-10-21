@@ -52,7 +52,7 @@ public class SelectPanel extends JPanel {
 		TixButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				removeAll();
-				add(new CustomerMainMenu());
+				//add(new CustomerMainMenu());
 				revalidate();
 				repaint();
 			}
