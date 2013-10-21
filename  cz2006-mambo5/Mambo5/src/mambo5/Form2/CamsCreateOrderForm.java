@@ -22,12 +22,34 @@ import java.awt.event.ActionEvent;
 
 public class CamsCreateOrderForm extends JPanel {
 
-	//private JPanel contentPane;
-	//private final JLabel lblOrderId = new JLabel("NEW ORDER #xxx");
-	
 	JPanel receiptPanel, keypadPanel, menuItemPanel;
 	
 	final JTextArea receipt = new JTextArea();
+	
+	//declaration of all the menu items
+	// (Perform a for loop to dynamically create JButton base on the number
+	//  of menuitem that particular stall have)
+	final JButton btnChickenChop = new JButton("Chicken Chop");
+	final JButton btnLambChop = new JButton("Lamb Chop");
+	final JButton btnPorkChop = new JButton("Pork Chop");
+	final JButton btnRibeyeSteak = new JButton("Ribeye Steak");
+	final JButton btnSirloinSteak = new JButton("Sirloin Steak");
+	final JButton btnBeefSteak = new JButton("Beef Steak");
+	final JButton btnChickenCutlet = new JButton("Chicken Cutlet");
+	final JButton btnPorkCutlet = new JButton("Pork Cutlet");
+	final JButton btnFishCutlet = new JButton("Fish Cutlet");
+	
+	final JButton btnConfirmOrder = new JButton();
+	final JButton numPad_1 = new JButton("1");
+	final JButton numPad_2 = new JButton("2");
+	final JButton numPad_3 = new JButton("3");
+	final JButton numPad_4 = new JButton("4");
+	final JButton numPad_5 = new JButton("5");
+	final JButton numPad_6 = new JButton("6");
+	final JButton numPad_7 = new JButton("7");
+	final JButton numPad_8 = new JButton("8");
+	final JButton numPad_9 = new JButton("9");
+	
 	
 	public String generateTemplate()
 	{
@@ -49,30 +71,47 @@ public class CamsCreateOrderForm extends JPanel {
 	
 	public CamsCreateOrderForm() {
 		//Panel size
-		setBounds(0, 40, 800, 600);
+		setBounds(0, 0, 800, 600);
 		setLayout(null);	
-		setBackground(new Color(255, 255, 255));
+		setBackground(new Color(240, 240, 240));
 		
-		//rceipt
-		receiptPanel.setBounds(0, 40, 800, 600);
+		//receipt panel
+		receiptPanel = new JPanel();
+		receiptPanel.setBounds(0, 50, 200, 100);
 		receiptPanel.setLayout(null);	
-		receiptPanel.setBackground(new Color(255, 255, 255));
+		receiptPanel.setBackground(new Color(240, 240, 240));
+		add(receipt);
 		
+		//keypad panel
+		keypadPanel = new JPanel();
+		keypadPanel.setBounds(0, 0, 100, 100);	
+		keypadPanel.setBackground(new Color(240, 240, 240));
+		//add(keypadPanel);
+		keypadPanel.add(numPad_1);keypadPanel.add(numPad_2);
+		keypadPanel.add(numPad_3);keypadPanel.add(numPad_4);
+		keypadPanel.add(numPad_5);keypadPanel.add(numPad_6);
+		keypadPanel.add(numPad_7);keypadPanel.add(numPad_8);
+		keypadPanel.add(numPad_9);
+		keypadPanel.setLayout(null);
+		
+		//menuitem panel
+		menuItemPanel = new JPanel();
+		keypadPanel.setBounds(500, 300, 300, 200);
+		keypadPanel.setLayout(null);	
+		keypadPanel.setBackground(new Color(105, 105, 105));
+		keypadPanel.setForeground(Color.WHITE);
 		
 		//First menu Item
-		final JButton btnChickenChop = new JButton("Chicken Chop");
 		btnChickenChop.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				receipt.append("\t" + btnChickenChop.getText() + "   " +"\t\t$"+"4.50"+"\n");
-			}
-		});
+				receipt.append("\t" + btnChickenChop.getText() + "   " +"\t\t$"+"4.50"+"\n");					}
+			});
 		btnChickenChop.setBounds(336, 53, 120, 52);
 		btnChickenChop.setBackground(new Color(105, 105, 105));
 		btnChickenChop.setForeground(Color.WHITE);
-		add(btnChickenChop);
+		add(btnChickenChop);	
 		
 		//Second menu Item
-		final JButton btnLambChop = new JButton("Lamb Chop");
 		btnLambChop.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				receipt.append("\t" + btnLambChop.getText() + "   " +"\t\t$"+"4.50"+"\n");
@@ -84,7 +123,6 @@ public class CamsCreateOrderForm extends JPanel {
 		add(btnLambChop);
 		
 		//Third menu Item
-		final JButton btnPorkChop = new JButton("Pork Chop");
 		btnPorkChop.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				receipt.append("\t" + btnPorkChop.getText() + "   " +"\t\t$"+"4.50"+"\n");
@@ -96,7 +134,6 @@ public class CamsCreateOrderForm extends JPanel {
 		add(btnPorkChop);
 		
 		//Fourth menu Item
-		final JButton btnRibeyeSteak = new JButton("Ribeye Steak");
 		btnRibeyeSteak.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				receipt.append("\t" + btnRibeyeSteak.getText() + "   " +"\t\t$"+"4.50"+"\n");
@@ -108,7 +145,6 @@ public class CamsCreateOrderForm extends JPanel {
 		add(btnRibeyeSteak);
 		
 		//Fifth menu Item
-		final JButton btnSirloinSteak = new JButton("Sirloin Steak");
 		btnSirloinSteak.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				receipt.append("\t" + btnSirloinSteak.getText() + "   " +"\t\t$"+"4.50"+"\n");
@@ -120,7 +156,6 @@ public class CamsCreateOrderForm extends JPanel {
 		add(btnSirloinSteak);
 		
 		//Sixth menu Item
-		final JButton btnBeefSteak = new JButton("Beef Steak");
 		btnBeefSteak.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				receipt.append("\t" + btnBeefSteak.getText() + "   " +"\t\t$"+"4.50"+"\n");
@@ -132,7 +167,6 @@ public class CamsCreateOrderForm extends JPanel {
 		add(btnBeefSteak);
 		
 		//Seventh menu Item
-		final JButton btnChickenCutlet = new JButton("Chicken Cutlet");
 		btnChickenCutlet.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				receipt.append("\t" + btnChickenCutlet.getText() + "  " +"\t\t$"+"4.50"+"\n");
@@ -144,7 +178,6 @@ public class CamsCreateOrderForm extends JPanel {
 		add(btnChickenCutlet);
 		
 		//Eighth menu Item
-		final JButton btnPorkCutlet = new JButton("Pork Cutlet");
 		btnPorkCutlet.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				receipt.append("\t" + btnPorkCutlet.getText() + "   " +"\t\t$"+"4.50"+"\n");;
@@ -156,7 +189,6 @@ public class CamsCreateOrderForm extends JPanel {
 		add(btnPorkCutlet);
 		
 		//Nineth menu item
-		final JButton btnFishCutlet = new JButton("Fish Cutlet");
 		btnFishCutlet.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				receipt.append("\t" + btnFishCutlet.getText() + "   " +"\t\t$"+"4.50"+"\n");
@@ -166,42 +198,8 @@ public class CamsCreateOrderForm extends JPanel {
 		btnFishCutlet.setBackground(new Color(105, 105, 105));
 		btnFishCutlet.setForeground(Color.WHITE);
 		add(btnFishCutlet);
-		
-		
-		final JButton btnEatIn = new JButton("EAT IN");
-		btnEatIn.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				 int reply = JOptionPane.showConfirmDialog(null, "Confirm eat in?", "Confirmation", 
-						 JOptionPane.YES_NO_OPTION);
-			        if (reply == JOptionPane.YES_OPTION) {
-			          // insert into database with option as eatin
-			        }
-			}
-		});
-		
-		btnEatIn.setFont(new Font("Tahoma", Font.BOLD, 11));
-		btnEatIn.setForeground(Color.WHITE);
-		btnEatIn.setBackground(new Color(0, 128, 0));
-		btnEatIn.setBounds(420, 276, 89, 23);
-		add(btnEatIn);
-		
-		final JButton btnTakeOut = new JButton("TAKE OUT");
-		btnTakeOut.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				 int reply = JOptionPane.showConfirmDialog(null, "Confirm take out?", "Confirmation", 
-						 JOptionPane.YES_NO_OPTION);
-			        if (reply == JOptionPane.YES_OPTION) {
-			          // insert into database with option as takeaway
-			        }
-			}
-		});
-		btnTakeOut.setForeground(Color.WHITE);
-		btnTakeOut.setFont(new Font("Tahoma", Font.BOLD, 11));
-		btnTakeOut.setBackground(new Color(0, 128, 0));
-		btnTakeOut.setBounds(557, 276, 89, 23);
-		add(btnTakeOut);
-			
-		final JButton numPad_1 = new JButton();
+	
+		//Implementation of keypad 
 		numPad_1.setText("1");
 		numPad_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -215,8 +213,6 @@ public class CamsCreateOrderForm extends JPanel {
 		numPad_1.setBounds(378, 324, 57, 44);
 		add(numPad_1);
 		
-		final JButton numPad_2 = new JButton();
-		numPad_2.setText("2");
 		numPad_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				receipt.append(numPad_2.getText() + "    ");
@@ -228,8 +224,6 @@ public class CamsCreateOrderForm extends JPanel {
 		numPad_2.setBounds(448, 324, 57, 44);
 		add(numPad_2);
 		
-		final JButton numPad_3 = new JButton();
-		numPad_3.setText("3");
 		numPad_3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				receipt.append(numPad_3.getText() + "    ");
@@ -241,8 +235,6 @@ public class CamsCreateOrderForm extends JPanel {
 		numPad_3.setBounds(518, 324, 57, 44);
 		add(numPad_3);
 		
-		final JButton numPad_4 = new JButton();
-		numPad_4.setText("4");
 		numPad_4.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				receipt.append(numPad_4.getText() + "    ");
@@ -254,8 +246,6 @@ public class CamsCreateOrderForm extends JPanel {
 		numPad_4.setBounds(378, 383, 57, 44);
 		add(numPad_4);
 		
-		final JButton numPad_5 = new JButton();
-		numPad_5.setText("5");
 		numPad_5.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				receipt.append(numPad_5.getText() + "    ");
@@ -267,8 +257,6 @@ public class CamsCreateOrderForm extends JPanel {
 		numPad_5.setBounds(448, 383, 57, 44);
 		add(numPad_5);
 		
-		final JButton numPad_6 = new JButton();
-		numPad_6.setText("6");
 		numPad_6.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				receipt.append(numPad_6.getText() + "    ");
@@ -280,8 +268,6 @@ public class CamsCreateOrderForm extends JPanel {
 		numPad_6.setBounds(518, 383, 57, 44);
 		add(numPad_6);
 		
-		final JButton numPad_7 = new JButton();
-		numPad_7.setText("7");
 		numPad_7.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				receipt.append(numPad_7.getText() + "    ");
@@ -293,8 +279,6 @@ public class CamsCreateOrderForm extends JPanel {
 		numPad_7.setBounds(378, 446, 57, 44);
 		add(numPad_7);
 		
-		final JButton numPad_8 = new JButton();
-		numPad_8.setText("8");
 		numPad_8.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				receipt.append(numPad_8.getText() + "    ");
@@ -306,8 +290,6 @@ public class CamsCreateOrderForm extends JPanel {
 		numPad_8.setBounds(448, 446, 57, 44);
 		add(numPad_8);
 		
-		final JButton numPad_9 = new JButton();
-		numPad_9.setText("9");
 		numPad_9.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				receipt.append(numPad_9.getText() + "    ");
@@ -328,20 +310,25 @@ public class CamsCreateOrderForm extends JPanel {
 		btnClear.setForeground(Color.WHITE);
 		btnClear.setFont(new Font("Tahoma", Font.BOLD, 12));
 		btnClear.setBackground(new Color(0, 0, 0));
-		btnClear.setBounds(597, 344, 100, 50);
+		btnClear.setBounds(597, 334, 100, 50);
 		add(btnClear);
 		
-		final JButton btnEnter = new JButton("ENTER");
-		btnEnter.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				receipt.append("\n");
+		btnConfirmOrder.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				 int reply = JOptionPane.showConfirmDialog(null, "Confirm Order?", "Confirmation", 
+						 JOptionPane.YES_NO_OPTION);
+			        if (reply == JOptionPane.YES_OPTION) {
+			          // insert into database with option as eatin
+			        }
 			}
 		});
-		btnEnter.setForeground(Color.WHITE);
-		btnEnter.setFont(new Font("Tahoma", Font.BOLD, 12));
-		btnEnter.setBackground(Color.BLACK);
-		btnEnter.setBounds(597, 416, 100, 52);
-		add(btnEnter);
+		btnConfirmOrder.setFont(new Font("Tahoma", Font.BOLD, 12));
+		btnConfirmOrder.setForeground(Color.WHITE);
+		btnConfirmOrder.setBackground(new Color(0, 128, 0));
+		btnConfirmOrder.setBounds(597, 404, 100, 70);
+		btnConfirmOrder.setText("<html>Confirm<br/>Order</html>");
+		add(btnConfirmOrder);
+		
 		
 		JButton btnMainPage = new JButton("Main Page");
 		btnMainPage.setForeground(Color.WHITE);
