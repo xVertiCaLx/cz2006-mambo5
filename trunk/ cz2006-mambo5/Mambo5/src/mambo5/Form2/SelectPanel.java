@@ -16,12 +16,13 @@ public class SelectPanel extends JPanel {
 	boolean id_select = true, pwd_select = false;
 	private JPasswordField passwordField;
 
+	
+	
 	public SelectPanel(final CamsMainFrame mainFrame) {
 		// Panel Size
 		setBounds(0, 40, 800, 560);
 		setLayout(null);
 		setBackground(new Color(240, 240, 240));
-		//mainFrame.setTitle("Selectio2222n");
 		CamsMainFrame.titleLabel.setText("Please select a button");
 
 		JButton CAMSButton = new JButton("Enter Canteen Management System");
@@ -31,6 +32,12 @@ public class SelectPanel extends JPanel {
 				mainFrame.add(new CamsMainMenuForm());
 				mainFrame.revalidate();
 				mainFrame.repaint();
+				/*CamsMainMenuForm mainmenu = new CamsMainMenuForm();
+				//setVisible(false);
+				removeAll();
+				add(mainmenu);
+				revalidate();
+				repaint();	*/				
 			}
 		});
 		CAMSButton.setBounds(274, 151, 234, 80);
@@ -62,4 +69,5 @@ public class SelectPanel extends JPanel {
 		add(CAMSButton);
 
 	}
+
 }

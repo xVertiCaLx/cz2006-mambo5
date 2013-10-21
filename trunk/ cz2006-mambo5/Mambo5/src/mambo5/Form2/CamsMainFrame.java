@@ -13,8 +13,8 @@ import javax.swing.border.EmptyBorder;
 
 public class CamsMainFrame extends JFrame {
 
-	private JPanel contentPane, titlePanel;
-	JPanel selectPanel;
+	private JPanel titlePanel, contentPane; 
+	public static JPanel selectPanel;
 	public static JLabel titleLabel = new JLabel("#Canteen");;
 
 	public CamsMainFrame() {
@@ -52,5 +52,4 @@ public class CamsMainFrame extends JFrame {
 		label_1.setBounds(0, 0, 794, 39);
 		contentPane.add(selectPanel);
 	}
-	
 }
