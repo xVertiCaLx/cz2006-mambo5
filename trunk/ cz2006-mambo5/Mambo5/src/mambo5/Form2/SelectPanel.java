@@ -23,7 +23,7 @@ public class SelectPanel extends JPanel {
 		setBounds(0, 40, 800, 560);
 		setLayout(null);
 		setBackground(new Color(240, 240, 240));
-		CamsMainFrame.titleLabel.setText("Please select a button");
+		mainFrame.titleLabel.setText("Please select a button");
 
 		JButton CAMSButton = new JButton("Enter Canteen Management System");
 		CAMSButton.addActionListener(new ActionListener() {
