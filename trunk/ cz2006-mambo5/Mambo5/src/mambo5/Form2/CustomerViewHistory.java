@@ -14,6 +14,8 @@ import java.awt.Font;
 
 import javax.swing.JTextField;
 import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class CustomerViewHistory extends JPanel {
 
@@ -22,17 +24,7 @@ public class CustomerViewHistory extends JPanel {
 	private JTextField txtName;
 	private JTextField txtCurrentValue;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-	
-	}
-
-	/**
-	 * Create the frame.
-	 */
-	public CustomerViewHistory() {
+	public CustomerViewHistory(final CamsMainFrame mainFrame) {
 		
 		setBounds(0, 40, 800, 560);
 		setLayout(null);	
@@ -95,6 +87,11 @@ public class CustomerViewHistory extends JPanel {
 		add(lblSgd);
 		
 		JButton btnBackToMain = new JButton("Back to main");
+		btnBackToMain.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				mainFrame.replacePanel(new CustomerMainMenu(mainFrame));
+			}
+		});
 		btnBackToMain.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		btnBackToMain.setBounds(279, 223, 112, 28);
 		add(btnBackToMain);

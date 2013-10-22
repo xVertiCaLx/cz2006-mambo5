@@ -11,6 +11,8 @@ import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.Color;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class CustomerRefundCard extends JPanel {
 
@@ -19,17 +21,7 @@ public class CustomerRefundCard extends JPanel {
 	private JTextField txtName;
 	private JTextField txtCurrentValue;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		
-	}
-
-	/**
-	 * Create the frame.
-	 */
-	public CustomerRefundCard() {
+	public CustomerRefundCard(final CamsMainFrame mainFrame) {
 		
 		setBounds(0, 40, 800, 560);
 		setLayout(null);	
@@ -85,6 +77,11 @@ public class CustomerRefundCard extends JPanel {
 		add(btnConfirmRefund);
 		
 		JButton btnBackToMain = new JButton("Back to main");
+		btnBackToMain.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				mainFrame.replacePanel(new CustomerMainMenu(mainFrame));
+			}
+		});
 		btnBackToMain.setBounds(288, 228, 112, 23);
 		add(btnBackToMain);
 		

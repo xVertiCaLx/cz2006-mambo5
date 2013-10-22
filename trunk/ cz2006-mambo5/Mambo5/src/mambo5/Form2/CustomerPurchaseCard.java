@@ -56,6 +56,11 @@ public class CustomerPurchaseCard extends JPanel {
 		add(lblInserted);
 		
 		JButton btnCancel = new JButton("Back to main");
+		btnCancel.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				mainFrame.replacePanel(new CustomerMainMenu(mainFrame));
+			}
+		});
 		btnCancel.setBounds(315, 231, 109, 20);
 		add(btnCancel);
 		
