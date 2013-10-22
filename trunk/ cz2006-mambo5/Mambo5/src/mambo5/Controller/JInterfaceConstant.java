@@ -10,4 +10,6 @@ public interface JInterfaceConstant {
 	public static final int NUMPAD_KEYWIDTH = 60, NUMPAD_KEYHEIGHT = 60;
 	public static final int KEYBOARD_KEYWIDTH = 60, KEYBOARD_KEYHEIGHT = 60;
 	public static final Color JPANEL_BACKGROUND_COLOUR = new Color(240, 240, 240);
+	public static final int JLABEL_HEIGHT = 15;
+	public static final int JTEXTFIELD_HEIGHT = 20;
 }
