@@ -21,17 +21,7 @@ public class CustomerPurchaseCard extends JPanel {
 	//private JPanel contentPane;
 	private JTextField txtAmountInserted;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		
-	}
-
-	/**
-	 * Create the frame.
-	 */
-	public CustomerPurchaseCard() {
+	public CustomerPurchaseCard(final CamsMainFrame mainFrame) {
 		
 		setBounds(0, 40, 800, 560);
 		setLayout(null);	

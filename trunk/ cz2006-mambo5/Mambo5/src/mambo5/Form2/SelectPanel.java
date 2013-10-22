@@ -42,7 +42,7 @@ public class SelectPanel extends JPanel {
 		TixButton = new JButton("Enter Ticketing System");
 		TixButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				mainFrame.replacePanel(new CustomerMainMenu(mainFrame));
 			}
 		});
 		TixButton.setBounds(528, 151, 234, 80);

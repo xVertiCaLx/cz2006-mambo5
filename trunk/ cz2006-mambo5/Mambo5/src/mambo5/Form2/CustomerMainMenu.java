@@ -14,27 +14,23 @@ import javax.swing.JTextPane;
 import javax.swing.JTextField;
 
 import java.awt.Font;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class CustomerMainMenu extends JPanel {
 
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-	
-	}
-
-	/**
-	 * Create the frame.
-	 */
-	public CustomerMainMenu() {
-		
+	public CustomerMainMenu(final CamsMainFrame mainFrame) {
+		mainFrame.setTitle("CaMS Ticketing Machine");
 		setBounds(0, 40, 800, 560);
 		setLayout(null);	
 		setBackground(new Color(255, 255, 255));
 		
 		JButton btnPurchaseCard = new JButton("Purchase Card");
+		btnPurchaseCard.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				mainFrame.replacePanel(new CustomerPurchaseCard(mainFrame));
+			}
+		});
 		btnPurchaseCard.setFont(new Font("Arial", Font.BOLD, 16));
 		btnPurchaseCard.setBounds(120, 151, 234, 80);
 		add(btnPurchaseCard);
