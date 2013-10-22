@@ -24,7 +24,7 @@ public class SelectPanel extends JPanel {
 		OFSButton = new JButton("Enter OFS System");
 		OFSButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				mainFrame.replacePanel(new OFSFunction(mainFrame));
+				mainFrame.replacePanel(new CamsLoginForm(mainFrame));
 			}
 		});
 		OFSButton.setBounds(20, 151, 234, 80);
@@ -33,7 +33,7 @@ public class SelectPanel extends JPanel {
 		CAMSButton = new JButton("Enter Canteen Management System");
 		CAMSButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				mainFrame.replacePanel(new CamsMainMenuForm(mainFrame));
+				mainFrame.replacePanel(new CamsCreateMenuItemForm(mainFrame));
 			}
 		});
 		CAMSButton.setBounds(274, 151, 234, 80);
