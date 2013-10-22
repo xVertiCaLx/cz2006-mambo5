@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.ButtonGroup;
 import javax.swing.JLabel;
 import javax.swing.JComboBox;
 import javax.swing.JButton;
@@ -35,7 +36,8 @@ public class UpdateStallForm extends JPanel {
 	private StallController sc;
 	private ArrayList<Stall> retrieveStallList;
 	private JComboBox<String> stallCB;
-
+	private JRadioButton openRB = new JRadioButton("Open");;
+	private JRadioButton closeRB = new JRadioButton("Close");
 	/**
 	 * Create the frame.
 	 */
@@ -96,14 +98,19 @@ public class UpdateStallForm extends JPanel {
 		statusLabel.setBounds(147, 274, 109, 14);
 		add(statusLabel);
 		
-		JRadioButton openRD = new JRadioButton("Open");
-		openRD.setSelected(true);
-		openRD.setBounds(266, 270, 70, 23);
-		add(openRD);
+		//openRB = new JRadioButton("Open");
+		openRB.setSelected(true);
+		openRB.setBounds(266, 270, 70, 23);
+		add(openRB);
 		
-		JRadioButton closeRD = new JRadioButton("Close");
-		closeRD.setBounds(338, 270, 109, 23);
-		add(closeRD);
+		//closeRB = new JRadioButton("Close");
+		closeRB.setBounds(338, 270, 109, 23);
+		add(closeRB);
+		
+		ButtonGroup group = new ButtonGroup();
+		group.add(openRB);
+		group.add(closeRB);
+		
 		
 		descArea = new JTextArea();
 		descArea.setBounds(266, 300, 305, 99);
@@ -154,9 +161,15 @@ public class UpdateStallForm extends JPanel {
 		nameText.setText(retrieveStallList.get(index).getStallName());
 		
 		descArea.setText(retrieveStallList.get(index).getStallDesc());
-		//if(retrieveStallList.get(index).getStallStatus() == true) 
-			//statusText.setText("Open");
-		//else
-			//statusText.setText("Closed");
+		if(retrieveStallList.get(index).getStallStatus() == true) { 
+			openRB.setSelected(true);
+			closeRB.setSelected(false);
+			System.out.println("TRUE");
+		}
+		else {
+			System.out.println("FALSE");
+			closeRB.setSelected(true);
+			openRB.setSelected(false);
+		}
 	}
 }
