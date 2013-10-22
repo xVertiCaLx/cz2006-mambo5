@@ -67,13 +67,13 @@ public class GuoHao extends JFrame {
 		titlePanel.add(titleLabel);
 
 		
-		selectPanel = new CamsCreateOrderForm();
+		selectPanel = new CamsCreateOrderForm(/*new CamsMainFrame()*/);
 		JLabel label_1 = new JLabel("#Store Name | #CaMS Page");
 		label_1.setHorizontalAlignment(SwingConstants.CENTER);
 		label_1.setForeground(Color.WHITE);
 		label_1.setFont(new Font("Arial", Font.BOLD, 12));
 		label_1.setBounds(0, 0, 794, 39);
-		contentPane.add(new CamsCreateOrderForm());
+		contentPane.add(new CamsCreateOrderForm(/*new CamsMainFrame()*/));
 	}
 	
 }
