@@ -20,7 +20,7 @@ public class CamsMainMenuForm extends JPanel {
 		JButton btnLogin = new JButton("LOGOUT");
 		btnLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				mainFrame.replacePanel(new CamsLoginForm());
+				mainFrame.replacePanel(new CamsLoginForm(mainFrame));
 			}
 		});
 		btnLogin.setForeground(new Color(255, 255, 255));
@@ -48,7 +48,7 @@ public class CamsMainMenuForm extends JPanel {
 		btnLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				removeAll();
-				add(new CamsLoginForm());
+				add(new CamsLoginForm(mainFrame));
 				revalidate();
 				repaint();
 			}
