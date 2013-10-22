@@ -36,16 +36,31 @@ public class CustomerMainMenu extends JPanel {
 		add(btnPurchaseCard);
 		
 		JButton btnCheckHistory = new JButton("Check History");
+		btnCheckHistory.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				mainFrame.replacePanel(new CustomerViewHistory(mainFrame));
+			}
+		});
 		btnCheckHistory.setFont(new Font("Arial", Font.BOLD, 16));
 		btnCheckHistory.setBounds(120, 301, 234, 80);
 		add(btnCheckHistory);
 		
 		JButton btnTopUpCard = new JButton("Top-up Card");
+		btnTopUpCard.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				mainFrame.replacePanel(new CustomerTopUpCard(mainFrame));
+			}
+		});
 		btnTopUpCard.setFont(new Font("Arial", Font.BOLD, 16));
 		btnTopUpCard.setBounds(474, 151, 234, 80);
 		add(btnTopUpCard);
 		
 		JButton btnRefundCard = new JButton("Refund Card");
+		btnRefundCard.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				mainFrame.replacePanel(new CustomerRefundCard(mainFrame));
+			}
+		});
 		btnRefundCard.setFont(new Font("Arial", Font.BOLD, 16));
 		btnRefundCard.setBounds(474, 301, 234, 80);
 		add(btnRefundCard);

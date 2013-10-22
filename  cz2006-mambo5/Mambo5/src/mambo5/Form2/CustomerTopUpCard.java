@@ -7,6 +7,8 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class CustomerTopUpCard extends JPanel {
 
@@ -15,17 +17,7 @@ public class CustomerTopUpCard extends JPanel {
 	private JTextField txtCurrentValue;
 	private JTextField textField_3;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		
-	}
-
-	/**
-	 * Create the frame.
-	 */
-	public CustomerTopUpCard() {
+	public CustomerTopUpCard(final CamsMainFrame mainFrame) {
 		
 		setBounds(0, 40, 800, 560);
 		setLayout(null);	
@@ -131,6 +123,11 @@ public class CustomerTopUpCard extends JPanel {
 		add(btnOk);
 		
 		JButton btnCancel = new JButton("Back to main");
+		btnCancel.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				mainFrame.replacePanel(new CustomerMainMenu(mainFrame));
+			}
+		});
 		btnCancel.setBounds(308, 228, 105, 23);
 		add(btnCancel);
 		
