@@ -22,8 +22,10 @@ public class Order {
 		this.orderStatus = orderStatus;
 	}
 	
+	public Order() {};
+	
 	//New Order
-	public int createOrder() 
+	public int createOrder(int custID, Date purchaseDate, String orderStatus) 
 	{
 		dbc = new DBController();
 		int result = 0;
