@@ -15,6 +15,8 @@ public class Order {
 	private Date purchaseDate;
 	DBController dbc;
 	
+	public Order() {};
+	
 	public Order(int orderID, int custID, Date purchaseDate, String orderStatus){
 		this.orderID = orderID;
 		this.custID = custID;
@@ -22,7 +24,21 @@ public class Order {
 		this.orderStatus = orderStatus;
 	}
 	
-	public Order() {};
+	public int getOrderID() {
+		return orderID;
+	}
+
+	public int getCustID() {
+		return custID;
+	}
+
+	public String getOrderStatus() {
+		return orderStatus;
+	}
+
+	public Date getPurchaseDate() {
+		return purchaseDate;
+	}
 	
 	//New Order
 	public int createOrder(int custID, Date purchaseDate, String orderStatus) 
