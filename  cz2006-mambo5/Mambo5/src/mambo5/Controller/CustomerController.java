@@ -27,12 +27,23 @@ public class CustomerController {
 	}
 	
 	public int validateCustomerDetail(double cardBalance, String fullName, int accessID){
+		
 		int validate = 0;
 		
 		cust = new Customer();
 		validate = cust.createCustomer(cardBalance, fullName, 6);
 				
 		return validate;
+	}
+	
+	public int removeCustomerAccount(int custID){
+		
+		int removeStatus = 0;
+		
+		cust = new Customer();
+		removeStatus = cust.refundCustomerCard(custID);
+				
+		return removeStatus;
 	}
 	
 	

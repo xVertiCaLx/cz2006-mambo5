@@ -4,7 +4,7 @@ import mambo5.Controller.DBController;
 
 import java.sql.*;
 
-public class Customer {
+public class Customer  {
 	
 	private int custID;
 	private double cardBalance;
@@ -67,11 +67,11 @@ public class Customer {
 	}
 	
 	public Customer retrieveCustomerDetail(int custID) {
-		System.out.println("TEST2");
+		
 		dbc = new DBController();
 		cust = null;
 		ResultSet rs = null;
-		String sql = "Select * from Customer where custID = " + custID + ";";
+		String sql = "SELECT * FROM Customer WHERE custID = " + custID + ";";
 		System.out.println(sql);
 		rs = dbc.executeQuery(sql);
 		
