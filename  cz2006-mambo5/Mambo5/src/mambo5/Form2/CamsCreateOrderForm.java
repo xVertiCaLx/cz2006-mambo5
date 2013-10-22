@@ -11,6 +11,9 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
 public class CamsCreateOrderForm extends JPanel {
+	
+	private String custID;
+	
 	JPanel receiptPanel, keypadPanel, menuItemPanel, sidePanel;
 	
 	final JTextArea receipt = new JTextArea();
@@ -87,7 +90,7 @@ public class CamsCreateOrderForm extends JPanel {
 			}
 		});
 		
-		numPad_1.setFont(new Font("Arial", Font.BOLD, 12));
+		numPad_1.setFont(new Font("Tahoma", Font.BOLD, 12));
 		numPad_1.setForeground(Color.WHITE);
 		numPad_1.setBackground(Color.BLACK);
 		numPad_1.setBounds(10, 10, 60, 60);
@@ -316,6 +319,7 @@ public class CamsCreateOrderForm extends JPanel {
 		btnPrevPage.setBackground(new Color(100, 149, 237));
 		btnPrevPage.setBounds(10, 150, 110, 50);
 		sidePanel.add(btnPrevPage);
+		
 	}
 
 }
