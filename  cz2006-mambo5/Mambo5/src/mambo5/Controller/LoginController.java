@@ -12,10 +12,7 @@ public class LoginController {
 		return cust;		
 	}
 	
-	private Stall stall;
-	
-	public Stall stallLogin(int stallId, int employeeId, String password) {
-		System.out.println("entered login method");
-		return stall;	
+	public void login(String username, String password) {
+		
 	}
 }
