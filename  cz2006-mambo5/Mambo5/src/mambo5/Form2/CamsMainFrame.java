@@ -1,18 +1,24 @@
 package mambo5.Form2;
 
-import java.awt.*;
+import java.awt.Color;
 //import java.awt.EventQueue;
 //import javax.swing.JComboBox;
 //import java.awt.Font;
+import java.awt.Font;
 
 /*import javax.swing.JFrame;
  import javax.swing.JLabel;
  import javax.swing.JPanel;*/
-import javax.swing.*;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-public class CamsMainFrame extends JFrame {
+import mambo5.Controller.JInterfaceConstant;
 
+public class CamsMainFrame extends JFrame implements JInterfaceConstant {
+
+	
 	private JPanel titlePanel, contentPane, selectPanel;
 	private JLabel titleLabel = new JLabel("#Canteen");;
 
@@ -22,30 +28,29 @@ public class CamsMainFrame extends JFrame {
 		setVisible(true);
 		setTitle("Canteen Management System");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(0, 0, 800, 600);
+		setBounds(POS_WINDOW_X, POS_WINDOW_Y, WINDOW_WIDTH, WINDOW_HEIGHT);
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.WHITE);
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		contentPane.setBounds(0,0,MAINPANE_WIDTH, MAINPANE_HEIGHT);
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 
 		// the background
 		titlePanel = new JPanel();
 		titlePanel.setBackground(new Color(0, 0, 102));
-		titlePanel.setBounds(0, 0, 800, 40);
+		titlePanel.setBounds(0, 0, TITLEBAR_WIDTH, TITLEBAR_HEIGHT);
 		contentPane.add(titlePanel);
 		titlePanel.setLayout(null);
 
-		
 		titleLabel.setForeground(Color.WHITE);
 		titleLabel.setFont(new Font("Arial", Font.BOLD, 12));
-		titleLabel.setBounds(10, 1, 780, 38);
+		titleLabel.setBounds(POS_TITLELABEL_X, POS_TITLELABEL_Y, TITLELABEL_WIDTH, TITLELABEL_HEIGHT);
 		titlePanel.add(titleLabel);
 
 		selectPanel = new SelectPanel(this);
 		contentPane.add(selectPanel);
 	}
-	
+	  
 	public void setSelectPanel(JPanel selectPanel) {
 		this.selectPanel = selectPanel;
 	}
