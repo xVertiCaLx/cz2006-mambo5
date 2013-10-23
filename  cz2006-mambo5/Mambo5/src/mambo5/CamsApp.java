@@ -2,6 +2,7 @@ package mambo5;
 
 import javax.swing.SwingUtilities;
 
+import mambo5.Controller.LoginController;
 import mambo5.Entity.Menu;
 import mambo5.Entity.Stall;
 import mambo5.Form2.CamsMainFrame;
@@ -24,7 +25,7 @@ public class CamsApp {
 		//View
 		CamsMainFrame CamsFrame = new CamsMainFrame();
 		//Controller
-		//StallController stallController = new StallController();
+		//LoginController loginController = new LoginController();
 		//MenuController menuController = new MenuController();
 		
 		//CamsFrame.setLoginListener(stallController);

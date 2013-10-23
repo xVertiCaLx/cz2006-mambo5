@@ -14,9 +14,9 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import mambo5.Controller.JInterfaceConstant;
+import mambo5.Controller.JInterfaceController;
 
-public class CamsMainFrame extends JFrame implements JInterfaceConstant {
+public class CamsMainFrame extends JFrame implements JInterfaceController {
 
 	
 	private JPanel titlePanel, contentPane, selectPanel;

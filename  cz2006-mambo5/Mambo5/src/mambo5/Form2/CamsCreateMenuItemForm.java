@@ -10,9 +10,9 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import mambo5.Controller.JInterfaceConstant;
+import mambo5.Controller.JInterfaceController;
 
-public class CamsCreateMenuItemForm extends JPanel implements JInterfaceConstant {
+public class CamsCreateMenuItemForm extends JPanel implements JInterfaceController {
 
 	private JLabel menuItemLabel, menuItemPriceLabel, menuItemDiscountLabel;
 	private JTextField menuItemTextField, menuItemPriceTextField, menuItemDiscountTextField;
@@ -26,8 +26,9 @@ public class CamsCreateMenuItemForm extends JPanel implements JInterfaceConstant
 		mainFrame.setTitle("Create Menu Item");
 		//setBounds(posY, posX, CONTENTPANE_WIDTH, CONTENTPANE_HEIGHT);
 		setSize(new Dimension(CONTENTPANE_WIDTH, CONTENTPANE_HEIGHT));
+		setLocation(0,12);
 		setLayout(null);
-		setBackground(new Color(255,255,255));
+		setBackground(JPANEL_BACKGROUND_COLOUR);
 				
 		posX = ((CONTENTPANE_WIDTH - TEXTFIELD_WIDTH)/2);
 		

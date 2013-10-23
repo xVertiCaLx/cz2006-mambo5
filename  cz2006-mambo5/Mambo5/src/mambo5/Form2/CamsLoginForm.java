@@ -1,41 +1,83 @@
 package mambo5.Form2;
 
-import java.awt.Color;
-import java.awt.Font;
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.FocusEvent;
-import java.awt.event.FocusListener;
 
-import javax.swing.JPanel;
 import javax.swing.JButton;
 import javax.swing.JLabel;
-import javax.swing.JTextField;
-import javax.swing.JTextPane;
+import javax.swing.JPanel;
 import javax.swing.JPasswordField;
+import javax.swing.JTextField;
 
-import mambo5.Controller.JInterfaceConstant;
+import mambo5.Controller.JInterfaceController;
+import mambo5.Controller.LoginController;
 
-public class CamsLoginForm extends JPanel implements JInterfaceConstant {
+public class CamsLoginForm extends JPanel implements JInterfaceController {
 	private JTextField useridTextField;
 	private JPasswordField passwordField;
 	private JLabel useridLabel, passwordLabel;
+	private JButton loginButton;
 	boolean id_select = true, pwd_select = false;
+	private int labelWidth = 300, textFieldWidth = 300, totalWidth = 0, totalHeight = 0, posX=0, posY=0;
+	private LoginController loginController;	
 	
 	public CamsLoginForm(final CamsMainFrame mainFrame) {
-		setBounds(0, 40, 800, 560);
+		setSize(new Dimension(CONTENTPANE_WIDTH, CONTENTPANE_HEIGHT));
+		setLocation(0, POS_CONTENTPANE_OFFSET_Y);
 		setLayout(null);
-		setBackground(new Color(255, 255, 255));
-
-		//UserID
-		useridLabel = new JLabel("Enter your Staff ID:");
-		useridLabel.setBounds(((MAINPANE_WIDTH-300)/2),50,300,14);
-		add(useridLabel);
+		setBackground(JPANEL_BACKGROUND_COLOUR);
+		
+		useridLabel = new JLabel("Enter your ID:");
+		useridLabel.setSize(new Dimension(labelWidth, JLABEL_HEIGHT));
+		totalHeight += useridLabel.getHeight() + MARGIN;
 		
 		useridTextField = new JTextField();
-		useridTextField.setBounds(((MAINPANE_WIDTH-300)/2),50+useridLabel.getHeight(),300,20);
+		useridTextField.setSize(new Dimension(textFieldWidth, JTEXTFIELD_HEIGHT));
+		totalHeight += useridTextField.getHeight() + MARGIN;
+		
+		passwordLabel = new JLabel("Enter your password:");
+		passwordLabel.setSize(new Dimension(labelWidth, JLABEL_HEIGHT));
+		totalHeight += passwordLabel.getHeight() + MARGIN;
+		
+		passwordField = new JPasswordField();
+		passwordField.setSize(new Dimension(textFieldWidth, JTEXTFIELD_HEIGHT));
+		totalHeight += passwordField.getHeight() + MARGIN;
+		
+		loginButton = new JButton("LOG IN");
+		loginButton.setSize(new Dimension(STANDARDBUTTON_WIDTH, STANDARDBUTTON_HEIGHT));
+		loginButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(loginController.login(useridTextField.getText(), passwordField.getText()) != null) {
+					
+				} else {
+					//prompt error
+				}
+			}
+		});
+		totalHeight += loginButton.getHeight();
+		
+		posX = (getWidth() - useridTextField.getWidth())/2;
+		posY = (getHeight() - totalHeight)/2;
+		
+		useridLabel.setLocation(posX, posY);
+		posY += useridLabel.getHeight()+MARGIN;
+		add(useridLabel);
+		
+		useridTextField.setLocation(posX, posY);
+		posY += useridTextField.getHeight()+MARGIN;
 		add(useridTextField);
 		
+		passwordLabel.setLocation(posX, posY);
+		posY += passwordLabel.getHeight()+MARGIN;
+		add(passwordLabel);
+		
+		passwordField.setLocation(posX, posY);
+		posY += passwordField.getHeight()+MARGIN;
+		add(passwordField);
+		
+		loginButton.setLocation(posX, posY);
+		add(loginButton);
 		
 	}
 }
