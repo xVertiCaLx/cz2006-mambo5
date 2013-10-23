@@ -45,8 +45,8 @@ public class Order {
 	{
 		dbc = new DBController();
 		int result = 0;
-		String sql = "INSERT INTO Order (custID, purchaseDate, orderStatus) "
-					+ "VALUES ( '" + custID + "' , '" + purchaseDate +"' , '" + "Processing" +" ');";
+		String sql = "INSERT INTO orders (custID, purchaseDate, orderStatus) "
+					+ "VALUES ( '" + custID + "' , '" + purchaseDate + "' , '" + orderStatus +"');";
 		
 		result = dbc.executeNonQuery(sql);
 		return result;

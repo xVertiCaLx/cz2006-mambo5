@@ -41,12 +41,12 @@ public class OrderDetail {
 		return instructions;
 	}
 
-	public int createOrderDetail(int menuItemID, double actualPrice, String instructions) 
+	public int createOrderDetail(int orderID, int menuItemID, double actualPrice, String instructions) 
 	{
 		dbc = new DBController();
 		int result = 0;
-		String sql = "INSERT INTO OrderDetail (menuItemID, actualPrice, instructions)"
-					+ "VALUES ( '" + menuItemID + "' , '" + actualPrice + "' , '" + instructions +"');";
+		String sql = "INSERT INTO orderdetails (orderID, menuItemID, actualPrice, instructions)"
+					+ "VALUES ( '"+ orderID +"', '" + menuItemID + "' , '" + actualPrice + "' , '" + instructions +"');";
 		
 		result = dbc.executeNonQuery(sql);
 		return result;
