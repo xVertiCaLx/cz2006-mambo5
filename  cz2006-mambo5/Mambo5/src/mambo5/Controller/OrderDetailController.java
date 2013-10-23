@@ -21,11 +21,11 @@ public class OrderDetailController {
 	public OrderDetailController() { }
 
 		//validating createOrderDetail
-		public int validateCreateOrderDetail(int menuItemID, double actualPrice, String instructions){
+		public int validateCreateOrderDetail(int orderID,int menuItemID, double actualPrice, String instructions){
 			int validate = 0;
 			
 			od = new OrderDetail();
-			validate = od.createOrderDetail(menuItemID, actualPrice, instructions);
+			validate = od.createOrderDetail(orderID, menuItemID, actualPrice, instructions);
 			
 			return validate;
 		}

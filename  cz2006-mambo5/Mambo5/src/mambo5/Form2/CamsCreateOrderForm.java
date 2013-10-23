@@ -12,19 +12,29 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
-import mambo5.Controller.OrderController;
+import mambo5.Controller.*;
 
 public class CamsCreateOrderForm extends JPanel {
 	
 	private OrderController oc;
+	private OrderDetailController odc;
 	private CamsMainFrame mainFrame;
+	
+	//For Order
 	private int custID;
-	private Timestamp date;
+	private Timestamp purchaseDate;
 	private String orderStatus;
+	
+	//For OrderDetails
+	private int menuItemID;
+	private double actualPrice;
+	private String instructions;
+	private int orderID;
 	
 	JPanel receiptPanel, keypadPanel, menuItemPanel, sidePanel;
 	
 	final JTextArea receipt = new JTextArea();
+	ActionEvent e;
 
 	JButton numPad_1 = new JButton("1");
 	JButton numPad_2 = new JButton("2");
@@ -58,6 +68,8 @@ public class CamsCreateOrderForm extends JPanel {
 	
 	public CamsCreateOrderForm(/*mainFrame*/) {
 		
+		submitsOrder(e);	//Upon entering this page, order is created
+		
 		//default
 		setBounds(0, 40, 800, 560);
 		setLayout(null);
@@ -89,7 +101,6 @@ public class CamsCreateOrderForm extends JPanel {
 		sidePanel.setLayout(null);
 		sidePanel.setBackground(new Color(250,250,250));
 		add(sidePanel);
-		
 		
 		numPad_1.setText("1");
 		numPad_1.addActionListener(new ActionListener() {
@@ -223,6 +234,7 @@ public class CamsCreateOrderForm extends JPanel {
 		//First menu Item
 		btnMenuItem_1.addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
+			submitsOrderDetails(e);
 			receipt.append("\t" + btnMenuItem_1.getText() + "\t$"+"4.50"+"\n");					}
 		});
 		btnMenuItem_1.setBounds(10, 10, 150, 80);
@@ -327,9 +339,9 @@ public class CamsCreateOrderForm extends JPanel {
 		btnPrevPage.setBackground(new Color(100, 149, 237));
 		btnPrevPage.setBounds(10, 150, 110, 50);
 		sidePanel.add(btnPrevPage);
-		
 	}
 	
+	//A method to retrieve current datetime
 	private Timestamp GetDate() {
 		long time = System.currentTimeMillis();
 		java.sql.Timestamp timestamp = new java.sql.Timestamp(time);
@@ -338,10 +350,32 @@ public class CamsCreateOrderForm extends JPanel {
 }
 	
 	public void submitsOrder(ActionEvent e) {
-		date = GetDate();
+		purchaseDate = GetDate();
 		orderStatus = "Processing";
 		custID = 1; //Need to know how to retrieve custID
+		
+		oc = new OrderController();
+		if(oc.validateCreateOrder(custID, purchaseDate, orderStatus)==0)
+			JOptionPane.showMessageDialog(null, "Order cannot be created");
+		else
+		{
+			JOptionPane.showMessageDialog(null, "Order successfully created");
+		}
 	}
 	
+	public void submitsOrderDetails(ActionEvent e) {
+		orderID = 1; //Need to know how to retrieve orderID
+		menuItemID = 1; //Need to know how to retrieve menuItemID
+		actualPrice = 2.00; //Need to know how to retrieve price
+		instructions = "testing"; //Need to know how to retrieve instructions
 
+		odc = new OrderDetailController();
+		if(odc.validateCreateOrderDetail(orderID, menuItemID, actualPrice, instructions)==0)
+			JOptionPane.showMessageDialog(null, "OrderDetail cannot be created");
+		else
+		{
+			JOptionPane.showMessageDialog(null, "OrderDetail successfully created");
+		}
+	}
+	
 }
