@@ -1,6 +1,5 @@
 package mambo5.Form2;
 
-import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -53,7 +52,7 @@ public class SelectPanel extends JPanel implements JInterfaceConstant {
 		
 		totalWidth += TixButton.getWidth();
 		
-		posX = (getWidth() - totalWidth)/2;
+		posX = (CONTENTPANE_WIDTH - totalWidth)/2;
 		posY = (getHeight() - totalHeight)/2;
 		
 		OFSButton.setLocation(posX, posY);
@@ -64,7 +63,7 @@ public class SelectPanel extends JPanel implements JInterfaceConstant {
 		CAMSButton.setLocation(posX, posY);
 		add(CAMSButton);
 		
-		posX += OFSButton.getWidth() + MARGIN;
+		posX += CAMSButton.getWidth() + MARGIN;
 		
 		TixButton.setLocation(posX, posY);
 		add(TixButton);
