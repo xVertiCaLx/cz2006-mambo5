@@ -6,11 +6,11 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
-import mambo5.Controller.JInterfaceConstant;
+import mambo5.Controller.JInterfaceController;
 
 //231 + y 254+x
 
-public class SelectPanel extends JPanel implements JInterfaceConstant {
+public class SelectPanel extends JPanel implements JInterfaceController {
 	private int posX = 0, posY = 40, totalHeight = 0, totalWidth = 0;
 	private JButton OFSButton, CAMSButton, TixButton;
 	
@@ -36,7 +36,7 @@ public class SelectPanel extends JPanel implements JInterfaceConstant {
 		CAMSButton.setSize(MENUBUTTON_WIDTH, MENUBUTTON_HEIGHT);
 		CAMSButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				mainFrame.replacePanel(new CamsCreateMenuItemForm(mainFrame));
+				mainFrame.replacePanel(new CamsLoginForm(mainFrame));
 			}
 		});
 		
