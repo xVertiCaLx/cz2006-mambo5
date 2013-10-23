@@ -12,42 +12,61 @@ import mambo5.Controller.JInterfaceConstant;
 //231 + y 254+x
 
 public class SelectPanel extends JPanel implements JInterfaceConstant {
-	
+	private int posX = 0, posY = 40, totalHeight = 0, totalWidth = 0;
 	private JButton OFSButton, CAMSButton, TixButton;
 	
 	public SelectPanel(final CamsMainFrame mainFrame) {
 		// Panel Size
-		setBounds(0, 40, CONTENTPANE_WIDTH, CONTENTPANE_HEIGHT);
+		setBounds(posX, posY, CONTENTPANE_WIDTH, CONTENTPANE_HEIGHT);
 		setLayout(null);
-		setBackground(new Color(240, 240, 240));
+		setBackground(JPANEL_BACKGROUND_COLOUR);
 		mainFrame.setTitle("Please select a System to demonstrate:");
 
 		OFSButton = new JButton("Enter OFS System");
+		OFSButton.setSize(MENUBUTTON_WIDTH, MENUBUTTON_HEIGHT);
 		OFSButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				mainFrame.replacePanel(new CamsLoginForm(mainFrame));
 			}
 		});
-		
-		OFSButton.setBounds(20, 151, MENUBUTTON_WIDTH, MENUBUTTON_HEIGHT);
-		add(OFSButton);
+
+		totalHeight += OFSButton.getHeight();
+		totalWidth += OFSButton.getWidth() + MARGIN;
 		
 		CAMSButton = new JButton("Enter Canteen Management System");
+		CAMSButton.setSize(MENUBUTTON_WIDTH, MENUBUTTON_HEIGHT);
 		CAMSButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				mainFrame.replacePanel(new CamsCreateMenuItemForm(mainFrame));
 			}
 		});
-		CAMSButton.setBounds(274, 151, MENUBUTTON_WIDTH, MENUBUTTON_HEIGHT);
-		add(CAMSButton);
+		
+		totalWidth += CAMSButton.getWidth() + MARGIN;
 		
 		TixButton = new JButton("Enter Ticketing System");
+		TixButton.setSize(MENUBUTTON_WIDTH, MENUBUTTON_HEIGHT);
 		TixButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				mainFrame.replacePanel(new CustomerMainMenu(mainFrame));
 			}
 		});
-		TixButton.setBounds(528, 151, MENUBUTTON_WIDTH, MENUBUTTON_HEIGHT);
+		
+		totalWidth += TixButton.getWidth();
+		
+		posX = (getWidth() - totalWidth)/2;
+		posY = (getHeight() - totalHeight)/2;
+		
+		OFSButton.setLocation(posX, posY);
+		add(OFSButton);
+		
+		posX += OFSButton.getWidth() + MARGIN;
+		
+		CAMSButton.setLocation(posX, posY);
+		add(CAMSButton);
+		
+		posX += OFSButton.getWidth() + MARGIN;
+		
+		TixButton.setLocation(posX, posY);
 		add(TixButton);
 	}
 	
