@@ -46,18 +46,18 @@ public class Order {
 		dbc = new DBController();
 		int result = 0;
 		String sql = "INSERT INTO Order (custID, purchaseDate, orderStatus) "
-					+ "VALUES ( '" + custID + "' , '" + purchaseDate +"' , '" + "Processing" +"');";
+					+ "VALUES ( '" + custID + "' , '" + purchaseDate +"' , '" + "Processing" +" ');";
 		
 		result = dbc.executeNonQuery(sql);
 		return result;
 	}
 	
-	//Delete Order
+	//Delete Order - Doesnt delete, only update the orderStatus to Cancelled
 	public int deleteOrder(int orderID)
 	{
 		dbc = new DBController();
 		int result = 0;
-		String sql = "UPDATE Order SET orderStatus = '" + "Deleted" + "' WHERE orderID = '" + orderID + "';";
+		String sql = "UPDATE Order SET orderStatus = '" + "Cancelled" + "' WHERE orderID = '" + orderID + "';";
 				
 		result = dbc.executeNonQuery(sql);
 		return result;
@@ -73,12 +73,5 @@ public class Order {
 		result = dbc.executeNonQuery(sql);
 		return result;
 	}
-
-/*	private Timestamp GetDate() {
-		long time = System.currentTimeMillis();
-		java.sql.Timestamp timestamp = new java.sql.Timestamp(time);
-		
-		return timestamp;
-	}*/
 	
 }

@@ -4,15 +4,23 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Date;
+import java.sql.Timestamp;
 
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
+import mambo5.Controller.OrderController;
+
 public class CamsCreateOrderForm extends JPanel {
 	
-	private String custID;
+	private OrderController oc;
+	private CamsMainFrame mainFrame;
+	private int custID;
+	private Timestamp date;
+	private String orderStatus;
 	
 	JPanel receiptPanel, keypadPanel, menuItemPanel, sidePanel;
 	
@@ -48,7 +56,7 @@ public class CamsCreateOrderForm extends JPanel {
 	final JButton btnMenuItem_8 = new JButton("Pork Cutlet");
 	final JButton btnMenuItem_9 = new JButton("Fish Cutlet");
 	
-	public CamsCreateOrderForm(/*final CamsMainFrame mainFrame*/) {
+	public CamsCreateOrderForm(/*mainFrame*/) {
 		
 		//default
 		setBounds(0, 40, 800, 560);
@@ -321,5 +329,19 @@ public class CamsCreateOrderForm extends JPanel {
 		sidePanel.add(btnPrevPage);
 		
 	}
+	
+	private Timestamp GetDate() {
+		long time = System.currentTimeMillis();
+		java.sql.Timestamp timestamp = new java.sql.Timestamp(time);
+	
+		return timestamp;
+}
+	
+	public void submitsOrder(ActionEvent e) {
+		date = GetDate();
+		orderStatus = "Processing";
+		custID = 1; //Need to know how to retrieve custID
+	}
+	
 
 }
