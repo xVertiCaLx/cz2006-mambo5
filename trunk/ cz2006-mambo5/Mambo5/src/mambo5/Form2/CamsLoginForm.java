@@ -29,11 +29,11 @@ public class CamsLoginForm extends JPanel implements JInterfaceConstant {
 
 		//UserID
 		useridLabel = new JLabel("Enter your Staff ID:");
-		useridLabel.setBounds(((CONTENTPANE_WIDTH-300)/2),50,300,14);
+		useridLabel.setBounds(((MAINPANE_WIDTH-300)/2),50,300,14);
 		add(useridLabel);
 		
 		useridTextField = new JTextField();
-		useridTextField.setBounds(((CONTENTPANE_WIDTH-300)/2),50+useridLabel.getHeight(),300,20);
+		useridTextField.setBounds(((MAINPANE_WIDTH-300)/2),50+useridLabel.getHeight(),300,20);
 		add(useridTextField);
 		
 		
