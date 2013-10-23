@@ -1,6 +1,7 @@
 package mambo5.Form2;
 
 import java.awt.Color;
+import java.awt.Dimension;
 //import java.awt.EventQueue;
 //import javax.swing.JComboBox;
 //import java.awt.Font;
@@ -12,7 +13,6 @@ import java.awt.Font;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
 
 import mambo5.Controller.JInterfaceConstant;
 
@@ -31,14 +31,16 @@ public class CamsMainFrame extends JFrame implements JInterfaceConstant {
 		setBounds(POS_WINDOW_X, POS_WINDOW_Y, WINDOW_WIDTH, WINDOW_HEIGHT);
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.WHITE);
-		contentPane.setBounds(0,0,MAINPANE_WIDTH, MAINPANE_HEIGHT);
+		contentPane.setSize(new Dimension(MAINPANE_WIDTH, MAINPANE_HEIGHT));
+		contentPane.setLocation(0,0);
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 
 		// the background
 		titlePanel = new JPanel();
 		titlePanel.setBackground(new Color(0, 0, 102));
-		titlePanel.setBounds(0, 0, TITLEBAR_WIDTH, TITLEBAR_HEIGHT);
+		titlePanel.setSize(new Dimension(TITLEBAR_WIDTH, TITLEBAR_HEIGHT));
+		titlePanel.setLocation(0,0);
 		contentPane.add(titlePanel);
 		titlePanel.setLayout(null);
 
@@ -49,6 +51,7 @@ public class CamsMainFrame extends JFrame implements JInterfaceConstant {
 
 		selectPanel = new SelectPanel(this);
 		contentPane.add(selectPanel);
+		System.out.println("Window's Width: " + getWidth() + " Height: " + getHeight());
 	}
 	  
 	public void setSelectPanel(JPanel selectPanel) {

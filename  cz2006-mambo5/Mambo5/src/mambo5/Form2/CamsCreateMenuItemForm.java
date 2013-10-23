@@ -1,6 +1,9 @@
 package mambo5.Form2;
 
 import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -21,11 +24,12 @@ public class CamsCreateMenuItemForm extends JPanel implements JInterfaceConstant
 		
 		posX = 40;
 		mainFrame.setTitle("Create Menu Item");
-		setBounds(posY, posX, MAINPANE_WIDTH, MAINPANE_HEIGHT);
+		//setBounds(posY, posX, CONTENTPANE_WIDTH, CONTENTPANE_HEIGHT);
+		setSize(new Dimension(CONTENTPANE_WIDTH, CONTENTPANE_HEIGHT));
 		setLayout(null);
 		setBackground(new Color(255,255,255));
 				
-		posX = ((MAINPANE_WIDTH - TEXTFIELD_WIDTH)/2);
+		posX = ((CONTENTPANE_WIDTH - TEXTFIELD_WIDTH)/2);
 		
 		menuItemLabel = new JLabel("Item Name:");
 		menuItemLabel.setSize(TEXTLABEL_WIDTH, JLABEL_HEIGHT);
@@ -45,23 +49,33 @@ public class CamsCreateMenuItemForm extends JPanel implements JInterfaceConstant
 		
 		menuItemDiscountLabel = new JLabel("Item Discount Price: ");
 		menuItemDiscountLabel.setSize(TEXTLABEL_WIDTH, JLABEL_HEIGHT);
+		totalHeight += (menuItemDiscountLabel.getHeight()+MARGIN);
 		
 		menuItemDiscountTextField = new JTextField();
 		menuItemDiscountTextField.setSize(TEXTFIELD_WIDTH, JTEXTFIELD_HEIGHT);
 		totalHeight += (menuItemDiscountTextField.getHeight() + MARGIN);
 		
 		addButton = new JButton("Add to Menu");
+		addButton.setSize(new Dimension(STANDARDBUTTON_WIDTH, STANDARDBUTTON_HEIGHT));
+		addButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				//mainFrame.replacePanel(new CustomerMainMenu(mainFrame));
+			}
+		});
 		totalHeight += addButton.getHeight();
 		
 		clearAllButton = new JButton("Clear All");
+		clearAllButton.setSize(new Dimension(STANDARDBUTTON_WIDTH, STANDARDBUTTON_HEIGHT));
+		clearAllButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				//mainFrame.replacePanel(new CustomerMainMenu(mainFrame));
+			}
+		});
 		
-		posY = 50;//(CONTENTPANE_HEIGHT - totalHeight)/2;
-		posX = (MAINPANE_WIDTH - 200)/2;
-		System.out.println(posY);
+		posX = (CONTENTPANE_WIDTH - menuItemTextField.getWidth())/2;
+		posY = (CONTENTPANE_HEIGHT - totalHeight)/2;
 		menuItemLabel.setLocation(posX, posY);
 		add(menuItemLabel);
-
-		System.out.println("posY: " + posY);
 		
 		posY += menuItemLabel.getHeight() + MARGIN;
 		menuItemTextField.setLocation(posX, posY);
@@ -84,7 +98,14 @@ public class CamsCreateMenuItemForm extends JPanel implements JInterfaceConstant
 		menuItemDiscountTextField.setLocation(posX, posY);
 		add(menuItemDiscountTextField);
 		
-		System.out.println(getHeight());
+		posY += menuItemDiscountTextField.getHeight() + MARGIN;
+		
+		addButton.setLocation(posX, posY);
+		add(addButton);
+		posX += addButton.getWidth() + MARGIN;
+		
+		clearAllButton.setLocation(posX, posY);
+		add(clearAllButton);
 	}
 
 }

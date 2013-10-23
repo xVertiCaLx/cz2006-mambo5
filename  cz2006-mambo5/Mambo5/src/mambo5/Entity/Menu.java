@@ -7,9 +7,18 @@ public class Menu {
 	
 	public Menu(){}
 	
+	public Menu(int stallID, String menuType) {
+		this.stallID = stallID;
+		this.menuType = menuType;
+	}
+	
 	public Menu(int menuID, int stallID, String menuType) {
 		this.menuID = menuID;
 		this.stallID = stallID;
 		this.menuType = menuType;
+	}
+	
+	public void createMenuItem() {
+		
 	}
 }
