@@ -7,14 +7,20 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+
+import mambo5.Controller.CanteenController;
+import mambo5.Controller.OrderController;
 
 public class RefundOrderForm extends JPanel {
 
 	JPanel refundPanel; 
 	final JTextField txtOrderId = new JTextField();
+	
 	private int num;
+	private OrderController oc;
 	
 	JButton numPad_1 = new JButton("1");
 	JButton numPad_2 = new JButton("2");
@@ -198,22 +204,23 @@ public class RefundOrderForm extends JPanel {
 		btnEnter.setBounds(250, 300, 100, 100);
 		refundPanel.add(btnEnter);
 		
-		
-		public void submitOrderID() {
-			purchaseDate = GetDate();
-			orderStatus = "Processing";
-			custID = 1; //Need to know how to retrieve custID
-			stallID = 2; //Need to know how to retrieve stallID
+	}
+	
+		public void submitOrderID() 
+		{
+			
+			int orderID=Integer.parseInt(txtOrderId.getText());
 			
 			oc = new OrderController();
-			order = oc.validateRefundOrder(orderID);
-			if(!txtOrderId.getText() isNaN)
-				JOptionPane.showMessageDialog(null, "Order cannot be created");
+			oc.validateRefundOrder(orderID);
+
+			if(orderID==0)
+				JOptionPane.showMessageDialog(null, "Order refunded!");
 			else
-				JOptionPane.showMessageDialog(null, "Order ID: " + order);	
+				JOptionPane.showMessageDialog(null, "Order not refunded!");	
 			}
-		}
-	}
+		
+	
 	
 	
 }
