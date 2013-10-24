@@ -7,10 +7,5 @@ public class MenuController {
 	public MenuController() {
 		// TODO Auto-generated constructor stub
 	}
-	
-	public void createMenu() {
-		dbcon = new DBController();
-		
-	}
 
 }
