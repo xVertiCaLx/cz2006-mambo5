@@ -57,7 +57,7 @@ public class DBController {
 		return count;
 	}
 	
-	public ResultSet executeQuery(String sql){
+	public ResultSet execute(String sql){
 		rset = null;
 		try {
 			getConnection();
