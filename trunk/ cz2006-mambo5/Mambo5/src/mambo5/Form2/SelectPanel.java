@@ -25,7 +25,7 @@ public class SelectPanel extends JPanel implements JInterfaceController {
 		OFSButton.setSize(MENUBUTTON_WIDTH, MENUBUTTON_HEIGHT);
 		OFSButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				mainFrame.replacePanel(new CamsLoginForm(mainFrame));
+				mainFrame.replacePanel(new OFSLoginForm(mainFrame));
 			}
 		});
 

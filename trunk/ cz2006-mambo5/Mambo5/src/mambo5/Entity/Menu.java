@@ -5,7 +5,9 @@ public class Menu {
 	private int stallID;
 	private String menuType;
 	
-	public Menu(){}
+	public Menu(){
+		
+	}
 	
 	public Menu(int stallID, String menuType) {
 		this.stallID = stallID;
@@ -18,7 +20,5 @@ public class Menu {
 		this.menuType = menuType;
 	}
 	
-	public void createMenuItem() {
-		
-	}
+	
 }
