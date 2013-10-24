@@ -198,5 +198,22 @@ public class RefundOrderForm extends JPanel {
 		btnEnter.setBounds(250, 300, 100, 100);
 		refundPanel.add(btnEnter);
 		
+		
+		public void submitOrderID() {
+			purchaseDate = GetDate();
+			orderStatus = "Processing";
+			custID = 1; //Need to know how to retrieve custID
+			stallID = 2; //Need to know how to retrieve stallID
+			
+			oc = new OrderController();
+			order = oc.validateRefundOrder(orderID);
+			if(!txtOrderId.getText() isNaN)
+				JOptionPane.showMessageDialog(null, "Order cannot be created");
+			else
+				JOptionPane.showMessageDialog(null, "Order ID: " + order);	
+			}
+		}
 	}
+	
+	
 }
