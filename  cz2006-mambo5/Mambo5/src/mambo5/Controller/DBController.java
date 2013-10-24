@@ -65,7 +65,7 @@ public class DBController {
 			rset = stmt.executeQuery(sql);
 			System.out.println("Successfully queried MamboJumbo.");
 		} catch (Exception e) {
-			System.out.println("Failed to query MamboJumb. Printing Stacktrace...");
+			System.out.println("Failed to query MamboJumbo. Printing Stacktrace...");
 			e.printStackTrace();
 		} 
 		return rset;

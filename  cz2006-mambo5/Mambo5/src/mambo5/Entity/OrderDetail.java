@@ -39,7 +39,7 @@ public class OrderDetail {
 	{
 		dbc = new DBController();
 		int result = 0;
-		String sql = "INSERT INTO orderdetails (orderID, menuItemID, actualPrice, instructions)"
+		String sql = "INSERT INTO orderdetails (orderID, menuItemID, actualPrice)"
 					+ "VALUES ( '"+ orderID +"', '" + menuItemID + "' , '" + actualPrice + "');";
 		
 		result = dbc.executeNonQuery(sql);
