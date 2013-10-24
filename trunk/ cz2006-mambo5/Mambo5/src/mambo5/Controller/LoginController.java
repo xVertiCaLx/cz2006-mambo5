@@ -22,8 +22,8 @@ public class LoginController {
 		return cust;		
 	}
 	
-	public Staff login(String username, String password) {
-		sql = "SELECT staffID, accessID from mambojumbo.staff WHERE staffID = '" + username + "' AND password ='" + password + "';";
+	public Staff login(String username, String password, int accessID) {
+		sql = "SELECT staffID, accessID from mambojumbo.staff WHERE staffID = '" + username + "' AND password ='" + password + "' AND accessID = '"+accessID+";";
 		dbcon = new DBController();
 		
 		try {
@@ -35,5 +35,9 @@ public class LoginController {
 		}
 		
 		return staff;
+	}
+	
+	public boolean login(String username, String password) {
+		return true;
 	}
 }
