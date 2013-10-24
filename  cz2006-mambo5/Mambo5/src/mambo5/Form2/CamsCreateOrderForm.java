@@ -31,6 +31,7 @@ public class CamsCreateOrderForm extends JPanel {
 	private double actualPrice;
 	private String instructions;
 	private Order order;
+	private int stallID;
 	
 	JPanel receiptPanel, keypadPanel, menuItemPanel, sidePanel;
 	
@@ -233,7 +234,7 @@ public class CamsCreateOrderForm extends JPanel {
 		//First menu Item
 		btnMenuItem_1.addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
-			submitsOrderDetails(e);
+			submitsOrderDetails();
 			receipt.append("\t" + btnMenuItem_1.getText() + "\t$"+"4.50"+"\n");					}
 		});
 		btnMenuItem_1.setBounds(10, 10, 150, 80);
@@ -352,16 +353,17 @@ public class CamsCreateOrderForm extends JPanel {
 		purchaseDate = GetDate();
 		orderStatus = "Processing";
 		custID = 1; //Need to know how to retrieve custID
+		stallID = 2;
 		
 		oc = new OrderController();
-		order = oc.createOrder(custID, purchaseDate, orderStatus);
+		order = oc.createOrder(custID, purchaseDate, orderStatus, stallID);
 		if(order == null)
 			JOptionPane.showMessageDialog(null, "Order cannot be created");
 		else
 			JOptionPane.showMessageDialog(null, "Order ID: " + order.getOrderID());	
 	}
 	
-	public void submitsOrderDetails(ActionEvent e) {
+	public void submitsOrderDetails() {
 		menuItemID = 1; //Need to know how to retrieve menuItemID
 		actualPrice = 2.00; //Need to know how to retrieve price
 
