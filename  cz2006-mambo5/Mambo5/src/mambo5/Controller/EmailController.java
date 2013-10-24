@@ -1,52 +1,57 @@
 package mambo5.Controller;
 
-import java.util.*;
-import javax.mail.*;
-import javax.mail.internet.*;
-import javax.activation.*;
+import java.io.UnsupportedEncodingException;
+import java.util.Properties;
+
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.AddressException;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 
 public class EmailController {
-	public static void main(String[] args) {
-		// Recipient's email ID needs to be mentioned.
-		String to = "abcd@gmail.com";
 
-		// Sender's email ID needs to be mentioned
-		String from = "web@gmail.com";
+	private final String MAMBOJUMBO = "mambo.jumbo.5", HOST = "@gmail.com",
+			VALIDATE = "dq2sqzvf", SMTP_SERVER = "smtp.gmail.com",
+			PORT = "587";
+	private Properties properties;
 
-		// Assuming you are sending email from localhost
-		String host = "localhost";
+	public EmailController() {
+		properties = new Properties();
+		properties.put("mail.smtp.auth", "true");
+		properties.put("mail.smtp.starttls.enable", "true");
+		properties.put("mail.smtp.host", SMTP_SERVER);
+		properties.put("mail.smtp.port", PORT);
+	}
 
-		// Get system properties
-		Properties properties = System.getProperties();
-
-		// Setup mail server
-		properties.setProperty("mail.smtp.host", host);
-
-		// Get the default Session object.
-		Session session = Session.getDefaultInstance(properties);
+	public boolean sendAlert(String user, double amount) {
+		boolean validate=false;
+		Session session = Session.getInstance(properties,
+				new javax.mail.Authenticator() {
+					protected PasswordAuthentication getPasswordAuthentication() {
+						return new PasswordAuthentication(MAMBOJUMBO+HOST, VALIDATE);
+					}
+				});
 
 		try {
-			// Create a default MimeMessage object.
-			MimeMessage message = new MimeMessage(session);
 
-			// Set From: header field of the header.
-			message.setFrom(new InternetAddress(from));
+			Message message = new MimeMessage(session);
+			message.setFrom(new InternetAddress(MAMBOJUMBO+HOST));
+			message.setRecipients(Message.RecipientType.TO,
+					InternetAddress.parse(user));
+			message.setSubject("Testing Subject");
+			message.setText("Dear Mail Crawler,"
+					+ "\n\n No spam to my email, please!");
 
-			// Set To: header field of the header.
-			message.addRecipient(Message.RecipientType.TO, new InternetAddress(
-					to));
-
-			// Set Subject: header field
-			message.setSubject("This is the Subject Line!");
-
-			// Now set the actual message
-			message.setText("This is actual message");
-
-			// Send message
 			Transport.send(message);
-			System.out.println("Sent message successfully....");
-		} catch (MessagingException mex) {
-			mex.printStackTrace();
+			validate = true;
+		} catch (MessagingException e) {
+			throw new RuntimeException(e);
 		}
+		
+		return validate;
 	}
 }
