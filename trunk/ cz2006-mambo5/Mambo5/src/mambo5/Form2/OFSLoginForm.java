@@ -56,7 +56,7 @@ public class OFSLoginForm extends JPanel implements JInterfaceController {
 				admin = loginController.login(useridTextField.getText(), passwordField.getText());
 				if(admin != null) {
 					System.out.println("Login Success: " + admin.getAdminID());
-					if (admin.getAdminID() == 1) {
+					if (admin.getAccessID() == 1) {
 						mainFrame.replacePanel(new OFSFunction(mainFrame));
 					} else JOptionPane.showMessageDialog(mainFrame,"This account is not authorised to access this page.");
 				} else {
