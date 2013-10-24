@@ -28,10 +28,11 @@ import java.awt.event.ActionEvent;
 
 public class CreateStallForm extends JPanel {
 
-	private JTextField nameText;
+	private JTextField nameText = new JTextField();
 	private JComboBox<String> availableCB;
-	private JTextArea descriptionText;
-	private JRadioButton openRB; 
+	private JTextArea descArea = new JTextArea();
+	private JRadioButton openRB = new JRadioButton("Open"); 
+	private JRadioButton closeRB = new JRadioButton("Close");
 	private JComboBox<String> unitCB;
 	private JButton createBtn;
 	private CamsMainFrame mainFrame;
@@ -92,7 +93,7 @@ public class CreateStallForm extends JPanel {
 		nameLabel.setBounds(147, 222, 99, 14);
 		add(nameLabel);
 		
-		nameText = new JTextField();
+		//nameText = new JTextField();
 		nameText.setBounds(276, 219, 295, 20);
 		add(nameText);
 		nameText.setColumns(10);
@@ -101,12 +102,10 @@ public class CreateStallForm extends JPanel {
 		stallStatus.setBounds(147, 254, 109, 14);
 		add(stallStatus);
 		
-		openRB = new JRadioButton("Open");
 		openRB.setSelected(true);
 		openRB.setBounds(276, 250, 76, 23);
 		add(openRB);
 		
-		JRadioButton closeRB = new JRadioButton("Close");
 		closeRB.setBounds(354, 250, 109, 23);
 		add(closeRB);
 		
@@ -118,9 +117,8 @@ public class CreateStallForm extends JPanel {
 		descriptionLabel.setBounds(147, 279, 109, 14);
 		add(descriptionLabel);
 		
-		descriptionText = new JTextArea();
-		descriptionText.setBounds(276, 280, 295, 117);
-		add(descriptionText);
+		descArea.setBounds(276, 280, 295, 117);
+		add(descArea);
 		
 		
 		unitCB.setBounds(276, 191, 295, 20);
@@ -161,7 +159,7 @@ public class CreateStallForm extends JPanel {
 	public void submitsStallDetail(ActionEvent e) {
 
 		stallName = nameText.getText();
-		stallDesc = descriptionText.getText();
+		stallDesc = descArea.getText();
 		stallStatus = "F";
 		int index = availableCB.getSelectedIndex();
 		stallUnit = unitCB.getSelectedItem().toString();
@@ -209,9 +207,17 @@ public class CreateStallForm extends JPanel {
 			JOptionPane.showMessageDialog(null, "No Available Stall");
 			availableStallList.removeAll(availableStallList);
 			createBtn.setEnabled(false);
+			nameText.setEnabled(false);
+			descArea.setEnabled(false);
+			openRB.setEnabled(false);
+			closeRB.setEnabled(false);
 		}
 		if(availableStallList.size() > 0) {
 			createBtn.setEnabled(true);
+			nameText.setEnabled(true);
+			descArea.setEnabled(true);
+			openRB.setEnabled(true);
+			closeRB.setEnabled(true);
 			for(int i = 0; i<availableStallList.size(); i++) {
 				unitCB.addItem(availableStallList.get(i));
 			}    	
