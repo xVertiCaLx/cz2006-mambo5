@@ -237,7 +237,6 @@ public class CamsCreateOrderForm extends JPanel {
 		//First menu Item
 		btnMenuItem_1.addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
-			submitsOrderDetails();
 			receipt.append("\t" + btnMenuItem_1.getText() + "\t$"+"4.50"+"\n");	
 			}
 		});

@@ -28,16 +28,6 @@ public class OrderController {
 			return validate;
 		}
 	
-	//validating delete order
-	public int validateDeleteOrder(int orderID){
-		int validate = 0;
-		
-		o = new Order();
-		validate = o.deleteOrder(orderID);
-		
-		return validate;
-	}
-	
 	//validating refund order
 	public int validateRefundOrder(int orderID){
 		int validate = 0;
