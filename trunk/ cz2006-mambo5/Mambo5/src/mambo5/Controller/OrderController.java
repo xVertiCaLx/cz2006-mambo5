@@ -1,16 +1,15 @@
 package mambo5.Controller;
 
-import java.util.ArrayList;
+import java.sql.ResultSet;
 import java.util.Date;
 
-import mambo5.Database.*;
-import mambo5.Entity.Canteen;
 import mambo5.Entity.Order;
-import mambo5.Form2.CamsCreateMenuItemForm;
 
 public class OrderController { 
 
 	private Order o;
+	private DBController dbc;
+	private ResultSet rs;
 	//private CamsCreateMenuItemForm form;
 	//private DataStoreInterface dataStore;
 	//private SystemConfiguration sysConfig;
@@ -18,6 +17,25 @@ public class OrderController {
 	public OrderController() { }
 		// TODO Auto-generated constructor stub
 
+	public int createOrder(int custID, Date purchaseDate, String orderStatus) {
+		int orderID = -1;
+		dbc = new DBController();
+		String sql = "INSERT INTO mambojumbo.orders (custID, purchaseDate, orderStatus) "
+				+ "VALUES ( '" + custID + "' , '" + purchaseDate + "' , '" + orderStatus +"');";
+		System.out.println("Attempting to " + sql);
+		
+		dbc.executeNonQuery(sql);
+		sql = "Select orderID from mambojumbo.orders order by orderID desc limit 1;";
+		
+		try {
+			rs = dbc.execute(sql);
+ 			if (rs.next()) orderID = rs.getInt(1);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return orderID;
+	}
+	
 	//validating create order
 	public int validateCreateOrder(int custID, Date purchaseDate, String orderStatus){
 		int validate = 0;

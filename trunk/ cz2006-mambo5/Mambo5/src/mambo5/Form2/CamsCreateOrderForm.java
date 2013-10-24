@@ -21,7 +21,7 @@ public class CamsCreateOrderForm extends JPanel {
 	private CamsMainFrame mainFrame;
 	
 	//For Order
-	private int custID;
+	private int custID, orderID;
 	private Timestamp purchaseDate;
 	private String orderStatus;
 	
@@ -29,7 +29,7 @@ public class CamsCreateOrderForm extends JPanel {
 	private int menuItemID;
 	private double actualPrice;
 	private String instructions;
-	private int orderID;
+	private int currOrderID;
 	
 	JPanel receiptPanel, keypadPanel, menuItemPanel, sidePanel;
 	
@@ -68,8 +68,7 @@ public class CamsCreateOrderForm extends JPanel {
 	
 	public CamsCreateOrderForm(/*mainFrame*/) {
 		
-		submitsOrder(e);	//Upon entering this page, order is created
-		
+		submitsOrder();	//Upon entering this page, order is created
 		//default
 		setBounds(0, 40, 800, 560);
 		setLayout(null);
@@ -349,33 +348,29 @@ public class CamsCreateOrderForm extends JPanel {
 		return timestamp;
 }
 	
-	public void submitsOrder(ActionEvent e) {
+	public void submitsOrder() {
 		purchaseDate = GetDate();
 		orderStatus = "Processing";
 		custID = 1; //Need to know how to retrieve custID
 		
 		oc = new OrderController();
-		if(oc.validateCreateOrder(custID, purchaseDate, orderStatus)==0)
+		orderID = oc.createOrder(custID, purchaseDate, orderStatus);
+		if(orderID == -1)
 			JOptionPane.showMessageDialog(null, "Order cannot be created");
 		else
 		{
-			JOptionPane.showMessageDialog(null, "Order successfully created");
+			JOptionPane.showMessageDialog(null, "Order ID: " + orderID);
 		}
 	}
 	
 	public void submitsOrderDetails(ActionEvent e) {
-		orderID = 1; //Need to know how to retrieve orderID
 		menuItemID = 1; //Need to know how to retrieve menuItemID
 		actualPrice = 2.00; //Need to know how to retrieve price
 		instructions = "testing"; //Need to know how to retrieve instructions
 
 		odc = new OrderDetailController();
-		if(odc.validateCreateOrderDetail(orderID, menuItemID, actualPrice, instructions)==0)
-			JOptionPane.showMessageDialog(null, "OrderDetail cannot be created");
-		else
-		{
-			JOptionPane.showMessageDialog(null, "OrderDetail successfully created");
-		}
+		odc.createOrderDetails(orderID, menuItemID, actualPrice, instructions);
+		JOptionPane.showMessageDialog(null, "Order Details Added!");
 	}
 	
 }

@@ -67,7 +67,7 @@ public class GuoHao extends JFrame {
 		titlePanel.add(titleLabel);
 
 		
-		selectPanel = new CamsCreateOrderForm(/*new CamsMainFrame()*/);
+		//selectPanel = new CamsCreateOrderForm(/*new CamsMainFrame()*/);
 		JLabel label_1 = new JLabel("#Store Name | #CaMS Page");
 		label_1.setHorizontalAlignment(SwingConstants.CENTER);
 		label_1.setForeground(Color.WHITE);
