@@ -5,6 +5,7 @@ import java.awt.Color;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
@@ -13,13 +14,24 @@ import java.awt.Font;
 
 import javax.swing.JTextField;
 import javax.swing.JButton;
+
+import mambo5.Controller.CustomerController;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.util.*;
 
 public class CustomerPurchaseCard extends JPanel {
 
 	//private JPanel contentPane;
 	private JTextField txtAmountInserted;
+	private double cardBalance;
+	private String fullName;
+	private int accessID;
+	private CustomerController customerCon;
+	
 
 	public CustomerPurchaseCard(final CamsMainFrame mainFrame) {
 		
@@ -38,6 +50,16 @@ public class CustomerPurchaseCard extends JPanel {
 		add(lblPleaseInsertSgs);
 		
 		txtAmountInserted = new JTextField();
+		txtAmountInserted.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				
+				Scanner sc = new Scanner (System.in);
+				System.out.print("How much do you wish to add value to your new card?"); 
+				String valueEntered = sc.next();
+				txtAmountInserted.setText(valueEntered);
+			}
+		});
 		txtAmountInserted.setEditable(false);
 		txtAmountInserted.setText("-.--");
 		txtAmountInserted.setFont(new Font("Tahoma", Font.PLAIN, 19));
@@ -93,10 +115,33 @@ public class CustomerPurchaseCard extends JPanel {
 		JButton btnOk = new JButton("Ok");
 		btnOk.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) 
-			
 			{	
-				//implement the controller
-				System.out.print("test");
+				if (txtAmountInserted.getText().endsWith("-.--"))
+				{
+					JOptionPane.showMessageDialog(null, "Please insert cash.");
+				}
+				
+				cardBalance = Double.parseDouble(txtAmountInserted.getText());
+				
+				if (cardBalance < 10.00)
+				{
+					JOptionPane.showMessageDialog(null, "Minimum amount has to be SGD$10.00.");
+				}
+				else 
+				{
+					customerCon = new CustomerController();
+					fullName = "Visitor";
+					accessID = 6;
+					
+					if(customerCon.validateCustomerDetail(cardBalance, fullName, accessID)==0)
+					{
+						JOptionPane.showMessageDialog(null, "Error");
+					}
+					else
+					{
+						JOptionPane.showMessageDialog(null, "Card purchased successfully.");
+					}
+				}
 			}
 		});
 		btnOk.setBounds(184, 231, 109, 20);
