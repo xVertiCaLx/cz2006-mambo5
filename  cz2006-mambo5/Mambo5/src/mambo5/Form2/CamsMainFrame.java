@@ -6,7 +6,10 @@ import java.awt.Dimension;
 //import javax.swing.JComboBox;
 //import java.awt.Font;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
+import javax.swing.JButton;
 /*import javax.swing.JFrame;
  import javax.swing.JLabel;
  import javax.swing.JPanel;*/
@@ -19,8 +22,10 @@ import mambo5.Controller.JInterfaceController;
 public class CamsMainFrame extends JFrame implements JInterfaceController {
 
 	
-	private JPanel titlePanel, contentPane, selectPanel;
-	private JLabel titleLabel = new JLabel("#Canteen");;
+	private JPanel titlePanel, contentPane, selectPanel, applicationPanel;
+	private JLabel titleLabel = new JLabel("#Canteen");
+	private JButton mainMenuButton;
+	private int posX = 0, posY = 0;
 
 	public CamsMainFrame() {
 		// the frame
@@ -32,7 +37,7 @@ public class CamsMainFrame extends JFrame implements JInterfaceController {
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.WHITE);
 		contentPane.setSize(new Dimension(MAINPANE_WIDTH, MAINPANE_HEIGHT));
-		contentPane.setLocation(0,0);
+		contentPane.setLocation(posX,posY);
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 
@@ -40,26 +45,43 @@ public class CamsMainFrame extends JFrame implements JInterfaceController {
 		titlePanel = new JPanel();
 		titlePanel.setBackground(new Color(0, 0, 102));
 		titlePanel.setSize(new Dimension(TITLEBAR_WIDTH, TITLEBAR_HEIGHT));
-		titlePanel.setLocation(0,0);
+		titlePanel.setLocation(posX,posY);
 		contentPane.add(titlePanel);
 		titlePanel.setLayout(null);
-
+		
+		posX += MARGIN;
+		posY += MARGIN;
+		
+		mainMenuButton = new JButton("Main Menu");
+		mainMenuButton.setSize(new Dimension(STANDARDBUTTON_WIDTH, STANDARDBUTTON_HEIGHT));
+		mainMenuButton.setLocation(posX, posY);
+		mainMenuButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				replacePanel(selectPanel);
+			}
+		});
+		titlePanel.add(mainMenuButton);
+		posX += mainMenuButton.getWidth() + MARGIN;
+		
 		titleLabel.setForeground(Color.WHITE);
 		titleLabel.setFont(new Font("Arial", Font.BOLD, 12));
-		titleLabel.setBounds(POS_TITLELABEL_X, POS_TITLELABEL_Y, TITLELABEL_WIDTH, TITLELABEL_HEIGHT);
+		titleLabel.setSize(new Dimension(TITLELABEL_WIDTH, TITLELABEL_HEIGHT));
+		//titleLabel.setBounds(POS_TITLELABEL_X, POS_TITLELABEL_Y, TITLELABEL_WIDTH, TITLELABEL_HEIGHT);
+		titleLabel.setLocation(posX, posY);
 		titlePanel.add(titleLabel);
 
 		selectPanel = new SelectPanel(this);
-		contentPane.add(selectPanel);
+		applicationPanel = selectPanel;
+		contentPane.add(applicationPanel);
 		System.out.println("Window's Width: " + getWidth() + " Height: " + getHeight());
 	}
 	  
-	public void setSelectPanel(JPanel selectPanel) {
-		this.selectPanel = selectPanel;
+	public void setSelectPanel(JPanel applicationPanel) {
+		this.applicationPanel = applicationPanel;
 	}
 
 	public JPanel getSelectPanel() {
-		return selectPanel;
+		return applicationPanel;
 	}
 
 	public void setTitle(String title) {
@@ -67,9 +89,9 @@ public class CamsMainFrame extends JFrame implements JInterfaceController {
 	}
 	
 	public void replacePanel(JPanel panel) {
-		contentPane.remove(selectPanel);
-		selectPanel = panel;
-		contentPane.add(selectPanel);
+		contentPane.remove(applicationPanel);
+		applicationPanel = panel;
+		contentPane.add(applicationPanel);
 		contentPane.revalidate();
 		contentPane.repaint();
 	}

@@ -23,14 +23,16 @@ public class CamsLoginForm extends JPanel implements JInterfaceController {
 	private int labelWidth = 300, textFieldWidth = 300, totalWidth = 0, totalHeight = 0, posX=0, posY=0;
 	private LoginController loginController;
 	private Staff staff;
+	//private String requestor;
 	
 	public CamsLoginForm(final CamsMainFrame mainFrame) {
 		setSize(new Dimension(CONTENTPANE_WIDTH, CONTENTPANE_HEIGHT));
 		setLocation(0, POS_CONTENTPANE_OFFSET_Y);
 		setLayout(null);
 		setBackground(JPANEL_BACKGROUND_COLOUR);
-		
 		loginController = new LoginController();
+		
+		//this.requestor = requestor;
 		
 		useridLabel = new JLabel("Enter your ID:");
 		useridLabel.setSize(new Dimension(labelWidth, JLABEL_HEIGHT));
@@ -53,14 +55,12 @@ public class CamsLoginForm extends JPanel implements JInterfaceController {
 		loginButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("Login Fired!");
-				staff = loginController.login(useridTextField.getText(), passwordField.getText());
+				staff = loginController.login(useridTextField.getText(), passwordField.getText(), 2);
 				if(staff != null) {
 					System.out.println("Login Success: " + staff.getStaffID());
 					if (staff.getAccessID() == 1) {
-						//1
 						mainFrame.replacePanel(new OFSFunction(mainFrame));
 					} else {
-						//2 or 3
 						mainFrame.replacePanel(new CamsMainMenuForm(mainFrame));
 					}
 				} else {
