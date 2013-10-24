@@ -22,20 +22,20 @@ public class OrderDetailController {
 	public OrderDetailController() { }
 
 		//validating createOrderDetail
-		public int validateCreateOrderDetail(int orderID,int menuItemID, double actualPrice, String instructions){
+		public int validateCreateOrderDetail(int orderID,int menuItemID, double actualPrice){
 			int validate = 0;
 			
 			od = new OrderDetail();
-			validate = od.createOrderDetail(orderID, menuItemID, actualPrice, instructions);
+			validate = od.createOrderDetail(orderID, menuItemID, actualPrice);
 			
 			return validate;
 		}
 		
-		public void createOrderDetails(int orderID, int menuItemID, double actualPrice, String instructions) 
+		public void createOrderDetails(int orderID, int menuItemID, double actualPrice) 
 		{
 			dbc = new DBController();
-			String sql = "INSERT INTO orderdetails (orderID, menuItemID, actualPrice, instructions)"
-						+ "VALUES ( '"+ orderID +"', '" + menuItemID + "' , '" + actualPrice + "' , '" + instructions +"');";
+			String sql = "INSERT INTO orderdetails (orderID, menuItemID, actualPrice)"
+						+ "VALUES ( '"+ orderID +"', '" + menuItemID + "' , '" + actualPrice + "');";
 			dbc.executeNonQuery(sql);
 		}
 		
