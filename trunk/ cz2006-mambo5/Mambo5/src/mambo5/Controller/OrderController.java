@@ -18,10 +18,10 @@ public class OrderController {
 	public OrderController() { }
 		// TODO Auto-generated constructor stub
 
-	public Order createOrder(int custID, Date purchaseDate, String orderStatus) {
+	public Order createOrder(int custID, Date purchaseDate, String orderStatus, int stallID) {
 		dbc = new DBController();
-		String sql = "INSERT INTO mambojumbo.orders (custID, purchaseDate, orderStatus) "
-				+ "VALUES ( '" + custID + "' , '" + purchaseDate + "' , '" + orderStatus +"');";
+		String sql = "INSERT INTO mambojumbo.orders (custID, purchaseDate, orderStatus, stallID) "
+				+ "VALUES ( '" + custID + "' , '" + purchaseDate + "' , '" + orderStatus +"' , '" + stallID +"');";
 		System.out.println("Attempting to " + sql);
 		
 		dbc.executeNonQuery(sql);
@@ -30,7 +30,7 @@ public class OrderController {
 		try {
 			rs = dbc.execute(sql);
  			if (rs.next()) {
- 				order = new Order(rs.getInt(1), custID, purchaseDate, orderStatus);
+ 				order = new Order(rs.getInt(1), custID, purchaseDate, orderStatus, stallID);
  			}
 		} catch (Exception e) {
 			e.printStackTrace();

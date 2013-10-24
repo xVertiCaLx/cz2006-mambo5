@@ -11,16 +11,18 @@ public class Order {
 	private int custID;
 	private String orderStatus;
 	private Date purchaseDate;
+	private int stallID;
 	DBController dbc;
 	private ResultSet rs;
 	
 	public Order() {};
 	
-	public Order(int orderID, int custID, Date purchaseDate, String orderStatus){
+	public Order(int orderID, int custID, Date purchaseDate, String orderStatus, int stallID){
 		this.orderID = orderID;
 		this.custID = custID;
 		this.purchaseDate = purchaseDate;
 		this.orderStatus = orderStatus;
+		this.stallID = stallID;
 	}
 	
 	public int getOrderID() {
@@ -39,17 +41,21 @@ public class Order {
 		return purchaseDate;
 	}
 	
-	//New Order
-	public int createOrder(int custID, Date purchaseDate, String orderStatus) 
+	public int getStallID() {
+		return stallID;
+	}
+	
+	/*//New Order
+	public int createOrder(int custID, Date purchaseDate, String orderStatus, int stallID) 
 	{
 		dbc = new DBController();
 		int result = 0;
-		String sql = "INSERT INTO mambojumbo.orders (custID, purchaseDate, orderStatus) "
-					+ "VALUES ( '" + custID + "' , '" + purchaseDate + "' , '" + orderStatus +"');";
+		String sql = "INSERT INTO mambojumbo.orders (custID, purchaseDate, orderStatus, stallID) "
+					+ "VALUES ( '" + custID + "' , '" + purchaseDate + "' , '" + orderStatus +"', '" + stallID +"');";
 		
 		result = dbc.executeNonQuery(sql);
 		return result;
-	}
+	}*/
 	
 	//Delete Order - Doesnt delete, only update the orderStatus to Cancelled
 	public int deleteOrder(int orderID)
