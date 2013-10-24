@@ -1,6 +1,5 @@
 package mambo5.Controller;
 
-import java.io.UnsupportedEncodingException;
 import java.util.Properties;
 
 import javax.mail.Message;
@@ -8,7 +7,6 @@ import javax.mail.MessagingException;
 import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
 import javax.mail.Transport;
-import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
@@ -18,6 +16,8 @@ public class EmailController {
 			VALIDATE = "dq2sqzvf", SMTP_SERVER = "smtp.gmail.com",
 			PORT = "587";
 	private Properties properties;
+	
+	private String MESSAGE_BALANCE_ALERT_SUBJECT = "CaMS: Low Card Balance Alert";
 
 	public EmailController() {
 		properties = new Properties();
@@ -27,7 +27,7 @@ public class EmailController {
 		properties.put("mail.smtp.port", PORT);
 	}
 
-	public boolean sendAlert(String user, double amount) {
+	public boolean sendBalanceAlertEmail(String user, double amount) {
 		boolean validate=false;
 		Session session = Session.getInstance(properties,
 				new javax.mail.Authenticator() {
@@ -42,9 +42,8 @@ public class EmailController {
 			message.setFrom(new InternetAddress(MAMBOJUMBO+HOST));
 			message.setRecipients(Message.RecipientType.TO,
 					InternetAddress.parse(user));
-			message.setSubject("Testing Subject");
-			message.setText("Dear Mail Crawler,"
-					+ "\n\n No spam to my email, please!");
+			message.setSubject(MESSAGE_BALANCE_ALERT_SUBJECT);
+			message.setText("Warning: \n Your card balance is low. You have $" + amount + "in your card. Kindly proceed to the nearest top up kiosk to top up and refresh your card balance.");
 
 			Transport.send(message);
 			validate = true;
