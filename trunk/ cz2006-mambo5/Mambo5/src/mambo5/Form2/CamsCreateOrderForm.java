@@ -35,7 +35,6 @@ public class CamsCreateOrderForm extends JPanel {
 	JPanel receiptPanel, keypadPanel, menuItemPanel, sidePanel;
 	
 	final JTextArea receipt = new JTextArea();
-	ActionEvent e;
 
 	JButton numPad_1 = new JButton("1");
 	JButton numPad_2 = new JButton("2");
