@@ -31,14 +31,6 @@ public class OrderDetailController {
 			return validate;
 		}
 		
-		public void createOrderDetails(int orderID, int menuItemID, double actualPrice) 
-		{
-			dbc = new DBController();
-			String sql = "INSERT INTO orderdetails (orderID, menuItemID, actualPrice)"
-						+ "VALUES ( '"+ orderID +"', '" + menuItemID + "' , '" + actualPrice + "');";
-			dbc.executeNonQuery(sql);
-		}
-		
 		//validating deleteOrderDetail
 		public int deleteOrderDetail(int detailID){
 			

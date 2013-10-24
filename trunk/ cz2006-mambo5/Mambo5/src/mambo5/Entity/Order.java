@@ -45,7 +45,7 @@ public class Order {
 		return stallID;
 	}
 	
-	/*//New Order
+	//New Order
 	public int createOrder(int custID, Date purchaseDate, String orderStatus, int stallID) 
 	{
 		dbc = new DBController();
@@ -54,8 +54,24 @@ public class Order {
 					+ "VALUES ( '" + custID + "' , '" + purchaseDate + "' , '" + orderStatus +"', '" + stallID +"');";
 		
 		result = dbc.executeNonQuery(sql);
+		
+		if(result==1)
+		{
+			sql = "Select orderID from mambojumbo.orders order by orderID desc limit 1;";
+			
+			try {
+				rs = dbc.execute(sql);
+				rs.next();
+				result = rs.getInt("orderID"); 
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		else
+			result = -1;
+		
 		return result;
-	}*/
+	}
 	
 	//Delete Order - Doesnt delete, only update the orderStatus to Cancelled
 	public int deleteOrder(int orderID)
@@ -77,22 +93,6 @@ public class Order {
 				
 		result = dbc.executeNonQuery(sql);
 		return result;
-	}
-	
-	//Select latest Order record
-		public int selectLastOrderID()
-		{
-			dbc = new DBController();
-			int result = 0;
-			String sql = "Select orderID from mambojumbo.orders order by orderID desc limit 1;";
-			
-			try {
-				rs = dbc.execute(sql);
-				result = rs.getInt(1); 
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-			return result;
-		}
+	}	
 	
 }

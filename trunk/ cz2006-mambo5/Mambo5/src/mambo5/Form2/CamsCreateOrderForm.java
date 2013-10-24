@@ -5,6 +5,7 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
@@ -30,8 +31,10 @@ public class CamsCreateOrderForm extends JPanel {
 	private int menuItemID;
 	private double actualPrice;
 	private String instructions;
-	private Order order;
+	private int order;
 	private int stallID;
+	
+	ArrayList orderDetailsList = new ArrayList();
 	
 	JPanel receiptPanel, keypadPanel, menuItemPanel, sidePanel;
 	
@@ -69,7 +72,7 @@ public class CamsCreateOrderForm extends JPanel {
 	
 	public CamsCreateOrderForm(/*mainFrame*/) {
 		
-		submitsOrder();	//Upon entering this page, order is created
+		//submitsOrder();	//Upon entering this page, order is created
 		//default
 		setBounds(0, 40, 800, 560);
 		setLayout(null);
@@ -219,7 +222,7 @@ public class CamsCreateOrderForm extends JPanel {
 				 int reply = JOptionPane.showConfirmDialog(null, "Confirm Order?", "Confirmation", 
 						 JOptionPane.YES_NO_OPTION);
 			        if (reply == JOptionPane.YES_OPTION) {
-			          // insert into database with option as eatin
+			        	submitsOrder();
 			        }
 			}
 		});
@@ -235,7 +238,8 @@ public class CamsCreateOrderForm extends JPanel {
 		btnMenuItem_1.addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
 			submitsOrderDetails();
-			receipt.append("\t" + btnMenuItem_1.getText() + "\t$"+"4.50"+"\n");					}
+			receipt.append("\t" + btnMenuItem_1.getText() + "\t$"+"4.50"+"\n");	
+			}
 		});
 		btnMenuItem_1.setBounds(10, 10, 150, 80);
 		btnMenuItem_1.setBackground(new Color(105, 105, 105));
@@ -353,22 +357,22 @@ public class CamsCreateOrderForm extends JPanel {
 		purchaseDate = GetDate();
 		orderStatus = "Processing";
 		custID = 1; //Need to know how to retrieve custID
-		stallID = 2;
+		stallID = 2; //Need to know how to retrieve stallID
 		
 		oc = new OrderController();
-		order = oc.createOrder(custID, purchaseDate, orderStatus, stallID);
-		if(order == null)
+		order = oc.validateCreateOrder(custID, purchaseDate, orderStatus, stallID);
+		if(custID == 0 || purchaseDate.equals("") || orderStatus.equals("") || stallID == 0)
 			JOptionPane.showMessageDialog(null, "Order cannot be created");
 		else
-			JOptionPane.showMessageDialog(null, "Order ID: " + order.getOrderID());	
+			JOptionPane.showMessageDialog(null, "Order ID: " + order);	
 	}
 	
 	public void submitsOrderDetails() {
 		menuItemID = 1; //Need to know how to retrieve menuItemID
-		actualPrice = 2.00; //Need to know how to retrieve price
+		actualPrice = 7.99; //Need to know how to retrieve price
 
 		odc = new OrderDetailController();
-		odc.createOrderDetails(order.getOrderID(), menuItemID, actualPrice);
+		odc.validateCreateOrderDetail(orderID, menuItemID, actualPrice);
 		JOptionPane.showMessageDialog(null, "Order Details Added!");
 	}
 	
