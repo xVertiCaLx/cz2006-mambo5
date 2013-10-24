@@ -22,6 +22,7 @@ public class DBController {
 		database = "jdbc:mysql://mysql1100.shared-servers.com:1091/MamboJumbo";
 		dbuser = "mambo5";
 		dbpassword = "anything";
+		System.out.println("DB Connection Initialised!");
 	}
 	
 	//actual implementation
@@ -40,6 +41,7 @@ public class DBController {
 	public int executeNonQuery(String sql){
 		int count =0;
 		try {
+			System.out.println("DB Connection Connecting!");
 			getConnection();
 			System.out.println("Attempting to: " + sql);
 			stmt.execute(sql);
