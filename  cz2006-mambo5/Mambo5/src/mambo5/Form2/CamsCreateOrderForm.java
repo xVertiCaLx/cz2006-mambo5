@@ -4,7 +4,6 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.Date;
 import java.sql.Timestamp;
 
 import javax.swing.JButton;
@@ -12,7 +11,9 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
-import mambo5.Controller.*;
+import mambo5.Controller.OrderController;
+import mambo5.Controller.OrderDetailController;
+import mambo5.Entity.Order;
 
 public class CamsCreateOrderForm extends JPanel {
 	
@@ -29,7 +30,7 @@ public class CamsCreateOrderForm extends JPanel {
 	private int menuItemID;
 	private double actualPrice;
 	private String instructions;
-	private int currOrderID;
+	private Order order;
 	
 	JPanel receiptPanel, keypadPanel, menuItemPanel, sidePanel;
 	
@@ -354,22 +355,19 @@ public class CamsCreateOrderForm extends JPanel {
 		custID = 1; //Need to know how to retrieve custID
 		
 		oc = new OrderController();
-		orderID = oc.createOrder(custID, purchaseDate, orderStatus);
-		if(orderID == -1)
+		order = oc.createOrder(custID, purchaseDate, orderStatus);
+		if(order == null)
 			JOptionPane.showMessageDialog(null, "Order cannot be created");
 		else
-		{
-			JOptionPane.showMessageDialog(null, "Order ID: " + orderID);
-		}
+			JOptionPane.showMessageDialog(null, "Order ID: " + order.getOrderID());	
 	}
 	
 	public void submitsOrderDetails(ActionEvent e) {
 		menuItemID = 1; //Need to know how to retrieve menuItemID
 		actualPrice = 2.00; //Need to know how to retrieve price
-		instructions = "testing"; //Need to know how to retrieve instructions
 
 		odc = new OrderDetailController();
-		odc.createOrderDetails(orderID, menuItemID, actualPrice, instructions);
+		odc.createOrderDetails(order.getOrderID(), menuItemID, actualPrice);
 		JOptionPane.showMessageDialog(null, "Order Details Added!");
 	}
 	

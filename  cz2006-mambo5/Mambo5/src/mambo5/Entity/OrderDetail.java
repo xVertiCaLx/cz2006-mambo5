@@ -7,18 +7,16 @@ public class OrderDetail {
 	private int menuItemID;
 	private int orderID;
 	private double actualPrice;
-	private String instructions;
 	DBController dbc;
 	
 	public OrderDetail() {}
 	
-	public OrderDetail(int detailID, int menuItemID, int orderID, double actualPrice, String instructions) 
+	public OrderDetail(int detailID, int menuItemID, int orderID, double actualPrice) 
 	{
 		this.detailID = detailID;
 		this.menuItemID = menuItemID;
 		this.orderID = orderID;
 		this.actualPrice = actualPrice;
-		this.instructions = instructions;
 	}
 	
 	public int getDetailID() {
@@ -37,16 +35,12 @@ public class OrderDetail {
 		return actualPrice;
 	}
 
-	public String getInstructions() {
-		return instructions;
-	}
-
-	public int createOrderDetail(int orderID, int menuItemID, double actualPrice, String instructions) 
+	public int createOrderDetail(int orderID, int menuItemID, double actualPrice) 
 	{
 		dbc = new DBController();
 		int result = 0;
 		String sql = "INSERT INTO orderdetails (orderID, menuItemID, actualPrice, instructions)"
-					+ "VALUES ( '"+ orderID +"', '" + menuItemID + "' , '" + actualPrice + "' , '" + instructions +"');";
+					+ "VALUES ( '"+ orderID +"', '" + menuItemID + "' , '" + actualPrice + "');";
 		
 		result = dbc.executeNonQuery(sql);
 		return result;
