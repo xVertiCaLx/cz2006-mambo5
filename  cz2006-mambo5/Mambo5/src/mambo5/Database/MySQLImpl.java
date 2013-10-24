@@ -4,6 +4,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 
 import mambo5.Controller.DBController;
+import mambo5.Entity.Admin;
 import mambo5.Entity.Canteen;
 import mambo5.Entity.Stall;
 
@@ -13,6 +14,7 @@ public class MySQLImpl implements DataStoreInterface {
 	//methods
 	private ArrayList<Canteen> canteenList;
 	private ArrayList<Stall> stallList;
+	private ArrayList<Admin> adminList;
 	private ResultSet rs;
 	
 	//setup Connections
@@ -108,4 +110,25 @@ public class MySQLImpl implements DataStoreInterface {
 		return result;
 	}
 	
+	//----
+	@Override
+	public ArrayList<Admin> retrieveAdminList() {
+		Admin admin;
+		adminList = new ArrayList<Admin>();
+				
+		String sql = "SELECT * FROM admin;";
+		rs = dbc.execute(sql);
+		
+		try{
+			while(rs.next()) {
+				admin = new Admin(rs.getInt("adminID"), rs.getInt("accessID"), rs.getInt("stallID"), rs.getString("adminName"), rs.getString("password"));
+				adminList.add(admin);
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			dbc.terminate();
+		}
+		return adminList;
+	}
 }

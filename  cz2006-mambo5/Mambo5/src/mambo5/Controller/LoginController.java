@@ -1,43 +1,38 @@
 package mambo5.Controller;
 import java.sql.ResultSet;
 
-import mambo5.Entity.Customer;
-import mambo5.Entity.Staff;
+import mambo5.Entity.Admin;
+
 
 public class LoginController {
-	
-	private Customer cust;
-	private Staff staff;
-	private DBController dbcon;
+
+	private Admin admin;
+	private DBController dbc;
 	private String sql;
 	private ResultSet rs;
 
 	public LoginController() {
 		System.out.println("Login Controller Initialised");
 	}
-	
-	public Customer validateLoginDetail(int accessID, int custID) {	
-		cust = new Customer();
-		cust = cust.retrieveCustomerDetail(custID);
-		return cust;		
+
+	public boolean validateLoginField(String userid, String password) {
+		if (userid.isEmpty() || password.isEmpty()) return false;
+		else return true;
 	}
 	
-	public Staff login(String username, String password, int accessID) {
-		sql = "SELECT staffID, accessID from mambojumbo.staff WHERE staffID = '" + username + "' AND password ='" + password + "' AND accessID = '"+accessID+";";
-		dbcon = new DBController();
+	public Admin login(String userid, String password) {
+		dbc = new DBController();
+		if (validateLoginField(userid, password)) {
+			sql = "SELECT * FROM admin WHERE adminID = '" + userid + "' AND password = '" + password + "';";
+			rs = dbc.execute(sql);
+			try {
+				if(rs.next())
+					admin = new Admin(rs.getInt("adminID"), rs.getInt("accessID"), rs.getInt("stallID"), rs.getString("adminName"), rs.getString("password"));
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		} 
 		
-		try {
-			rs = dbcon.execute(sql);
-			if(rs.next())
-				staff = new Staff(rs.getInt(1),rs.getInt(2));
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		
-		return staff;
-	}
-	
-	public boolean login(String username, String password) {
-		return true;
+		return admin;
 	}
 }
