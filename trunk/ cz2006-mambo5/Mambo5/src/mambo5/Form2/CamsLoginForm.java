@@ -6,13 +6,14 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 import mambo5.Controller.JInterfaceController;
 import mambo5.Controller.LoginController;
-import mambo5.Entity.Staff;
+import mambo5.Entity.Admin;
 
 public class CamsLoginForm extends JPanel implements JInterfaceController {
 	private JTextField useridTextField;
@@ -22,7 +23,7 @@ public class CamsLoginForm extends JPanel implements JInterfaceController {
 	boolean id_select = true, pwd_select = false;
 	private int labelWidth = 300, textFieldWidth = 300, totalWidth = 0, totalHeight = 0, posX=0, posY=0;
 	private LoginController loginController;
-	private Staff staff;
+	private Admin admin;
 	//private String requestor;
 	
 	public CamsLoginForm(final CamsMainFrame mainFrame) {
@@ -55,16 +56,16 @@ public class CamsLoginForm extends JPanel implements JInterfaceController {
 		loginButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("Login Fired!");
-				staff = loginController.login(useridTextField.getText(), passwordField.getText(), 2);
-				if(staff != null) {
-					System.out.println("Login Success: " + staff.getStaffID());
-					if (staff.getAccessID() == 1) {
+				admin = loginController.login(useridTextField.getText(), passwordField.getText());
+				if(admin != null) {
+					System.out.println("Login Success: " + admin.getAdminID());
+					if (admin.getStallID() == -1) {
 						mainFrame.replacePanel(new OFSFunction(mainFrame));
 					} else {
-						mainFrame.replacePanel(new CamsMainMenuForm(mainFrame));
+						mainFrame.replacePanel(new CamsMainMenuForm(mainFrame, admin));
 					}
 				} else {
-					//prompt error
+					JOptionPane.showMessageDialog(mainFrame, "You have entered an incorrect UserID/Password");
 				}
 			}
 		});

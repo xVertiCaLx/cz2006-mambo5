@@ -9,9 +9,11 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
+import mambo5.Entity.Admin;
+
 public class CamsMainMenuForm extends JPanel {
 
-	public CamsMainMenuForm(final CamsMainFrame mainFrame) {
+	public CamsMainMenuForm(final CamsMainFrame mainFrame, Admin admin) {
 		setBounds(0, 40, 800, 560);
 		setLayout(null);
 		setBackground(new Color(255, 255, 255));

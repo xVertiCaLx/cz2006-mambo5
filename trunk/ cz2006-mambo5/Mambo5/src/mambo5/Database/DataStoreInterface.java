@@ -17,6 +17,7 @@ public interface DataStoreInterface {
 	ArrayList<Stall> retrieveStallList(int canteenID);
 	int createStall(int canteenID, String stallUnit, String stallName, String stallDesc, String stallStatus);
 	
-	
+	//ADMIN
+	ArrayList<Admin>  retrieveAdminList();
 	
 	}
