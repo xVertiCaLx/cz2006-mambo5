@@ -4,6 +4,8 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 import javax.swing.JFrame;
@@ -25,7 +27,7 @@ import mambo5.Entity.Stall;
 
 public class UpdateStallForm extends JPanel {
 
-	private JTextField nameText = new JTextField();;
+	private JTextField nameText = new JTextField();
 	private CamsMainFrame mainFrame;
 	private JTextArea descArea = new JTextArea();
 	
@@ -36,8 +38,16 @@ public class UpdateStallForm extends JPanel {
 	private StallController sc;
 	private ArrayList<Stall> retrieveStallList;
 	private JComboBox<String> stallCB;
-	private JRadioButton openRB = new JRadioButton("Open");;
+	private JRadioButton openRB = new JRadioButton("Open");
 	private JRadioButton closeRB = new JRadioButton("Close");
+	private JButton updateBtn = new JButton("Update");
+	
+	private String stallUnit;
+	private String stallName;
+	private String stallDesc;
+	private String stallStatus;
+	private int canteenID;
+	
 	/**
 	 * Create the frame.
 	 */
@@ -67,25 +77,26 @@ public class UpdateStallForm extends JPanel {
 		
 		availableCB = getCanteenList();
 		availableCB.setBounds(266, 155, 305, 20);
+		availableCB.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				submitsCanteen(e);
+			}
+		});
+
 		add(availableCB);
 		
 		JLabel stallLabel = new JLabel("Available Stall:");
 		stallLabel.setBounds(147, 183, 99, 14);
 		add(stallLabel);
 		
-		//JComboBox stallCB = new JComboBox();
 		stallCB.setBounds(266, 180, 305, 20);
+		stallCB.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				submitsStall(e);
+			}
+		});
 		add(stallCB);
 		
-		JLabel unitLabel = new JLabel("Stall Unit:");
-		unitLabel.setBounds(147, 212, 70, 14);
-		add(unitLabel);
-		
-		JComboBox unitCB = new JComboBox();
-		unitCB.setBounds(266, 209, 305, 20);
-		add(unitCB);
-		
-		//nameText = new JTextField();
 		nameText.setColumns(10);
 		nameText.setBounds(266, 243, 305, 20);
 		add(nameText);
@@ -98,12 +109,10 @@ public class UpdateStallForm extends JPanel {
 		statusLabel.setBounds(147, 274, 109, 14);
 		add(statusLabel);
 		
-		//openRB = new JRadioButton("Open");
 		openRB.setSelected(true);
 		openRB.setBounds(266, 270, 70, 23);
 		add(openRB);
 		
-		//closeRB = new JRadioButton("Close");
 		closeRB.setBounds(338, 270, 109, 23);
 		add(closeRB);
 		
@@ -119,8 +128,13 @@ public class UpdateStallForm extends JPanel {
 		JLabel descriptionLabel = new JLabel("Stall Description:");
 		descriptionLabel.setBounds(147, 299, 109, 14);
 		add(descriptionLabel);
+		updateBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				submitsStallDetail(e);
+			}
+		});
 		
-		JButton updateBtn = new JButton("Update");
+		
 		updateBtn.setBounds(482, 410, 89, 23);
 		add(updateBtn);
 	}
@@ -151,10 +165,20 @@ public class UpdateStallForm extends JPanel {
 		if(retrieveStallList.size() != 0) {
 			for(int i = 0; i<retrieveStallList.size();i++) 
 				stallCB.addItem(retrieveStallList.get(i).getStallUnit());
+			updateBtn.setEnabled(true);
+			nameText.setEnabled(true);
+			descArea.setEnabled(true);
+			openRB.setEnabled(true);
+			closeRB.setEnabled(true);
 		}
-		else 
+		else {
 			JOptionPane.showMessageDialog(null, "No Stall Available");
-    	
+			updateBtn.setEnabled(false);
+			nameText.setEnabled(false);
+			descArea.setEnabled(false);
+			openRB.setEnabled(false);
+			closeRB.setEnabled(false);
+		}
 	}
 	
 	private void displayStallDetail(int index) {
@@ -164,12 +188,55 @@ public class UpdateStallForm extends JPanel {
 		if(retrieveStallList.get(index).getStallStatus() == true) { 
 			openRB.setSelected(true);
 			closeRB.setSelected(false);
-			System.out.println("TRUE");
 		}
 		else {
-			System.out.println("FALSE");
 			closeRB.setSelected(true);
 			openRB.setSelected(false);
+		}
+	}
+	
+	private void submitsCanteen(ActionEvent e) {
+		int index = availableCB.getSelectedIndex();
+    	getStallList(retrieveCanteenList.get(index).getCanteenID());
+	}
+	
+	private void submitsStall(ActionEvent e) {
+		int index = stallCB.getSelectedIndex();
+		if(index >= 0)
+			displayStallDetail(index);
+		else {
+			nameText.setText("");
+			closeRB.setSelected(false);
+			openRB.setSelected(false);
+			descArea.setText("");
+		}
+	}
+	public void submitsStallDetail(ActionEvent e) {
+
+		stallName = nameText.getText();
+		stallDesc = descArea.getText();
+		stallStatus = "F";
+		int index = availableCB.getSelectedIndex();
+		stallUnit = stallCB.getSelectedItem().toString();
+		if (openRB.isSelected())
+			stallStatus = "T";
+		if(stallName.equals("")) 
+			JOptionPane.showMessageDialog(null, "Please Enter Stall Name");
+		else if (stallDesc.equals(""))
+			JOptionPane.showMessageDialog(null, "Please Enter Stall Description");
+		else {
+			sc = new StallController();
+			canteenID = retrieveCanteenList.get(index).getCanteenID();
+			if(sc.validateStallDetail(canteenID, stallUnit, stallName, stallDesc, stallStatus) == 0) 
+				JOptionPane.showMessageDialog(null, "Stall cannot be created");
+			else {
+				JOptionPane.showMessageDialog(null, "Stall successfully created");
+				mainFrame.remove(mainFrame.getSelectPanel());
+				mainFrame.setSelectPanel(new OFSFunction(mainFrame));
+				mainFrame.getContentPane().add(mainFrame.getSelectPanel());
+				mainFrame.revalidate();
+				mainFrame.repaint();
+			}
 		}
 	}
 }
