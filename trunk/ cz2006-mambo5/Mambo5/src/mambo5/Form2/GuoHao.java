@@ -73,8 +73,8 @@ public class GuoHao extends JFrame {
 		label_1.setForeground(Color.WHITE);
 		label_1.setFont(new Font("Arial", Font.BOLD, 12));
 		label_1.setBounds(0, 0, 794, 39);
-		//contentPane.add(new CamsCreateOrderForm(/*new CamsMainFrame()*/));
-		contentPane.add(new RefundOrderForm(/*new CamsMainFrame()*/));
+		contentPane.add(new CamsCreateOrderForm(/*new CamsMainFrame()*/));
+		//contentPane.add(new RefundOrderForm(/*new CamsMainFrame()*/));
 	}
 	
 }

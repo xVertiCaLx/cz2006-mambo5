@@ -73,17 +73,6 @@ public class Order {
 		return result;
 	}
 	
-	//Delete Order - Doesnt delete, only update the orderStatus to Cancelled
-	public int RefundOrder(int orderID)
-	{
-		dbc = new DBController();
-		int result = 0;
-		String sql = "UPDATE mambojumbo.orders SET orderStatus = '" + "Cancelled" + "' WHERE orderID = '" + orderID + "';";
-				
-		result = dbc.executeNonQuery(sql);
-		return result;
-	}
-	
 	//Refund Order
 	public int refundOrder(int orderID)
 	{
