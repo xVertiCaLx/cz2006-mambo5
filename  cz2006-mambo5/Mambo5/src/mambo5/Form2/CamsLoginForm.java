@@ -12,6 +12,7 @@ import javax.swing.JTextField;
 
 import mambo5.Controller.JInterfaceController;
 import mambo5.Controller.LoginController;
+import mambo5.Entity.Staff;
 
 public class CamsLoginForm extends JPanel implements JInterfaceController {
 	private JTextField useridTextField;
@@ -20,13 +21,16 @@ public class CamsLoginForm extends JPanel implements JInterfaceController {
 	private JButton loginButton;
 	boolean id_select = true, pwd_select = false;
 	private int labelWidth = 300, textFieldWidth = 300, totalWidth = 0, totalHeight = 0, posX=0, posY=0;
-	private LoginController loginController;	
+	private LoginController loginController;
+	private Staff staff;
 	
 	public CamsLoginForm(final CamsMainFrame mainFrame) {
 		setSize(new Dimension(CONTENTPANE_WIDTH, CONTENTPANE_HEIGHT));
 		setLocation(0, POS_CONTENTPANE_OFFSET_Y);
 		setLayout(null);
 		setBackground(JPANEL_BACKGROUND_COLOUR);
+		
+		loginController = new LoginController();
 		
 		useridLabel = new JLabel("Enter your ID:");
 		useridLabel.setSize(new Dimension(labelWidth, JLABEL_HEIGHT));
@@ -48,8 +52,17 @@ public class CamsLoginForm extends JPanel implements JInterfaceController {
 		loginButton.setSize(new Dimension(STANDARDBUTTON_WIDTH, STANDARDBUTTON_HEIGHT));
 		loginButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(loginController.login(useridTextField.getText(), passwordField.getText()) != null) {
-					
+				System.out.println("Login Fired!");
+				staff = loginController.login(useridTextField.getText(), passwordField.getText());
+				if(staff != null) {
+					System.out.println("Login Success: " + staff.getStaffID());
+					if (staff.getAccessID() == 1) {
+						//1
+						mainFrame.replacePanel(new OFSFunction(mainFrame));
+					} else {
+						//2 or 3
+						mainFrame.replacePanel(new CamsMainMenuForm(mainFrame));
+					}
 				} else {
 					//prompt error
 				}

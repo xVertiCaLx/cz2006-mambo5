@@ -31,7 +31,7 @@ public class MySQLImpl implements DataStoreInterface {
 		canteenList = new ArrayList<Canteen>();
 		
 		String sql = "SELECT * FROM CANTEEN;";
-		rs = dbc.executeQuery(sql);
+		rs = dbc.execute(sql);
 		
 		try{
 			while(rs.next()) {
@@ -77,7 +77,7 @@ public class MySQLImpl implements DataStoreInterface {
 		stallList = new ArrayList<Stall>();
 		boolean status = false; 
 		String sql = "SELECT * FROM Stall WHERE canteenID = " + canteenID + " and stallStatus = 'T';";
-		rs = dbc.executeQuery(sql);
+		rs = dbc.execute(sql);
 		
 		try{
 			while(rs.next()) {

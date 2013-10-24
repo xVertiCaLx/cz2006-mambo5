@@ -73,7 +73,7 @@ public class Customer  {
 		ResultSet rs = null;
 		String sql = "SELECT * FROM Customer WHERE custID = " + custID + ";";
 		System.out.println(sql);
-		rs = dbc.executeQuery(sql);
+		rs = dbc.execute(sql);
 		
 		if(rs != null) {
 	        try {
