@@ -11,7 +11,6 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import mambo5.Controller.CanteenController;
 import mambo5.Controller.OrderController;
 
 public class RefundOrderForm extends JPanel {
@@ -201,6 +200,11 @@ public class RefundOrderForm extends JPanel {
 		btnEnter.setForeground(Color.WHITE);
 		btnEnter.setFont(new Font("Tahoma", Font.BOLD, 15));
 		btnEnter.setBackground(Color.GREEN);
+		btnEnter.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				submitOrderID();
+			}
+		});
 		btnEnter.setBounds(250, 300, 100, 100);
 		refundPanel.add(btnEnter);
 		
@@ -208,19 +212,27 @@ public class RefundOrderForm extends JPanel {
 	
 		public void submitOrderID() 
 		{
-			
-			int orderID=Integer.parseInt(txtOrderId.getText());
-			
-			oc = new OrderController();
-			oc.validateRefundOrder(orderID);
-
-			if(orderID==0)
-				JOptionPane.showMessageDialog(null, "Order refunded!");
-			else
-				JOptionPane.showMessageDialog(null, "Order not refunded!");	
+			try
+			{
+				int orderID=Integer.parseInt(txtOrderId.getText());
+				txtOrderId.requestFocusInWindow();
+				oc = new OrderController();
+				if(oc.validateRefundOrder(orderID) == 0)
+					JOptionPane.showMessageDialog(null, "Order not refunded!");
+				else
+				{
+					JOptionPane.showMessageDialog(null, "Order refunded!");
+					txtOrderId.setText("");
+					repaint();
+				}
 			}
-		
-	
-	
-	
+			catch (Exception z)
+			{
+				JOptionPane.showMessageDialog(this, "Incorrect Data Type! Numbers Only!",  
+                        "Input Error", JOptionPane.ERROR_MESSAGE);  
+					 txtOrderId.setText("");  
+					 txtOrderId.requestFocusInWindow();  
+                     return;  
+			}
+		}
 }

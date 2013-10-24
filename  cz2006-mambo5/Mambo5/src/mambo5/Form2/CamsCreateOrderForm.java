@@ -14,7 +14,6 @@ import javax.swing.JTextArea;
 
 import mambo5.Controller.OrderController;
 import mambo5.Controller.OrderDetailController;
-import mambo5.Entity.Order;
 
 public class CamsCreateOrderForm extends JPanel {
 	
@@ -72,7 +71,6 @@ public class CamsCreateOrderForm extends JPanel {
 	
 	public CamsCreateOrderForm(/*mainFrame*/) {
 		
-		//submitsOrder();	//Upon entering this page, order is created
 		//default
 		setBounds(0, 40, 800, 560);
 		setLayout(null);
@@ -223,6 +221,7 @@ public class CamsCreateOrderForm extends JPanel {
 						 JOptionPane.YES_NO_OPTION);
 			        if (reply == JOptionPane.YES_OPTION) {
 			        	submitsOrder();
+			        	submitsOrderDetails();
 			        }
 			}
 		});
@@ -238,6 +237,7 @@ public class CamsCreateOrderForm extends JPanel {
 		btnMenuItem_1.addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
 			receipt.append("\t" + btnMenuItem_1.getText() + "\t$"+"4.50"+"\n");	
+			//orderDetailsList.add(btnMenuItem_1.getText());
 			}
 		});
 		btnMenuItem_1.setBounds(10, 10, 150, 80);
@@ -371,7 +371,7 @@ public class CamsCreateOrderForm extends JPanel {
 		actualPrice = 7.99; //Need to know how to retrieve price
 
 		odc = new OrderDetailController();
-		odc.validateCreateOrderDetail(orderID, menuItemID, actualPrice);
+		odc.validateCreateOrderDetail(order, menuItemID, actualPrice);
 		JOptionPane.showMessageDialog(null, "Order Details Added!");
 	}
 	
