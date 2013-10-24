@@ -17,6 +17,7 @@ public class OrderDetailController {
 	//private CamsCreateMenuItemForm form;
 	//private DataStoreInterface dataStore;
 	//private SystemConfiguration sysConfig;
+	private DBController dbc;
 	
 	public OrderDetailController() { }
 
@@ -28,6 +29,14 @@ public class OrderDetailController {
 			validate = od.createOrderDetail(orderID, menuItemID, actualPrice, instructions);
 			
 			return validate;
+		}
+		
+		public void createOrderDetails(int orderID, int menuItemID, double actualPrice, String instructions) 
+		{
+			dbc = new DBController();
+			String sql = "INSERT INTO orderdetails (orderID, menuItemID, actualPrice, instructions)"
+						+ "VALUES ( '"+ orderID +"', '" + menuItemID + "' , '" + actualPrice + "' , '" + instructions +"');";
+			dbc.executeNonQuery(sql);
 		}
 		
 		//validating deleteOrderDetail
