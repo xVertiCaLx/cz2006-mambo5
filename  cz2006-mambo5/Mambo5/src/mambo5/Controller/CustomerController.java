@@ -31,7 +31,7 @@ public class CustomerController {
 		int validate = 0;
 		
 		cust = new Customer();
-		validate = cust.createCustomer(cardBalance, fullName, 6);
+		validate = cust.createCustomer(cardBalance, fullName, accessID);
 				
 		return validate;
 	}
