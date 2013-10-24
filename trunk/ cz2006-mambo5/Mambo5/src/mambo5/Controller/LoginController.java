@@ -11,7 +11,10 @@ public class LoginController {
 	private DBController dbcon;
 	private String sql;
 	private ResultSet rs;
-	
+
+	public LoginController() {
+		System.out.println("Login Controller Initialised");
+	}
 	
 	public Customer validateLoginDetail(int accessID, int custID) {	
 		cust = new Customer();
@@ -20,15 +23,15 @@ public class LoginController {
 	}
 	
 	public Staff login(String username, String password) {
-		sql = "SELECT staffID, accessID from staff WHERE staffID = '" + username + "' AND password ='" + password + "';";
+		sql = "SELECT staffID, accessID from mambojumbo.staff WHERE staffID = '" + username + "' AND password ='" + password + "';";
 		dbcon = new DBController();
-		rs = dbcon.executeQuery(sql);
+		
 		try {
-			while (rs.next()) {
-				staff = new Staff(rs.getInt(0), rs.getInt(1));
-			}
+			rs = dbcon.execute(sql);
+			if(rs.next())
+				staff = new Staff(rs.getInt(1),rs.getInt(2));
 		} catch (Exception e) {
-			
+			e.printStackTrace();
 		}
 		
 		return staff;
