@@ -15,7 +15,7 @@ import mambo5.Controller.JInterfaceController;
 import mambo5.Controller.LoginController;
 import mambo5.Entity.Admin;
 
-public class CamsLoginForm extends JPanel implements JInterfaceController {
+public class OFSLoginForm extends JPanel implements JInterfaceController {
 	private JTextField useridTextField;
 	private JPasswordField passwordField;
 	private JLabel useridLabel, passwordLabel;
@@ -25,7 +25,7 @@ public class CamsLoginForm extends JPanel implements JInterfaceController {
 	private LoginController loginController;
 	private Admin admin;
 	
-	public CamsLoginForm(final CamsMainFrame mainFrame) {
+	public OFSLoginForm(final CamsMainFrame mainFrame) {
 		setSize(new Dimension(CONTENTPANE_WIDTH, CONTENTPANE_HEIGHT));
 		setLocation(0, POS_CONTENTPANE_OFFSET_Y);
 		setLayout(null);
@@ -56,11 +56,9 @@ public class CamsLoginForm extends JPanel implements JInterfaceController {
 				admin = loginController.login(useridTextField.getText(), passwordField.getText());
 				if(admin != null) {
 					System.out.println("Login Success: " + admin.getAdminID());
-					if (admin.getStallID() != -1) {
-						mainFrame.replacePanel(new CamsMainMenuForm(mainFrame, admin));
-					} else {
-						JOptionPane.showMessageDialog(mainFrame,"This account is not authorised to access this page.");
-					}
+					if (admin.getAdminID() == 1) {
+						mainFrame.replacePanel(new OFSFunction(mainFrame));
+					} else JOptionPane.showMessageDialog(mainFrame,"This account is not authorised to access this page.");
 				} else {
 					JOptionPane.showMessageDialog(mainFrame, "You have entered an incorrect UserID/Password");
 				}
