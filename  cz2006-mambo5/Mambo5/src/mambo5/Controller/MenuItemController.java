@@ -1,30 +1,32 @@
 package mambo5.Controller;
 
+import mambo5.Entity.Canteen;
 import mambo5.Entity.MenuItem;
 import mambo5.Entity.OrderDetail;
 
 public class MenuItemController {
 
-	private MenuItem Mi;
+	private MenuItem menuItem;
 	
 	public MenuItemController() {}
-	
-	public int validateCreateMenuItem(int menuID, String itemName, String itemPrice, String itemDiscount) {
-		int validate = 0;
-		
-		Mi = new MenuItem();
-		validate = Mi.createMenuItem(menuID,itemName,itemPrice,itemDiscount);
-		
-		return validate;
-	}
 
 	public String retrieveMenuItem(int menuID)
 	{
 		String validate = "";
 
-		Mi = new MenuItem();
-		validate = Mi.retrieveMenu(menuID);
+		menuItem = new MenuItem();
+		validate = menuItem.retrieveMenu(menuID);
 		
 		return validate;
 	}
+	
+	public int validateMenuItemDetail(int menuID, String menuItemName, double menuItemPrice, double discount){
+		int validate = 0;
+		
+		menuItem = new MenuItem();
+		validate = menuItem.createMenuItem(menuID, menuItemName, menuItemPrice, discount);
+		
+		return validate;
+	}
+	
 }
