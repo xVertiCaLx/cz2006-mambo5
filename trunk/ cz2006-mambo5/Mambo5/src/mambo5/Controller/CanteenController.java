@@ -53,12 +53,13 @@ public class CanteenController {
 	public ArrayList<Menu> triggerRetrieveMenu(int canteenID) {
 		MenuController mc = new MenuController();
 		StallController sc = new StallController();
+		
 		ArrayList<Stall> stallList = new ArrayList<Stall>();
 		stallList = sc.processRetrieveStallList(canteenID);
+		
 		ArrayList<Menu> menuList = new ArrayList<Menu>();
-		for(int i = 0; i<stallList.size(); i++) {
-			menuList.add(mc.retrieveMenu(stallList.get(i).getStallId()));
-		}
+		
+		menuList = mc.retrieveMenu(stallList);	
 		return menuList;
 	}
 
