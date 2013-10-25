@@ -18,10 +18,10 @@ public class MenuItemController {
 		return validate;
 	}
 
-	public int validateSelectMenuName(int menuID)
+	public String retrieveMenuItem(int menuID, int i)
 	{
-		int validate = 0;
-		
+		String validate = "";
+
 		Mi = new MenuItem();
 		validate = Mi.retrieveMenu(menuID);
 		

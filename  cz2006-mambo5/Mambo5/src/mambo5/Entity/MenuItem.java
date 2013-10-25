@@ -10,6 +10,7 @@ public class MenuItem {
 	private String menuItemName;
 	private double menuItemPrice;
 	private double discount;
+	private MenuItem menuItem;
 	
 	private DBController dbc;
 	private ResultSet rs;
@@ -57,17 +58,17 @@ public class MenuItem {
 		return result;
 	}
 	
-	public int retrieveMenu(int menuID)
+	public String retrieveMenu(int menuID)
 	{
 		dbc = new DBController();
-		int result = 0;
 		//not sure on the sql part
-		sql = "Select menuItemName from mambojumbo.menuitem where menuID = 5";
+		String result ="";
+		sql = "Select menuItemName from mambojumbo.menuitem where menuID = '" + menuID + "';";
 		
 		try {
 			rs = dbc.execute(sql);
 			rs.next();
-			result = rs.getInt("orderID"); 
+			result = rs.getString("menuItemName");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

@@ -12,14 +12,18 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
+import mambo5.Controller.MenuItemController;
 import mambo5.Controller.OrderController;
 import mambo5.Controller.OrderDetailController;
+import mambo5.Entity.MenuItem;
+import mambo5.Entity.OrderDetail;
 
 public class CamsCreateOrderForm extends JPanel {
 	
 	private OrderController oc;
 	private OrderDetailController odc;
 	private CamsMainFrame mainFrame;
+	private MenuItemController Mi;
 	
 	//For Order
 	private int custID;
@@ -32,7 +36,11 @@ public class CamsCreateOrderForm extends JPanel {
 	private int order;
 	private int stallID;
 	
-	ArrayList<String> orderDetailsList = new ArrayList<String>();
+	//For MenuItem
+	private int menuID;
+	
+	ArrayList<OrderDetail> orderDetailsList = new ArrayList<OrderDetail>();
+	ArrayList<String> menuItemList = new ArrayList<String>();
 	
 	JPanel receiptPanel, keypadPanel, menuItemPanel, sidePanel;
 	
@@ -70,6 +78,14 @@ public class CamsCreateOrderForm extends JPanel {
 	
 	public CamsCreateOrderForm(/*mainFrame*/) {
 		
+		menuID = 5;
+		retrieveMenuItem();
+
+		for (int i=0; i<menuItemList.size(); i++)
+		{
+			System.out.println("test");
+		    System.out.println("element" + i + ":" + menuItemList.get(i) );
+		}
 		//default
 		setBounds(0, 40, 800, 560);
 		setLayout(null);
@@ -236,7 +252,7 @@ public class CamsCreateOrderForm extends JPanel {
 		btnMenuItem_1.addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
 			receipt.append("\t" + btnMenuItem_1.getText() + "\t$"+"4.50"+"\n");	
-			orderDetailsList.add(btnMenuItem_1.getText());
+			orderDetailsList.add(new OrderDetail(menuItemID,actualPrice));
 			}
 		});
 		btnMenuItem_1.setBounds(10, 10, 150, 80);
@@ -366,16 +382,26 @@ public class CamsCreateOrderForm extends JPanel {
 	}
 	
 	public void submitsOrderDetails() {
-		menuItemID = 1; //Need to know how to retrieve menuItemID
-		actualPrice = 7.99; //Need to know how to retrieve price
 
 		for (int i=0; i < orderDetailsList.size(); i++)
 		{
 			odc = new OrderDetailController();
-			//odc.validateCreateOrderDetail(order, orderDetailsList.get(i).getMenuItemIdD, orderDetailsList.get(i).getactualPrice());
-			odc.validateCreateOrderDetail(order, menuItemID, actualPrice);
+			odc.validateCreateOrderDetail(order, orderDetailsList.get(i).getMenuItemID(), orderDetailsList.get(i).getActualPrice());
 			JOptionPane.showMessageDialog(null, i + "Order Details Added!");
 		}
 	}
 	
+	public void retrieveMenuItem() {
+		
+		System.out.println("result is " +menuItemList.size());
+			for (int i=0; i < 7; i++)
+			{
+				Mi = new MenuItemController();	
+				//menuItemList.get(imenuItemList).getMenuItemName();
+				menuItemList.add(Mi.retrieveMenuItem(5,i));
+				//System.out.println("result is ::: " +menuItemList.size());
+			}
+		System.out.println("result is NOW" +menuItemList.size());
+
+	}
 }

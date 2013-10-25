@@ -6,7 +6,6 @@ public class Menu {
 	private String menuType;
 	
 	public Menu(){
-		
 	}
 	
 	public Menu(int stallID, String menuType) {

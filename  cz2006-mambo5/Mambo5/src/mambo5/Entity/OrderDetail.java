@@ -11,6 +11,14 @@ public class OrderDetail {
 	
 	public OrderDetail() {}
 	
+	public OrderDetail(int menuItemID, double actualPrice) 
+	{
+		this.detailID = -1;
+		this.menuItemID = menuItemID;
+		this.orderID = -1;
+		this.actualPrice = actualPrice;
+	}
+	
 	public OrderDetail(int detailID, int menuItemID, int orderID, double actualPrice) 
 	{
 		this.detailID = detailID;
