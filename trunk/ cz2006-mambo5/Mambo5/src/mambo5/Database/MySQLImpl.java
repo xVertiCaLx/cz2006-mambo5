@@ -6,12 +6,13 @@ import java.util.ArrayList;
 import mambo5.Controller.DBController;
 import mambo5.Entity.Admin;
 import mambo5.Entity.Canteen;
+import mambo5.Entity.Menu;
 import mambo5.Entity.Stall;
 
 //Concrete data store object for data access in MySQL database
 
 public class MySQLImpl implements DataStoreInterface {
-	//methods
+	//declaration
 	private ArrayList<Canteen> canteenList;
 	private ArrayList<Stall> stallList;
 	private ArrayList<Admin> adminList;
@@ -98,7 +99,7 @@ public class MySQLImpl implements DataStoreInterface {
 		return stallList;
 	}
 
-	//-------------------------------------------STALL----------------------------------------------------------------
+	//-------------------------------------------Stall----------------------------------------------------------------
 	@Override
 	public int createStall(int canteenID, String stallUnit, String stallName, String stallDesc, String stallStatus) {
 		int result = 0;
@@ -110,7 +111,7 @@ public class MySQLImpl implements DataStoreInterface {
 		return result;
 	}
 	
-	//----
+	//-------------------------------------------Admin-----------------------------------------------------------------
 	@Override
 	public ArrayList<Admin> retrieveAdminList() {
 		Admin admin;
@@ -130,5 +131,23 @@ public class MySQLImpl implements DataStoreInterface {
 			dbc.terminate();
 		}
 		return adminList;
+	}
+	//------------------------------------------Menu-----------------------------------------------------------------------
+	@Override
+	public Menu retrieveMenu(int stallID) {
+		Menu m = null;
+		
+		String sql = "SELECT * FROM MENU WHERE stallID = '" + stallID + "';";
+		try{
+			while(rs.next()) {
+				m = new Menu(rs.getInt("menuID"), stallID, rs.getString("menuType"));
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			dbc.terminate();
+		}
+		// TODO Auto-generated method stub
+		return m;
 	}
 }
