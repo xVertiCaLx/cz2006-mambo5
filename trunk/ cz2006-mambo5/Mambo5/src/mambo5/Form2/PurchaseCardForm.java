@@ -23,7 +23,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.*;
 
-public class CustomerPurchaseCard extends JPanel {
+public class PurchaseCardForm extends JPanel {
 
 	//private JPanel contentPane;
 	private JTextField txtAmountInserted;
@@ -33,7 +33,7 @@ public class CustomerPurchaseCard extends JPanel {
 	private CustomerController customerCon;
 	
 
-	public CustomerPurchaseCard(final CamsMainFrame mainFrame) {
+	public PurchaseCardForm(final CamsMainFrame mainFrame) {
 		
 		setBounds(0, 40, 800, 560);
 		setLayout(null);	
@@ -80,7 +80,7 @@ public class CustomerPurchaseCard extends JPanel {
 		JButton btnCancel = new JButton("Back to main");
 		btnCancel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				mainFrame.replacePanel(new CustomerMainMenu(mainFrame));
+				mainFrame.replacePanel(new MainMenuForm(mainFrame));
 			}
 		});
 		btnCancel.setBounds(315, 231, 109, 20);

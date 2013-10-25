@@ -4,24 +4,36 @@ import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
+
 import java.awt.Font;
+
 import javax.swing.JTextField;
 import javax.swing.JButton;
+
+import mambo5.Controller.CustomerController;
+import mambo5.Entity.Customer;
+
 import java.awt.Color;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.util.*;
 
-public class CustomerRefundCard extends JPanel {
+public class RefundCardForm extends JPanel {
 
 	//private JPanel contentPane;
+	private CustomerController customerCon;
 	private JTextField txtCardNumber;
 	private JTextField txtName;
 	private JTextField txtCurrentValue;
+	private int custID;
 
-	public CustomerRefundCard(final CamsMainFrame mainFrame) {
+	public RefundCardForm(final CamsMainFrame mainFrame) {
 		
 		setBounds(0, 40, 800, 560);
 		setLayout(null);	
@@ -33,6 +45,13 @@ public class CustomerRefundCard extends JPanel {
 		add(label);
 		
 		txtCardNumber = new JTextField();
+		txtCardNumber.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				String custID = JOptionPane.showInputDialog("Please enter custID");
+				txtCardNumber.setText(custID);
+			}
+		});
 		txtCardNumber.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		txtCardNumber.setEnabled(false);
 		txtCardNumber.setEditable(false);
@@ -73,13 +92,23 @@ public class CustomerRefundCard extends JPanel {
 		add(label_3);
 		
 		JButton btnConfirmRefund = new JButton("Confirm refund");
+		btnConfirmRefund.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+				if (txtCardNumber.getText().endsWith(""))
+				{
+					JOptionPane.showMessageDialog(null, "No record entered to be searched.");
+				}
+				
+			}
+		});
 		btnConfirmRefund.setBounds(166, 228, 112, 23);
 		add(btnConfirmRefund);
 		
 		JButton btnBackToMain = new JButton("Back to main");
 		btnBackToMain.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				mainFrame.replacePanel(new CustomerMainMenu(mainFrame));
+				mainFrame.replacePanel(new MainMenuForm(mainFrame));
 			}
 		});
 		btnBackToMain.setBounds(288, 228, 112, 23);
@@ -88,7 +117,7 @@ public class CustomerRefundCard extends JPanel {
 		JLabel lblPleaseRememberTo = new JLabel("Please remember to collect your refund");
 		lblPleaseRememberTo.setForeground(Color.RED);
 		lblPleaseRememberTo.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblPleaseRememberTo.setBounds(59, 135, 312, 14);
+		lblPleaseRememberTo.setBounds(59, 136, 312, 14);
 		add(lblPleaseRememberTo);
 	}
 

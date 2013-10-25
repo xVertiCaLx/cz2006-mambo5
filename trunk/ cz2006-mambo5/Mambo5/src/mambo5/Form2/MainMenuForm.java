@@ -17,9 +17,9 @@ import java.awt.Font;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class CustomerMainMenu extends JPanel {
+public class MainMenuForm extends JPanel {
 
-	public CustomerMainMenu(final CamsMainFrame mainFrame) {
+	public MainMenuForm(final CamsMainFrame mainFrame) {
 		mainFrame.setTitle("CaMS Ticketing Machine");
 		setBounds(0, 40, 800, 560);
 		setLayout(null);	
@@ -28,7 +28,7 @@ public class CustomerMainMenu extends JPanel {
 		JButton btnPurchaseCard = new JButton("Purchase Card");
 		btnPurchaseCard.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				mainFrame.replacePanel(new CustomerPurchaseCard(mainFrame));
+				mainFrame.replacePanel(new PurchaseCardForm(mainFrame));
 			}
 		});
 		btnPurchaseCard.setFont(new Font("Arial", Font.BOLD, 16));
@@ -38,7 +38,7 @@ public class CustomerMainMenu extends JPanel {
 		JButton btnCheckHistory = new JButton("Check History");
 		btnCheckHistory.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				mainFrame.replacePanel(new CustomerViewHistory(mainFrame));
+				mainFrame.replacePanel(new ViewHistoryForm(mainFrame));
 			}
 		});
 		btnCheckHistory.setFont(new Font("Arial", Font.BOLD, 16));
@@ -48,7 +48,7 @@ public class CustomerMainMenu extends JPanel {
 		JButton btnTopUpCard = new JButton("Top-up Card");
 		btnTopUpCard.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				mainFrame.replacePanel(new CustomerTopUpCard(mainFrame));
+				mainFrame.replacePanel(new AddValueForm(mainFrame));
 			}
 		});
 		btnTopUpCard.setFont(new Font("Arial", Font.BOLD, 16));
@@ -58,7 +58,7 @@ public class CustomerMainMenu extends JPanel {
 		JButton btnRefundCard = new JButton("Refund Card");
 		btnRefundCard.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				mainFrame.replacePanel(new CustomerRefundCard(mainFrame));
+				mainFrame.replacePanel(new RefundCardForm(mainFrame));
 			}
 		});
 		btnRefundCard.setFont(new Font("Arial", Font.BOLD, 16));

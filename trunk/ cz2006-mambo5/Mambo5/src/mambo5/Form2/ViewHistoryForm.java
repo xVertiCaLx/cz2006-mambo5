@@ -17,14 +17,14 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class CustomerViewHistory extends JPanel {
+public class ViewHistoryForm extends JPanel {
 
 	
 	private JTextField txtCardNumber;
 	private JTextField txtName;
 	private JTextField txtCurrentValue;
 
-	public CustomerViewHistory(final CamsMainFrame mainFrame) {
+	public ViewHistoryForm(final CamsMainFrame mainFrame) {
 		
 		setBounds(0, 40, 800, 560);
 		setLayout(null);	
@@ -89,7 +89,7 @@ public class CustomerViewHistory extends JPanel {
 		JButton btnBackToMain = new JButton("Back to main");
 		btnBackToMain.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				mainFrame.replacePanel(new CustomerMainMenu(mainFrame));
+				mainFrame.replacePanel(new MainMenuForm(mainFrame));
 			}
 		});
 		btnBackToMain.setFont(new Font("Tahoma", Font.PLAIN, 11));

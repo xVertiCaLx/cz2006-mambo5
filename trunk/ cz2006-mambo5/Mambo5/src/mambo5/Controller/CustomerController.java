@@ -46,5 +46,17 @@ public class CustomerController {
 		return removeStatus;
 	}
 	
+	public int retrieveCustInfo(int custID)
+	{
+		int result = 0;
+		
+		cust = new Customer();
+		cust = cust.retrieveCustomerDetail(custID);
+		fullName = cust.getFullName();
+		cardBalance = cust.getCardBalance();
+		accessID = cust.getAccessID();
+		
+		return result;
+	}
 	
 }
