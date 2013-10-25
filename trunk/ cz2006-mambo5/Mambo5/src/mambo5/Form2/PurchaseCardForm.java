@@ -54,10 +54,9 @@ public class PurchaseCardForm extends JPanel {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				
-				Scanner sc = new Scanner (System.in);
-				System.out.print("How much do you wish to add value to your new card?"); 
-				String valueEntered = sc.next();
+				String valueEntered = JOptionPane.showInputDialog("Please enter initial purhcase card value.");
 				txtAmountInserted.setText(valueEntered);
+			
 			}
 		});
 		txtAmountInserted.setEditable(false);
