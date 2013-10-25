@@ -48,12 +48,12 @@ public class MenuItem {
 		return discount;
 	}
 
-	public int createMenuItem(int menuID, String menuItemName, String menuItemPrice, String discounts) 
+	public int createMenuItem(int menuID, String menuItemName, double menuItemPrice, double discount) 
 	{
 		dbc = new DBController();
 		int result = 0;
 		sql = "INSERT INTO mambojumbo.menuitem (menuID, menuItemName, menuItemPrice, discounts)"
-					+ "VALUES ( '"+ menuID +"', '"+ menuItemName +"', '" + menuItemPrice + "' , '" + discounts + "');";
+					+ "VALUES ( '"+ menuID +"', '"+ menuItemName +"', '" + menuItemPrice + "' , '" + discount + "');";
 		
 		result = dbc.executeNonQuery(sql);
 		

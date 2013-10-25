@@ -1,6 +1,5 @@
 package mambo5.Form2;
 
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -11,18 +10,23 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import mambo5.Controller.CanteenController;
 import mambo5.Controller.JInterfaceController;
+import mambo5.Controller.MenuItemController;
 
 public class CamsCreateMenuItemForm extends JPanel implements JInterfaceController {
 
 	private JLabel menuItemLabel, menuItemPriceLabel, menuItemDiscountLabel;
 	private JTextField menuItemTextField, menuItemPriceTextField, menuItemDiscountTextField;
 	private JButton addButton, clearAllButton;
-	private int posY = 0, posX = 0, totalHeight = 0, TEXTFIELD_WIDTH = 300, TEXTLABEL_WIDTH = 300;
+	private int posY = 0, posX = 0, totalHeight = 0, TEXTFIELD_WIDTH = 300, TEXTLABEL_WIDTH = 300, menuID;
+	private double price, discount;
+	private MenuItemController mic;
+	private CamsMainFrame mainFrame;
 	
-	
-	public CamsCreateMenuItemForm(final CamsMainFrame mainFrame) {
-		
+	public CamsCreateMenuItemForm(final CamsMainFrame mainFrame, int menuID) {
+		this.mainFrame = mainFrame;
+		this.menuID = menuID;
 		posX = 40;
 		mainFrame.setTitle("Create Menu Item");
 		setSize(new Dimension(CONTENTPANE_WIDTH, CONTENTPANE_HEIGHT));
@@ -115,7 +119,18 @@ public class CamsCreateMenuItemForm extends JPanel implements JInterfaceControll
 		if(menuItemTextField.getText().isEmpty() || menuItemPriceTextField.getText().isEmpty() || menuItemDiscountTextField.getText().isEmpty()) {
 			JOptionPane.showMessageDialog(null, "Error! Please ensure that all fields contains information.\nNo fields should be empty.");
 		} else {
-			
+			try {
+				price = Double.parseDouble(menuItemPriceTextField.getText());
+				mic = new MenuItemController();
+				if(mic.validateMenuItemDetail(menuID, menuItemTextField.getText(), price, discount)==0)
+					JOptionPane.showMessageDialog(null, "Canteen cannot be created");
+				else {
+					JOptionPane.showMessageDialog(null, "Canteen successfully created");
+					mainFrame.replacePanel(new OFSFunction(mainFrame));
+				}
+			}catch (NumberFormatException exception) {
+				JOptionPane.showMessageDialog(null, "Please Enter Only Integer Value for Price and Discount");
+			}
 		}
 	}
 	

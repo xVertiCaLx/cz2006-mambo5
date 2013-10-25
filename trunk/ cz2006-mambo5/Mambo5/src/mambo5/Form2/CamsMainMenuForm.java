@@ -17,7 +17,7 @@ public class CamsMainMenuForm extends JPanel {
 		setBounds(0, 40, 800, 560);
 		setLayout(null);
 		setBackground(new Color(255, 255, 255));
-		//mainFrame.setTitle("Canteen Management System");
+		mainFrame.setTitle("Canteen Management System");
 		
 		JButton btnLogin = new JButton("LOGOUT");
 		btnLogin.addActionListener(new ActionListener() {
@@ -49,10 +49,7 @@ public class CamsMainMenuForm extends JPanel {
 		JButton btnLock = new JButton("LOCK");
 		btnLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				removeAll();
-				add(new CamsLoginForm(mainFrame));
-				revalidate();
-				repaint();
+				mainFrame.replacePanel(new CamsLoginForm(mainFrame));
 			}
 		});
 		btnLock.setForeground(Color.WHITE);
