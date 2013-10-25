@@ -18,7 +18,7 @@ public class MenuItemController {
 		return validate;
 	}
 
-	public String retrieveMenuItem(int menuID, int i)
+	public String retrieveMenuItem(int menuID)
 	{
 		String validate = "";
 

@@ -1,6 +1,7 @@
 package mambo5.Entity;
 
 import java.sql.ResultSet;
+import java.util.ArrayList;
 
 import mambo5.Controller.DBController;
 
@@ -15,6 +16,7 @@ public class MenuItem {
 	private DBController dbc;
 	private ResultSet rs;
 	String sql;
+	ArrayList<String> menuItemList = new ArrayList<String>();
 	
 	public MenuItem() {}
 	
