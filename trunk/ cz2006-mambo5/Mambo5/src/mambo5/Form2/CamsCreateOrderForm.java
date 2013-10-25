@@ -76,7 +76,7 @@ public class CamsCreateOrderForm extends JPanel {
 	final JButton btnMenuItem_8 = new JButton("Pork Cutlet");
 	final JButton btnMenuItem_9 = new JButton("Fish Cutlet");
 	
-	public CamsCreateOrderForm(/*mainFrame*/) {
+	public CamsCreateOrderForm(final CamsMainFrame mainFrame) {
 		
 		menuID = 5;
 		retrieveMenuItem();
@@ -86,7 +86,7 @@ public class CamsCreateOrderForm extends JPanel {
 		    System.out.println("element" + i + ":" + menuItemList.get(i) );
 		}
 		//default
-		setBounds(0, 40, 800, 560);
+		setBounds(0, 0, 800, 560);
 		setLayout(null);
 		setBackground(new Color(240,240,240));
 		

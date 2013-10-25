@@ -9,9 +9,10 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
+import mambo5.Controller.JInterfaceController;
 import mambo5.Entity.Admin;
 
-public class CamsMainMenuForm extends JPanel {
+public class CamsMainMenuForm extends JPanel implements JInterfaceController {
 
 	public CamsMainMenuForm(final CamsMainFrame mainFrame, Admin admin) {
 		setBounds(0, 40, 800, 560);
@@ -27,7 +28,7 @@ public class CamsMainMenuForm extends JPanel {
 		});
 		btnLogin.setForeground(new Color(255, 255, 255));
 		btnLogin.setFont(new Font("Arial", Font.BOLD, 16));
-		btnLogin.setBackground(new Color(105, 105, 105));
+		btnLogin.setBackground(new Color(105, 105, 105)); 
 		btnLogin.setBounds(20, 151, 234, 80);
 		add(btnLogin);
 		
@@ -35,7 +36,7 @@ public class CamsMainMenuForm extends JPanel {
 		btnNewOrder.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				removeAll();
-				add(new CamsCreateOrderForm());
+				add(new CamsCreateOrderForm(mainFrame));
 				revalidate();
 				repaint();
 			}
@@ -46,19 +47,19 @@ public class CamsMainMenuForm extends JPanel {
 		btnNewOrder.setBounds(274, 151, 234, 80);
 		add(btnNewOrder);
 		
-		JButton btnLock = new JButton("LOCK");
-		btnLogin.addActionListener(new ActionListener() {
+		JButton btnAddMenuItem = new JButton("ADD NEW ITEM");
+		btnAddMenuItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				mainFrame.replacePanel(new CamsLoginForm(mainFrame));
+				mainFrame.replacePanel(new CamsCreateMenuItemForm(mainFrame, 1));
 			}
 		});
-		btnLock.setForeground(Color.WHITE);
-		btnLock.setFont(new Font("Arial", Font.BOLD, 16));
-		btnLock.setBackground(SystemColor.controlDkShadow);
-		btnLock.setBounds(528, 151, 234, 80);
-		add(btnLock);
+		btnAddMenuItem.setForeground(Color.WHITE);
+		btnAddMenuItem.setFont(new Font("Arial", Font.BOLD, 16));
+		btnAddMenuItem.setBackground(SystemColor.controlDkShadow);
+		btnAddMenuItem.setBounds(528, 151, 234, 80);
+		add(btnAddMenuItem);
 		
-		JButton btnPending = new JButton("Pending Order");
+		JButton btnPending = new JButton("Pending Orders");
 		btnPending.setForeground(Color.WHITE);
 		btnPending.setFont(new Font("Arial", Font.BOLD, 16));
 		btnPending.setBackground(SystemColor.controlDkShadow);
@@ -66,7 +67,7 @@ public class CamsMainMenuForm extends JPanel {
 		add(btnPending);
 
 		JButton btnRefund = new JButton("REFUND");
-		btnRefund.setEnabled(false);
+		//btnRefund.setEnabled(false);
 		btnRefund.setForeground(Color.WHITE);
 		btnRefund.setFont(new Font("Arial", Font.BOLD, 16));
 		btnRefund.setBackground(SystemColor.controlDkShadow);
