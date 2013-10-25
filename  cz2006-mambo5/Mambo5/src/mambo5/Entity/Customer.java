@@ -88,7 +88,7 @@ public class Customer  {
 		return cust;
 	}
 	
-	public int updateCustomerCardValue(int custID)
+	public int updateCustomerCardValue(int custID, double cardBalance)
 	{
 		dbc = new DBController();
 		int result = 0;

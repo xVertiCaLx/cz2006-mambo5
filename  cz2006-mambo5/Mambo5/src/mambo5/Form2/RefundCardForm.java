@@ -52,7 +52,7 @@ public class RefundCardForm extends JPanel {
 				String custID = JOptionPane.showInputDialog("Please enter custID");
 				txtCardNumber.setText(custID);
 				customerCon = new CustomerController();
-				cust = customerCon.retrieveCustInfo(Integer.parseInt(custID));
+				cust = customerCon.retrieveCustomerInfo(Integer.parseInt(custID));
 				txtName.setText(cust.getFullName());
 				txtCurrentValue.setText(String.valueOf(cust.getCardBalance()));
 				

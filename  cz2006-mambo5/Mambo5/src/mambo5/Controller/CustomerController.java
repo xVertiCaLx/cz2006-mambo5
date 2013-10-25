@@ -25,6 +25,16 @@ public class CustomerController {
 		return validate;
 	}
 	
+	public int updateCustomerCardBalance(int custID, double cardBalance)
+	{
+		int addValueStatus = 0;
+		
+		cust = new Customer();
+		addValueStatus = cust.updateCustomerCardValue(custID, cardBalance);
+		
+		return addValueStatus;
+	}
+	
 	public int removeCustomerAccount(int custID){
 		
 		int removeStatus = 0;
@@ -35,7 +45,7 @@ public class CustomerController {
 		return removeStatus;
 	}
 	
-	public Customer retrieveCustInfo(int custID)
+	public Customer retrieveCustomerInfo(int custID)
 	{
 		cust = new Customer();
 		cust = cust.retrieveCustomerDetail(custID);

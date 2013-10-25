@@ -124,7 +124,7 @@ public class PurchaseCardForm extends JPanel {
 				
 				if (cardBalance < 10.00)
 				{
-					JOptionPane.showMessageDialog(null, "Minimum amount has to be SGD$10.00.");
+					JOptionPane.showMessageDialog(null, "Sorry, minimum amount has to be SGD$10.00.");
 				}
 				else 
 				{
