@@ -83,7 +83,6 @@ public class CamsCreateOrderForm extends JPanel {
 
 		for (int i=0; i<menuItemList.size(); i++)
 		{
-			System.out.println("test");
 		    System.out.println("element" + i + ":" + menuItemList.get(i) );
 		}
 		//default
@@ -393,15 +392,14 @@ public class CamsCreateOrderForm extends JPanel {
 	
 	public void retrieveMenuItem() {
 		
-		System.out.println("result is " +menuItemList.size());
+		//System.out.println("TOTAL SIZE: (before)" +menuItemList.size());
 			for (int i=0; i < 7; i++)
 			{
 				Mi = new MenuItemController();	
-				//menuItemList.get(imenuItemList).getMenuItemName();
-				menuItemList.add(Mi.retrieveMenuItem(5,i));
+				menuItemList.add(Mi.retrieveMenuItem(5));
 				//System.out.println("result is ::: " +menuItemList.size());
 			}
-		System.out.println("result is NOW" +menuItemList.size());
+		//System.out.println("TOTAL SIZE: (after)" +menuItemList.size());
 
 	}
 }
