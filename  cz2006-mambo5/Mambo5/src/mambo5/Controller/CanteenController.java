@@ -1,8 +1,11 @@
 package mambo5.Controller;
 
 import java.util.ArrayList;
+
 import mambo5.Database.*;
 import mambo5.Entity.Canteen;
+import mambo5.Entity.Menu;
+import mambo5.Entity.Stall;
 
 public class CanteenController {
 
@@ -45,6 +48,18 @@ public class CanteenController {
 		dataStore = DataStoreFactory.createDataStore(sysConfig);
 		
 		return dataStore.deleteCanteen(canteenID);
+	}
+	
+	public ArrayList<Menu> triggerRetrieveMenu(int canteenID) {
+		MenuController mc = new MenuController();
+		StallController sc = new StallController();
+		ArrayList<Stall> stallList = new ArrayList<Stall>();
+		stallList = sc.processRetrieveStallList(canteenID);
+		ArrayList<Menu> menuList = new ArrayList<Menu>();
+		for(int i = 0; i<stallList.size(); i++) {
+			menuList.add(mc.retrieveMenu(stallList.get(i).getStallId()));
+		}
+		return menuList;
 	}
 
 }
