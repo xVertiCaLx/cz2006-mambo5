@@ -24,7 +24,7 @@ public class RefundOrderController {
 			int validate = 0;
 			
 			od = new Order();
-			validate = od.RefundOrder(orderID);
+			validate = od.refundOrder(orderID);
 			
 			return validate;
 		}

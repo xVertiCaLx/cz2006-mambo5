@@ -17,7 +17,6 @@ public class OrderDetailController {
 	//private CamsCreateMenuItemForm form;
 	//private DataStoreInterface dataStore;
 	//private SystemConfiguration sysConfig;
-	private DBController dbc;
 	
 	public OrderDetailController() { }
 
