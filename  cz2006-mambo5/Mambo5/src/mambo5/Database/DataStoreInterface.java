@@ -21,6 +21,6 @@ public interface DataStoreInterface {
 	ArrayList<Admin>  retrieveAdminList();
 	
 	//MENU
-	Menu retrieveMenu(int stallID);
+	ArrayList<Menu> retrieveMenu(ArrayList<Stall> stallList);
 	
 	}

@@ -18,6 +18,17 @@ public class Menu {
 		this.stallID = stallID;
 		this.menuType = menuType;
 	}
-	
+
+	public int getMenuID() {
+		return menuID;
+	}
+
+	public int getStallID() {
+		return stallID;
+	}
+
+	public String getMenuType() {
+		return menuType;
+	}
 	
 }
