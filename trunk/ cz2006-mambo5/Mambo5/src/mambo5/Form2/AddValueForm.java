@@ -25,6 +25,7 @@ public class AddValueForm extends JPanel {
 	private JTextField txtName;
 	private JTextField txtCurrentValue;
 	private JTextField txtAmountInserted;
+	private double amountInserted;
 
 	public AddValueForm(final CamsMainFrame mainFrame) {
 		
@@ -46,7 +47,7 @@ public class AddValueForm extends JPanel {
 				String custID = JOptionPane.showInputDialog("Please enter custID");
 				txtCardNumber.setText(custID);
 				customerCon = new CustomerController();
-				cust = customerCon.retrieveCustInfo(Integer.parseInt(custID));
+				cust = customerCon.retrieveCustomerInfo(Integer.parseInt(custID));
 				txtName.setText(cust.getFullName());
 				txtCurrentValue.setText(String.valueOf(cust.getCardBalance()));
 			}
@@ -122,6 +123,13 @@ public class AddValueForm extends JPanel {
 		add(label_9);
 		
 		txtAmountInserted = new JTextField();
+		txtAmountInserted.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				String valueEntered = JOptionPane.showInputDialog("Please enter the value you wish to add in.");
+				txtAmountInserted.setText(valueEntered);
+			}
+		});
 		txtAmountInserted.setText("-.--");
 		txtAmountInserted.setFont(new Font("Tahoma", Font.PLAIN, 19));
 		txtAmountInserted.setEditable(false);
@@ -140,6 +148,41 @@ public class AddValueForm extends JPanel {
 		add(lblMinimumOfSgd);
 		
 		JButton btnOk = new JButton("Ok");
+		btnOk.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+				if (txtAmountInserted.getText().endsWith("-.--"))
+				{
+					JOptionPane.showMessageDialog(null, "Please insert cash.");
+				}
+				
+				amountInserted = Double.parseDouble(txtAmountInserted.getText());
+				
+				if (amountInserted < 5.00)
+				{
+					JOptionPane.showMessageDialog(null, "Sorry, minimum amount has to be SGD$5.00.");
+				}
+				else
+				{	
+					customerCon = new CustomerController();
+					double newCardBalance;
+					
+					newCardBalance = Double.parseDouble(txtAmountInserted.getText()) + Double.parseDouble(txtCurrentValue.getText());
+					
+					if(customerCon.updateCustomerCardBalance(Integer.parseInt(txtCardNumber.getText()), newCardBalance) == 0)
+					{
+						JOptionPane.showMessageDialog(null, "Error");
+					}
+					else
+					{
+						JOptionPane.showMessageDialog(null, "Value added successfully to card.");
+						txtAmountInserted.setText("-.--");
+						txtCurrentValue.setText(String.valueOf(newCardBalance));
+					}
+				}
+			}
+		});
 		btnOk.setBounds(193, 228, 105, 23);
 		add(btnOk);
 		
