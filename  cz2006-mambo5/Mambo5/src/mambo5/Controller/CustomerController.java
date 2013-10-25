@@ -8,24 +8,13 @@ import mambo5.Entity.Customer;
 
 public class CustomerController {
 	
-	private int custID;
-	private double cardBalance;
-	private String fullName;
-	private int accessID;
+
 	private Customer cust;
 	DataStoreInterface dataStore;
 	private SystemConfiguration sysConfig;
 	
 	public CustomerController() {}
-	
-	public CustomerController(int custID, double cardBalance, String fullName, int accessID) {
-		this.custID = custID;
-		this.cardBalance = cardBalance;
-		this.fullName = fullName;
-		this.accessID = accessID;
 		
-	}
-	
 	public int validateCustomerDetail(double cardBalance, String fullName, int accessID){
 		
 		int validate = 0;
@@ -46,17 +35,12 @@ public class CustomerController {
 		return removeStatus;
 	}
 	
-	public int retrieveCustInfo(int custID)
+	public Customer retrieveCustInfo(int custID)
 	{
-		int result = 0;
-		
 		cust = new Customer();
 		cust = cust.retrieveCustomerDetail(custID);
-		fullName = cust.getFullName();
-		cardBalance = cust.getCardBalance();
-		accessID = cust.getAccessID();
-		
-		return result;
+	
+		return cust;
 	}
 	
 }

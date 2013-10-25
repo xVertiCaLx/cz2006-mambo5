@@ -27,6 +27,7 @@ import java.util.*;
 public class RefundCardForm extends JPanel {
 
 	//private JPanel contentPane;
+	private Customer cust;
 	private CustomerController customerCon;
 	private JTextField txtCardNumber;
 	private JTextField txtName;
@@ -39,10 +40,10 @@ public class RefundCardForm extends JPanel {
 		setLayout(null);	
 		setBackground(new Color(255, 255, 255));
 		
-		JLabel label = new JLabel("Card Number:");
-		label.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		label.setBounds(20, 23, 90, 14);
-		add(label);
+		JLabel lblCustomerId = new JLabel("Customer ID:");
+		lblCustomerId.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		lblCustomerId.setBounds(20, 23, 90, 14);
+		add(lblCustomerId);
 		
 		txtCardNumber = new JTextField();
 		txtCardNumber.addMouseListener(new MouseAdapter() {
@@ -50,6 +51,11 @@ public class RefundCardForm extends JPanel {
 			public void mouseClicked(MouseEvent arg0) {
 				String custID = JOptionPane.showInputDialog("Please enter custID");
 				txtCardNumber.setText(custID);
+				customerCon = new CustomerController();
+				cust = customerCon.retrieveCustInfo(Integer.parseInt(custID));
+				txtName.setText(cust.getFullName());
+				txtCurrentValue.setText(String.valueOf(cust.getCardBalance()));
+				
 			}
 		});
 		txtCardNumber.setFont(new Font("Tahoma", Font.PLAIN, 13));
@@ -83,7 +89,7 @@ public class RefundCardForm extends JPanel {
 		txtCurrentValue.setEnabled(false);
 		txtCurrentValue.setEditable(false);
 		txtCurrentValue.setColumns(10);
-		txtCurrentValue.setBounds(324, 42, 59, 27);
+		txtCurrentValue.setBounds(324, 42, 76, 27);
 		add(txtCurrentValue);
 		
 		JLabel label_3 = new JLabel("SGD$");
@@ -95,11 +101,19 @@ public class RefundCardForm extends JPanel {
 		btnConfirmRefund.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
-				if (txtCardNumber.getText().endsWith(""))
+				if (txtCardNumber.getText().equals(""))
 				{
 					JOptionPane.showMessageDialog(null, "No record entered to be searched.");
 				}
-				
+				else 
+				{	
+					customerCon = new CustomerController();
+					customerCon.removeCustomerAccount(Integer.parseInt(txtCardNumber.getText()));
+					txtCardNumber.setText("");
+					txtCurrentValue.setText("");
+					txtName.setText("");
+					JOptionPane.showMessageDialog(null, "Please remember to collect your refund.");
+				}
 			}
 		});
 		btnConfirmRefund.setBounds(166, 228, 112, 23);
@@ -113,12 +127,6 @@ public class RefundCardForm extends JPanel {
 		});
 		btnBackToMain.setBounds(288, 228, 112, 23);
 		add(btnBackToMain);
-		
-		JLabel lblPleaseRememberTo = new JLabel("Please remember to collect your refund");
-		lblPleaseRememberTo.setForeground(Color.RED);
-		lblPleaseRememberTo.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblPleaseRememberTo.setBounds(59, 136, 312, 14);
-		add(lblPleaseRememberTo);
 	}
 
 }
