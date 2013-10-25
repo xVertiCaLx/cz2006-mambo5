@@ -35,8 +35,8 @@ public class AddValueForm extends JPanel {
 		
 		
 		JLabel lblCustomerId = new JLabel("Customer ID:");
-		lblCustomerId.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		lblCustomerId.setBounds(22, 35, 90, 14);
+		lblCustomerId.setFont(new Font("Arial", Font.BOLD, 19));
+		lblCustomerId.setBounds(44, 58, 141, 27);
 		add(lblCustomerId);
 		
 		txtCardNumber = new JTextField();
@@ -52,11 +52,11 @@ public class AddValueForm extends JPanel {
 				txtCurrentValue.setText(String.valueOf(cust.getCardBalance()));
 			}
 		});
-		txtCardNumber.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		txtCardNumber.setFont(new Font("Arial", Font.BOLD, 19));
 		txtCardNumber.setEnabled(false);
 		txtCardNumber.setEditable(false);
 		txtCardNumber.setColumns(10);
-		txtCardNumber.setBounds(106, 32, 141, 20);
+		txtCardNumber.setBounds(195, 58, 195, 27);
 	    add(txtCardNumber);
 		
 		txtName = new JTextField();
@@ -64,62 +64,66 @@ public class AddValueForm extends JPanel {
 		txtName.setEnabled(false);
 		txtName.setEditable(false);
 		txtName.setColumns(10);
-		txtName.setBounds(106, 63, 141, 20);
+		txtName.setBounds(195, 107, 195, 27);
 		add(txtName);
 		
 		JLabel label_1 = new JLabel("Name:");
-		label_1.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		label_1.setBounds(20, 66, 46, 14);
+		label_1.setFont(new Font("Arial", Font.BOLD, 19));
+		label_1.setBounds(44, 105, 119, 27);
 		add(label_1);
 		
 		JLabel lblCurrentCardValue = new JLabel("Current Card Value");
-		lblCurrentCardValue.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		lblCurrentCardValue.setBounds(277, 35, 146, 14);
+		lblCurrentCardValue.setFont(new Font("Arial", Font.BOLD, 22));
+		lblCurrentCardValue.setBounds(471, 51, 219, 38);
 		add(lblCurrentCardValue);
 		
 		txtCurrentValue = new JTextField();
 		txtCurrentValue.setText("-.--");
-		txtCurrentValue.setFont(new Font("Tahoma", Font.PLAIN, 19));
+		txtCurrentValue.setFont(new Font("Arial", Font.BOLD, 19));
 		txtCurrentValue.setEnabled(false);
 		txtCurrentValue.setEditable(false);
 		txtCurrentValue.setColumns(10);
-		txtCurrentValue.setBounds(336, 57, 59, 27);
+		txtCurrentValue.setBounds(540, 107, 150, 27);
 		add(txtCurrentValue);
 		
 		JLabel label_3 = new JLabel("SGD$");
-		label_3.setFont(new Font("Tahoma", Font.PLAIN, 19));
-		label_3.setBounds(277, 60, 59, 20);
+		label_3.setFont(new Font("Arial", Font.BOLD, 19));
+		label_3.setBounds(471, 114, 59, 20);
 		add(label_3);
 		
 		JLabel label_2 = new JLabel("Please insert notes");
-		label_2.setFont(new Font("Tahoma", Font.PLAIN, 17));
-		label_2.setBounds(21, 94, 166, 27);
+		label_2.setFont(new Font("Arial", Font.BOLD, 22));
+		label_2.setBounds(44, 199, 265, 27);
 		add(label_2);
 		
 		JLabel label_4 = new JLabel("Notes accepted");
-		label_4.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		label_4.setBounds(265, 96, 108, 27);
+		label_4.setFont(new Font("Arial", Font.BOLD, 22));
+		label_4.setBounds(529, 199, 178, 27);
 		add(label_4);
 		
 		JLabel label_5 = new JLabel("Amount inserted");
-		label_5.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		label_5.setBounds(31, 128, 108, 27);
+		label_5.setFont(new Font("Arial", Font.BOLD, 19));
+		label_5.setBounds(66, 249, 161, 27);
 		add(label_5);
 		
 		JLabel label_6 = new JLabel("SGD$2.00");
-		label_6.setBounds(238, 134, 70, 20);
+		label_6.setFont(new Font("Arial", Font.BOLD, 19));
+		label_6.setBounds(471, 249, 127, 20);
 		add(label_6);
 		
 		JLabel label_7 = new JLabel("SGD$5.00");
-		label_7.setBounds(317, 134, 70, 20);
+		label_7.setFont(new Font("Arial", Font.BOLD, 19));
+		label_7.setBounds(647, 249, 127, 20);
 		add(label_7);
 		
 		JLabel label_8 = new JLabel("SGD$50.00");
-		label_8.setBounds(317, 170, 70, 20);
+		label_8.setFont(new Font("Arial", Font.BOLD, 19));
+		label_8.setBounds(647, 314, 127, 20);
 		add(label_8);
 		
 		JLabel label_9 = new JLabel("SGD$10.00");
-		label_9.setBounds(238, 170, 70, 20);
+		label_9.setFont(new Font("Arial", Font.BOLD, 19));
+		label_9.setBounds(471, 314, 119, 20);
 		add(label_9);
 		
 		txtAmountInserted = new JTextField();
@@ -131,23 +135,24 @@ public class AddValueForm extends JPanel {
 			}
 		});
 		txtAmountInserted.setText("-.--");
-		txtAmountInserted.setFont(new Font("Tahoma", Font.PLAIN, 19));
+		txtAmountInserted.setFont(new Font("Arial", Font.BOLD, 19));
 		txtAmountInserted.setEditable(false);
 		txtAmountInserted.setColumns(10);
-		txtAmountInserted.setBounds(87, 155, 70, 35);
+		txtAmountInserted.setBounds(108, 317, 119, 27);
 		add(txtAmountInserted);
 		
 		JLabel label_10 = new JLabel("SGD$");
-		label_10.setFont(new Font("Tahoma", Font.PLAIN, 19));
-		label_10.setBounds(37, 156, 65, 32);
+		label_10.setFont(new Font("Arial", Font.BOLD, 19));
+		label_10.setBounds(44, 315, 65, 32);
 		add(label_10);
 		
 		JLabel lblMinimumOfSgd = new JLabel("Minimum of SGD$5.00");
-		lblMinimumOfSgd.setFont(new Font("Tahoma", Font.PLAIN, 10));
-		lblMinimumOfSgd.setBounds(49, 196, 108, 27);
+		lblMinimumOfSgd.setFont(new Font("Arial", Font.BOLD, 10));
+		lblMinimumOfSgd.setBounds(108, 355, 125, 27);
 		add(lblMinimumOfSgd);
 		
 		JButton btnOk = new JButton("Ok");
+		btnOk.setFont(new Font("Arial", Font.BOLD, 19));
 		btnOk.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -183,16 +188,17 @@ public class AddValueForm extends JPanel {
 				}
 			}
 		});
-		btnOk.setBounds(193, 228, 105, 23);
+		btnOk.setBounds(330, 465, 200, 40);
 		add(btnOk);
 		
 		JButton btnCancel = new JButton("Back to main");
+		btnCancel.setFont(new Font("Arial", Font.BOLD, 19));
 		btnCancel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				mainFrame.replacePanel(new MainMenuForm(mainFrame));
 			}
 		});
-		btnCancel.setBounds(308, 228, 105, 23);
+		btnCancel.setBounds(572, 465, 200, 40);
 		add(btnCancel);
 		
 		JLabel lblTopupCard = new JLabel("Top-up Card");
