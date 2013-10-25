@@ -53,26 +53,28 @@ public class CamsMainFrame extends JFrame implements JInterfaceController {
 		posY += MARGIN;
 		
 		mainMenuButton = new JButton("Main Menu");
-		mainMenuButton.setSize(new Dimension(STANDARDBUTTON_WIDTH, STANDARDBUTTON_HEIGHT));
+		mainMenuButton.setSize(new Dimension(STANDARDBUTTON_WIDTH, STANDARDBUTTON_HEIGHT-10));
 		mainMenuButton.setLocation(posX, posY);
+		mainMenuButton.setVisible(false);
 		mainMenuButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				replacePanel(selectPanel);
 			}
 		});
+
 		titlePanel.add(mainMenuButton);
 		posX += mainMenuButton.getWidth() + MARGIN;
 		
 		titleLabel.setForeground(Color.WHITE);
 		titleLabel.setFont(new Font("Arial", Font.BOLD, 12));
 		titleLabel.setSize(new Dimension(TITLELABEL_WIDTH, TITLELABEL_HEIGHT));
-		//titleLabel.setBounds(POS_TITLELABEL_X, POS_TITLELABEL_Y, TITLELABEL_WIDTH, TITLELABEL_HEIGHT);
 		titleLabel.setLocation(posX, posY);
 		titlePanel.add(titleLabel);
 
 		selectPanel = new SelectPanel(this);
 		applicationPanel = selectPanel;
 		contentPane.add(applicationPanel);
+		
 		System.out.println("Window's Width: " + getWidth() + " Height: " + getHeight());
 	}
 	  
@@ -94,6 +96,8 @@ public class CamsMainFrame extends JFrame implements JInterfaceController {
 		contentPane.add(applicationPanel);
 		contentPane.revalidate();
 		contentPane.repaint();
+		if (this.applicationPanel instanceof SelectPanel) mainMenuButton.setVisible(false);
+		else mainMenuButton.setVisible(true);
 	}
 	
 }

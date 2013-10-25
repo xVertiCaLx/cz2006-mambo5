@@ -120,11 +120,7 @@ public class CreateCanteenForm extends JPanel {
 					JOptionPane.showMessageDialog(null, "Canteen cannot be created");
 				else {
 					JOptionPane.showMessageDialog(null, "Canteen successfully created");
-					mainFrame.remove(mainFrame.getSelectPanel());
-					mainFrame.setSelectPanel(new OFSFunction(mainFrame));
-					mainFrame.getContentPane().add(mainFrame.getSelectPanel());
-					mainFrame.revalidate();
-					mainFrame.repaint();
+					mainFrame.replacePanel(new OFSFunction(mainFrame));
 				}
 			}catch (NumberFormatException exception) {
 				JOptionPane.showMessageDialog(null, "Please Enter Only Integer Value for Max Stalls");

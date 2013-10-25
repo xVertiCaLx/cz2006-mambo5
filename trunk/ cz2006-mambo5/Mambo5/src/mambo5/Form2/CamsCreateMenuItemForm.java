@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
@@ -24,7 +25,6 @@ public class CamsCreateMenuItemForm extends JPanel implements JInterfaceControll
 		
 		posX = 40;
 		mainFrame.setTitle("Create Menu Item");
-		//setBounds(posY, posX, CONTENTPANE_WIDTH, CONTENTPANE_HEIGHT);
 		setSize(new Dimension(CONTENTPANE_WIDTH, CONTENTPANE_HEIGHT));
 		setLocation(0,12);
 		setLayout(null);
@@ -69,7 +69,9 @@ public class CamsCreateMenuItemForm extends JPanel implements JInterfaceControll
 		clearAllButton.setSize(new Dimension(STANDARDBUTTON_WIDTH, STANDARDBUTTON_HEIGHT));
 		clearAllButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//mainFrame.replacePanel(new CustomerMainMenu(mainFrame));
+				menuItemTextField.setText("");
+				menuItemPriceTextField.setText("");
+				menuItemDiscountTextField.setText("");
 			}
 		});
 		
@@ -109,4 +111,12 @@ public class CamsCreateMenuItemForm extends JPanel implements JInterfaceControll
 		add(clearAllButton);
 	}
 
+	public void submitMenuItem(ActionEvent e) {
+		if(menuItemTextField.getText().isEmpty() || menuItemPriceTextField.getText().isEmpty() || menuItemDiscountTextField.getText().isEmpty()) {
+			JOptionPane.showMessageDialog(null, "Error! Please ensure that all fields contains information.\nNo fields should be empty.");
+		} else {
+			
+		}
+	}
+	
 }
