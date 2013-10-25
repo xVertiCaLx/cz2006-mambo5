@@ -5,17 +5,26 @@ import java.awt.Font;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+
+import mambo5.Controller.CustomerController;
+import mambo5.Entity.Customer;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class AddValueForm extends JPanel {
-
+	
+	private Customer cust;
+	private CustomerController customerCon;
 	private JTextField txtCardNumber;
 	private JTextField txtName;
 	private JTextField txtCurrentValue;
-	private JTextField textField_3;
+	private JTextField txtAmountInserted;
 
 	public AddValueForm(final CamsMainFrame mainFrame) {
 		
@@ -24,12 +33,24 @@ public class AddValueForm extends JPanel {
 		setBackground(new Color(255, 255, 255));
 		
 		
-		JLabel label = new JLabel("Card Number:");
-		label.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		label.setBounds(22, 35, 90, 14);
-		add(label);
+		JLabel lblCustomerId = new JLabel("Customer ID:");
+		lblCustomerId.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		lblCustomerId.setBounds(22, 35, 90, 14);
+		add(lblCustomerId);
 		
 		txtCardNumber = new JTextField();
+		txtCardNumber.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				
+				String custID = JOptionPane.showInputDialog("Please enter custID");
+				txtCardNumber.setText(custID);
+				customerCon = new CustomerController();
+				cust = customerCon.retrieveCustInfo(Integer.parseInt(custID));
+				txtName.setText(cust.getFullName());
+				txtCurrentValue.setText(String.valueOf(cust.getCardBalance()));
+			}
+		});
 		txtCardNumber.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		txtCardNumber.setEnabled(false);
 		txtCardNumber.setEditable(false);
@@ -100,13 +121,13 @@ public class AddValueForm extends JPanel {
 		label_9.setBounds(238, 170, 70, 20);
 		add(label_9);
 		
-		textField_3 = new JTextField();
-		textField_3.setText("-.--");
-		textField_3.setFont(new Font("Tahoma", Font.PLAIN, 19));
-		textField_3.setEditable(false);
-		textField_3.setColumns(10);
-		textField_3.setBounds(87, 155, 70, 35);
-		add(textField_3);
+		txtAmountInserted = new JTextField();
+		txtAmountInserted.setText("-.--");
+		txtAmountInserted.setFont(new Font("Tahoma", Font.PLAIN, 19));
+		txtAmountInserted.setEditable(false);
+		txtAmountInserted.setColumns(10);
+		txtAmountInserted.setBounds(87, 155, 70, 35);
+		add(txtAmountInserted);
 		
 		JLabel label_10 = new JLabel("SGD$");
 		label_10.setFont(new Font("Tahoma", Font.PLAIN, 19));

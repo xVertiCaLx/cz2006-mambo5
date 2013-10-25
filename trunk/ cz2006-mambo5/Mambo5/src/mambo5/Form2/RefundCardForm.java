@@ -107,12 +107,19 @@ public class RefundCardForm extends JPanel {
 				}
 				else 
 				{	
-					customerCon = new CustomerController();
-					customerCon.removeCustomerAccount(Integer.parseInt(txtCardNumber.getText()));
-					txtCardNumber.setText("");
-					txtCurrentValue.setText("");
-					txtName.setText("");
-					JOptionPane.showMessageDialog(null, "Please remember to collect your refund.");
+					if(customerCon.removeCustomerAccount(Integer.parseInt(txtCardNumber.getText()))==0)
+					{
+						JOptionPane.showMessageDialog(null, "Error");
+					}
+					else
+					{
+						JOptionPane.showMessageDialog(null, "Card refunded successfully, please remember to collect your refund.");
+						txtCardNumber.setText("");
+						txtCurrentValue.setText("");
+						txtName.setText("");
+						mainFrame.replacePanel(new MainMenuForm(mainFrame));
+					}
+					
 				}
 			}
 		});
