@@ -22,18 +22,17 @@ public class CamsCreateOrderForm extends JPanel {
 	private CamsMainFrame mainFrame;
 	
 	//For Order
-	private int custID, orderID;
+	private int custID;
 	private Timestamp purchaseDate;
 	private String orderStatus;
 	
 	//For OrderDetails
 	private int menuItemID;
 	private double actualPrice;
-	private String instructions;
 	private int order;
 	private int stallID;
 	
-	ArrayList orderDetailsList = new ArrayList();
+	ArrayList<String> orderDetailsList = new ArrayList<String>();
 	
 	JPanel receiptPanel, keypadPanel, menuItemPanel, sidePanel;
 	
@@ -237,7 +236,7 @@ public class CamsCreateOrderForm extends JPanel {
 		btnMenuItem_1.addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
 			receipt.append("\t" + btnMenuItem_1.getText() + "\t$"+"4.50"+"\n");	
-			//orderDetailsList.add(btnMenuItem_1.getText());
+			orderDetailsList.add(btnMenuItem_1.getText());
 			}
 		});
 		btnMenuItem_1.setBounds(10, 10, 150, 80);
@@ -370,9 +369,13 @@ public class CamsCreateOrderForm extends JPanel {
 		menuItemID = 1; //Need to know how to retrieve menuItemID
 		actualPrice = 7.99; //Need to know how to retrieve price
 
-		odc = new OrderDetailController();
-		odc.validateCreateOrderDetail(order, menuItemID, actualPrice);
-		JOptionPane.showMessageDialog(null, "Order Details Added!");
+		for (int i=0; i < orderDetailsList.size(); i++)
+		{
+			odc = new OrderDetailController();
+			//odc.validateCreateOrderDetail(order, orderDetailsList.get(i).getMenuItemIdD, orderDetailsList.get(i).getactualPrice());
+			odc.validateCreateOrderDetail(order, menuItemID, actualPrice);
+			JOptionPane.showMessageDialog(null, i + "Order Details Added!");
+		}
 	}
 	
 }
