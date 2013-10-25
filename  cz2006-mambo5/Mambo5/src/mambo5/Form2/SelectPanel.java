@@ -46,7 +46,7 @@ public class SelectPanel extends JPanel implements JInterfaceController {
 		TixButton.setSize(MENUBUTTON_WIDTH, MENUBUTTON_HEIGHT);
 		TixButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				mainFrame.replacePanel(new CustomerMainMenu(mainFrame));
+				mainFrame.replacePanel(new MainMenuForm(mainFrame));
 			}
 		});
 		
