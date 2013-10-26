@@ -6,7 +6,7 @@ import java.awt.Toolkit;
 
 public interface JInterfaceController {
 	
-	public static final Color SPLASHSCREEN_TITLE_COLOUR = new Color(110,110,110);
+	public static final Color SPLASHSCREEN_TITLE_COLOUR = new Color(110,110,110), WHITE_BACKGROUND_COLOUR = new Color(255,255,255);
 	
 	public static final Dimension SCREENSIZE = Toolkit.getDefaultToolkit().getScreenSize();
 	public static final int SCREEN_WIDTH = (int)SCREENSIZE.getWidth(), SCREEN_HEIGHT = (int) SCREENSIZE.getHeight();
@@ -25,7 +25,7 @@ public interface JInterfaceController {
 	public static final int CONTENTPANE_WIDTH = WINDOW_WIDTH, CONTENTPANE_HEIGHT = MAINPANE_HEIGHT - TITLEBAR_HEIGHT;
 	public static final int POS_CONTENTPANE_OFFSET_Y = 12;
 
-	public static final int RECEIPT_WIDTH = 280, RECEIPT_HEIGHT = 510, RECEIPTPANE_WIDTH = 300, RECEIPTPANE_HEIGHT = 560;
+	public static final int RECEIPTPANE_WIDTH = 300, RECEIPTPANE_HEIGHT = 560, RECEIPT_WIDTH = (RECEIPTPANE_WIDTH-MARGIN-MARGIN), RECEIPT_HEIGHT = (RECEIPTPANE_HEIGHT-MARGIN-MARGIN);
 	public static final Color RECEIPT_BACKGROUND_COLOUR = new Color(255,255,255);
 	public static final int MENUITEMPANE_WIDTH = CONTENTPANE_WIDTH - RECEIPTPANE_WIDTH, MENUITEMPANE_HEIGHT = 290;
 	public static final int KEYPADPANE_WIDTH = 350, KEYPADPANE_HEIGHT = CONTENTPANE_HEIGHT - MENUITEMPANE_HEIGHT;
