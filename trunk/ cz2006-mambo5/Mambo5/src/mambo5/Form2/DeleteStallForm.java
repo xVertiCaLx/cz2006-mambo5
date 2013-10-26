@@ -81,7 +81,6 @@ public class DeleteStallForm extends JPanel {
 		deleteBtn.setBounds(482, 213, 89, 23);
 		add(deleteBtn);
 		
-		//stallCB = new JComboBox();
 		stallCB.setBounds(275, 182, 296, 20);
 		add(stallCB);
 		
