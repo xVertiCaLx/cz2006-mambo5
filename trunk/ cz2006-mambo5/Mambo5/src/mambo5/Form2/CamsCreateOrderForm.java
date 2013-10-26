@@ -118,7 +118,6 @@ public class CamsCreateOrderForm extends JPanel implements JInterfaceController 
 		
 		//initialise number pad
 		numpadPanel = new NumPad();
-		numpadPanel.setLayout(null);
 		numpadPanel.setSize(new Dimension(KEYPADPANE_WIDTH, KEYPADPANE_HEIGHT));
 		numpadPanel.setLocation(posX, posY);
 		//implement action listener
@@ -128,7 +127,7 @@ public class CamsCreateOrderForm extends JPanel implements JInterfaceController 
 		keypadPanel.setSize(new Dimension(KEYPADPANE_WIDTH, KEYPADPANE_HEIGHT));
 		keypadPanel.setLocation(posX, posY);
 		keypadPanel.setBackground(JPANEL_BACKGROUND_COLOUR);*/
-		
+
 		posX += numpadPanel.getWidth();
 				
 		sidePanel = new JPanel();
@@ -165,6 +164,42 @@ public class CamsCreateOrderForm extends JPanel implements JInterfaceController 
 		numpadPanel.num3().addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				receipt.append("3    ");
+			}
+		});
+		
+		numpadPanel.num4().addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				receipt.append("4    ");
+			}
+		});
+		
+		numpadPanel.num5().addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				receipt.append("5    ");
+			}
+		});
+		
+		numpadPanel.num6().addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				receipt.append("6    ");
+			}
+		});
+		//but it doesnt reflect. u see ah
+		numpadPanel.num7().addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				receipt.append("7    ");
+			}
+		});
+		
+		numpadPanel.num8().addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				receipt.append("8    ");
+			}
+		});
+		
+		numpadPanel.num9().addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				receipt.append("9    ");
 			}
 		});
 		

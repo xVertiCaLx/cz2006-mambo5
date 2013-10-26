@@ -37,7 +37,7 @@ public class SelectPanel extends JPanel implements JInterfaceController {
 		CAMSButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//mainFrame.replacePanel(new CamsLoginForm(mainFrame));
-				mainFrame.replacePanel(new CamsCreateOrderForm(mainFrame,5));
+				mainFrame.replacePanel(new PendingOrderForm(mainFrame,5));
 			}
 		});
 		
