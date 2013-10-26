@@ -7,6 +7,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 
 import javax.swing.JButton;
@@ -28,7 +29,7 @@ public class CamsCreateOrderForm extends JPanel implements JInterfaceController 
 	private OrderDetailController odc;
 	private MenuItemController menuItemController;
 
-	private Map<String, JButton> menuItemButtons;
+	private Map<JButton, MenuItem> menuItemButtons;
 	
 	// For Order
 	private int custID;
@@ -135,6 +136,7 @@ public class CamsCreateOrderForm extends JPanel implements JInterfaceController 
 	
 	//initialise menuitem buttons
 	public void initMenuItemButtons(int menuID) {
+		menuItemButtons = new HashMap<JButton, MenuItem>();
 		menuItemList = new ArrayList<MenuItem>();
 		menuItemController = new MenuItemController();
 
@@ -142,17 +144,21 @@ public class CamsCreateOrderForm extends JPanel implements JInterfaceController 
 
 		for (int i = 0; i < menuItemList.size(); i++) {
 			//System.out.println("element" + i + ":" + menuItemList.get(i).getMenuItemName());
-			addMenuItemButtons(menuItemList.get(i).getMenuItemName());
+			addMenuItemButtons(menuItemList.get(i));
 		}
 	}
 	
-	public void addMenuItemButtons(String name) {
-		JButton menuItemButton = new JButton(name);
-        menuItemButton.setActionCommand(name);
+	public void addMenuItemButtons(MenuItem menuItem) {
+		JButton menuItemButton = new JButton(menuItem.getMenuItemName());
+        menuItemButton.setActionCommand(menuItem.getMenuItemName());
+        menuItemButtons.put(menuItemButton, menuItem);
         menuItemButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                System.out.println("perform action " + e.getSource());
+            	receipt.append("\t" + (menuItemButtons.get(e.getSource()).getMenuItemName()) + "\t$" + menuItemButtons.get(e.getSource()).getMenuItemPrice()
+						+ "\n");
+            	int actualPrice = 4; //delete this int and create your own method to calculate price;
+            	orderDetailsList.add(new OrderDetail(menuItemButtons.get(e.getSource()).getMenuItemID(), actualPrice));
             }
         });
         
