@@ -98,22 +98,22 @@ public class UpdateStallForm extends JPanel {
 		add(stallCB);
 		
 		nameText.setColumns(10);
-		nameText.setBounds(266, 243, 305, 20);
+		nameText.setBounds(266, 205, 305, 20);
 		add(nameText);
 		
 		JLabel nameLabel = new JLabel("Stall Name");
-		nameLabel.setBounds(147, 246, 99, 14);
+		nameLabel.setBounds(147, 208, 99, 14);
 		add(nameLabel);
 		
 		JLabel statusLabel = new JLabel("Stall Status");
-		statusLabel.setBounds(147, 274, 109, 14);
+		statusLabel.setBounds(147, 233, 109, 14);
 		add(statusLabel);
 		
 		openRB.setSelected(true);
-		openRB.setBounds(266, 270, 70, 23);
+		openRB.setBounds(266, 229, 70, 23);
 		add(openRB);
 		
-		closeRB.setBounds(338, 270, 109, 23);
+		closeRB.setBounds(338, 229, 109, 23);
 		add(closeRB);
 		
 		ButtonGroup group = new ButtonGroup();
@@ -122,11 +122,11 @@ public class UpdateStallForm extends JPanel {
 		
 		
 		descArea = new JTextArea();
-		descArea.setBounds(266, 300, 305, 99);
+		descArea.setBounds(266, 259, 305, 99);
 		add(descArea);
 		
 		JLabel descriptionLabel = new JLabel("Stall Description:");
-		descriptionLabel.setBounds(147, 299, 109, 14);
+		descriptionLabel.setBounds(147, 260, 109, 14);
 		add(descriptionLabel);
 		updateBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -135,7 +135,7 @@ public class UpdateStallForm extends JPanel {
 		});
 		
 		
-		updateBtn.setBounds(482, 410, 89, 23);
+		updateBtn.setBounds(482, 369, 89, 23);
 		add(updateBtn);
 	}
 	
@@ -230,12 +230,9 @@ public class UpdateStallForm extends JPanel {
 			if(sc.validateStallDetail(canteenID, stallUnit, stallName, stallDesc, stallStatus) == 0) 
 				JOptionPane.showMessageDialog(null, "Stall cannot be created");
 			else {
-				JOptionPane.showMessageDialog(null, "Stall successfully created");
-				mainFrame.remove(mainFrame.getSelectPanel());
-				mainFrame.setSelectPanel(new OFSFunction(mainFrame));
-				mainFrame.getContentPane().add(mainFrame.getSelectPanel());
-				mainFrame.revalidate();
-				mainFrame.repaint();
+				JOptionPane.showMessageDialog(null, "Stall successfully updated");
+				mainFrame.setTitle("Please select a Function to perform:");
+				mainFrame.replacePanel(new OFSFunction(mainFrame));
 			}
 		}
 	}

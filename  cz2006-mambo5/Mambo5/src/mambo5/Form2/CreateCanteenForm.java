@@ -120,6 +120,7 @@ public class CreateCanteenForm extends JPanel {
 					JOptionPane.showMessageDialog(null, "Canteen cannot be created");
 				else {
 					JOptionPane.showMessageDialog(null, "Canteen successfully created");
+					mainFrame.setTitle("Please select a Function to perform:");
 					mainFrame.replacePanel(new OFSFunction(mainFrame));
 				}
 			}catch (NumberFormatException exception) {
