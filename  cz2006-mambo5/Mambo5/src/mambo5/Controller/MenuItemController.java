@@ -20,16 +20,6 @@ public class MenuItemController {
 	private MenuItem menuItem;
 	
 	public MenuItemController() {}
-
-	public String retrieveMenuItem(int menuID)
-	{
-		String validate = "";
-
-		menuItem = new MenuItem();
-		validate = menuItem.retrieveMenu(menuID);
-		
-		return validate;
-	}
 	
 	public int validateMenuItemDetail(int menuID, String menuItemName, double menuItemPrice, double discount){
 		int validate = 0;
