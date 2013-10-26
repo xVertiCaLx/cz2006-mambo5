@@ -39,4 +39,11 @@ public class StallController {
 			
 		return validate;
 	}
+	
+	public int processDeleteStall(int stallID) {
+		sysConfig = new SystemConfiguration();
+		dataStore = DataStoreFactory.createDataStore(sysConfig);
+		
+		return dataStore.deleteStall(stallID);
+	}
 }

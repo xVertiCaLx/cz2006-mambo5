@@ -143,6 +143,19 @@ public class MySQLImpl implements DataStoreInterface {
 		result = dbc.executeNonQuery(sql);
 		return result;
 	}
+	
+	@Override
+	public int deleteStall(int stallID) {
+		int result = 0;
+
+		String sql = "DELETE FROM stall " + "WHERE stallID = " + stallID
+				+ ";";
+
+		result = dbc.executeNonQuery(sql);
+
+		return result;
+	}
+
 
 	// -------------------------------------------Admin-----------------------------------------------------------------
 	@Override
@@ -225,6 +238,7 @@ public class MySQLImpl implements DataStoreInterface {
 		}
 		return orderIDList;
 	}
+
 
 
 }
