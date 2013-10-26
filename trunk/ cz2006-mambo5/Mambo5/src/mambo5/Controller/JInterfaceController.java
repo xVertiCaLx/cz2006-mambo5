@@ -34,7 +34,7 @@ public interface JInterfaceController {
 	public static final int MENUITEM_BUTTONN_WIDTH = 150, MENUITEM_BUTTON_HEIGHT = 80;
 	public static final Color KEYPAD_BACKGROUND_COLOUR = new Color(100,100,100);
 	public static final Color KEYPAD_FOREGROUND_COLOUR = new Color(255,255,255);
-	public static final int KEYPAD_WIDTH = 60, KEYPAD_HEIGHT = 60;
+	public static final int KEYPAD_WIDTH = 60, KEYPAD_HEIGHT = 50;
 	public static final int KEYPAD_SPECIAL_WIDTH = 100, KEYPAD_SPECIAL_HEIGHT = (3*KEYPAD_WIDTH + 3*MARGIN)/2 - MARGIN;
 	
 	public static final int KEYBOARD_KEYWIDTH = 60, KEYBOARD_KEYHEIGHT = 60;
