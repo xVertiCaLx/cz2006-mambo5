@@ -11,6 +11,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -66,6 +67,8 @@ public class CamsCreateOrderForm extends JPanel implements JInterfaceController 
 	JButton btnMainPage = new JButton("MAIN PAGE");
 	JButton btnNextPage = new JButton("NEXT PAGE");
 	JButton btnPrevPage = new JButton("PREV PAGE");
+	
+	JLabel totalPrice = new JLabel();
 	
 	public CamsCreateOrderForm(final CamsMainFrame mainFrame, int menuID) {
 		/*menuItemList = new ArrayList<MenuItem>();
