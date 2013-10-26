@@ -154,9 +154,14 @@ public class CamsCreateOrderForm extends JPanel implements JInterfaceController 
         menuItemButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+            	
+            	double discount= menuItemButtons.get(e.getSource()).getDiscount();
+            	double actualPrice= menuItemButtons.get(e.getSource()).getMenuItemPrice();
+            	actualPrice = (actualPrice*(100-discount))/100;
+            	
             	receipt.append("\t" + (menuItemButtons.get(e.getSource()).getMenuItemName()) + "\t$" + menuItemButtons.get(e.getSource()).getMenuItemPrice()
 						+ "\n");
-            	int actualPrice = 4; //delete this int and create your own method to calculate price;
+
             	orderDetailsList.add(new OrderDetail(menuItemButtons.get(e.getSource()).getMenuItemID(), actualPrice));
             }
         });
@@ -350,7 +355,7 @@ public class CamsCreateOrderForm extends JPanel implements JInterfaceController 
 			odc = new OrderDetailController();
 			odc.validateCreateOrderDetail(order, orderDetailsList.get(i)
 					.getMenuItemID(), orderDetailsList.get(i).getActualPrice());
-			JOptionPane.showMessageDialog(null, i + "Order Details Added!");
+			JOptionPane.showMessageDialog(null, (i+1) + "Order Details Added!");
 		}
 	}
 }
