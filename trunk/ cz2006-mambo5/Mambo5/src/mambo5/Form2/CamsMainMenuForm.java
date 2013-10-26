@@ -64,6 +64,11 @@ public class CamsMainMenuForm extends JPanel implements JInterfaceController {
 		btnPending.setFont(new Font("Arial", Font.BOLD, 16));
 		btnPending.setBackground(SystemColor.controlDkShadow);
 		btnPending.setBounds(20, 251, 234, 80);
+		btnPending.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				mainFrame.replacePanel(new PendingOrderForm(mainFrame, 5));
+			}
+		});
 		add(btnPending);
 
 		JButton btnRefund = new JButton("REFUND");
@@ -72,6 +77,11 @@ public class CamsMainMenuForm extends JPanel implements JInterfaceController {
 		btnRefund.setFont(new Font("Arial", Font.BOLD, 16));
 		btnRefund.setBackground(SystemColor.controlDkShadow);
 		btnRefund.setBounds(274, 251, 234, 80);
+		btnRefund.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				mainFrame.replacePanel(new RefundOrderForm(mainFrame));
+			}
+		});
 		add(btnRefund);
 	}
 }

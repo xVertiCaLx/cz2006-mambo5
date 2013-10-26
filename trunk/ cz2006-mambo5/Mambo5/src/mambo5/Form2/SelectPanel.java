@@ -36,7 +36,8 @@ public class SelectPanel extends JPanel implements JInterfaceController {
 		CAMSButton.setSize(MENUBUTTON_WIDTH, MENUBUTTON_HEIGHT);
 		CAMSButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				mainFrame.replacePanel(new CamsLoginForm(mainFrame));
+				//mainFrame.replacePanel(new CamsLoginForm(mainFrame));
+				mainFrame.replacePanel(new PendingOrderForm(mainFrame,5));
 			}
 		});
 		

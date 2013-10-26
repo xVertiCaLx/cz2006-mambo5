@@ -40,7 +40,7 @@ public class RefundOrderForm extends JPanel {
 	JLabel lblOrderId = new JLabel("ORDER ID:");
 	JButton btnRefund = new JButton("REFUND");
 	
-	public RefundOrderForm(/*mainFrame*/) {
+	public RefundOrderForm(final CamsMainFrame mainFrame) {
 	
 		orderIDList = new ArrayList<Order>();
 		OrderController = new OrderController();
