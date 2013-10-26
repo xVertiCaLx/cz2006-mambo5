@@ -14,9 +14,8 @@ import mambo5.Form2.CamsCreateMenuItemForm;
 public class OrderDetailController { 
 
 	private OrderDetail od;
-	//private CamsCreateMenuItemForm form;
-	//private DataStoreInterface dataStore;
-	//private SystemConfiguration sysConfig;
+	private DataStoreInterface dataStore;
+	private SystemConfiguration sysConfig;
 	
 	public OrderDetailController() { }
 
@@ -30,24 +29,19 @@ public class OrderDetailController {
 			return validate;
 		}
 		
-		//validating deleteOrderDetail
-		public int deleteOrderDetail(int detailID){
+		//guohao
+		public ArrayList<Order> retrieveOrderIDList(ArrayList<Order> orderIDList, int stallID, String orderStatus) {
+			sysConfig = new SystemConfiguration();
+			dataStore = DataStoreFactory.createDataStore(sysConfig);
 			
-			int removeStatus = 0;
-			
-			od = new OrderDetail();
-			removeStatus = od.deleteOrderDetail(detailID);
-					
-			return removeStatus;
+			return dataStore.retrieveOrderID(orderIDList, stallID, orderStatus);
 		}
 		
-		public int validateCalculateTotalPrice(int orderID)
-		{
-			int validate = 0;
+		//guohao - testing
+		/*public ArrayList<OrderDetail> retrieveOrderDetailList(ArrayList<OrderDetail> orderDetailList, int orderID) {
+			sysConfig = new SystemConfiguration();
+			dataStore = DataStoreFactory.createDataStore(sysConfig);
 			
-			od = new OrderDetail();
-			validate = od.calculateTotalPrice(orderID);
-			
-			return validate;
-		}
+			return dataStore.retrieveOrderDetail(orderDetailList, orderID);
+		}*/
 }
