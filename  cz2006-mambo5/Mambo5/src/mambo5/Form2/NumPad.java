@@ -14,6 +14,7 @@ public class NumPad extends JPanel implements JInterfaceController {
 	private int posX = 0, posY = 0;
 	
 	public NumPad() {
+		setLayout(null);
 		num1 = new JButton("1");
 		num2 = new JButton("2");
 		num3 = new JButton("3");
@@ -42,7 +43,7 @@ public class NumPad extends JPanel implements JInterfaceController {
 		delete.setSize(new Dimension(KEYPAD_SPECIAL_WIDTH, KEYPAD_SPECIAL_HEIGHT));
 		enter.setSize(new Dimension(KEYPAD_SPECIAL_WIDTH, KEYPAD_SPECIAL_HEIGHT));
 		
-		
+		//settled anything else? see here. wiat ah
 		num1.setLocation(posX, posY);
 		posX += num1.getWidth() + MARGIN;
 		num2.setLocation(posX, posY);

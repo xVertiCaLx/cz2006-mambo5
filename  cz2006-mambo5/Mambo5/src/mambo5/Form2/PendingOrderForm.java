@@ -10,6 +10,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
@@ -34,7 +35,7 @@ public class PendingOrderForm extends JPanel implements JInterfaceController {
 	private Map<JButton, Order> orderIDButtons;
 	private ArrayList<Order> orderIDList;
 	private OrderController OrderController;
-
+	private NumPad numpadPanel;
 	private JButton btnMainPage = new JButton("MAIN PAGE"), btnNextPage = new JButton("NEXT PAGE"), btnPrevPage = new JButton("PREV PAGE"), btnSearch;
 	private JTextField searchIDTextField;
 
@@ -47,6 +48,7 @@ public class PendingOrderForm extends JPanel implements JInterfaceController {
 		setBackground(JPANEL_BACKGROUND_COLOUR);
 
 		initPanels();
+		implementButtons();
 	}
 
 	public void initPanels() {
@@ -94,14 +96,17 @@ public class PendingOrderForm extends JPanel implements JInterfaceController {
 		
 		posY += ordersPanel.getHeight();
 		
-		keypadPanel = new JPanel();
-		keypadPanel.setLayout(null);
-		keypadPanel.setSize(new Dimension(KEYPAD_WIDTH, KEYPAD_HEIGHT));
+		/*keypadPanel = new JPanel();
+		//keypadPanel.setLayout(null);
+		keypadPanel.setSize(new Dimension(KEYPAD_WIDTH, KEYPAD_HEIGHT)); <<< nowonder you cannot see your keys
 		keypadPanel.setLocation(posX, posY);
 		keypadPanel.setBackground(JPANEL_BACKGROUND_COLOUR);
-		initKeypad();
+		initKeypad();*/
 		
-		posX += keypadPanel.getWidth();
+		numpadPanel = new NumPad();
+		numpadPanel.setSize(new Dimension(KEYPADPANE_WIDTH, KEYPADPANE_HEIGHT));
+		numpadPanel.setLocation(posX, posY);
+		posX += numpadPanel.getWidth();
 		
 		sidePanel = new JPanel();
 		sidePanel.setLayout(null);
@@ -121,8 +126,9 @@ public class PendingOrderForm extends JPanel implements JInterfaceController {
 		add(receiptPanel);
 		add(searchPanel);
 		add(ordersPanel);
-		add(keypadPanel);
+		add(numpadPanel);
 		add(sidePanel);
+
 	}
 
 
@@ -141,118 +147,13 @@ public class PendingOrderForm extends JPanel implements JInterfaceController {
 	}
 
 	public void initKeypad() {
-		posX = MARGIN;
-		posY = MARGIN;
-
-		numPad_1.setFont(new Font("Arial", Font.BOLD, 12));
-		numPad_1.setForeground(KEYPAD_FOREGROUND_COLOUR);
-		numPad_1.setBackground(KEYPAD_BACKGROUND_COLOUR);
-		numPad_1.setSize(new Dimension(KEYPAD_WIDTH, KEYPAD_HEIGHT));
-		numPad_1.setLocation(posX, posY);
-		numPad_1.setText("1");
-		numPad_1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				searchIDTextField.setText(searchIDTextField.getText()
-						+ numPad_1.getText());
-			}
-		});
-		keypadPanel.add(numPad_1);
-
-		numPad_2.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				searchIDTextField.setText(searchIDTextField.getText()
-						+ numPad_2.getText());
-			}
-		});
-		numPad_2.setFont(new Font("Tahoma", Font.BOLD, 12));
-		numPad_2.setForeground(Color.WHITE);
-		numPad_2.setBackground(Color.BLACK);
-		numPad_2.setBounds(80, 10, 60, 60);
-		keypadPanel.add(numPad_2);
-
-		numPad_3.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				searchIDTextField.setText(searchIDTextField.getText()
-						+ numPad_3.getText());
-			}
-		});
-		numPad_3.setFont(new Font("Tahoma", Font.BOLD, 12));
-		numPad_3.setForeground(Color.WHITE);
-		numPad_3.setBackground(Color.BLACK);
-		numPad_3.setBounds(150, 10, 60, 60);
-		keypadPanel.add(numPad_3);
-
-		numPad_4.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				searchIDTextField.setText(searchIDTextField.getText()
-						+ numPad_4.getText());
-			}
-		});
-		numPad_4.setForeground(Color.WHITE);
-		numPad_4.setBackground(Color.BLACK);
-		numPad_4.setFont(new Font("Tahoma", Font.BOLD, 12));
-		numPad_4.setBounds(10, 80, 60, 60);
-		keypadPanel.add(numPad_4);
-
-		numPad_5.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				searchIDTextField.setText(searchIDTextField.getText()
-						+ numPad_5.getText());
-			}
-		});
-		numPad_5.setForeground(Color.WHITE);
-		numPad_5.setBackground(Color.BLACK);
-		numPad_5.setFont(new Font("Tahoma", Font.BOLD, 12));
-		numPad_5.setBounds(80, 80, 60, 60);
-		keypadPanel.add(numPad_5);
-
-		numPad_6.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				searchIDTextField.setText(searchIDTextField.getText()
-						+ numPad_6.getText());
-			}
-		});
-		numPad_6.setForeground(Color.WHITE);
-		numPad_6.setBackground(Color.BLACK);
-		numPad_6.setFont(new Font("Tahoma", Font.BOLD, 12));
-		numPad_6.setBounds(150, 80, 60, 60);
-		keypadPanel.add(numPad_6);
-
-		numPad_7.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				searchIDTextField.setText(searchIDTextField.getText()
-						+ numPad_7.getText());
-			}
-		});
-		numPad_7.setForeground(Color.WHITE);
-		numPad_7.setBackground(Color.BLACK);
-		numPad_7.setFont(new Font("Tahoma", Font.BOLD, 12));
-		numPad_7.setBounds(10, 150, 60, 60);
-		keypadPanel.add(numPad_7);
-
-		numPad_8.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				searchIDTextField.setText(searchIDTextField.getText()
-						+ numPad_8.getText());
-			}
-		});
-		numPad_8.setForeground(Color.WHITE);
-		numPad_8.setBackground(Color.BLACK);
-		numPad_8.setFont(new Font("Tahoma", Font.BOLD, 12));
-		numPad_8.setBounds(80, 150, 60, 60);
-		keypadPanel.add(numPad_8);
-
-		numPad_9.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				searchIDTextField.setText(searchIDTextField.getText()
-						+ numPad_9.getText());
-			}
-		});
-		numPad_9.setForeground(Color.WHITE);
-		numPad_9.setBackground(Color.BLACK);
-		numPad_9.setFont(new Font("Tahoma", Font.BOLD, 12));
-		numPad_9.setBounds(150, 150, 60, 60);
-		keypadPanel.add(numPad_9);
+		//initialise number pad
+				numpadPanel = new NumPad();
+				numpadPanel.setLayout(null);
+				numpadPanel.setSize(new Dimension(KEYPADPANE_WIDTH, KEYPADPANE_HEIGHT));
+				numpadPanel.setLocation(posX, posY);
+				//implement action listener
+				implementButtons();
 	}
 
 	public void initSidePanelButton() {
@@ -273,5 +174,38 @@ public class PendingOrderForm extends JPanel implements JInterfaceController {
 		btnPrevPage.setBackground(new Color(100, 149, 237));
 		btnPrevPage.setBounds(10, 150, 110, 50);
 		sidePanel.add(btnPrevPage);
+	}
+	
+	public void implementButtons() {
+		//actual implementation
+		numpadPanel.num1().addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				//action performance
+				receipt.append("1    ");
+			}
+		});
+		
+		numpadPanel.num2().addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				receipt.append("2    ");
+			}
+		});
+		
+		numpadPanel.num3().addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				receipt.append("3    ");
+			}
+		});
+		
+		
+		numpadPanel.enter().addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				int reply = JOptionPane.showConfirmDialog(null,
+						"Confirm Order?", "Confirmation",
+						JOptionPane.YES_NO_OPTION);
+				if (reply == JOptionPane.YES_OPTION) {
+				}
+			}
+		});
 	}
 }
