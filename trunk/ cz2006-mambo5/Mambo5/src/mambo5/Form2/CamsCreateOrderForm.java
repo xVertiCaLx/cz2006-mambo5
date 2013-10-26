@@ -143,7 +143,6 @@ public class CamsCreateOrderForm extends JPanel implements JInterfaceController 
 		menuItemController.retrieveMenuItemList(menuItemList, 5);
 
 		for (int i = 0; i < menuItemList.size(); i++) {
-			//System.out.println("element" + i + ":" + menuItemList.get(i).getMenuItemName());
 			addMenuItemButtons(menuItemList.get(i));
 		}
 	}
