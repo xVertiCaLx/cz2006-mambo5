@@ -64,17 +64,5 @@ public class OrderDetail {
 		result = dbc.executeNonQuery(sql);
 		return result;
 	}
-	
-	//Qn: How to consolidate all the price together?
-	public int calculateTotalPrice(int orderID){
-		dbc = new DBController();
-		int result = 0;
-		
-		String sql = "SELECT actualPrice FROM OrderDetails WHERE orderID = " + orderID + ";";
-		
-		result = dbc.executeNonQuery(sql);
-		return result;
-	}
-	
-	
+
 }

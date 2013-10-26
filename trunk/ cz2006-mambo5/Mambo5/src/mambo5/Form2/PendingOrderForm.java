@@ -18,7 +18,9 @@ import javax.swing.JTextField;
 
 import mambo5.Controller.JInterfaceController;
 import mambo5.Controller.OrderController;
+import mambo5.Controller.OrderDetailController;
 import mambo5.Entity.Order;
+import mambo5.Entity.OrderDetail;
 
 public class PendingOrderForm extends JPanel implements JInterfaceController {
 
@@ -30,7 +32,9 @@ public class PendingOrderForm extends JPanel implements JInterfaceController {
 	private JScrollPane receiptScrollPane;
 	private Map<JButton, Order> orderIDButtons;
 	private ArrayList<Order> orderIDList = new ArrayList<Order>();
+	//private ArrayList<OrderDetail> OrderDetailList = new ArrayList<OrderDetail>();
 	private OrderController OrderController;
+	//private OrderDetailController OrderDetailController;
 	private NumPad numpadPanel;
 	private JButton btnMainPage = new JButton("MAIN PAGE"),
 			btnNextPage = new JButton("NEXT PAGE"), btnPrevPage = new JButton(
@@ -129,6 +133,7 @@ public class PendingOrderForm extends JPanel implements JInterfaceController {
 
 		initSidePanelButton();
 		initOrderIDButtons(stallID); // parameter should be stallID
+		
 		add(receiptPanel);
 		add(searchPanel);
 		add(ordersPanel);
@@ -137,14 +142,16 @@ public class PendingOrderForm extends JPanel implements JInterfaceController {
 
 	}
 
+	
+	
 	// initialise order item buttons
 	public void initOrderIDButtons(int stallID) {
 		orderIDButtons = new HashMap<JButton, Order>();
 		orderIDList = new ArrayList<Order>();
 		OrderController = new OrderController();
-
 		OrderController.retrieveOrderIDList(orderIDList, stallID, "Processing");
 
+		
 		for (int i = 0; i < orderIDList.size(); i++) {
 			addOrderIDButtons(orderIDList.get(i));
 		}
@@ -152,10 +159,11 @@ public class PendingOrderForm extends JPanel implements JInterfaceController {
 	}
 
 	public void addOrderIDButtons(Order order) {
-		JButton orderIDButton = new JButton(" " +
-				Integer.toString(order.getOrderID()));
+		JButton orderIDButton = new JButton(" "
+				+ Integer.toString(order.getOrderID()));
 		orderIDButton.setActionCommand(Integer.toString(order.getOrderID()));
 		orderIDButtons.put(orderIDButton, order);
+		//OrderDetailController.retrieveOrderDetailList(OrderDetailList, order.getOrderID());
 		orderIDButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -168,7 +176,7 @@ public class PendingOrderForm extends JPanel implements JInterfaceController {
 						.getStallID()));
 			}
 		});
-
+		
 		ordersPanel.add(orderIDButton);
 	}
 
@@ -265,7 +273,7 @@ public class PendingOrderForm extends JPanel implements JInterfaceController {
 								searchIDTextField.getText().length() - 1));
 			}
 		});
-		
+
 		numpadPanel.enter().addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int reply = JOptionPane.showConfirmDialog(null,
