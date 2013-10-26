@@ -52,7 +52,7 @@ public class MenuItem {
 	{
 		dbc = new DBController();
 		int result = 0;
-		sql = "INSERT INTO mambojumbo.menuitem (menuID, menuItemName, menuItemPrice, discounts)"
+		sql = "INSERT INTO mambojumbo.menuitem (menuID, menuItemName, menuItemPrice, discount)"
 					+ "VALUES ( '"+ menuID +"', '"+ menuItemName +"', '" + menuItemPrice + "' , '" + discount + "');";
 		
 		result = dbc.executeNonQuery(sql);
