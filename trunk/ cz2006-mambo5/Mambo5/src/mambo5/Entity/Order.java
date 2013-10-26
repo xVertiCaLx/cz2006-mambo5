@@ -81,6 +81,7 @@ public class Order {
 		String sql = "UPDATE mambojumbo.orders SET orderStatus = '" + "Refunded" + "' WHERE orderID = '" + orderID + "';";
 				
 		result = dbc.executeNonQuery(sql);
+		System.out.println(result);
 		return result;
 	}	
 	
