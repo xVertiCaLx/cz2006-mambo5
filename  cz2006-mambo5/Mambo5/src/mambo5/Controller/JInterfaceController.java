@@ -5,6 +5,9 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 
 public interface JInterfaceController {
+	
+	public static final Color SPLASHSCREEN_TITLE_COLOUR = new Color(110,110,110);
+	
 	public static final Dimension SCREENSIZE = Toolkit.getDefaultToolkit().getScreenSize();
 	public static final int SCREEN_WIDTH = (int)SCREENSIZE.getWidth(), SCREEN_HEIGHT = (int) SCREENSIZE.getHeight();
 	//public static final int WINDOW_WIDTH = (int)(SCREEN_WIDTH*0.8), WINDOW_HEIGHT = (int)(SCREEN_HEIGHT*0.8);
