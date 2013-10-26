@@ -168,8 +168,7 @@ public class MySQLImpl implements DataStoreInterface {
 						+ stallList.get(i).getStallId() + "';";
 				rs = dbc.execute(sql);
 				while (rs.next()) {
-					Menu m = new Menu(rs.getInt("menuID"), stallList.get(i)
-							.getStallId(), rs.getString("menuType"));
+					Menu m = new Menu(rs.getInt("menuID"), stallList.get(i).getStallId(), rs.getString("menuType"));
 					menuList.add(m);
 				}
 			}
