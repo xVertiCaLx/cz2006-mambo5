@@ -85,12 +85,12 @@ public class CamsMainFrame extends JFrame implements JInterfaceController {
 		
 		//SplashScreen splashscreen = new SplashScreen();
 		
-		System.out.println("Initialising CaMS, Please Wait...");
+		/*System.out.println("Initialising CaMS, Please Wait...");
 		menuItemList = new ArrayList<MenuItem>();
 		menuItemController = new MenuItemController();
 		menuItemController.retrieveMenuItemList(menuItemList, 5);
 		System.out.println("Initialising Complete. Loading Main Screen." + menuItemList.get(3).getMenuItemName());
-		replacePanel(new SelectPanel(this));
+		replacePanel(new SelectPanel(this));*/
 	}
 	  
 	public void setSelectPanel(JPanel applicationPanel) {
