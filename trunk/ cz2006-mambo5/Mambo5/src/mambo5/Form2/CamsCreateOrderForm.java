@@ -52,16 +52,6 @@ public class CamsCreateOrderForm extends JPanel implements JInterfaceController 
 	private JScrollPane receiptScrollPane;
 	
 	private NumPad numpadPanel;
-/*
-	JButton numPad_1 = new JButton("1");
-	JButton numPad_2 = new JButton("2");
-	JButton numPad_3 = new JButton("3");
-	JButton numPad_4 = new JButton("4");
-	JButton numPad_5 = new JButton("5");
-	JButton numPad_6 = new JButton("6");
-	JButton numPad_7 = new JButton("7");
-	JButton numPad_8 = new JButton("8");
-	JButton numPad_9 = new JButton("9");*/
 
 	JButton btnClear = new JButton("CLEAR");
 	JButton btnConfirmOrder = new JButton();
@@ -90,6 +80,7 @@ public class CamsCreateOrderForm extends JPanel implements JInterfaceController 
 		setBackground(JPANEL_BACKGROUND_COLOUR);
 
 		initPanels();
+		implementButtons();
 	}
 	
 	//initialise panels
@@ -120,8 +111,6 @@ public class CamsCreateOrderForm extends JPanel implements JInterfaceController 
 		numpadPanel = new NumPad();
 		numpadPanel.setSize(new Dimension(KEYPADPANE_WIDTH, KEYPADPANE_HEIGHT));
 		numpadPanel.setLocation(posX, posY);
-		//implement action listener
-		implementButtons();
 		
 		/*keypadPanel = new JPanel();
 		keypadPanel.setSize(new Dimension(KEYPADPANE_WIDTH, KEYPADPANE_HEIGHT));
@@ -136,14 +125,14 @@ public class CamsCreateOrderForm extends JPanel implements JInterfaceController 
 		sidePanel.setBackground(JPANEL_BACKGROUND_COLOUR);
 		
 		initMenuItemButtons(menuID);
-		
+		initSidePanelButton();
 		add(receiptPanel);
 		add(menuItemPanel);
 		add(numpadPanel);
 		add(sidePanel);
 		
 		/*initKeypad();*/
-		initSidePanelButton();
+
 	}
 	
 	public void implementButtons() {

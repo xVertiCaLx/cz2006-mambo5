@@ -6,10 +6,12 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -22,18 +24,13 @@ import mambo5.Entity.Order;
 
 public class PendingOrderForm extends JPanel implements JInterfaceController {
 
-	private JPanel receiptPanel, keypadPanel, ordersPanel, sidePanel,
-			searchPanel;
-
-	private JButton numPad_1 = new JButton("1"), numPad_2 = new JButton("2"), numPad_3 = new JButton("3");
-	private JButton numPad_4 = new JButton("4"), numPad_5 = new JButton("5"), numPad_6 = new JButton("6");
-	private JButton numPad_7 = new JButton("7"), numPad_8 = new JButton("8"), numPad_9 = new JButton("9");
+	private JPanel receiptPanel, keypadPanel, ordersPanel, sidePanel, searchPanel;
 
 	private int stallID, posX = 0, posY = 0;
 	private JTextArea receipt;
 	private JScrollPane receiptScrollPane;
 	private Map<JButton, Order> orderIDButtons;
-	private ArrayList<Order> orderIDList;
+	private ArrayList<Order> orderIDList = new ArrayList<Order>();
 	private OrderController OrderController;
 	private NumPad numpadPanel;
 	private JButton btnMainPage = new JButton("MAIN PAGE"), btnNextPage = new JButton("NEXT PAGE"), btnPrevPage = new JButton("PREV PAGE"), btnSearch;
@@ -52,42 +49,54 @@ public class PendingOrderForm extends JPanel implements JInterfaceController {
 	}
 
 	public void initPanels() {
+		
+		//Receipt Panel
 		receiptPanel = new JPanel();
-		receiptPanel.setSize(new Dimension(RECEIPTPANE_WIDTH, RECEIPTPANE_HEIGHT/2 + 150));
+		receiptPanel.setSize(new Dimension(RECEIPTPANE_WIDTH, RECEIPTPANE_HEIGHT/2));
 		receiptPanel.setLocation(posX, posY);
 		receiptPanel.setBackground(JPANEL_BACKGROUND_COLOUR);
 		receiptPanel.setLayout(null);
 		
+			//receipt
 		receipt = new JTextArea();
 		receipt.setSize(new Dimension(RECEIPT_WIDTH, RECEIPT_HEIGHT/2 + 140));
 		receipt.setBackground(WHITE_BACKGROUND_COLOUR);
 		receipt.setEditable(false);
 		
+			//enable scroll
 		receiptScrollPane = new JScrollPane();
 		receiptScrollPane.setSize(new Dimension(RECEIPT_WIDTH, RECEIPT_HEIGHT/2 + 140));
 		receiptScrollPane.setLocation(MARGIN,MARGIN);
 		receiptScrollPane.setBackground(WHITE_BACKGROUND_COLOUR);
 		receiptScrollPane.add(receipt);
-		
 		receiptPanel.add(receiptScrollPane);
 		
 		posY += receiptPanel.getHeight();
 		
+		//Search Panel
 		searchPanel = new JPanel();
 		searchPanel.setSize(new Dimension(RECEIPTPANE_WIDTH, RECEIPTPANE_HEIGHT/2 - 100));
-		searchPanel.setLocation(posX, posY);
+		searchPanel.setLocation(posX, posY+50);
 		searchPanel.setBackground(JPANEL_BACKGROUND_COLOUR);
 		searchPanel.setLayout(null);
 		
+			//JTextField
 		searchIDTextField = new JTextField();
-		searchIDTextField.setSize(new Dimension(RECEIPTPANE_WIDTH - (2*MARGIN), JTEXTFIELD_HEIGHT));
-		searchIDTextField.setLocation(MARGIN, MARGIN);
+		searchIDTextField.setSize(new Dimension(RECEIPTPANE_WIDTH/2 - (3*MARGIN), JTEXTFIELD_HEIGHT));
+		searchIDTextField.setLocation(MARGIN*9, MARGIN);
 		
+			//Search Button
+		btnSearch = new JButton("Search");
+		btnSearch.setSize(new Dimension(SIDEPANE_WIDTH, STANDARDBUTTON_HEIGHT+20));
+		btnSearch.setLocation(75,60);
+	
 		searchPanel.add(searchIDTextField);
-		
+		searchPanel.add(btnSearch);
+
 		posX = receiptPanel.getWidth();
 		posY = 0;
 		
+		//Orders Panel
 		ordersPanel = new JPanel();
 		ordersPanel.setLayout(null);
 		ordersPanel.setSize(new Dimension(MENUITEMPANE_WIDTH, MENUITEMPANE_HEIGHT));
@@ -96,34 +105,23 @@ public class PendingOrderForm extends JPanel implements JInterfaceController {
 		
 		posY += ordersPanel.getHeight();
 		
-		/*keypadPanel = new JPanel();
-		//keypadPanel.setLayout(null);
-		keypadPanel.setSize(new Dimension(KEYPAD_WIDTH, KEYPAD_HEIGHT)); <<< nowonder you cannot see your keys
-		keypadPanel.setLocation(posX, posY);
-		keypadPanel.setBackground(JPANEL_BACKGROUND_COLOUR);
-		initKeypad();*/
-		
+		//NumPad Panel
 		numpadPanel = new NumPad();
 		numpadPanel.setSize(new Dimension(KEYPADPANE_WIDTH, KEYPADPANE_HEIGHT));
 		numpadPanel.setLocation(posX, posY);
 		posX += numpadPanel.getWidth();
 		
+		//Side Panel
 		sidePanel = new JPanel();
 		sidePanel.setLayout(null);
 		sidePanel.setSize(new Dimension(SIDEPANE_WIDTH, SIDEPANE_HEIGHT));
 		sidePanel.setLocation(posX, posY);
-		
-		btnSearch = new JButton("Search");
-		btnSearch.setSize(new Dimension(SIDEPANE_WIDTH/2, STANDARDBUTTON_HEIGHT));
+		initSidePanelButton();
 		
 		posX = (RECEIPTPANE_WIDTH - btnSearch.getWidth())/2;
 		posY += searchIDTextField.getAlignmentY() + searchIDTextField.getHeight() + MARGIN;
 		
-		btnSearch.setLocation(posX,posY);
-		
-		searchPanel.add(btnSearch);
-		
-		add(receiptPanel);
+		add(receiptPanel); 
 		add(searchPanel);
 		add(ordersPanel);
 		add(numpadPanel);
@@ -131,20 +129,37 @@ public class PendingOrderForm extends JPanel implements JInterfaceController {
 
 	}
 
-
 	// initialise order item buttons
 	public void initOrderIDButtons(int orderID) {
 		orderIDButtons = new HashMap<JButton, Order>();
 		orderIDList = new ArrayList<Order>();
 		OrderController = new OrderController();
 
-		// OrderController.retrieveMenuItemList(orderIDList, 5);
+		OrderController.retrieveOrderIDList(orderIDList, 5, "Processing");
 
-		/*
-		 * for (int i = 0; i < menuItemList.size(); i++) {
-		 * addMenuItemButtons(menuItemList.get(i)); }
-		 */
+		
+		 for (int i = 0; i < orderIDList.size(); i++) {
+			 addMenuItemButtons(orderIDList.get(i)); }
+		 
 	}
+	
+	public void addMenuItemButtons(Order order) {
+		JButton orderIDButton = new JButton(order.getOrderStatus());
+		orderIDButton.setActionCommand(order.getOrderStatus());
+		orderIDButtons.put(orderIDButton, order);
+        orderIDButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+            	
+            	orderIDList.add(new Order(orderIDButtons.get(e.getSource()).getOrderID(), orderIDButtons.get(e.getSource()).getCustID(),
+            			orderIDButtons.get(e.getSource()).getPurchaseDate(),orderIDButtons.get(e.getSource()).getOrderStatus(),
+            			orderIDButtons.get(e.getSource()).getStallID()));
+            }
+        });
+        
+        ordersPanel.add(orderIDButton);
+	}
+	
 
 	public void initKeypad() {
 		//initialise number pad
@@ -180,26 +195,66 @@ public class PendingOrderForm extends JPanel implements JInterfaceController {
 		//actual implementation
 		numpadPanel.num1().addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//action performance
-				receipt.append("1    ");
+				searchIDTextField.setText(searchIDTextField.getText() + "1"); 
 			}
 		});
 		
 		numpadPanel.num2().addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				receipt.append("2    ");
+				searchIDTextField.setText(searchIDTextField.getText() + "2"); 
 			}
 		});
 		
 		numpadPanel.num3().addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				receipt.append("3    ");
+				searchIDTextField.setText(searchIDTextField.getText() + "3"); 
 			}
 		});
 		
+		numpadPanel.num4().addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				searchIDTextField.setText(searchIDTextField.getText() + "4"); 
+			}
+		});
+		
+		numpadPanel.num5().addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				searchIDTextField.setText(searchIDTextField.getText() + "5"); 
+			}
+		});
+		
+		numpadPanel.num6().addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				searchIDTextField.setText(searchIDTextField.getText() + "6"); 
+			}
+		});
+		
+		numpadPanel.num7().addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				searchIDTextField.setText(searchIDTextField.getText() + "7"); 
+			}
+		});
+		
+		numpadPanel.num8().addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				searchIDTextField.setText(searchIDTextField.getText() + "8"); 
+			}
+		});
+		
+		numpadPanel.num9().addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				searchIDTextField.setText(searchIDTextField.getText() + "9"); 
+			}
+		});
+		
+		numpadPanel.delete().addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+					searchIDTextField.setText(searchIDTextField.getText().substring(0, searchIDTextField.getText().length()-1)); 
+			}
+		});
 		
 		numpadPanel.enter().addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
+			public void actionPerformed(ActionEvent e) {
 				int reply = JOptionPane.showConfirmDialog(null,
 						"Confirm Order?", "Confirmation",
 						JOptionPane.YES_NO_OPTION);
@@ -207,5 +262,6 @@ public class PendingOrderForm extends JPanel implements JInterfaceController {
 				}
 			}
 		});
+		
 	}
 }
