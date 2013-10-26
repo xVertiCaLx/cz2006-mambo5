@@ -211,6 +211,7 @@ public class UpdateStallForm extends JPanel {
 			descArea.setText("");
 		}
 	}
+	
 	public void submitsStallDetail(ActionEvent e) {
 
 		stallName = nameText.getText();
