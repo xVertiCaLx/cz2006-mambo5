@@ -139,7 +139,7 @@ public class NumPad extends JPanel implements JInterfaceController {
 	}
 	
 	public JButton enter() {
-		return num3;
+		return enter;
 	}
 
 }
