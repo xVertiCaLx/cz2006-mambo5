@@ -1,15 +1,18 @@
 package mambo5.Form2;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Map;
 
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
 import mambo5.Controller.JInterfaceController;
@@ -23,29 +26,28 @@ public class CamsCreateOrderForm extends JPanel implements JInterfaceController 
 
 	private OrderController oc;
 	private OrderDetailController odc;
-	private CamsMainFrame mainFrame;
 	private MenuItemController menuItemController;
 
+	private Map<String, JButton> menuItemButtons;
+	
 	// For Order
 	private int custID;
 	private Timestamp purchaseDate;
 	private String orderStatus;
 
 	// For OrderDetails
-	private int menuItemID;
-	private double actualPrice;
-	private int order;
+	private int order, menuID;
 	private int stallID;
+	private int posX = 0, posY = 0;
 
 	// For MenuItem
-	private int menuID;
-
 	private ArrayList<OrderDetail> orderDetailsList = new ArrayList<OrderDetail>();
 	private ArrayList<MenuItem> menuItemList;
 
 	private JPanel receiptPanel, keypadPanel, menuItemPanel, sidePanel;
 
-	final JTextArea receipt = new JTextArea();
+	private JTextArea receipt;
+	private JScrollPane receiptScrollPane;
 
 	JButton numPad_1 = new JButton("1");
 	JButton numPad_2 = new JButton("2");
@@ -63,22 +65,9 @@ public class CamsCreateOrderForm extends JPanel implements JInterfaceController 
 	JButton btnMainPage = new JButton("MAIN PAGE");
 	JButton btnNextPage = new JButton("NEXT PAGE");
 	JButton btnPrevPage = new JButton("PREV PAGE");
-
-	// declaration of all the menu items
-	// (Perform a for loop to dynamically create JButton base on the number
-	// of menuitem that particular stall have)
-	final JButton btnMenuItem_1 = new JButton("Chicken Chop");
-	final JButton btnMenuItem_2 = new JButton("Lamb Chop");
-	final JButton btnMenuItem_3 = new JButton("Pork Chop");
-	final JButton btnMenuItem_4 = new JButton("Ribeye Steak");
-	final JButton btnMenuItem_5 = new JButton("Sirloin Steak");
-	final JButton btnMenuItem_6 = new JButton("Beef Steak");
-	final JButton btnMenuItem_7 = new JButton("Chicken Cutlet");
-	final JButton btnMenuItem_8 = new JButton("Pork Cutlet");
-	final JButton btnMenuItem_9 = new JButton("Fish Cutlet");
-
-	public CamsCreateOrderForm(final CamsMainFrame mainFrame) {
-		menuItemList = new ArrayList<MenuItem>();
+	
+	public CamsCreateOrderForm(final CamsMainFrame mainFrame, int menuID) {
+		/*menuItemList = new ArrayList<MenuItem>();
 		menuItemController = new MenuItemController();
 		menuID = 5;
 
@@ -86,50 +75,106 @@ public class CamsCreateOrderForm extends JPanel implements JInterfaceController 
 
 		for (int i = 0; i < menuItemList.size(); i++) {
 			System.out.println("element" + i + ":" + menuItemList.get(i).getMenuItemName());
-		}
+		}*/
 		// default
-		setBounds(0, 0, 800, 560);
+		this.menuID = menuID;
+		setSize(new Dimension(CONTENTPANE_WIDTH, CONTENTPANE_HEIGHT));
+		setLocation(posX, 40);
 		setLayout(null);
-		setBackground(new Color(240, 240, 240));
+		setBackground(JPANEL_BACKGROUND_COLOUR);
 
-		receipt.setBounds(10, 10, 280, 520);
-
+		initPanels();
+	}
+	
+	//initialise panels
+	public void initPanels() {
 		receiptPanel = new JPanel();
-		receiptPanel.setBounds(0, 0, 300, 530);
-		receiptPanel.setLayout(null);
-		receiptPanel.setBackground(new Color(250, 250, 250));
-		receiptPanel.add(receipt);
-		add(receiptPanel);
-
+		receiptPanel.setSize(new Dimension(RECEIPTPANE_WIDTH, RECEIPTPANE_HEIGHT));
+		receiptPanel.setLocation(posX, posY);
+		receiptPanel.setBackground(JPANEL_BACKGROUND_COLOUR);
+		
+		receipt = new JTextArea(32, 26);
+		receipt.setEditable(false);
+		receipt.setBackground(RECEIPT_BACKGROUND_COLOUR);
+		
+		receiptScrollPane = new JScrollPane(receipt);
+		
+		receiptPanel.add(receiptScrollPane);
+		
+		posX += receiptPanel.getWidth();
+		
 		menuItemPanel = new JPanel();
-		menuItemPanel.setBounds(300, 0, 490, 290);
-		menuItemPanel.setLayout(null);
-		menuItemPanel.setBackground(new Color(250, 250, 250));
-		add(menuItemPanel);
-
+		menuItemPanel.setSize(new Dimension(MENUITEMPANE_WIDTH, MENUITEMPANE_HEIGHT));
+		menuItemPanel.setLocation(posX, posY);
+		menuItemPanel.setBackground(JPANEL_BACKGROUND_COLOUR);
+		
+		posY += menuItemPanel.getHeight();
+		
 		keypadPanel = new JPanel();
-		keypadPanel.setBounds(300, 290, 350, 240);
-		keypadPanel.setLayout(null);
-		keypadPanel.setBackground(new Color(250, 250, 250));
-		add(keypadPanel);
-
+		keypadPanel.setSize(new Dimension(KEYPADPANE_WIDTH, KEYPADPANE_HEIGHT));
+		keypadPanel.setLocation(posX, posY);
+		keypadPanel.setBackground(JPANEL_BACKGROUND_COLOUR);
+		
+		posX += keypadPanel.getWidth();
+				
 		sidePanel = new JPanel();
-		sidePanel.setBounds(650, 290, 140, 240);
-		sidePanel.setLayout(null);
-		sidePanel.setBackground(new Color(250, 250, 250));
+		sidePanel.setSize(SIDEPANE_WIDTH, SIDEPANE_HEIGHT);
+		sidePanel.setLocation(posX, posY);
+		sidePanel.setBackground(JPANEL_BACKGROUND_COLOUR);
+		
+		initMenuItemButtons(menuID);
+		
+		add(receiptPanel);
+		add(menuItemPanel);
+		add(keypadPanel);
 		add(sidePanel);
+		
+		initKeypad();
+		initSidePanelButton();
+	}
+	
+	//initialise menuitem buttons
+	public void initMenuItemButtons(int menuID) {
+		menuItemList = new ArrayList<MenuItem>();
+		menuItemController = new MenuItemController();
 
+		menuItemController.retrieveMenuItemList(menuItemList, 5);
+
+		for (int i = 0; i < menuItemList.size(); i++) {
+			//System.out.println("element" + i + ":" + menuItemList.get(i).getMenuItemName());
+			addMenuItemButtons(menuItemList.get(i).getMenuItemName());
+		}
+	}
+	
+	public void addMenuItemButtons(String name) {
+		JButton menuItemButton = new JButton(name);
+        menuItemButton.setActionCommand(name);
+        menuItemButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("perform action " + e.getSource());
+            }
+        });
+        
+        menuItemPanel.add(menuItemButton);
+	}
+
+	public void initKeypad() {
+		posX = MARGIN;
+		posY = MARGIN;
+		
+		numPad_1.setFont(new Font("Arial", Font.BOLD, 12));
+		numPad_1.setForeground(KEYPAD_FOREGROUND_COLOUR);
+		numPad_1.setBackground(KEYPAD_BACKGROUND_COLOUR);
+		//numPad_1.setBorder(null);
+		numPad_1.setSize(new Dimension(KEYPAD_WIDTH, KEYPAD_HEIGHT));
+		numPad_1.setLocation(posX, posY);
 		numPad_1.setText("1");
 		numPad_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				receipt.append(numPad_1.getText() + "    ");
 			}
 		});
-
-		numPad_1.setFont(new Font("Tahoma", Font.BOLD, 12));
-		numPad_1.setForeground(Color.WHITE);
-		numPad_1.setBackground(Color.BLACK);
-		numPad_1.setBounds(10, 10, 60, 60);
 		keypadPanel.add(numPad_1);
 
 		numPad_2.addActionListener(new ActionListener() {
@@ -248,116 +293,9 @@ public class CamsCreateOrderForm extends JPanel implements JInterfaceController 
 		btnConfirmOrder.setBounds(235, 120, 100, 70);
 		btnConfirmOrder.setText("<html>CONFIRM<br/>ORDER</html>");
 		keypadPanel.add(btnConfirmOrder);
-
-		// First menu Item
-		btnMenuItem_1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				receipt.append("\t" + btnMenuItem_1.getText() + "\t$" + "4.50"
-						+ "\n");
-				orderDetailsList.add(new OrderDetail(menuItemID, actualPrice));
-			}
-		});
-		btnMenuItem_1.setBounds(10, 10, 150, 80);
-		btnMenuItem_1.setBackground(new Color(105, 105, 105));
-		btnMenuItem_1.setForeground(Color.WHITE);
-		menuItemPanel.add(btnMenuItem_1);
-
-		// Second menu Item
-		btnMenuItem_2.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				receipt.append("\t" + btnMenuItem_2.getText() + "\t$" + "4.50"
-						+ "\n");
-			}
-		});
-		btnMenuItem_2.setBounds(170, 10, 150, 80);
-		btnMenuItem_2.setBackground(new Color(105, 105, 105));
-		btnMenuItem_2.setForeground(Color.WHITE);
-		menuItemPanel.add(btnMenuItem_2);
-
-		// Third menu Item
-		btnMenuItem_3.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				receipt.append("\t" + btnMenuItem_3.getText() + "\t$" + "4.50"
-						+ "\n");
-			}
-		});
-		btnMenuItem_3.setBounds(330, 10, 150, 80);
-		btnMenuItem_3.setBackground(new Color(105, 105, 105));
-		btnMenuItem_3.setForeground(Color.WHITE);
-		menuItemPanel.add(btnMenuItem_3);
-
-		// Fourth menu Item
-		btnMenuItem_4.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				receipt.append("\t" + btnMenuItem_4.getText() + "\t$" + "4.50"
-						+ "\n");
-			}
-		});
-		btnMenuItem_4.setBounds(10, 100, 150, 80);
-		btnMenuItem_4.setBackground(new Color(105, 105, 105));
-		btnMenuItem_4.setForeground(Color.WHITE);
-		menuItemPanel.add(btnMenuItem_4);
-
-		// Fifth menu Item
-		btnMenuItem_5.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				receipt.append("\t" + btnMenuItem_5.getText() + "\t$" + "4.50"
-						+ "\n");
-			}
-		});
-		btnMenuItem_5.setBounds(170, 100, 150, 80);
-		btnMenuItem_5.setBackground(new Color(105, 105, 105));
-		btnMenuItem_5.setForeground(Color.WHITE);
-		menuItemPanel.add(btnMenuItem_5);
-
-		// Sixth menu Item
-		btnMenuItem_6.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				receipt.append("\t" + btnMenuItem_6.getText() + "\t$" + "4.50"
-						+ "\n");
-			}
-		});
-		btnMenuItem_6.setBounds(330, 100, 150, 80);
-		btnMenuItem_6.setBackground(new Color(105, 105, 105));
-		btnMenuItem_6.setForeground(Color.WHITE);
-		menuItemPanel.add(btnMenuItem_6);
-
-		// Seventh menu Item
-		btnMenuItem_7.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				receipt.append("\t" + btnMenuItem_7.getText() + "\t$" + "4.50"
-						+ "\n");
-			}
-		});
-		btnMenuItem_7.setBounds(10, 190, 150, 80);
-		btnMenuItem_7.setBackground(new Color(105, 105, 105));
-		btnMenuItem_7.setForeground(Color.WHITE);
-		menuItemPanel.add(btnMenuItem_7);
-
-		// Eigth menu Item
-		btnMenuItem_8.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				receipt.append("\t" + btnMenuItem_8.getText() + "\t$" + "4.50"
-						+ "\n");
-			}
-		});
-		btnMenuItem_8.setBounds(170, 190, 150, 80);
-		btnMenuItem_8.setBackground(new Color(105, 105, 105));
-		btnMenuItem_8.setForeground(Color.WHITE);
-		menuItemPanel.add(btnMenuItem_8);
-
-		// Nineth menu Item
-		btnMenuItem_9.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				receipt.append("\t" + btnMenuItem_9.getText() + "\t$" + "4.50"
-						+ "\n");
-			}
-		});
-		btnMenuItem_9.setBounds(330, 190, 150, 80);
-		btnMenuItem_9.setBackground(new Color(105, 105, 105));
-		btnMenuItem_9.setForeground(Color.WHITE);
-		menuItemPanel.add(btnMenuItem_9);
-
+	}
+	
+	public void initSidePanelButton() {
 		btnMainPage.setForeground(Color.WHITE);
 		btnMainPage.setFont(new Font("Tahoma", Font.BOLD, 12));
 		btnMainPage.setBackground(new Color(255, 0, 0));
@@ -376,7 +314,7 @@ public class CamsCreateOrderForm extends JPanel implements JInterfaceController 
 		btnPrevPage.setBounds(10, 150, 110, 50);
 		sidePanel.add(btnPrevPage);
 	}
-
+	
 	// A method to retrieve current datetime
 	private Timestamp GetDate() {
 		long time = System.currentTimeMillis();

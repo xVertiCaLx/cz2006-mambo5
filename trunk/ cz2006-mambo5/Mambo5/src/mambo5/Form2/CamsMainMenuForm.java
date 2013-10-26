@@ -36,7 +36,7 @@ public class CamsMainMenuForm extends JPanel implements JInterfaceController {
 		btnNewOrder.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				removeAll();
-				add(new CamsCreateOrderForm(mainFrame));
+				add(new CamsCreateOrderForm(mainFrame, 5));
 				revalidate();
 				repaint();
 			}
