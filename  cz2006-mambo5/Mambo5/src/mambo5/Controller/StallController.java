@@ -29,4 +29,14 @@ public class StallController {
 			
 		return validate;
 	}
+	
+	public int validateStallDetail(int stallID, String stallName, String stallDesc, String stallStatus){
+		int validate = 0;
+		
+		sysConfig = new SystemConfiguration();
+		dataStore = DataStoreFactory.createDataStore(sysConfig);
+		validate = dataStore.updateStallDetail(stallID, stallName, stallDesc, stallStatus);
+			
+		return validate;
+	}
 }

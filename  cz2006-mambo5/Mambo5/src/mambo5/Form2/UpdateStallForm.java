@@ -42,11 +42,10 @@ public class UpdateStallForm extends JPanel {
 	private JRadioButton closeRB = new JRadioButton("Close");
 	private JButton updateBtn = new JButton("Update");
 	
-	private String stallUnit;
 	private String stallName;
 	private String stallDesc;
 	private String stallStatus;
-	private int canteenID;
+	private int stallID;
 	
 	/**
 	 * Create the frame.
@@ -122,6 +121,7 @@ public class UpdateStallForm extends JPanel {
 		
 		
 		descArea = new JTextArea();
+		descArea.setLineWrap(true);
 		descArea.setBounds(266, 259, 305, 99);
 		add(descArea);
 		
@@ -216,8 +216,7 @@ public class UpdateStallForm extends JPanel {
 		stallName = nameText.getText();
 		stallDesc = descArea.getText();
 		stallStatus = "F";
-		int index = availableCB.getSelectedIndex();
-		stallUnit = stallCB.getSelectedItem().toString();
+		int index = stallCB.getSelectedIndex();
 		if (openRB.isSelected())
 			stallStatus = "T";
 		if(stallName.equals("")) 
@@ -226,9 +225,9 @@ public class UpdateStallForm extends JPanel {
 			JOptionPane.showMessageDialog(null, "Please Enter Stall Description");
 		else {
 			sc = new StallController();
-			canteenID = retrieveCanteenList.get(index).getCanteenID();
-			if(sc.validateStallDetail(canteenID, stallUnit, stallName, stallDesc, stallStatus) == 0) 
-				JOptionPane.showMessageDialog(null, "Stall cannot be created");
+			stallID = retrieveStallList.get(index).getStallId();
+			if(sc.validateStallDetail(stallID, stallName, stallDesc, stallStatus) == 0) 
+				JOptionPane.showMessageDialog(null, "Stall cannot be updated");
 			else {
 				JOptionPane.showMessageDialog(null, "Stall successfully updated");
 				mainFrame.setTitle("Please select a Function to perform:");
