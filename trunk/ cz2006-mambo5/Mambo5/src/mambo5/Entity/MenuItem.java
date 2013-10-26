@@ -60,7 +60,7 @@ public class MenuItem {
 		return result;
 	}
 	
-	public String retrieveMenu(int menuID)
+/*	public String retrieveMenu(int menuID)
 	{
 		dbc = new DBController();
 		//not sure on the sql part
@@ -76,5 +76,5 @@ public class MenuItem {
 		}
 		
 		return result;
-	}
+	}*/
 }

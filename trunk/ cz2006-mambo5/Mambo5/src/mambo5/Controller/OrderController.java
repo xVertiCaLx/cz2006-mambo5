@@ -1,8 +1,13 @@
 package mambo5.Controller;
 
 import java.sql.ResultSet;
+import java.util.ArrayList;
 import java.util.Date;
 
+import mambo5.Database.DataStoreFactory;
+import mambo5.Database.DataStoreInterface;
+import mambo5.Database.SystemConfiguration;
+import mambo5.Entity.MenuItem;
 import mambo5.Entity.Order;
 
 public class OrderController { 
@@ -12,8 +17,8 @@ public class OrderController {
 	private ResultSet rs;
 	private Order order;
 	//private CamsCreateMenuItemForm form;
-	//private DataStoreInterface dataStore;
-	//private SystemConfiguration sysConfig;
+	private DataStoreInterface dataStore;
+	private SystemConfiguration sysConfig;
 	
 	public OrderController() { }
 		// TODO Auto-generated constructor stub
@@ -36,5 +41,13 @@ public class OrderController {
 		validate = o.refundOrder(orderID);
 		
 		return validate;
+	}
+	
+	//guohao
+	public ArrayList<Order> retrieveOrderIDList(ArrayList<Order> orderIDList, int stallID, String orderStatus) {
+		sysConfig = new SystemConfiguration();
+		dataStore = DataStoreFactory.createDataStore(sysConfig);
+		
+		return dataStore.retrieveOrderID(orderIDList, stallID, orderStatus);
 	}
 }

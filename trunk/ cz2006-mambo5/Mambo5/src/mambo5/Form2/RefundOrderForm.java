@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -12,6 +13,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import mambo5.Controller.OrderController;
+import mambo5.Entity.Order;
 
 public class RefundOrderForm extends JPanel {
 
@@ -20,6 +22,8 @@ public class RefundOrderForm extends JPanel {
 	
 	private int num;
 	private OrderController oc;
+	private ArrayList<Order> orderIDList;
+	private OrderController OrderController;
 	
 	JButton numPad_1 = new JButton("1");
 	JButton numPad_2 = new JButton("2");
@@ -38,6 +42,15 @@ public class RefundOrderForm extends JPanel {
 	
 	public RefundOrderForm(/*mainFrame*/) {
 	
+		orderIDList = new ArrayList<Order>();
+		OrderController = new OrderController();
+		
+		OrderController.retrieveOrderIDList(orderIDList, 5, "Processing");
+		
+		for (int i = 0; i < orderIDList.size(); i++) {
+			System.out.println("element" + i + ":" + orderIDList.get(i).getOrderID());
+		}
+		
 		setBounds(0, 40, 800, 560);
 		setLayout(null);
 		setBackground(new Color(240,240,240));
@@ -208,31 +221,24 @@ public class RefundOrderForm extends JPanel {
 		btnEnter.setBounds(250, 300, 100, 100);
 		refundPanel.add(btnEnter);
 		
-	}
 	
-		public void submitOrderID() 
+	}
+
+
+	public void submitOrderID() 
+	{
+		int orderID=Integer.parseInt(txtOrderId.getText());
+		String message = "OrderID " + orderID + " does not exist.";
+
+		for (int i=0; i<orderIDList.size(); i++)
 		{
-			try
+			if(orderIDList.get(i).getOrderID() == orderID)
 			{
-				int orderID=Integer.parseInt(txtOrderId.getText());
-				txtOrderId.requestFocusInWindow();
-				oc = new OrderController();
-				if(oc.validateRefundOrder(orderID) == 0)
-					JOptionPane.showMessageDialog(null, "Order not refunded!");
-				else
-				{
-					JOptionPane.showMessageDialog(null, "Order refunded!");
-					txtOrderId.setText("");
-					repaint();
-				}
-			}
-			catch (Exception z)
-			{
-				JOptionPane.showMessageDialog(this, "Incorrect Data Type! Numbers Only!",  
-                        "Input Error", JOptionPane.ERROR_MESSAGE);  
-					 txtOrderId.setText("");  
-					 txtOrderId.requestFocusInWindow();  
-                     return;  
+				message = "OrderID " + orderID + " found.";
+				break;
 			}
 		}
-}
+		JOptionPane.showMessageDialog(null, message);
+	}
+}//end JPanel
+	

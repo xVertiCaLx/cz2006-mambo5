@@ -8,6 +8,7 @@ import mambo5.Entity.Admin;
 import mambo5.Entity.Canteen;
 import mambo5.Entity.Menu;
 import mambo5.Entity.MenuItem;
+import mambo5.Entity.Order;
 import mambo5.Entity.Stall;
 
 //Concrete data store object for data access in MySQL database
@@ -17,6 +18,7 @@ public class MySQLImpl implements DataStoreInterface {
 	private ArrayList<Canteen> canteenList;
 	private ArrayList<Stall> stallList;
 	private ArrayList<Admin> adminList;
+	//private ArrayList<Order> orderList; // guohao
 	private ResultSet rs;
 
 	// setup Connections
@@ -195,5 +197,22 @@ public class MySQLImpl implements DataStoreInterface {
 			dbc.terminate();
 		}
 		return menuItemList;
+	}
+	
+	//guohao
+	public ArrayList<Order> retrieveOrderID(ArrayList<Order> orderIDList, int stallID, String orderStatus) {
+		try {
+			System.out.println("got error in retrieve sql? guohao");
+			String sql = "SELECT * FROM orders WHERE stallID = '" + stallID + "' AND orderStatus = '" + orderStatus + "';";
+			rs = dbc.execute(sql);
+			
+			while(rs.next())
+				orderIDList.add(new Order(rs.getInt("orderID"), rs.getInt("custID"), rs.getDate("purchaseDate"), rs.getString("orderStatus"), rs.getInt("stallID")));
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			dbc.terminate();
+		}
+		return orderIDList;
 	}
 }
