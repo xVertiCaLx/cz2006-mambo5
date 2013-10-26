@@ -109,13 +109,8 @@ public class AnalyzeCanteenForm extends JPanel  {
 	}
 	
 	private void displayMenu(int canteenID) {
-		//menuTable = new JTable();
-		//menuTable.setEnabled(false);
-		//menuTable.setFont(new java.awt.Font("Dialog", java.awt.Font.BOLD, 14));
-		//menuTable.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_SUBSEQUENT_COLUMNS);	
-		//menuTable.remove(0);
 		DefaultTableModel tableModel = (DefaultTableModel) menuTable.getModel();
-		
+		tableModel.setRowCount(0);
 		String[] colName = {"StallID", "MenuID", "MenuType"};
 		tableModel.setColumnIdentifiers(colName);
 
