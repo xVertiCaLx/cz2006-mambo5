@@ -14,10 +14,10 @@ import mambo5.Entity.Admin;
 
 public class CamsMainMenuForm extends JPanel implements JInterfaceController {
 
-	public CamsMainMenuForm(final CamsMainFrame mainFrame, Admin admin) {
-		setBounds(0, 40, 800, 560);
+	public CamsMainMenuForm(final CamsMainFrame mainFrame, final Admin admin) {
+		setBounds(0, 0, 800, 560);
 		setLayout(null);
-		setBackground(new Color(255, 255, 255));
+		setBackground(new Color(0, 0, 255));
 		mainFrame.setTitle("Canteen Management System");
 		
 		JButton btnLogin = new JButton("LOGOUT");
@@ -50,7 +50,7 @@ public class CamsMainMenuForm extends JPanel implements JInterfaceController {
 		JButton btnAddMenuItem = new JButton("ADD NEW ITEM");
 		btnAddMenuItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				mainFrame.replacePanel(new CamsCreateMenuItemForm(mainFrame, 1));
+				mainFrame.replacePanel(new CamsCreateMenuItemForm(mainFrame, admin, 5));
 			}
 		});
 		btnAddMenuItem.setForeground(Color.WHITE);
@@ -59,7 +59,7 @@ public class CamsMainMenuForm extends JPanel implements JInterfaceController {
 		btnAddMenuItem.setBounds(528, 151, 234, 80);
 		add(btnAddMenuItem);
 		
-		JButton btnPending = new JButton("Pending Orders");
+		JButton btnPending = new JButton("PENDING ORDERS");
 		btnPending.setForeground(Color.WHITE);
 		btnPending.setFont(new Font("Arial", Font.BOLD, 16));
 		btnPending.setBackground(SystemColor.controlDkShadow);

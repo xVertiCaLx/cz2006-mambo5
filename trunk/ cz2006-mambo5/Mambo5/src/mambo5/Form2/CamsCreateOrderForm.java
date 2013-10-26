@@ -42,7 +42,7 @@ public class CamsCreateOrderForm extends JPanel {
 	ArrayList<OrderDetail> orderDetailsList = new ArrayList<OrderDetail>();
 	ArrayList<String> menuItemList = new ArrayList<String>();
 	
-	JPanel receiptPanel, keypadPanel, menuItemPanel, sidePanel;
+	private JPanel receiptPanel, keypadPanel, menuItemPanel, sidePanel;
 	
 	final JTextArea receipt = new JTextArea();
 

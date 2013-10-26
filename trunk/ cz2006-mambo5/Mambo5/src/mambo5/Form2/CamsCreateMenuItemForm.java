@@ -10,9 +10,9 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import mambo5.Controller.CanteenController;
 import mambo5.Controller.JInterfaceController;
 import mambo5.Controller.MenuItemController;
+import mambo5.Entity.Admin;
 
 public class CamsCreateMenuItemForm extends JPanel implements JInterfaceController {
 
@@ -23,10 +23,12 @@ public class CamsCreateMenuItemForm extends JPanel implements JInterfaceControll
 	private double price, discount;
 	private MenuItemController mic;
 	private CamsMainFrame mainFrame;
+	private Admin admin;
 	
-	public CamsCreateMenuItemForm(final CamsMainFrame mainFrame, int menuID) {
+	public CamsCreateMenuItemForm(final CamsMainFrame mainFrame, final Admin admin, int menuID) {
 		this.mainFrame = mainFrame;
 		this.menuID = menuID;
+		this.admin = admin;
 		posX = 40;
 		mainFrame.setTitle("Create Menu Item");
 		setSize(new Dimension(CONTENTPANE_WIDTH, CONTENTPANE_HEIGHT));
@@ -64,7 +66,7 @@ public class CamsCreateMenuItemForm extends JPanel implements JInterfaceControll
 		addButton.setSize(new Dimension(STANDARDBUTTON_WIDTH, STANDARDBUTTON_HEIGHT));
 		addButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//mainFrame.replacePanel(new CustomerMainMenu(mainFrame));
+				submitMenuItem(e);
 			}
 		});
 		totalHeight += addButton.getHeight();
@@ -126,7 +128,7 @@ public class CamsCreateMenuItemForm extends JPanel implements JInterfaceControll
 					JOptionPane.showMessageDialog(null, "Canteen cannot be created");
 				else {
 					JOptionPane.showMessageDialog(null, "Canteen successfully created");
-					mainFrame.replacePanel(new OFSFunction(mainFrame));
+					mainFrame.replacePanel(new CamsMainMenuForm(mainFrame, admin));
 				}
 			}catch (NumberFormatException exception) {
 				JOptionPane.showMessageDialog(null, "Please Enter Only Integer Value for Price and Discount");
