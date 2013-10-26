@@ -12,13 +12,14 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
+import mambo5.Controller.JInterfaceController;
 import mambo5.Controller.MenuItemController;
 import mambo5.Controller.OrderController;
 import mambo5.Controller.OrderDetailController;
 import mambo5.Entity.MenuItem;
 import mambo5.Entity.OrderDetail;
 
-public class CamsCreateOrderForm extends JPanel {
+public class CamsCreateOrderForm extends JPanel implements JInterfaceController {
 
 	private OrderController oc;
 	private OrderDetailController odc;
