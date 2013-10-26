@@ -6,8 +6,10 @@ import java.awt.Dimension;
 //import javax.swing.JComboBox;
 //import java.awt.Font;
 import java.awt.Font;
+import java.awt.SplashScreen;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 /*import javax.swing.JFrame;
@@ -16,16 +18,21 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 
 import mambo5.Controller.JInterfaceController;
+import mambo5.Controller.MenuItemController;
+import mambo5.Entity.MenuItem;
 
 public class CamsMainFrame extends JFrame implements JInterfaceController {
 
-	
 	private JPanel titlePanel, contentPane, selectPanel, applicationPanel;
 	private JLabel titleLabel = new JLabel("#Canteen");
 	private JButton mainMenuButton;
 	private int posX = 0, posY = 0;
+	
+	private ArrayList<MenuItem> menuItemList;
+	private MenuItemController menuItemController;
 
 	public CamsMainFrame() {
 		// the frame
@@ -68,6 +75,7 @@ public class CamsMainFrame extends JFrame implements JInterfaceController {
 		titleLabel.setForeground(Color.WHITE);
 		titleLabel.setFont(new Font("Arial", Font.BOLD, 12));
 		titleLabel.setSize(new Dimension(TITLELABEL_WIDTH, TITLELABEL_HEIGHT));
+		titleLabel.setHorizontalAlignment(SwingConstants.RIGHT);
 		titleLabel.setLocation(posX, posY);
 		titlePanel.add(titleLabel);
 
@@ -75,7 +83,14 @@ public class CamsMainFrame extends JFrame implements JInterfaceController {
 		applicationPanel = selectPanel;
 		contentPane.add(applicationPanel);
 		
-		System.out.println("Window's Width: " + getWidth() + " Height: " + getHeight());
+		//SplashScreen splashscreen = new SplashScreen();
+		
+		System.out.println("Initialising CaMS, Please Wait...");
+		menuItemList = new ArrayList<MenuItem>();
+		menuItemController = new MenuItemController();
+		menuItemController.retrieveMenuItemList(menuItemList, 5);
+		System.out.println("Initialising Complete. Loading Main Screen." + menuItemList.get(3).getMenuItemName());
+		replacePanel(new SelectPanel(this));
 	}
 	  
 	public void setSelectPanel(JPanel applicationPanel) {
