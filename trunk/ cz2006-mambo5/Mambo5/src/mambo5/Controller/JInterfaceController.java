@@ -35,6 +35,7 @@ public interface JInterfaceController {
 	public static final Color KEYPAD_BACKGROUND_COLOUR = new Color(100,100,100);
 	public static final Color KEYPAD_FOREGROUND_COLOUR = new Color(255,255,255);
 	public static final int KEYPAD_WIDTH = 60, KEYPAD_HEIGHT = 60;
+	public static final int KEYPAD_SPECIAL_WIDTH = 100, KEYPAD_SPECIAL_HEIGHT = (3*KEYPAD_WIDTH + 3*MARGIN)/2 - MARGIN;
 	
 	public static final int KEYBOARD_KEYWIDTH = 60, KEYBOARD_KEYHEIGHT = 60;
 	public static final Color JPANEL_BACKGROUND_COLOUR = new Color(240, 240, 240);
