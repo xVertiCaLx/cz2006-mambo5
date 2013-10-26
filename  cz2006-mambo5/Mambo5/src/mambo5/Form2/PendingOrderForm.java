@@ -152,7 +152,7 @@ public class PendingOrderForm extends JPanel implements JInterfaceController {
 	}
 
 	public void addOrderIDButtons(Order order) {
-		JButton orderIDButton = new JButton("Order ID: " +
+		JButton orderIDButton = new JButton(" " +
 				Integer.toString(order.getOrderID()));
 		orderIDButton.setActionCommand(Integer.toString(order.getOrderID()));
 		orderIDButtons.put(orderIDButton, order);
