@@ -52,7 +52,7 @@ public class CamsCreateOrderForm extends JPanel implements JInterfaceController 
 	private JScrollPane receiptScrollPane;
 	
 	private NumPad numpadPanel;
-
+/*
 	JButton numPad_1 = new JButton("1");
 	JButton numPad_2 = new JButton("2");
 	JButton numPad_3 = new JButton("3");
@@ -61,7 +61,7 @@ public class CamsCreateOrderForm extends JPanel implements JInterfaceController 
 	JButton numPad_6 = new JButton("6");
 	JButton numPad_7 = new JButton("7");
 	JButton numPad_8 = new JButton("8");
-	JButton numPad_9 = new JButton("9");
+	JButton numPad_9 = new JButton("9");*/
 
 	JButton btnClear = new JButton("CLEAR");
 	JButton btnConfirmOrder = new JButton();
@@ -116,11 +116,12 @@ public class CamsCreateOrderForm extends JPanel implements JInterfaceController 
 		
 		posY += menuItemPanel.getHeight();
 		
+		//initialise number pad
 		numpadPanel = new NumPad();
 		numpadPanel.setLayout(null);
 		numpadPanel.setSize(new Dimension(KEYPADPANE_WIDTH, KEYPADPANE_HEIGHT));
 		numpadPanel.setLocation(posX, posY);
-		
+		//implement action listener
 		implementButtons();
 		
 		/*keypadPanel = new JPanel();
@@ -147,8 +148,10 @@ public class CamsCreateOrderForm extends JPanel implements JInterfaceController 
 	}
 	
 	public void implementButtons() {
+		//actual implementation
 		numpadPanel.num1().addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				//action performance
 				receipt.append("1    ");
 			}
 		});
@@ -156,6 +159,25 @@ public class CamsCreateOrderForm extends JPanel implements JInterfaceController 
 		numpadPanel.num2().addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				receipt.append("2    ");
+			}
+		});
+		
+		numpadPanel.num3().addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				receipt.append("3    ");
+			}
+		});
+		
+		
+		numpadPanel.enter().addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				int reply = JOptionPane.showConfirmDialog(null,
+						"Confirm Order?", "Confirmation",
+						JOptionPane.YES_NO_OPTION);
+				if (reply == JOptionPane.YES_OPTION) {
+					submitsOrder();
+					submitsOrderDetails();
+				}
 			}
 		});
 	}
