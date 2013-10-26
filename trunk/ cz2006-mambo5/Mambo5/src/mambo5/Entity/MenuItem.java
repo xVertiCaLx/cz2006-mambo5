@@ -59,22 +59,4 @@ public class MenuItem {
 		
 		return result;
 	}
-	
-/*	public String retrieveMenu(int menuID)
-	{
-		dbc = new DBController();
-		//not sure on the sql part
-		String result ="";
-		sql = "Select menuItemName from mambojumbo.menuitem where menuID = '" + menuID + "';";
-		
-		try {
-			rs = dbc.execute(sql);
-			rs.next();
-			result = rs.getString("menuItemName");
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		
-		return result;
-	}*/
 }
