@@ -50,6 +50,8 @@ public class CamsCreateOrderForm extends JPanel implements JInterfaceController 
 
 	private JTextArea receipt;
 	private JScrollPane receiptScrollPane;
+	
+	private NumPad numpadPanel;
 
 	JButton numPad_1 = new JButton("1");
 	JButton numPad_2 = new JButton("2");
@@ -114,12 +116,19 @@ public class CamsCreateOrderForm extends JPanel implements JInterfaceController 
 		
 		posY += menuItemPanel.getHeight();
 		
-		keypadPanel = new JPanel();
+		numpadPanel = new NumPad();
+		numpadPanel.setLayout(null);
+		numpadPanel.setSize(new Dimension(KEYPADPANE_WIDTH, KEYPADPANE_HEIGHT));
+		numpadPanel.setLocation(posX, posY);
+		
+		implementButtons();
+		
+		/*keypadPanel = new JPanel();
 		keypadPanel.setSize(new Dimension(KEYPADPANE_WIDTH, KEYPADPANE_HEIGHT));
 		keypadPanel.setLocation(posX, posY);
-		keypadPanel.setBackground(JPANEL_BACKGROUND_COLOUR);
+		keypadPanel.setBackground(JPANEL_BACKGROUND_COLOUR);*/
 		
-		posX += keypadPanel.getWidth();
+		posX += numpadPanel.getWidth();
 				
 		sidePanel = new JPanel();
 		sidePanel.setSize(SIDEPANE_WIDTH, SIDEPANE_HEIGHT);
@@ -130,11 +139,25 @@ public class CamsCreateOrderForm extends JPanel implements JInterfaceController 
 		
 		add(receiptPanel);
 		add(menuItemPanel);
-		add(keypadPanel);
+		add(numpadPanel);
 		add(sidePanel);
 		
-		initKeypad();
+		/*initKeypad();*/
 		initSidePanelButton();
+	}
+	
+	public void implementButtons() {
+		numpadPanel.num1().addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				receipt.append("1    ");
+			}
+		});
+		
+		numpadPanel.num2().addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				receipt.append("2    ");
+			}
+		});
 	}
 	
 	//initialise menuitem buttons
@@ -172,14 +195,13 @@ public class CamsCreateOrderForm extends JPanel implements JInterfaceController 
         menuItemPanel.add(menuItemButton);
 	}
 
-	public void initKeypad() {
+/*	public void initKeypad() {
 		posX = MARGIN;
 		posY = MARGIN;
 		
 		numPad_1.setFont(new Font("Arial", Font.BOLD, 12));
 		numPad_1.setForeground(KEYPAD_FOREGROUND_COLOUR);
 		numPad_1.setBackground(KEYPAD_BACKGROUND_COLOUR);
-		//numPad_1.setBorder(null);
 		numPad_1.setSize(new Dimension(KEYPAD_WIDTH, KEYPAD_HEIGHT));
 		numPad_1.setLocation(posX, posY);
 		numPad_1.setText("1");
@@ -306,7 +328,7 @@ public class CamsCreateOrderForm extends JPanel implements JInterfaceController 
 		btnConfirmOrder.setBounds(235, 120, 100, 70);
 		btnConfirmOrder.setText("<html>CONFIRM<br/>ORDER</html>");
 		keypadPanel.add(btnConfirmOrder);
-	}
+	}*/
 	
 	public void initSidePanelButton() {
 		btnMainPage.setForeground(Color.WHITE);
