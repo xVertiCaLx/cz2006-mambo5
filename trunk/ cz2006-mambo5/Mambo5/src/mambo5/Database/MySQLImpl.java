@@ -57,8 +57,7 @@ public class MySQLImpl implements DataStoreInterface {
 	}
 
 	@Override
-	public int updateCanteenDetail(int canteenID, String canteenName,
-			String canteenDesc, String canteenAddress, int maxStall) {
+	public int updateCanteenDetail(int canteenID, String canteenName, String canteenDesc, String canteenAddress, int maxStall) {
 		int result = 0;
 
 		String sql = "UPDATE canteen " + "SET canteenName = '" + canteenName
@@ -113,8 +112,7 @@ public class MySQLImpl implements DataStoreInterface {
 
 	// -------------------------------------------Stall----------------------------------------------------------------
 	@Override
-	public int createStall(int canteenID, String stallUnit, String stallName,
-			String stallDesc, String stallStatus) {
+	public int createStall(int canteenID, String stallUnit, String stallName, String stallDesc, String stallStatus) {
 		int result = 0;
 
 		String sql = "INSERT INTO stall ( canteenID, stallUnit, stallName, stallDesc, stallStatus) "
@@ -129,6 +127,18 @@ public class MySQLImpl implements DataStoreInterface {
 				+ "' , '"
 				+ stallStatus
 				+ "');";
+
+		result = dbc.executeNonQuery(sql);
+		return result;
+	}
+	
+	@Override
+	public int updateStallDetail(int stallID, String stallName, String stallDesc, String stallStatus) {
+		int result = 0;
+
+		String sql = "UPDATE stall " + "SET stallName = '" + stallName
+				+ "' , stallDesc = '" + stallDesc
+				+ "' , stallStatus = '" + stallStatus + "' WHERE stallID = " + stallID + ";";
 
 		result = dbc.executeNonQuery(sql);
 		return result;
@@ -181,8 +191,6 @@ public class MySQLImpl implements DataStoreInterface {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-			
-		// TODO Auto-generated method stub
 		return menuList;
 	}
 
@@ -217,4 +225,6 @@ public class MySQLImpl implements DataStoreInterface {
 		}
 		return orderIDList;
 	}
+
+
 }
