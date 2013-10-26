@@ -79,12 +79,12 @@ public class CamsCreateOrderForm extends JPanel {
 	public CamsCreateOrderForm(final CamsMainFrame mainFrame) {
 		
 		menuID = 5;
-		retrieveMenuItem();
+		//retrieveMenuItem();
 
-		for (int i=0; i<menuItemList.size(); i++)
+/*		for (int i=0; i<menuItemList.size(); i++)
 		{
 		    System.out.println("element" + i + ":" + menuItemList.get(i) );
-		}
+		}*/
 		//default
 		setBounds(0, 0, 800, 560);
 		setLayout(null);
