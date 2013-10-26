@@ -24,28 +24,19 @@ public class PendingOrderForm extends JPanel implements JInterfaceController {
 	private JPanel receiptPanel, keypadPanel, ordersPanel, sidePanel,
 			searchPanel;
 
-	JButton numPad_1 = new JButton("1");
-	JButton numPad_2 = new JButton("2");
-	JButton numPad_3 = new JButton("3");
-	JButton numPad_4 = new JButton("4");
-	JButton numPad_5 = new JButton("5");
-	JButton numPad_6 = new JButton("6");
-	JButton numPad_7 = new JButton("7");
-	JButton numPad_8 = new JButton("8");
-	JButton numPad_9 = new JButton("9");
+	private JButton numPad_1 = new JButton("1"), numPad_2 = new JButton("2"), numPad_3 = new JButton("3");
+	private JButton numPad_4 = new JButton("4"), numPad_5 = new JButton("5"), numPad_6 = new JButton("6");
+	private JButton numPad_7 = new JButton("7"), numPad_8 = new JButton("8"), numPad_9 = new JButton("9");
 
-	private int stallID;
-	private int posX = 0, posY = 0;
+	private int stallID, posX = 0, posY = 0;
 	private JTextArea receipt;
 	private JScrollPane receiptScrollPane;
 	private Map<JButton, Order> orderIDButtons;
 	private ArrayList<Order> orderIDList;
 	private OrderController OrderController;
 
-	JButton btnMainPage = new JButton("MAIN PAGE");
-	JButton btnNextPage = new JButton("NEXT PAGE");
-	JButton btnPrevPage = new JButton("PREV PAGE");
-	JTextField searchIDTextField;
+	private JButton btnMainPage = new JButton("MAIN PAGE"), btnNextPage = new JButton("NEXT PAGE"), btnPrevPage = new JButton("PREV PAGE"), btnSearch;
+	private JTextField searchIDTextField;
 
 	public PendingOrderForm(final CamsMainFrame mainFrame, int stallID) {
 
@@ -60,69 +51,80 @@ public class PendingOrderForm extends JPanel implements JInterfaceController {
 
 	public void initPanels() {
 		receiptPanel = new JPanel();
-		receiptPanel.setSize(new Dimension(RECEIPTPANE_WIDTH,
-				RECEIPTPANE_HEIGHT - 260));
+		receiptPanel.setSize(new Dimension(RECEIPTPANE_WIDTH, RECEIPTPANE_HEIGHT/2 + 150));
 		receiptPanel.setLocation(posX, posY);
 		receiptPanel.setBackground(JPANEL_BACKGROUND_COLOUR);
-
-		receipt = new JTextArea(18, 26);// check how to use
+		receiptPanel.setLayout(null);
+		
+		receipt = new JTextArea();
+		receipt.setSize(new Dimension(RECEIPT_WIDTH, RECEIPT_HEIGHT/2 + 140));
+		receipt.setBackground(WHITE_BACKGROUND_COLOUR);
 		receipt.setEditable(false);
-		receipt.setBackground(RECEIPT_BACKGROUND_COLOUR);
-
-		receiptScrollPane = new JScrollPane(receipt);
-
+		
+		receiptScrollPane = new JScrollPane();
+		receiptScrollPane.setSize(new Dimension(RECEIPT_WIDTH, RECEIPT_HEIGHT/2 + 140));
+		receiptScrollPane.setLocation(MARGIN,MARGIN);
+		receiptScrollPane.setBackground(WHITE_BACKGROUND_COLOUR);
+		receiptScrollPane.add(receipt);
+		
 		receiptPanel.add(receiptScrollPane);
 		
 		posY += receiptPanel.getHeight();
+		
 		searchPanel = new JPanel();
-		searchPanel.setSize(new Dimension(RECEIPTPANE_WIDTH, 100));
+		searchPanel.setSize(new Dimension(RECEIPTPANE_WIDTH, RECEIPTPANE_HEIGHT/2 - 100));
 		searchPanel.setLocation(posX, posY);
-		searchPanel.setBackground(new Color(255,255,255));
-
+		searchPanel.setBackground(JPANEL_BACKGROUND_COLOUR);
+		searchPanel.setLayout(null);
+		
 		searchIDTextField = new JTextField();
-		searchIDTextField.setSize(new Dimension(250, JTEXTFIELD_HEIGHT));
-		searchIDTextField.setLocation(0,0);
+		searchIDTextField.setSize(new Dimension(RECEIPTPANE_WIDTH - (2*MARGIN), JTEXTFIELD_HEIGHT));
+		searchIDTextField.setLocation(MARGIN, MARGIN);
+		
 		searchPanel.add(searchIDTextField);
 		
-		posX = RECEIPTPANE_WIDTH;
-
+		posX = receiptPanel.getWidth();
+		posY = 0;
+		
 		ordersPanel = new JPanel();
-		ordersPanel.setSize(new Dimension(MENUITEMPANE_WIDTH,
-				MENUITEMPANE_HEIGHT));
+		ordersPanel.setLayout(null);
+		ordersPanel.setSize(new Dimension(MENUITEMPANE_WIDTH, MENUITEMPANE_HEIGHT));
 		ordersPanel.setLocation(posX, posY);
 		ordersPanel.setBackground(JPANEL_BACKGROUND_COLOUR);
-
-		posY = ordersPanel.getHeight();
-
+		
+		posY += ordersPanel.getHeight();
+		
 		keypadPanel = new JPanel();
-		keypadPanel.setSize(new Dimension(KEYPADPANE_WIDTH, KEYPADPANE_HEIGHT));
+		keypadPanel.setLayout(null);
+		keypadPanel.setSize(new Dimension(KEYPAD_WIDTH, KEYPAD_HEIGHT));
 		keypadPanel.setLocation(posX, posY);
 		keypadPanel.setBackground(JPANEL_BACKGROUND_COLOUR);
-
+		initKeypad();
+		
 		posX += keypadPanel.getWidth();
-
+		
 		sidePanel = new JPanel();
-		sidePanel.setSize(SIDEPANE_WIDTH, SIDEPANE_HEIGHT);
+		sidePanel.setLayout(null);
+		sidePanel.setSize(new Dimension(SIDEPANE_WIDTH, SIDEPANE_HEIGHT));
 		sidePanel.setLocation(posX, posY);
-		sidePanel.setBackground(JPANEL_BACKGROUND_COLOUR);
-
-		initSearchPanel();
-
-		initOrderIDButtons(stallID);
-
+		
+		btnSearch = new JButton("Search");
+		btnSearch.setSize(new Dimension(SIDEPANE_WIDTH/2, STANDARDBUTTON_HEIGHT));
+		
+		posX = (RECEIPTPANE_WIDTH - btnSearch.getWidth())/2;
+		posY += searchIDTextField.getAlignmentY() + searchIDTextField.getHeight() + MARGIN;
+		
+		btnSearch.setLocation(posX,posY);
+		
+		searchPanel.add(btnSearch);
+		
 		add(receiptPanel);
+		add(searchPanel);
 		add(ordersPanel);
 		add(keypadPanel);
 		add(sidePanel);
-		add(searchPanel);
+	}
 
-		initKeypad();
-		initSidePanelButton();
-	}
-	
-	public void initSearchPanel() {
-		
-	}
 
 	// initialise order item buttons
 	public void initOrderIDButtons(int orderID) {
@@ -145,7 +147,6 @@ public class PendingOrderForm extends JPanel implements JInterfaceController {
 		numPad_1.setFont(new Font("Arial", Font.BOLD, 12));
 		numPad_1.setForeground(KEYPAD_FOREGROUND_COLOUR);
 		numPad_1.setBackground(KEYPAD_BACKGROUND_COLOUR);
-		// numPad_1.setBorder(null);
 		numPad_1.setSize(new Dimension(KEYPAD_WIDTH, KEYPAD_HEIGHT));
 		numPad_1.setLocation(posX, posY);
 		numPad_1.setText("1");
