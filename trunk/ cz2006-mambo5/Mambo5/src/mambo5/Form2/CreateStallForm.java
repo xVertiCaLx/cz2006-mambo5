@@ -176,11 +176,8 @@ public class CreateStallForm extends JPanel {
 				JOptionPane.showMessageDialog(null, "Stall cannot be created");
 			else {
 				JOptionPane.showMessageDialog(null, "Stall successfully created");
-				mainFrame.remove(mainFrame.getSelectPanel());
-				mainFrame.setSelectPanel(new OFSFunction(mainFrame));
-				mainFrame.getContentPane().add(mainFrame.getSelectPanel());
-				mainFrame.revalidate();
-				mainFrame.repaint();
+				mainFrame.setTitle("Please select a Function to perform:");
+				mainFrame.replacePanel(new OFSFunction(mainFrame));
 			}
 		}
 	}

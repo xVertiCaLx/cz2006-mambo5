@@ -32,6 +32,8 @@ public class OFSFunction extends JPanel {
 		add(titlePanel2);
 		titlePanel2.setLayout(null);
 		
+		mainFrame.setTitle("Please select a Function to perform:");
+		
 		JLabel canteenTitle = new JLabel("Manage Canteen");
 		canteenTitle.setBounds(10, 0, 134, 50);
 		titlePanel2.add(canteenTitle);

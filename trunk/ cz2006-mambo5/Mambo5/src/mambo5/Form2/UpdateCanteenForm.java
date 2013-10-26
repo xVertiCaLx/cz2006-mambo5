@@ -111,7 +111,7 @@ public class UpdateCanteenForm extends JPanel {
 			
 		});
 		
-		updateBtn.setBounds(537, 507, 89, 23);
+		updateBtn.setBounds(482, 411, 89, 23);
 		add(updateBtn);
 		
 		availableCB = getCanteenList();
@@ -175,11 +175,8 @@ public class UpdateCanteenForm extends JPanel {
 					JOptionPane.showMessageDialog(null, "Error when updating to database");
 				else {
 					JOptionPane.showMessageDialog(null, "Canteen successfully updated");
-					mainFrame.remove(mainFrame.getSelectPanel());
-					mainFrame.setSelectPanel(new OFSFunction(mainFrame));
-					mainFrame.getContentPane().add(mainFrame.getSelectPanel());
-					mainFrame.revalidate();
-					mainFrame.repaint();
+					mainFrame.setTitle("Please select a Function to perform:");
+					mainFrame.replacePanel(new OFSFunction(mainFrame));
 				}
 			} catch (NumberFormatException exception) {
 				JOptionPane.showMessageDialog(null, "Please Enter Only Integer Value for Max Stalls");
