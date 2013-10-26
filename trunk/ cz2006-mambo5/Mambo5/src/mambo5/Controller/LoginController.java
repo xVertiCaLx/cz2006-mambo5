@@ -30,6 +30,8 @@ public class LoginController {
 					admin = new Admin(rs.getInt("adminID"), rs.getInt("accessID"), rs.getInt("stallID"), rs.getString("adminName"), rs.getString("password"));
 			} catch (Exception e) {
 				e.printStackTrace();
+			} finally {
+				dbc.terminate();
 			}
 		} 
 		
