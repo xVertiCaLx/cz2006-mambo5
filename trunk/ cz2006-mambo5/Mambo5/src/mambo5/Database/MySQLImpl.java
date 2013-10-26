@@ -199,10 +199,8 @@ public class MySQLImpl implements DataStoreInterface {
 		return menuItemList;
 	}
 	
-	//guohao
 	public ArrayList<Order> retrieveOrderID(ArrayList<Order> orderIDList, int stallID, String orderStatus) {
 		try {
-			System.out.println("got error in retrieve sql? guohao");
 			String sql = "SELECT * FROM orders WHERE stallID = '" + stallID + "' AND orderStatus = '" + orderStatus + "';";
 			rs = dbc.execute(sql);
 			

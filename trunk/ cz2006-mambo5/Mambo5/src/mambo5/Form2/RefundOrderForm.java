@@ -44,7 +44,6 @@ public class RefundOrderForm extends JPanel {
 	
 		orderIDList = new ArrayList<Order>();
 		OrderController = new OrderController();
-		
 		OrderController.retrieveOrderIDList(orderIDList, 5, "Processing");
 		
 		for (int i = 0; i < orderIDList.size(); i++) {
@@ -223,21 +222,42 @@ public class RefundOrderForm extends JPanel {
 		
 	
 	}
-
-
+	
 	public void submitOrderID() 
-	{
-		int orderID=Integer.parseInt(txtOrderId.getText());
-		String message = "OrderID " + orderID + " does not exist.";
-
-		for (int i=0; i<orderIDList.size(); i++)
+	{		
+		String message = "Unable to refund Order: " + txtOrderId.getText();
+		try
 		{
-			if(orderIDList.get(i).getOrderID() == orderID)
+			int orderID=Integer.parseInt(txtOrderId.getText());
+			txtOrderId.requestFocusInWindow();
+			for (int i=0; i<orderIDList.size(); i++)
 			{
-				message = "OrderID " + orderID + " found.";
-				break;
-			}
+				
+				if(orderIDList.get(i).getOrderID() == orderID)
+				{
+					oc = new OrderController();
+					if (oc.validateRefundOrder(orderID) == 1)
+					{
+						message = "Order " + orderID + " successfuly refunded";
+						break;
+					}
+					else
+					{
+						repaint();
+						break;
+					}
+				}//end outer if
+			}//end for loop
 		}
+		catch (Exception z)
+		{
+			JOptionPane.showMessageDialog(this, "Incorrect Data Type! Numbers Only!",  
+	                "Input Error", JOptionPane.ERROR_MESSAGE);   
+				 txtOrderId.requestFocusInWindow();  
+	             return;  
+		} //end catch
+		
+		txtOrderId.setText("");
 		JOptionPane.showMessageDialog(null, message);
 	}
 }//end JPanel
