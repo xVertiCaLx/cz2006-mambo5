@@ -28,7 +28,6 @@ public class CamsCreateOrderForm extends JPanel implements JInterfaceController 
 
 	private OrderController oc;
 	private OrderDetailController odc;
-	private MenuItemController menuItemController;
 
 	private Map<JButton, MenuItem> menuItemButtons;
 
@@ -62,18 +61,9 @@ public class CamsCreateOrderForm extends JPanel implements JInterfaceController 
 
 	JLabel totalPrice = new JLabel();
 
-	public CamsCreateOrderForm(final CamsMainFrame mainFrame, int menuID) {
-		/*
-		 * menuItemList = new ArrayList<MenuItem>(); menuItemController = new
-		 * MenuItemController(); menuID = 5;
-		 * 
-		 * menuItemController.retrieveMenuItemList(menuItemList, 5);
-		 * 
-		 * for (int i = 0; i < menuItemList.size(); i++) {
-		 * System.out.println("element" + i + ":" +
-		 * menuItemList.get(i).getMenuItemName()); }
-		 */
+	public CamsCreateOrderForm(final CamsMainFrame mainFrame, final ArrayList<MenuItem> menuItemList, int menuID) {
 		// default
+		this.menuItemList = menuItemList;
 		this.menuID = menuID;
 		setSize(new Dimension(CONTENTPANE_WIDTH, CONTENTPANE_HEIGHT));
 		setLocation(posX, 40);
@@ -110,7 +100,6 @@ public class CamsCreateOrderForm extends JPanel implements JInterfaceController 
 
 		posY += menuItemPanel.getHeight();
 
-		// initialise number pad
 		numpadPanel = new NumPad();
 		numpadPanel.setSize(new Dimension(KEYPADPANE_WIDTH, KEYPADPANE_HEIGHT));
 		numpadPanel.setLocation(posX, posY);
@@ -210,13 +199,9 @@ public class CamsCreateOrderForm extends JPanel implements JInterfaceController 
 	// initialise menuitem buttons
 	public void initMenuItemButtons(int menuID) {
 		menuItemButtons = new HashMap<JButton, MenuItem>();
-		menuItemList = new ArrayList<MenuItem>();
-		menuItemController = new MenuItemController();
-
-		menuItemController.retrieveMenuItemList(menuItemList, 5);
-
 		for (int i = 0; i < menuItemList.size(); i++) {
-			addMenuItemButtons(menuItemList.get(i));
+			if (menuItemList.get(i).getMenuID() == menuID)
+				addMenuItemButtons(menuItemList.get(i));
 		}
 	}
 

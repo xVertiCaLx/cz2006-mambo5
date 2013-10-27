@@ -30,8 +30,7 @@ public class CamsMainFrame extends JFrame implements JInterfaceController {
 	private JLabel titleLabel = new JLabel("#Canteen");
 	private JButton mainMenuButton;
 	private int posX = 0, posY = 0;
-	private ArrayList<MenuItem> menuItemList;
-	private MenuItemController menuItemController;
+	
 
 	public CamsMainFrame() {		
 		// the frame
@@ -81,12 +80,6 @@ public class CamsMainFrame extends JFrame implements JInterfaceController {
 		final CamsSplashScreen splashscreen = new CamsSplashScreen(this);
 		applicationPanel = splashscreen;
 		contentPane.add(applicationPanel);
-		
-		System.out.println("Initialising CaMS, Please Wait...");
-		menuItemList = new ArrayList<MenuItem>();
-		menuItemController = new MenuItemController();
-		menuItemController.retrieveMenuItemList(menuItemList);
-		System.out.println("Initialising Complete. Loading Main Screen.");
 		
 		selectPanel = new SelectPanel(this);
 		replacePanel(selectPanel);

@@ -5,16 +5,18 @@ import java.awt.Font;
 import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
 import mambo5.Controller.JInterfaceController;
 import mambo5.Entity.Admin;
+import mambo5.Entity.MenuItem;
 
 public class CamsMainMenuForm extends JPanel implements JInterfaceController {
 
-	public CamsMainMenuForm(final CamsMainFrame mainFrame, final Admin admin) {
+	public CamsMainMenuForm(final CamsMainFrame mainFrame, final Admin admin, final ArrayList<MenuItem> menuItemList) {
 		setBounds(0, 0, 800, 560);
 		setLayout(null);
 		setBackground(new Color(0, 0, 255));
@@ -36,7 +38,7 @@ public class CamsMainMenuForm extends JPanel implements JInterfaceController {
 		btnNewOrder.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				removeAll();
-				add(new CamsCreateOrderForm(mainFrame, 5));
+				add(new CamsCreateOrderForm(mainFrame, menuItemList, 5));
 				revalidate();
 				repaint();
 			}
