@@ -39,7 +39,8 @@ public class CamsCreateOrderForm extends JPanel implements JInterfaceController 
 	// For OrderDetails
 	private int order, menuID;
 	private int stallID;
-	private int posX = 0, posY = 0;
+	
+	private int posX = 0, posY = 0, totalWidth = 0, totalHeight = 0, currentMenuItem = 0;
 
 	// For MenuItem
 	private ArrayList<OrderDetail> orderDetailsList = new ArrayList<OrderDetail>();
@@ -62,7 +63,6 @@ public class CamsCreateOrderForm extends JPanel implements JInterfaceController 
 	JLabel totalPrice = new JLabel();
 
 	public CamsCreateOrderForm(final CamsMainFrame mainFrame, final ArrayList<MenuItem> menuItemList, int menuID) {
-		// default
 		this.menuItemList = menuItemList;
 		this.menuID = menuID;
 		setSize(new Dimension(CONTENTPANE_WIDTH, CONTENTPANE_HEIGHT));
@@ -74,7 +74,6 @@ public class CamsCreateOrderForm extends JPanel implements JInterfaceController 
 		implementButtons();
 	}
 
-	// initialise panels
 	public void initPanels() {
 		receiptPanel = new JPanel();
 		receiptPanel.setSize(new Dimension(RECEIPTPANE_WIDTH,
@@ -93,6 +92,7 @@ public class CamsCreateOrderForm extends JPanel implements JInterfaceController 
 		posX += receiptPanel.getWidth();
 
 		menuItemPanel = new JPanel();
+		menuItemPanel.setLayout(null);
 		menuItemPanel.setSize(new Dimension(MENUITEMPANE_WIDTH,
 				MENUITEMPANE_HEIGHT));
 		menuItemPanel.setLocation(posX, posY);
@@ -196,17 +196,37 @@ public class CamsCreateOrderForm extends JPanel implements JInterfaceController 
 		});
 	}
 
-	// initialise menuitem buttons
 	public void initMenuItemButtons(int menuID) {
+		posX = 0; posY = MARGIN; totalWidth = 2*(MENUITEM_BUTTON_WIDTH + MARGIN); totalHeight = 2*(MENUITEM_BUTTON_HEIGHT+MARGIN);
 		menuItemButtons = new HashMap<JButton, MenuItem>();
-		for (int i = 0; i < menuItemList.size(); i++) {
-			if (menuItemList.get(i).getMenuID() == menuID)
-				addMenuItemButtons(menuItemList.get(i));
+		for (; currentMenuItem < menuItemList.size(); currentMenuItem++) {
+			if (menuItemList.get(currentMenuItem).getMenuID() == menuID) {
+				if (totalWidth >= menuItemPanel.getWidth()) {
+					if (totalHeight >= menuItemPanel.getHeight()) {
+						totalHeight = 0;
+						posX = 0;
+						posY = MARGIN;
+						break;
+					} else {
+						posX = 0;
+						totalWidth = 2*(MENUITEM_BUTTON_WIDTH + MARGIN);
+						posY += MENUITEM_BUTTON_HEIGHT + MARGIN;
+						totalHeight += MENUITEM_BUTTON_HEIGHT + MARGIN;
+					}
+				} else {
+					totalWidth += MENUITEM_BUTTON_WIDTH + MARGIN;
+				}
+			}
+			
+			addMenuItemButtons(menuItemList.get(currentMenuItem));
+			posX += MENUITEM_BUTTON_WIDTH + MARGIN;
 		}
 	}
 
 	public void addMenuItemButtons(MenuItem menuItem) {
 		JButton menuItemButton = new JButton(menuItem.getMenuItemName());
+		menuItemButton.setSize(new Dimension(MENUITEM_BUTTON_WIDTH, MENUITEM_BUTTON_HEIGHT));
+		menuItemButton.setLocation(posX, posY);
 		menuItemButton.setActionCommand(menuItem.getMenuItemName());
 		menuItemButtons.put(menuItemButton, menuItem);
 		menuItemButton.addActionListener(new ActionListener() {
@@ -233,6 +253,10 @@ public class CamsCreateOrderForm extends JPanel implements JInterfaceController 
 		menuItemPanel.add(menuItemButton);
 	}
 
+	public void repaintReceipt() {
+		
+	}
+	
 	public void initSidePanelButton() {
 		btnMainPage.setForeground(Color.WHITE);
 		btnMainPage.setFont(new Font("Tahoma", Font.BOLD, 12));
