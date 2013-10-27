@@ -21,7 +21,6 @@ public class RefundOrderForm extends JPanel {
 	final JTextField txtOrderId = new JTextField();
 	
 	private int num;
-	private OrderController oc;
 	private ArrayList<Order> orderIDList;
 	private OrderController OrderController;
 	
@@ -235,8 +234,8 @@ public class RefundOrderForm extends JPanel {
 				
 				if(orderIDList.get(i).getOrderID() == orderID)
 				{
-					oc = new OrderController();
-					if (oc.validateRefundOrder(orderID) == 1)
+					OrderController = new OrderController();
+					if (OrderController.validateRefundOrder(orderID) == 1)
 					{
 						message = "Order " + orderID + " successfuly refunded";
 						//need to know how to remove the selected arraylist object.
