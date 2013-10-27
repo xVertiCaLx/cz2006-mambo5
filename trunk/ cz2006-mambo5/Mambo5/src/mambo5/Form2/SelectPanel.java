@@ -2,17 +2,20 @@ package mambo5.Form2;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
 import mambo5.Controller.JInterfaceController;
-
-//231 + y 254+x
+import mambo5.Controller.MenuItemController;
+import mambo5.Entity.MenuItem;
 
 public class SelectPanel extends JPanel implements JInterfaceController {
 	private int posX = 0, posY = 40, totalHeight = 0, totalWidth = 0;
 	private JButton OFSButton, CAMSButton, TixButton;
+	private ArrayList<MenuItem> menuItemList = new ArrayList<MenuItem>();
+	private MenuItemController menuItemController = new MenuItemController();
 	
 	public SelectPanel(final CamsMainFrame mainFrame) {
 		// Panel Size
@@ -21,6 +24,11 @@ public class SelectPanel extends JPanel implements JInterfaceController {
 		setBackground(JPANEL_BACKGROUND_COLOUR);
 		mainFrame.setTitle("Please select a System to demonstrate:");
 
+		System.out.println("Initialising CaMS, Please Wait...");
+				
+		menuItemController.retrieveMenuItemList(menuItemList);
+		System.out.println("Initialising Complete. Loading Main Screen.");
+		
 		OFSButton = new JButton("Enter OFS System");
 		OFSButton.setSize(MENUBUTTON_WIDTH, MENUBUTTON_HEIGHT);
 		OFSButton.addActionListener(new ActionListener() {
@@ -37,7 +45,7 @@ public class SelectPanel extends JPanel implements JInterfaceController {
 		CAMSButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//mainFrame.replacePanel(new CamsLoginForm(mainFrame));
-				mainFrame.replacePanel(new CamsCreateOrderForm(mainFrame,5));
+				mainFrame.replacePanel(new CamsCreateOrderForm(mainFrame, menuItemList, 5));
 			}
 		});
 		
