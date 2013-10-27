@@ -38,10 +38,11 @@ public class OrderDetailController {
 		}
 		
 		//guohao - testing
-		/*public ArrayList<OrderDetail> retrieveOrderDetailList(ArrayList<OrderDetail> orderDetailList, int orderID) {
+		public ArrayList<OrderDetail> retrieveOrderDetailList(ArrayList<OrderDetail> orderDetailList, int orderID) {
+			System.out.println("REACH retrieveOrderDetailList");
 			sysConfig = new SystemConfiguration();
 			dataStore = DataStoreFactory.createDataStore(sysConfig);
 			
-			return dataStore.retrieveOrderDetail(orderDetailList, orderID);
-		}*/
+			return dataStore.retrieveOrderDetailList(orderDetailList, orderID);
+		}
 }

@@ -9,6 +9,7 @@ import mambo5.Entity.Canteen;
 import mambo5.Entity.Menu;
 import mambo5.Entity.MenuItem;
 import mambo5.Entity.Order;
+import mambo5.Entity.OrderDetail;
 import mambo5.Entity.Stall;
 
 //Concrete data store object for data access in MySQL database
@@ -239,6 +240,21 @@ public class MySQLImpl implements DataStoreInterface {
 		return orderIDList;
 	}
 
-
+	public ArrayList<OrderDetail> retrieveOrderDetailList(ArrayList<OrderDetail> orderDetailList, int orderID) {
+		try {
+			String sql = "SELECT od.orderID, od.actualPrice, mi.menuItemName, mi.discount "
+					+ "FROM mambojumbo.orderdetails od INNER JOIN mambojumbo.menuitem mi "
+					+ "ON mi.menuItemID = od.menuItemID WHERE orderID = " + orderID +";";
+			rs = dbc.execute(sql);
+			
+			while(rs.next())
+				orderDetailList.add(new OrderDetail(rs.getInt("orderID"), rs.getDouble("actualPrice"), rs.getString("menuItemName"), rs.getDouble("discount")));
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			dbc.terminate();
+		}
+		return orderDetailList;
+	}
 
 }
