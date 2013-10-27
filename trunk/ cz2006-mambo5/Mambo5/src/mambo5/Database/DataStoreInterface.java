@@ -26,6 +26,7 @@ public interface DataStoreInterface {
 	ArrayList<Menu> retrieveMenu(ArrayList<Stall> stallList);
 	
 	//MENUITEM
+	public ArrayList<MenuItem> retrieveMenuItem(ArrayList<MenuItem> menuItemList);
 	public ArrayList<MenuItem> retrieveMenuItem(ArrayList<MenuItem> menuItemList, int menuItemID);
 	
 	//ORDER

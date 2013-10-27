@@ -230,6 +230,24 @@ public class MySQLImpl implements DataStoreInterface {
 		}
 		return menuItemList;
 	}
+	
+	public ArrayList<MenuItem> retrieveMenuItem(ArrayList<MenuItem> menuItemList) {
+		try {
+			String sql = "SELECT * FROM menuitem;";
+			rs = dbc.execute(sql);
+
+			while (rs.next())
+				menuItemList.add(new MenuItem(rs.getInt("menuItemID"), rs
+						.getInt("menuID"), rs.getString("menuItemName"), rs
+						.getDouble("menuItemPrice"), rs.getDouble("discount")));
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			dbc.terminate();
+		}
+		
+		return menuItemList;
+	}
 
 	public ArrayList<Order> retrieveOrderID(ArrayList<Order> orderIDList,
 			int stallID, String orderStatus) {
