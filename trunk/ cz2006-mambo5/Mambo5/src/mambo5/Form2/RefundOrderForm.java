@@ -222,7 +222,7 @@ public class RefundOrderForm extends JPanel {
 		
 	
 	}
-	
+
 	public void submitOrderID() 
 	{		
 		String message = "Unable to refund Order: " + txtOrderId.getText();
@@ -239,6 +239,7 @@ public class RefundOrderForm extends JPanel {
 					if (oc.validateRefundOrder(orderID) == 1)
 					{
 						message = "Order " + orderID + " successfuly refunded";
+						//need to know how to remove the selected arraylist object.
 						break;
 					}
 					else
