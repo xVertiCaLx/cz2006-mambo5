@@ -19,7 +19,7 @@ public class MySQLImpl implements DataStoreInterface {
 	private ArrayList<Canteen> canteenList;
 	private ArrayList<Stall> stallList;
 	private ArrayList<Admin> adminList;
-	//private ArrayList<Order> orderList; // guohao
+	// private ArrayList<Order> orderList; // guohao
 	private ResultSet rs;
 
 	// setup Connections
@@ -58,7 +58,8 @@ public class MySQLImpl implements DataStoreInterface {
 	}
 
 	@Override
-	public int updateCanteenDetail(int canteenID, String canteenName, String canteenDesc, String canteenAddress, int maxStall) {
+	public int updateCanteenDetail(int canteenID, String canteenName,
+			String canteenDesc, String canteenAddress, int maxStall) {
 		int result = 0;
 
 		String sql = "UPDATE canteen " + "SET canteenName = '" + canteenName
@@ -113,7 +114,8 @@ public class MySQLImpl implements DataStoreInterface {
 
 	// -------------------------------------------Stall----------------------------------------------------------------
 	@Override
-	public int createStall(int canteenID, String stallUnit, String stallName, String stallDesc, String stallStatus) {
+	public int createStall(int canteenID, String stallUnit, String stallName,
+			String stallDesc, String stallStatus) {
 		int result = 0;
 
 		String sql = "INSERT INTO stall ( canteenID, stallUnit, stallName, stallDesc, stallStatus) "
@@ -132,31 +134,30 @@ public class MySQLImpl implements DataStoreInterface {
 		result = dbc.executeNonQuery(sql);
 		return result;
 	}
-	
+
 	@Override
-	public int updateStallDetail(int stallID, String stallName, String stallDesc, String stallStatus) {
+	public int updateStallDetail(int stallID, String stallName,
+			String stallDesc, String stallStatus) {
 		int result = 0;
 
 		String sql = "UPDATE stall " + "SET stallName = '" + stallName
-				+ "' , stallDesc = '" + stallDesc
-				+ "' , stallStatus = '" + stallStatus + "' WHERE stallID = " + stallID + ";";
+				+ "' , stallDesc = '" + stallDesc + "' , stallStatus = '"
+				+ stallStatus + "' WHERE stallID = " + stallID + ";";
 
 		result = dbc.executeNonQuery(sql);
 		return result;
 	}
-	
+
 	@Override
 	public int deleteStall(int stallID) {
 		int result = 0;
 
-		String sql = "DELETE FROM stall " + "WHERE stallID = " + stallID
-				+ ";";
+		String sql = "DELETE FROM stall " + "WHERE stallID = " + stallID + ";";
 
 		result = dbc.executeNonQuery(sql);
 
 		return result;
 	}
-
 
 	// -------------------------------------------Admin-----------------------------------------------------------------
 	@Override
@@ -187,17 +188,18 @@ public class MySQLImpl implements DataStoreInterface {
 	public ArrayList<Menu> retrieveMenu(ArrayList<Stall> stallList) {
 		ArrayList<Menu> menuList = new ArrayList<Menu>();
 		try {
-			if(stallList.size() > 0) {
+			if (stallList.size() > 0) {
 				String sql = "SELECT * FROM MENU WHERE stallID in (";
 				for (int i = 0; i < stallList.size(); i++) {
-					sql += "'" +stallList.get(i).getStallId() + "'";
-					if(i+1 < stallList.size())
-						sql +=",";
+					sql += "'" + stallList.get(i).getStallId() + "'";
+					if (i + 1 < stallList.size())
+						sql += ",";
 				}
-				sql +=");";
+				sql += ");";
 				rs = dbc.execute(sql);
 				while (rs.next()) {
-					Menu m = new Menu(rs.getInt("menuID"), rs.getInt("stallID"), rs.getString("menuType"));
+					Menu m = new Menu(rs.getInt("menuID"),
+							rs.getInt("stallID"), rs.getString("menuType"));
 					menuList.add(m);
 				}
 				dbc.terminate();
@@ -209,14 +211,18 @@ public class MySQLImpl implements DataStoreInterface {
 	}
 
 	@Override
-	public ArrayList<MenuItem> retrieveMenuItem(ArrayList<MenuItem> menuItemList, int menuID) {
+	public ArrayList<MenuItem> retrieveMenuItem(
+			ArrayList<MenuItem> menuItemList, int menuItemID) {
 		try {
 			System.out.println("got error in retrieve sql?");
-			String sql = "SELECT * FROM MENUITEM WHERE menuID = '" + menuID + "';";
+			String sql = "SELECT * FROM MENUITEM WHERE menuItemID = '"
+					+ menuItemID + "';";
 			rs = dbc.execute(sql);
-			
-			while(rs.next())
-				menuItemList.add(new MenuItem(rs.getInt("menuItemID"), rs.getInt("menuID"), rs.getString("menuItemName"), rs.getDouble("menuItemPrice"), rs.getDouble("discount")));
+
+			while (rs.next())
+				menuItemList.add(new MenuItem(rs.getInt("menuItemID"), rs
+						.getInt("menuID"), rs.getString("menuItemName"), rs
+						.getDouble("menuItemPrice"), rs.getDouble("discount")));
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -224,14 +230,18 @@ public class MySQLImpl implements DataStoreInterface {
 		}
 		return menuItemList;
 	}
-	
-	public ArrayList<Order> retrieveOrderID(ArrayList<Order> orderIDList, int stallID, String orderStatus) {
+
+	public ArrayList<Order> retrieveOrderID(ArrayList<Order> orderIDList,
+			int stallID, String orderStatus) {
 		try {
-			String sql = "SELECT * FROM orders WHERE stallID = '" + stallID + "' AND orderStatus = '" + orderStatus + "';";
+			String sql = "SELECT * FROM orders WHERE stallID = '" + stallID
+					+ "' AND orderStatus = '" + orderStatus + "';";
 			rs = dbc.execute(sql);
-			
-			while(rs.next())
-				orderIDList.add(new Order(rs.getInt("orderID"), rs.getInt("custID"), rs.getDate("purchaseDate"), rs.getString("orderStatus"), rs.getInt("stallID")));
+
+			while (rs.next())
+				orderIDList.add(new Order(rs.getInt("orderID"), rs
+						.getInt("custID"), rs.getDate("purchaseDate"), rs
+						.getString("orderStatus"), rs.getInt("stallID")));
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -240,15 +250,19 @@ public class MySQLImpl implements DataStoreInterface {
 		return orderIDList;
 	}
 
-	public ArrayList<OrderDetail> retrieveOrderDetailList(ArrayList<OrderDetail> orderDetailList, int orderID) {
+	public ArrayList<OrderDetail> retrieveOrderDetailList(
+			ArrayList<OrderDetail> orderDetailList, int orderID) {
+		System.out.println("CAME IN MySQLImpl");
 		try {
-			String sql = "SELECT od.orderID, od.actualPrice, mi.menuItemName, mi.discount "
-					+ "FROM mambojumbo.orderdetails od INNER JOIN mambojumbo.menuitem mi "
-					+ "ON mi.menuItemID = od.menuItemID WHERE orderID = " + orderID +";";
+			String sql = "SELECT * FROM mambojumbo.orderdetails WHERE orderID = "
+					+ orderID + ";";
 			rs = dbc.execute(sql);
-			
-			while(rs.next())
-				orderDetailList.add(new OrderDetail(rs.getInt("orderID"), rs.getDouble("actualPrice"), rs.getString("menuItemName"), rs.getDouble("discount")));
+
+			while (rs.next()) {
+				System.out.println("add once");
+				orderDetailList.add(new OrderDetail(rs.getInt("menuItemID"), rs
+						.getInt("orderID"), rs.getDouble("actualPrice")));
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -256,5 +270,21 @@ public class MySQLImpl implements DataStoreInterface {
 		}
 		return orderDetailList;
 	}
+
+	/*
+	 * public ArrayList<OrderDetail>
+	 * retrieveOrderDetailList(ArrayList<OrderDetail> orderDetailList, int
+	 * orderID) { try { String sql =
+	 * "SELECT od.orderID, od.actualPrice, mi.menuItemName, mi.discount " +
+	 * "FROM mambojumbo.orderdetails od INNER JOIN mambojumbo.menuitem mi " +
+	 * "ON mi.menuItemID = od.menuItemID WHERE orderID = " + orderID +";"; rs =
+	 * dbc.execute(sql);
+	 * 
+	 * while(rs.next()) orderDetailList.add(new
+	 * OrderDetail(rs.getInt("orderID"), rs.getDouble("actualPrice"),
+	 * rs.getString("menuItemName"), rs.getDouble("discount"))); } catch
+	 * (Exception e) { e.printStackTrace(); } finally { dbc.terminate(); }
+	 * return orderDetailList; }
+	 */
 
 }

@@ -39,7 +39,7 @@ public class OrderDetailController {
 		
 		//guohao - testing
 		public ArrayList<OrderDetail> retrieveOrderDetailList(ArrayList<OrderDetail> orderDetailList, int orderID) {
-			System.out.println("REACH retrieveOrderDetailList");
+			System.out.println("Came in retrieveOrderDetailList");
 			sysConfig = new SystemConfiguration();
 			dataStore = DataStoreFactory.createDataStore(sysConfig);
 			
