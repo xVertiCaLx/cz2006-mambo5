@@ -17,8 +17,10 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 import mambo5.Controller.JInterfaceController;
+import mambo5.Controller.MenuItemController;
 import mambo5.Controller.OrderController;
 import mambo5.Controller.OrderDetailController;
+import mambo5.Entity.MenuItem;
 import mambo5.Entity.Order;
 import mambo5.Entity.OrderDetail;
 
@@ -26,16 +28,20 @@ public class PendingOrderForm extends JPanel implements JInterfaceController {
 
 	private JPanel receiptPanel, ordersPanel, sidePanel, searchPanel;
 
-	private int stallID = 5, posX = 0, posY = 0, firstOrderID = 0;
+	private int stallID = 5, posX = 0, posY = 0;
 	private JTextArea receipt;
 	private JScrollPane receiptScrollPane;
 	private Map<JButton, Order> orderIDButtons;
+	private Map<Order, ArrayList<OrderDetail>> orderDetails;
 	private ArrayList<Order> orderIDList = new ArrayList<Order>();
 	private OrderController OrderController;
 	
 	//guohao testing
-	private ArrayList<OrderDetail> OrderDetailList = new ArrayList<OrderDetail>();
-	private OrderDetailController OrderDetailController;
+	private ArrayList<OrderDetail> orderDetailList;// = new ArrayList<OrderDetail>();
+	private ArrayList<MenuItem> menuItemList = new ArrayList<MenuItem>();
+	private OrderDetailController OrderDetailController = new OrderDetailController();;
+	private MenuItemController menuItemController = new MenuItemController();
+
 	
 	
 	private NumPad numpadPanel;
@@ -53,30 +59,55 @@ public class PendingOrderForm extends JPanel implements JInterfaceController {
 		setBackground(JPANEL_BACKGROUND_COLOUR);
 
 		
-
 		initPanels();
 		initOrderIDButtons(stallID);// parameter should be stallID
 		implementButtons();
 		initSidePanelButton();
 		
-		OrderDetailList = new ArrayList<OrderDetail>();
-		OrderDetailController = new OrderDetailController();
+		//OrderDetailController = 
+		//menuItemController = 
+		//System.out.println("OrderDetailList size before loop is: " + orderDetailList.size());
+		//orderIDList.size()=3-->System.out.println("orderIDList.size() before loop is: " + orderIDList.size());
 		
-		System.out.println("orderIDList.size() size is: " +orderIDList.size());
+		
+		//init time
+		orderDetails = new HashMap<Order, ArrayList<OrderDetail>>();
+		
 		for (int i =0; i< orderIDList.size(); i++)
 		{
-			OrderDetailController.retrieveOrderDetailList(OrderDetailList, orderIDList.get(i).getOrderID());	
+			orderDetailList = new ArrayList<OrderDetail>();
+			OrderDetailController.retrieveOrderDetailList(orderDetailList, orderIDList.get(i).getOrderID());	
+			for(int j = 0; j < orderDetailList.size(); j++)
+				menuItemController.retrieveMenuItemList(menuItemList, orderDetailList.get(j).getMenuItemID());
+			orderDetails.put(orderIDList.get(i), orderDetailList);
+			System.out.println("OrderDetailList.size in loop is: " + orderDetailList.size());
+			System.out.println((orderDetails.get(orderIDList.get(i))).get(0).getMenuItemID());
+		
 		}
 		
-		receipt.setText("ORDER ID: " + OrderDetailList.get(0).getOrderID() + "\n"
-				+ OrderDetailList.get(0).getActualPrice());
+		receipt.setText(receipt.getText() + "ORDER ID: " + orderDetails.get(orderIDList.get(0)).get(0).getOrderID() + "\n");
+
+		System.out.println("OrderDetailList size after loop is " + orderDetailList.size());
+		System.out.println("menuItemList size is " + menuItemList.size());
+				
+		for (int i =0; i < orderDetails.get(orderIDList.get(0)).size(); i++)
+		{
+			System.out.println("Came in " + (i+1));
+		receipt.setText(receipt.getText() 
+				+ orderDetails.get(orderIDList.get(0)).get(i).getMenuItemID() + "\t\t\t"
+				+ orderDetails.get(orderIDList.get(0)).get(i).getActualPrice() + "\n");
+		}
+		
+
+		
+		
+		
 		
 		/*for (int i =0; i< orderIDList.size(); i++)
 		{
 			System.out.println("NAME IS: " + OrderDetailList.get(i).getMenuItemID() +" PRICE IS: " + OrderDetailList.get(i).getActualPrice());
 		}*/
-
-		System.out.println("OrderDetailList.size() size is: " +OrderDetailList.size());
+		//System.out.println("OrderDetailList.size() size is: " +OrderDetailList.size());
 
 		
 	}
@@ -304,6 +335,7 @@ public class PendingOrderForm extends JPanel implements JInterfaceController {
 		});
 		
 		numpadPanel.enter().setText("SEARCH");
+		numpadPanel.enter().setVisible(false);
 		numpadPanel.enter().addActionListener(new ActionListener() {
 			
 			public void actionPerformed(ActionEvent e) {

@@ -30,10 +30,12 @@ public class MenuItemController {
 		return validate;
 	}
 	
-	public ArrayList<MenuItem> retrieveMenuItemList(ArrayList<MenuItem> menuItemList, int menuID) {
+	public ArrayList<MenuItem> retrieveMenuItemList(ArrayList<MenuItem> menuItemList, int menuItemID) {
 		sysConfig = new SystemConfiguration();
 		dataStore = DataStoreFactory.createDataStore(sysConfig);
 		
-		return dataStore.retrieveMenuItem(menuItemList, menuID);
+		return dataStore.retrieveMenuItem(menuItemList, menuItemID);
 	}
+	
+	
 }
