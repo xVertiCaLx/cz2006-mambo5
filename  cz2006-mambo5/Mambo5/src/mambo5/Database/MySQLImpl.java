@@ -270,7 +270,6 @@ public class MySQLImpl implements DataStoreInterface {
 
 	public ArrayList<OrderDetail> retrieveOrderDetailList(
 			ArrayList<OrderDetail> orderDetailList, int orderID) {
-		System.out.println("CAME IN MySQLImpl");
 		try {
 			String sql = "SELECT * FROM mambojumbo.orderdetails WHERE orderID = "
 					+ orderID + ";";

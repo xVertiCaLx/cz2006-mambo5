@@ -27,7 +27,7 @@ public class PendingOrderForm extends JPanel implements JInterfaceController {
 
 	private JPanel receiptPanel, ordersPanel, sidePanel, searchPanel;
 
-	private int stallID = 5, posX = 0, posY = 0;
+	private int stallID, posX = 0, posY = 0;
 	private JTextArea receipt;
 	private JScrollPane receiptScrollPane;
 	private Map<JButton, Order> orderButtons;
@@ -80,15 +80,14 @@ public class PendingOrderForm extends JPanel implements JInterfaceController {
 			/*for(int j = 0; j < orderDetailList.size(); j++)
 				menuItemController.retrieveMenuItemList(menuItemList, orderDetailList.get(j).getMenuItemID());*/
 			orderDetails.put(orderIDList.get(i), orderDetailList);
-			System.out.println("OrderDetailList.size in loop is: " + orderDetailList.size());
 			System.out.println((orderDetails.get(orderIDList.get(i))).get(0).getMenuItemID());
 		
 		}
 		
 		receipt.setText(receipt.getText() + "ORDER ID: " + orderDetails.get(orderIDList.get(0)).get(0).getOrderID() + "\n");
 
-		System.out.println("OrderDetailList size after loop is " + orderDetailList.size());
-		System.out.println("menuItemList size is " + menuItemList.size());
+		//System.out.println("OrderDetailList size after loop is " + orderDetailList.size());
+		//System.out.println("menuItemList size is " + menuItemList.size());
 				
 		for (int i =0; i < orderDetails.get(orderIDList.get(0)).size(); i++)
 		{
@@ -153,17 +152,26 @@ public class PendingOrderForm extends JPanel implements JInterfaceController {
 		
 		btnSearch.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//System.out.println("Order ID: " + orderDetails.get(orderIDList.get(0)).get(0).getMenuItemID());
-				receipt.setText("ORDER: " + searchIDTextField.getText() + "\n");
-				 
-				for (int j = 0; j < orderIDList.size(); j++) {
+				double tempTotal = 0.00;
+				receipt.setText("ORDER: " + searchIDTextField.getText() + "\n"
+						+ "========================================" + "\n");
+				receipt.setText(receipt.getText() + "Qty"+"   ItemName"+ "\t" +"UnitPrice"+ "      " +"TotalAmount\n");
+				for (int j = 0; j < orderIDList.size(); j++) {		
 					if (orderIDList.get(j).getOrderID() == Integer.parseInt(searchIDTextField.getText())) {
 						for (int i = 0; i < orderDetails.get(orderIDList.get(j)).size(); i++) {
-							receipt.append(orderDetails.get(orderIDList.get(j)).get(i).getQuantity() + "\t" + menuItems.get(orderDetails.get(orderIDList.get(j)).get(i).getMenuItemID()).getMenuItemName() + orderDetails.get(orderIDList.get(j)).get(i).getActualPrice()+"\n");
+							receipt.append(orderDetails.get(orderIDList.get(j)).get(i).getQuantity() + "   " +
+						menuItems.get(orderDetails.get(orderIDList.get(j)).get(i).getMenuItemID()).getMenuItemName() 
+						+ "  $" +orderDetails.get(orderIDList.get(j)).get(i).getActualPrice() + "" +
+						"\t" + "$" +(orderDetails.get(orderIDList.get(j)).get(i).getQuantity() * orderDetails.get(orderIDList.get(j)).get(i).getActualPrice())
+						+ "\n");
+							tempTotal += (orderDetails.get(orderIDList.get(j)).get(i).getQuantity() * orderDetails.get(orderIDList.get(j)).get(i).getActualPrice());
 						}
 					}
 				}
-			//	menuItems.get(orderDetails.get(orderIDList.get(0)).get(0).getMenuItemID()).getMenuItemName());		
+				receipt.setText(receipt.getText() + "\n\n" + "========================================\n"
+				+ "TOTAL: \t\t" + "$" +tempTotal+ "\n========================================");
+
+	
 			}
 		});
 
@@ -228,19 +236,24 @@ public class PendingOrderForm extends JPanel implements JInterfaceController {
 		orderIDButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				//orderDetails.get(orderButtons.get(e.getSource())).get(0).getActualPrice()
-				System.out.println("Retrieve data from Button: " + orderDetails.get(orderButtons.get(e.getSource())).get(0).getActualPrice());
-				
+				double tempTotal = 0.00;
 				receipt.setText("ORDER: " + orderDetails.get(orderButtons.get(e.getSource())).get(0).getOrderID() + "\n"
-						+ menuItems.get(orderDetails.get(orderIDList.get(0)).get(0).getMenuItemID()).getMenuItemName() + "\t\t\t"
-						+ orderDetails.get(orderButtons.get(e.getSource())).get(0).getActualPrice());
-				
-				/*orderIDList.add(new Order(orderIDButtons.get(e.getSource())
-						.getOrderID(), orderIDButtons.get(e.getSource())
-						.getCustID(), orderIDButtons.get(e.getSource())
-						.getPurchaseDate(), orderIDButtons.get(e.getSource())
-						.getOrderStatus(), orderIDButtons.get(e.getSource())
-						.getStallID()));*/
+						+ "========================================" + "\n");
+				receipt.setText(receipt.getText() + "Qty"+"   ItemName"+ "\t" +"UnitPrice"+ "      " +"TotalAmount\n");
+				for (int j = 0; j < orderIDList.size(); j++) {		
+					if (orderIDList.get(j).getOrderID() == orderDetails.get(orderButtons.get(e.getSource())).get(0).getOrderID()) {
+						for (int i = 0; i < orderDetails.get(orderIDList.get(j)).size(); i++) {
+							receipt.append(orderDetails.get(orderIDList.get(j)).get(i).getQuantity() + "   " +
+						menuItems.get(orderDetails.get(orderIDList.get(j)).get(i).getMenuItemID()).getMenuItemName() 
+						+ "  $" +orderDetails.get(orderIDList.get(j)).get(i).getActualPrice() + "" +
+						"\t" + "$" +(orderDetails.get(orderIDList.get(j)).get(i).getQuantity() * orderDetails.get(orderIDList.get(j)).get(i).getActualPrice())
+						+ "\n");
+							tempTotal += (orderDetails.get(orderIDList.get(j)).get(i).getQuantity() * orderDetails.get(orderIDList.get(j)).get(i).getActualPrice());
+						}
+					}
+				}
+				receipt.setText(receipt.getText() + "\n\n" + "========================================\n"
+				+ "TOTAL: \t\t" + "$" +tempTotal+ "\n========================================");
 			}
 		});
 		
@@ -343,14 +356,6 @@ public class PendingOrderForm extends JPanel implements JInterfaceController {
 			}
 		});
 		
-		numpadPanel.enter().setText("SEARCH");
 		numpadPanel.enter().setVisible(false);
-		numpadPanel.enter().addActionListener(new ActionListener() {
-			
-			public void actionPerformed(ActionEvent e) {
-				System.out.println("test");
-			}
-		});
-
 	}
 }
