@@ -10,7 +10,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.swing.JButton;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
@@ -31,8 +30,9 @@ public class PendingOrderForm extends JPanel implements JInterfaceController {
 	private int stallID = 5, posX = 0, posY = 0;
 	private JTextArea receipt;
 	private JScrollPane receiptScrollPane;
-	private Map<JButton, Order> orderIDButtons;
+	private Map<JButton, Order> orderButtons;
 	private Map<Order, ArrayList<OrderDetail>> orderDetails;
+	private Map<Integer, MenuItem> menuItems;
 	private ArrayList<Order> orderIDList = new ArrayList<Order>();
 	private OrderController OrderController;
 	
@@ -42,8 +42,6 @@ public class PendingOrderForm extends JPanel implements JInterfaceController {
 	private OrderDetailController OrderDetailController = new OrderDetailController();;
 	private MenuItemController menuItemController = new MenuItemController();
 
-	
-	
 	private NumPad numpadPanel;
 	private JButton btnMainPage = new JButton("MAIN PAGE"),
 			btnNextPage = new JButton("NEXT PAGE"), btnPrevPage = new JButton(
@@ -64,6 +62,14 @@ public class PendingOrderForm extends JPanel implements JInterfaceController {
 		implementButtons();
 		initSidePanelButton();
 		
+		menuItems = new HashMap<Integer, MenuItem>();
+		menuItemList = new ArrayList<MenuItem>();
+		menuItemList = menuItemController.retrieveMenuItemList(menuItemList);
+		
+		for (int i = 0; i < menuItemList.size(); i++) {
+			menuItems.put(menuItemList.get(i).getMenuItemID(), menuItemList.get(i));
+		}
+		
 		//OrderDetailController = 
 		//menuItemController = 
 		//System.out.println("OrderDetailList size before loop is: " + orderDetailList.size());
@@ -77,8 +83,8 @@ public class PendingOrderForm extends JPanel implements JInterfaceController {
 		{
 			orderDetailList = new ArrayList<OrderDetail>();
 			OrderDetailController.retrieveOrderDetailList(orderDetailList, orderIDList.get(i).getOrderID());	
-			for(int j = 0; j < orderDetailList.size(); j++)
-				menuItemController.retrieveMenuItemList(menuItemList, orderDetailList.get(j).getMenuItemID());
+			/*for(int j = 0; j < orderDetailList.size(); j++)
+				menuItemController.retrieveMenuItemList(menuItemList, orderDetailList.get(j).getMenuItemID());*/
 			orderDetails.put(orderIDList.get(i), orderDetailList);
 			System.out.println("OrderDetailList.size in loop is: " + orderDetailList.size());
 			System.out.println((orderDetails.get(orderIDList.get(i))).get(0).getMenuItemID());
@@ -93,8 +99,9 @@ public class PendingOrderForm extends JPanel implements JInterfaceController {
 		for (int i =0; i < orderDetails.get(orderIDList.get(0)).size(); i++)
 		{
 			System.out.println("Came in " + (i+1));
+			
 		receipt.setText(receipt.getText() 
-				+ orderDetails.get(orderIDList.get(0)).get(i).getMenuItemID() + "\t\t\t"
+				+ menuItems.get(orderDetails.get(orderIDList.get(0)).get(i).getMenuItemID()).getMenuItemName() + "\t\t\t"
 				+ orderDetails.get(orderIDList.get(0)).get(i).getActualPrice() + "\n");
 		}
 		
@@ -206,7 +213,7 @@ public class PendingOrderForm extends JPanel implements JInterfaceController {
 	
 	// initialise order item buttons
 	public void initOrderIDButtons(int stallID) {
-		orderIDButtons = new HashMap<JButton, Order>();
+		orderButtons = new HashMap<JButton, Order>();
 		orderIDList = new ArrayList<Order>();
 		OrderController = new OrderController();
 		OrderController.retrieveOrderIDList(orderIDList, stallID, "Processing");
@@ -221,17 +228,19 @@ public class PendingOrderForm extends JPanel implements JInterfaceController {
 		JButton orderIDButton = new JButton(" "
 				+ Integer.toString(order.getOrderID()));
 		orderIDButton.setActionCommand(Integer.toString(order.getOrderID()));
-		orderIDButtons.put(orderIDButton, order);
+		orderButtons.put(orderIDButton, order);
 		orderIDButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 
-				orderIDList.add(new Order(orderIDButtons.get(e.getSource())
+				System.out.println("Retrieve data from Button: " + orderDetails.get(orderButtons.get(e.getSource())).get(0).getActualPrice());
+				
+				/*orderIDList.add(new Order(orderIDButtons.get(e.getSource())
 						.getOrderID(), orderIDButtons.get(e.getSource())
 						.getCustID(), orderIDButtons.get(e.getSource())
 						.getPurchaseDate(), orderIDButtons.get(e.getSource())
 						.getOrderStatus(), orderIDButtons.get(e.getSource())
-						.getStallID()));
+						.getStallID()));*/
 			}
 		});
 		
