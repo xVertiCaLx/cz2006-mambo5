@@ -245,7 +245,7 @@ public class CamsCreateOrderForm extends JPanel implements JInterfaceController 
 						+ "\n");
 
 				orderDetailsList.add(new OrderDetail(menuItemButtons.get(
-						e.getSource()).getMenuItemID(), actualPrice));
+						e.getSource()).getMenuItemID(), actualPrice, 5));
 			}
 		});
 

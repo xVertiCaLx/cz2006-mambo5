@@ -56,11 +56,8 @@ public class CamsListMenuItemForm extends JPanel implements JInterfaceController
 		menuItemButtons = new HashMap<JButton, MenuItem>();
 		for (int i = 0; i < menuItemList.size(); i++) {
 			if (menuItemList.get(i).getMenuID() == menuID)
-			{
-				//Able to get menuID=1 here and matches
-				System.out.println("menuItemList.get(i) is: " +menuItemList.get(i).getMenuItemName());
 				addMenuItemButtons(menuItemList.get(i));		
-			}
+			
 		}
 	}
 	

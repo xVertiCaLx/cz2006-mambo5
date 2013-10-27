@@ -279,7 +279,7 @@ public class MySQLImpl implements DataStoreInterface {
 			while (rs.next()) {
 				System.out.println("add once");
 				orderDetailList.add(new OrderDetail(rs.getInt("menuItemID"), rs
-						.getInt("orderID"), rs.getDouble("actualPrice")));
+						.getInt("orderID"), rs.getDouble("actualPrice"),rs.getInt("quantity")));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

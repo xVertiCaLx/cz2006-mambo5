@@ -58,7 +58,7 @@ public class PendingOrderForm extends JPanel implements JInterfaceController {
 
 		
 		initPanels();
-		initOrderIDButtons(stallID);// parameter should be stallID
+		initOrderIDButtons(stallID);
 		implementButtons();
 		initSidePanelButton();
 		
@@ -69,12 +69,6 @@ public class PendingOrderForm extends JPanel implements JInterfaceController {
 		for (int i = 0; i < menuItemList.size(); i++) {
 			menuItems.put(menuItemList.get(i).getMenuItemID(), menuItemList.get(i));
 		}
-		
-		//OrderDetailController = 
-		//menuItemController = 
-		//System.out.println("OrderDetailList size before loop is: " + orderDetailList.size());
-		//orderIDList.size()=3-->System.out.println("orderIDList.size() before loop is: " + orderIDList.size());
-		
 		
 		//init time
 		orderDetails = new HashMap<Order, ArrayList<OrderDetail>>();
@@ -98,24 +92,11 @@ public class PendingOrderForm extends JPanel implements JInterfaceController {
 				
 		for (int i =0; i < orderDetails.get(orderIDList.get(0)).size(); i++)
 		{
-			System.out.println("Came in " + (i+1));
-			
+
 		receipt.setText(receipt.getText() 
 				+ menuItems.get(orderDetails.get(orderIDList.get(0)).get(i).getMenuItemID()).getMenuItemName() + "\t\t\t"
 				+ orderDetails.get(orderIDList.get(0)).get(i).getActualPrice() + "\n");
 		}
-		
-
-		
-		
-		
-		
-		/*for (int i =0; i< orderIDList.size(); i++)
-		{
-			System.out.println("NAME IS: " + OrderDetailList.get(i).getMenuItemID() +" PRICE IS: " + OrderDetailList.get(i).getActualPrice());
-		}*/
-		//System.out.println("OrderDetailList.size() size is: " +OrderDetailList.size());
-
 		
 	}
 
@@ -135,7 +116,6 @@ public class PendingOrderForm extends JPanel implements JInterfaceController {
 		receipt.setBackground(WHITE_BACKGROUND_COLOUR);
 
 		receipt.setEditable(false);
-
 
 		// enable scroll
 		receiptScrollPane = new JScrollPane();
@@ -167,9 +147,25 @@ public class PendingOrderForm extends JPanel implements JInterfaceController {
 		btnSearch.setSize(new Dimension(SIDEPANE_WIDTH,
 				STANDARDBUTTON_HEIGHT + 20));
 		btnSearch.setLocation(75, 60);
-
 		searchPanel.add(searchIDTextField);
 		searchPanel.add(btnSearch);
+		
+		
+		btnSearch.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				//System.out.println("Order ID: " + orderDetails.get(orderIDList.get(0)).get(0).getMenuItemID());
+				receipt.setText("ORDER: " + searchIDTextField.getText() + "\n");
+				 
+				for (int j = 0; j < orderIDList.size(); j++) {
+					if (orderIDList.get(j).getOrderID() == Integer.parseInt(searchIDTextField.getText())) {
+						for (int i = 0; i < orderDetails.get(orderIDList.get(j)).size(); i++) {
+							receipt.append(orderDetails.get(orderIDList.get(j)).get(i).getQuantity() + "\t" + menuItems.get(orderDetails.get(orderIDList.get(j)).get(i).getMenuItemID()).getMenuItemName() + orderDetails.get(orderIDList.get(j)).get(i).getActualPrice()+"\n");
+						}
+					}
+				}
+			//	menuItems.get(orderDetails.get(orderIDList.get(0)).get(0).getMenuItemID()).getMenuItemName());		
+			}
+		});
 
 		posX = receiptPanel.getWidth();
 		posY = 0;
@@ -225,15 +221,19 @@ public class PendingOrderForm extends JPanel implements JInterfaceController {
 	}
 
 	public void addOrderIDButtons(Order order) {
-		JButton orderIDButton = new JButton(" "
+		JButton orderIDButton = new JButton("Order "
 				+ Integer.toString(order.getOrderID()));
 		orderIDButton.setActionCommand(Integer.toString(order.getOrderID()));
 		orderButtons.put(orderIDButton, order);
 		orderIDButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-
+				//orderDetails.get(orderButtons.get(e.getSource())).get(0).getActualPrice()
 				System.out.println("Retrieve data from Button: " + orderDetails.get(orderButtons.get(e.getSource())).get(0).getActualPrice());
+				
+				receipt.setText("ORDER: " + orderDetails.get(orderButtons.get(e.getSource())).get(0).getOrderID() + "\n"
+						+ menuItems.get(orderDetails.get(orderIDList.get(0)).get(0).getMenuItemID()).getMenuItemName() + "\t\t\t"
+						+ orderDetails.get(orderButtons.get(e.getSource())).get(0).getActualPrice());
 				
 				/*orderIDList.add(new Order(orderIDButtons.get(e.getSource())
 						.getOrderID(), orderIDButtons.get(e.getSource())
