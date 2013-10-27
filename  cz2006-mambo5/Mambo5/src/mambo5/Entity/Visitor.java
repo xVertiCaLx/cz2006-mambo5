@@ -1,9 +1,9 @@
 package mambo5.Entity;
 
-public class Vistor extends Customer{
+public class Visitor extends Customer{
 	private String vistorID;
 	
-	public Vistor(String vistorID) {
+	public Visitor(String vistorID) {
 		this.vistorID = vistorID;
 	}
 

@@ -20,7 +20,7 @@ public interface DataStoreInterface {
 	int deleteStall(int stallID);
 	
 	//ADMIN
-	ArrayList<Admin>  retrieveAdminList();
+	ArrayList<Admin> retrieveAdminList();
 	
 	//MENU
 	ArrayList<Menu> retrieveMenu(ArrayList<Stall> stallList);

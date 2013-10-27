@@ -1,8 +1,8 @@
 package mambo5.Form2;
 
-import java.awt.Component;
 import java.awt.Dimension;
 
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
@@ -39,9 +39,47 @@ public class NumPad extends JPanel implements JInterfaceController {
 		num8.setSize(new Dimension(KEYPAD_WIDTH, KEYPAD_HEIGHT));
 		num9.setSize(new Dimension(KEYPAD_WIDTH, KEYPAD_HEIGHT));
 		num0.setSize(new Dimension(KEYPAD_WIDTH, KEYPAD_HEIGHT));
-		
 		delete.setSize(new Dimension(KEYPAD_SPECIAL_WIDTH, KEYPAD_SPECIAL_HEIGHT));
 		enter.setSize(new Dimension(KEYPAD_SPECIAL_WIDTH, KEYPAD_SPECIAL_HEIGHT));
+		
+		num1.setBorder(BorderFactory.createEmptyBorder());
+		num2.setBorder(BorderFactory.createEmptyBorder());
+		num3.setBorder(BorderFactory.createEmptyBorder());
+		num4.setBorder(BorderFactory.createEmptyBorder());
+		num5.setBorder(BorderFactory.createEmptyBorder());
+		num6.setBorder(BorderFactory.createEmptyBorder());
+		num7.setBorder(BorderFactory.createEmptyBorder());
+		num8.setBorder(BorderFactory.createEmptyBorder());
+		num9.setBorder(BorderFactory.createEmptyBorder());
+		num0.setBorder(BorderFactory.createEmptyBorder());
+		delete.setBorder(BorderFactory.createEmptyBorder());
+		enter.setBorder(BorderFactory.createEmptyBorder());
+		
+		num1.setBackground(KEYPAD_BACKGROUND_COLOUR);
+		num2.setBackground(KEYPAD_BACKGROUND_COLOUR);
+		num3.setBackground(KEYPAD_BACKGROUND_COLOUR);
+		num4.setBackground(KEYPAD_BACKGROUND_COLOUR);
+		num5.setBackground(KEYPAD_BACKGROUND_COLOUR);
+		num6.setBackground(KEYPAD_BACKGROUND_COLOUR);
+		num7.setBackground(KEYPAD_BACKGROUND_COLOUR);
+		num8.setBackground(KEYPAD_BACKGROUND_COLOUR);
+		num9.setBackground(KEYPAD_BACKGROUND_COLOUR);
+		num0.setBackground(KEYPAD_BACKGROUND_COLOUR);
+		delete.setBackground(KEYPAD_BACKGROUND_COLOUR);
+		enter.setBackground(KEYPAD_BACKGROUND_COLOUR);
+		
+		num1.setForeground(KEYPAD_FOREGROUND_COLOUR);
+		num2.setForeground(KEYPAD_FOREGROUND_COLOUR);
+		num3.setForeground(KEYPAD_FOREGROUND_COLOUR);
+		num4.setForeground(KEYPAD_FOREGROUND_COLOUR);
+		num5.setForeground(KEYPAD_FOREGROUND_COLOUR);
+		num6.setForeground(KEYPAD_FOREGROUND_COLOUR);
+		num7.setForeground(KEYPAD_FOREGROUND_COLOUR);
+		num8.setForeground(KEYPAD_FOREGROUND_COLOUR);
+		num9.setForeground(KEYPAD_FOREGROUND_COLOUR);
+		num0.setForeground(KEYPAD_FOREGROUND_COLOUR);
+		delete.setForeground(KEYPAD_FOREGROUND_COLOUR);
+		enter.setForeground(KEYPAD_FOREGROUND_COLOUR);
 		
 		//settled anything else? see here. wiat ah
 		num1.setLocation(posX, posY);
@@ -140,6 +178,10 @@ public class NumPad extends JPanel implements JInterfaceController {
 	
 	public JButton enter() {
 		return enter;
+	}
+	
+	public void setEnterName(String name) {
+		enter.setText(name);
 	}
 
 }

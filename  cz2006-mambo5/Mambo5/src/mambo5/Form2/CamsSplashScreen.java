@@ -3,12 +3,15 @@ package mambo5.Form2;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.util.ArrayList;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
 import mambo5.Controller.JInterfaceController;
+import mambo5.Controller.MenuItemController;
+import mambo5.Entity.MenuItem;
 
 public class CamsSplashScreen extends JPanel implements JInterfaceController {
 
