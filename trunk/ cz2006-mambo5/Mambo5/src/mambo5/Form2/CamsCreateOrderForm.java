@@ -250,7 +250,7 @@ public class CamsCreateOrderForm extends JPanel implements JInterfaceController 
 		});
 
 		menuItemPanel.add(menuItemButton);
-	}
+	};
 
 	public void repaintReceipt() {
 		

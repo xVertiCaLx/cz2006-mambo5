@@ -85,4 +85,14 @@ public class Order {
 		return result;
 	}	
 	
+	public int confirmOrder(int orderID)
+	{
+		dbc = new DBController();
+		int result = 0;
+		String sql = "UPDATE mambojumbo.orders SET orderStatus = '" + "Completed" + "' WHERE orderID = '" + orderID + "';";
+				
+		result = dbc.executeNonQuery(sql);
+		System.out.println(result);
+		return result;
+	}	
 }

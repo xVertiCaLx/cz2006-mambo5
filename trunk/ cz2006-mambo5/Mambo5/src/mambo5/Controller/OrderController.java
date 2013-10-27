@@ -7,7 +7,6 @@ import java.util.Date;
 import mambo5.Database.DataStoreFactory;
 import mambo5.Database.DataStoreInterface;
 import mambo5.Database.SystemConfiguration;
-import mambo5.Entity.MenuItem;
 import mambo5.Entity.Order;
 
 public class OrderController { 
@@ -42,6 +41,16 @@ public class OrderController {
 		
 		return validate;
 	}
+	
+	//validating confirm order
+		public int validateConfirmOrder(int orderID){
+			int validate = 0;
+			
+			o = new Order();
+			validate = o.confirmOrder(orderID);
+			
+			return validate;
+		}
 	
 	//guohao
 	public ArrayList<Order> retrieveOrderIDList(ArrayList<Order> orderIDList, int stallID, String orderStatus) {
