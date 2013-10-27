@@ -13,23 +13,8 @@ public class CamsApp {
 		SwingUtilities.invokeLater(new Runnable() {
 			@Override
 			public void run() {
-				init();
+				new CamsMainFrame();
 			}
 		});
 	}
-
-	public static void init() {
-		//Model
-		Stall stall = new Stall();
-		Menu menu = new Menu();
-		//View
-		CamsMainFrame CamsFrame = new CamsMainFrame();
-		//Controller
-		//LoginController loginController = new LoginController();
-		//MenuController menuController = new MenuController();
-		
-		//CamsFrame.setLoginListener(stallController);
-		
-	}
-
 }

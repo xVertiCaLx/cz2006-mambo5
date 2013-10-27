@@ -30,11 +30,10 @@ public class CamsMainFrame extends JFrame implements JInterfaceController {
 	private JLabel titleLabel = new JLabel("#Canteen");
 	private JButton mainMenuButton;
 	private int posX = 0, posY = 0;
-	
 	private ArrayList<MenuItem> menuItemList;
 	private MenuItemController menuItemController;
 
-	public CamsMainFrame() {
+	public CamsMainFrame() {		
 		// the frame
 		setResizable(false);
 		setVisible(true);
@@ -78,21 +77,21 @@ public class CamsMainFrame extends JFrame implements JInterfaceController {
 		titleLabel.setHorizontalAlignment(SwingConstants.RIGHT);
 		titleLabel.setLocation(posX, posY);
 		titlePanel.add(titleLabel);
-
-		selectPanel = new SelectPanel(this);
-		applicationPanel = selectPanel;
+		
+		final CamsSplashScreen splashscreen = new CamsSplashScreen(this);
+		applicationPanel = splashscreen;
 		contentPane.add(applicationPanel);
 		
-		//SplashScreen splashscreen = new SplashScreen();
-		
-		/*System.out.println("Initialising CaMS, Please Wait...");
+		System.out.println("Initialising CaMS, Please Wait...");
 		menuItemList = new ArrayList<MenuItem>();
 		menuItemController = new MenuItemController();
-		menuItemController.retrieveMenuItemList(menuItemList, 5);
-		System.out.println("Initialising Complete. Loading Main Screen." + menuItemList.get(3).getMenuItemName());
-		replacePanel(new SelectPanel(this));*/
+		menuItemController.retrieveMenuItemList(menuItemList);
+		System.out.println("Initialising Complete. Loading Main Screen.");
+		
+		selectPanel = new SelectPanel(this);
+		replacePanel(selectPanel);
 	}
-	  
+	
 	public void setSelectPanel(JPanel applicationPanel) {
 		this.applicationPanel = applicationPanel;
 	}
