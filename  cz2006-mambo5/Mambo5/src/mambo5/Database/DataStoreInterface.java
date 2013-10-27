@@ -30,7 +30,7 @@ public interface DataStoreInterface {
 	
 	//ORDER
 	public ArrayList<Order> retrieveOrderID(ArrayList<Order> orderIDList, int stallID, String orderStatus);
+
+	//ORDERDETAIL - testing
+	public ArrayList<OrderDetail> retrieveOrderDetailList(ArrayList<OrderDetail> orderDetailList, int orderID);
 }
-	//ORDERDETAIL
-	//public ArrayList<OrderDetail> retrieveOrderDetail(ArrayList<OrderDetail> orderDetailList, int orderID);
-	//}

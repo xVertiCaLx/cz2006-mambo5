@@ -7,6 +7,8 @@ public class OrderDetail {
 	private int menuItemID;
 	private int orderID;
 	private double actualPrice;
+	private String menuItemName; //testing
+	private double discount; // testing
 	DBController dbc;
 	
 	public OrderDetail() {}
@@ -17,6 +19,17 @@ public class OrderDetail {
 		this.menuItemID = menuItemID;
 		this.orderID = -1;
 		this.actualPrice = actualPrice;
+	}
+	
+	//testing
+	public OrderDetail(int orderID, double actualPrice, String menuItemName, double discount) 
+	{
+		this.detailID = detailID;
+		this.menuItemID = menuItemID;
+		this.orderID = orderID;
+		this.actualPrice = actualPrice;
+		this.menuItemName = menuItemName;
+		this.discount = discount;
 	}
 	
 	public OrderDetail(int detailID, int menuItemID, int orderID, double actualPrice) 
@@ -64,5 +77,4 @@ public class OrderDetail {
 		result = dbc.executeNonQuery(sql);
 		return result;
 	}
-
 }

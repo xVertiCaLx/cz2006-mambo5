@@ -24,17 +24,20 @@ import mambo5.Entity.OrderDetail;
 
 public class PendingOrderForm extends JPanel implements JInterfaceController {
 
-	private JPanel receiptPanel, keypadPanel, ordersPanel, sidePanel,
-			searchPanel;
+	private JPanel receiptPanel, ordersPanel, sidePanel, searchPanel;
 
-	private int stallID = 5, posX = 0, posY = 0;
+	private int stallID = 5, posX = 0, posY = 0, firstOrderID = 0;
 	private JTextArea receipt;
 	private JScrollPane receiptScrollPane;
 	private Map<JButton, Order> orderIDButtons;
 	private ArrayList<Order> orderIDList = new ArrayList<Order>();
-	//private ArrayList<OrderDetail> OrderDetailList = new ArrayList<OrderDetail>();
 	private OrderController OrderController;
-	//private OrderDetailController OrderDetailController;
+	
+	//guohao testing
+	private ArrayList<OrderDetail> OrderDetailList = new ArrayList<OrderDetail>();
+	private OrderDetailController OrderDetailController;
+	
+	
 	private NumPad numpadPanel;
 	private JButton btnMainPage = new JButton("MAIN PAGE"),
 			btnNextPage = new JButton("NEXT PAGE"), btnPrevPage = new JButton(
@@ -49,8 +52,33 @@ public class PendingOrderForm extends JPanel implements JInterfaceController {
 		setLayout(null);
 		setBackground(JPANEL_BACKGROUND_COLOUR);
 
+		
+
 		initPanels();
+		initOrderIDButtons(stallID);// parameter should be stallID
 		implementButtons();
+		initSidePanelButton();
+		
+		OrderDetailList = new ArrayList<OrderDetail>();
+		OrderDetailController = new OrderDetailController();
+		
+		System.out.println("orderIDList.size() size is: " +orderIDList.size());
+		for (int i =0; i< orderIDList.size(); i++)
+		{
+			OrderDetailController.retrieveOrderDetailList(OrderDetailList, orderIDList.get(i).getOrderID());	
+		}
+		
+		receipt.setText("ORDER ID: " + OrderDetailList.get(0).getOrderID() + "\n"
+				+ OrderDetailList.get(0).getActualPrice());
+		
+		/*for (int i =0; i< orderIDList.size(); i++)
+		{
+			System.out.println("NAME IS: " + OrderDetailList.get(i).getMenuItemID() +" PRICE IS: " + OrderDetailList.get(i).getActualPrice());
+		}*/
+
+		System.out.println("OrderDetailList.size() size is: " +OrderDetailList.size());
+
+		
 	}
 
 	public void initPanels() {
@@ -67,7 +95,9 @@ public class PendingOrderForm extends JPanel implements JInterfaceController {
 		receipt = new JTextArea();
 		receipt.setSize(new Dimension(RECEIPT_WIDTH, RECEIPT_HEIGHT / 2 + 140));
 		receipt.setBackground(WHITE_BACKGROUND_COLOUR);
+
 		receipt.setEditable(false);
+
 
 		// enable scroll
 		receiptScrollPane = new JScrollPane();
@@ -125,14 +155,13 @@ public class PendingOrderForm extends JPanel implements JInterfaceController {
 		sidePanel = new JPanel();
 		sidePanel.setLayout(null);
 		sidePanel.setSize(new Dimension(SIDEPANE_WIDTH, SIDEPANE_HEIGHT));
-		sidePanel.setLocation(posX, posY);
+		sidePanel.setLocation(posX, posY+50);
 
 		posX = (RECEIPTPANE_WIDTH - btnSearch.getWidth()) / 2;
 		posY += searchIDTextField.getAlignmentY()
 				+ searchIDTextField.getHeight() + MARGIN;
 
-		initSidePanelButton();
-		initOrderIDButtons(stallID); // parameter should be stallID
+
 		
 		add(receiptPanel);
 		add(searchPanel);
@@ -150,7 +179,6 @@ public class PendingOrderForm extends JPanel implements JInterfaceController {
 		orderIDList = new ArrayList<Order>();
 		OrderController = new OrderController();
 		OrderController.retrieveOrderIDList(orderIDList, stallID, "Processing");
-
 		
 		for (int i = 0; i < orderIDList.size(); i++) {
 			addOrderIDButtons(orderIDList.get(i));
@@ -163,7 +191,6 @@ public class PendingOrderForm extends JPanel implements JInterfaceController {
 				+ Integer.toString(order.getOrderID()));
 		orderIDButton.setActionCommand(Integer.toString(order.getOrderID()));
 		orderIDButtons.put(orderIDButton, order);
-		//OrderDetailController.retrieveOrderDetailList(OrderDetailList, order.getOrderID());
 		orderIDButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -177,7 +204,9 @@ public class PendingOrderForm extends JPanel implements JInterfaceController {
 			}
 		});
 		
-		ordersPanel.add(orderIDButton);
+		ordersPanel.add(orderIDButton);	
+	//	for(int i=0; i<orderIDList.size(); i++)
+	//		System.out.println("order ID is : " +orderIDList.get(i).getOrderID());
 	}
 
 	public void initKeypad() {
@@ -273,14 +302,12 @@ public class PendingOrderForm extends JPanel implements JInterfaceController {
 								searchIDTextField.getText().length() - 1));
 			}
 		});
-
+		
+		numpadPanel.enter().setText("SEARCH");
 		numpadPanel.enter().addActionListener(new ActionListener() {
+			
 			public void actionPerformed(ActionEvent e) {
-				int reply = JOptionPane.showConfirmDialog(null,
-						"Confirm Order?", "Confirmation",
-						JOptionPane.YES_NO_OPTION);
-				if (reply == JOptionPane.YES_OPTION) {
-				}
+				System.out.println("test");
 			}
 		});
 
