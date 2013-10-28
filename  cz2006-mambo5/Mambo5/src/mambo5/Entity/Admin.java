@@ -1,16 +1,9 @@
 package mambo5.Entity;
 
-import java.sql.ResultSet;
-
-import mambo5.Controller.DBController;
-
 public class Admin {
 	private int adminID,accessID;
 	private int stallID;
-	private String adminName, password, sql;
-	private Admin admin;
-	private DBController dbc;
-	private ResultSet rs;
+	private String adminName, password;
 	
 	public Admin (int adminID, int accessID, int stallID, String adminName, String password) {
 		this.adminID = adminID;
@@ -35,4 +28,9 @@ public class Admin {
 	public String getAdminName() {
 		return adminName;
 	}
+
+	public String getPassword() {
+		return password;
+	}
+	
 }
