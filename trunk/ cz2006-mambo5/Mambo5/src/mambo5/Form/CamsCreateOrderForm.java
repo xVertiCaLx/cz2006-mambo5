@@ -60,11 +60,10 @@ public class CamsCreateOrderForm extends JPanel implements JInterfaceController 
 
 	
 
-	public CamsCreateOrderForm(final CamsMainFrame mainFrame, ArrayList<MenuItem> menuItemList, final ArrayList<OrderDetail> orderDetailList, int menuID) {
+	public CamsCreateOrderForm(final CamsMainFrame mainFrame, ArrayList<MenuItem> menuItemList, final ArrayList<OrderDetail> orderDetailList, int stallID, int menuID) {
 		this.menuItemList = menuItemList;
 		this.menuID = menuID;
-
-		
+		this.stallID = stallID;
 		setSize(new Dimension(CONTENTPANE_WIDTH, CONTENTPANE_HEIGHT));
 		setLocation(posX, 40);
 		setLayout(null);
