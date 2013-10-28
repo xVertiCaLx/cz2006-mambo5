@@ -6,6 +6,7 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Timestamp;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -57,7 +58,7 @@ public class CamsCreateOrderForm extends JPanel implements JInterfaceController 
 	JButton btnMainPage = new JButton("MAIN PAGE");
 	JButton btnNextPage = new JButton("NEXT PAGE");
 	JButton btnPrevPage = new JButton("PREV PAGE");
-
+	DecimalFormat df = new DecimalFormat("#.##");
 	
 
 	public CamsCreateOrderForm(final CamsMainFrame mainFrame, ArrayList<MenuItem> menuItemList, final ArrayList<OrderDetail> orderDetailList, int stallID, int menuID) {
@@ -68,7 +69,7 @@ public class CamsCreateOrderForm extends JPanel implements JInterfaceController 
 		setLocation(posX, 40);
 		setLayout(null);
 		setBackground(JPANEL_BACKGROUND_COLOUR);
-
+		
 		initPanels();
 		implementButtons();	
 	}
@@ -83,7 +84,6 @@ public class CamsCreateOrderForm extends JPanel implements JInterfaceController 
 		receipt = new JTextArea(32, 26);
 		receipt.setEditable(false);
 		receipt.setBackground(RECEIPT_BACKGROUND_COLOUR);
-
 		receiptScrollPane = new JScrollPane(receipt);
 
 		receiptPanel.add(receiptScrollPane);
@@ -281,7 +281,12 @@ public class CamsCreateOrderForm extends JPanel implements JInterfaceController 
 					receiptDetail += quantityInt + "\t" + menuItemButtons.get(e.getSource()).getMenuItemName()  + "\t $" + actualPrice + "\n";
 					receiptDetail += "\t\t $" + (quantityInt * actualPrice) + "\n";
 				}
-				totalPrice += (quantityInt * actualPrice);
+	
+				totalPrice = totalPrice +  (quantityInt * actualPrice);
+				receiptDetail += "\n\n" + "=============================="
+						 + "\nTOTAL PRICE: " + "\t\t $" + df.format(totalPrice)
+						 + "\n==============================";
+
 				System.out.println("totalPrice is: " +totalPrice);
 				quantity = "";
 				receipt.setText(receiptDetail);
@@ -343,6 +348,10 @@ public class CamsCreateOrderForm extends JPanel implements JInterfaceController 
 				JOptionPane.showMessageDialog(null, "Order ID: " + order);
 			}
 			validOrder = 1;
+			
+			cc.updateCustomerCardBalance(custID, (currentCardValue-totalPrice));
+						JOptionPane.showMessageDialog(null, "Your card value is "
+								+ "now: " +df.format((currentCardValue-totalPrice)));
 		}
 		else
 			JOptionPane.showMessageDialog(null, "Card has not enough Value");
@@ -356,8 +365,6 @@ public class CamsCreateOrderForm extends JPanel implements JInterfaceController 
 			odc = new OrderDetailController();
 			odc.validateCreateOrderDetail(order, orderDetailList.get(i)
 					.getMenuItemID(), orderDetailList.get(i).getActualPrice(), orderDetailList.get(i).getQuantity());
-			JOptionPane.showMessageDialog(null, (i + 1)
-					+ "This part check PAYMENT!");
 		}
 	}
 }
