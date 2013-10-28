@@ -331,6 +331,27 @@ public class MySQLImpl implements DataStoreInterface {
 		return result;
 	}
 
+	@Override
+	public int updateCustomerCardValue(int custID, double cardBalance) {
+		int result = 0;
+		
+		String sql = "UPDATE customer SET cardBalance = '" + cardBalance + "' WHERE custID = " + custID + ";";
+				
+		result = dbc.executeNonQuery(sql);
+				
+		return result;
+	}
+
+	@Override
+	public int refundCustomerCard(int custID) {
+		int result = 0;
+		
+		String sql = "DELETE FROM customer WHERE custID = " + custID + ";";
+				
+		result = dbc.executeNonQuery(sql);
+		return result;
+	}
+
 
 
 	/*

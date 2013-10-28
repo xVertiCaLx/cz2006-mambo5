@@ -39,4 +39,6 @@ public interface DataStoreInterface {
 	
 	//CUSTOMER
 	int createCustomer(double cardBalance, String fullName, int accessID);
+	int updateCustomerCardValue(int custID, double cardBalance);
+	int refundCustomerCard(int custID);
 }

@@ -30,8 +30,10 @@ public class CustomerController {
 	{
 		int addValueStatus = 0;
 		
-		cust = new Customer();
-		addValueStatus = cust.updateCustomerCardValue(custID, cardBalance);
+		sysConfig = new SystemConfiguration();
+		dataStore = DataStoreFactory.createDataStore(sysConfig);
+		
+		addValueStatus = dataStore.updateCustomerCardValue(custID, cardBalance);
 		
 		return addValueStatus;
 	}
@@ -40,8 +42,9 @@ public class CustomerController {
 		
 		int removeStatus = 0;
 		
-		cust = new Customer();
-		removeStatus = cust.refundCustomerCard(custID);
+		sysConfig = new SystemConfiguration();
+		dataStore = DataStoreFactory.createDataStore(sysConfig);
+		removeStatus = dataStore.refundCustomerCard(custID);
 				
 		return removeStatus;
 	}
