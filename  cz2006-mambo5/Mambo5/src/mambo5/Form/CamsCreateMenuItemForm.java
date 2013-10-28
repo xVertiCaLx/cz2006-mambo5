@@ -23,12 +23,9 @@ public class CamsCreateMenuItemForm extends JPanel implements JInterfaceControll
 	private double price, discount;
 	private MenuItemController mic;
 	private CamsMainFrame mainFrame;
-	private Admin admin;
 	
 	public CamsCreateMenuItemForm(final CamsMainFrame mainFrame, int stallID) {
 		this.mainFrame = mainFrame;
-		this.menuID = menuID;
-		this.admin = admin;
 		posX = 40;
 		mainFrame.setTitle("Create Menu Item");
 		setSize(new Dimension(CONTENTPANE_WIDTH, CONTENTPANE_HEIGHT));

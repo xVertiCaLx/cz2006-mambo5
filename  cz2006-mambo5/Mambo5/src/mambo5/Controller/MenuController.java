@@ -23,5 +23,12 @@ public class MenuController {
 		
 		return dataStore.retrieveMenu(stallList);
 	}
+	
+	public ArrayList<Menu> retrieveMenuList(ArrayList<Menu> menuList) {
+		sysConfig = new SystemConfiguration();
+		dataStore = DataStoreFactory.createDataStore(sysConfig);
+		
+		return dataStore.retrieveMenuList(menuList);
+	}
 
 }

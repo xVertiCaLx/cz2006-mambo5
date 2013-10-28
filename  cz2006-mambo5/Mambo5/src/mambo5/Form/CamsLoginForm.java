@@ -3,6 +3,7 @@ package mambo5.Form;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -14,6 +15,7 @@ import javax.swing.JTextField;
 import mambo5.Controller.JInterfaceController;
 import mambo5.Controller.LoginController;
 import mambo5.Entity.Admin;
+import mambo5.Entity.Menu;
 
 public class CamsLoginForm extends JPanel implements JInterfaceController {
 	private JTextField useridTextField;
@@ -21,11 +23,11 @@ public class CamsLoginForm extends JPanel implements JInterfaceController {
 	private JLabel useridLabel, passwordLabel;
 	private JButton loginButton;
 	boolean id_select = true, pwd_select = false;
-	private int labelWidth = 300, textFieldWidth = 300, totalWidth = 0, totalHeight = 0, posX=0, posY=0;
+	private int labelWidth = 300, textFieldWidth = 300, totalWidth = 0, totalHeight = 0, posX=0, posY=0, menuID = -1;
 	private LoginController loginController;
 	private Admin admin;
 	
-	public CamsLoginForm(final CamsMainFrame mainFrame) {
+	public CamsLoginForm(final CamsMainFrame mainFrame, final ArrayList<Menu> menuList) {
 		setSize(new Dimension(CONTENTPANE_WIDTH, CONTENTPANE_HEIGHT));
 		setLocation(0, POS_CONTENTPANE_OFFSET_Y);
 		setLayout(null);
@@ -56,7 +58,12 @@ public class CamsLoginForm extends JPanel implements JInterfaceController {
 				admin = loginController.login(useridTextField.getText(), passwordField.getText());
 				if(admin != null) {
 					if (admin.getStallID() != -1) {
-						mainFrame.setID(admin.getAdminID(), 5);
+						for (int i = 0; i < menuList.size(); i++) {
+							if (menuList.get(i).getStallID() == admin.getStallID()) {
+								menuID = menuList.get(i).getMenuID();
+							}
+						}
+						mainFrame.setID(admin.getStallID(), menuID);
 						mainFrame.replacePanel("CamsMainMenuForm");
 					} else {
 						JOptionPane.showMessageDialog(mainFrame,"This account is not authorised to access this page.");

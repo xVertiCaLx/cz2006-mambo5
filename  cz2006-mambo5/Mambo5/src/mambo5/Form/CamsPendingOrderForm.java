@@ -36,11 +36,8 @@ public class CamsPendingOrderForm extends JPanel implements JInterfaceController
 	private ArrayList<Order> orderList = new ArrayList<Order>();
 	private OrderController OrderController;
 	private JButton btnConfirmOrder;
-	
-	//guohao testing
-	
+		
 	private ArrayList<MenuItem> menuItemList = new ArrayList<MenuItem>();
-	//private MenuItemController menuItemController = new MenuItemController();
 
 	private NumPad numpadPanel;
 	private JButton btnMainPage = new JButton("MAIN PAGE"),
@@ -226,24 +223,14 @@ public class CamsPendingOrderForm extends JPanel implements JInterfaceController
 				menuItems.put(menuItemList.get(i).getMenuItemID(), menuItemList.get(i));
 		}
 		
-		/*for (int i =0; i < orderDetails.get(this.orderList.get(0)).size(); i++)
-		{
-
-			receipt.setText(receipt.getText() 
-				+ menuItems.get(orderDetails.get(orderList.get(0)).get(i).getMenuItemID()).getMenuItemName() + "\t\t\t"
-				+ orderDetails.get(orderList.get(0)).get(i).getActualPrice() + "\n");
-		}*/
 	}
 	
-	
-	// initialise order item buttons
 	public void initOrderIDButtons(int stallID) {
 		orderButtons = new HashMap<JButton, Order>();		
 		for (int i = 0; i < orderList.size(); i++) {
 			addOrderIDButtons(orderList.get(i));
 		}
 		System.out.println("orderList.size() is: " +orderList.size());
-
 	}
 
 	public void addOrderIDButtons(Order order) {

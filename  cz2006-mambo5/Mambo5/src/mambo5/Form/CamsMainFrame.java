@@ -20,9 +20,11 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
 import mambo5.Controller.JInterfaceController;
+import mambo5.Controller.MenuController;
 import mambo5.Controller.MenuItemController;
 import mambo5.Controller.OrderController;
 import mambo5.Controller.OrderDetailController;
+import mambo5.Entity.Menu;
 import mambo5.Entity.MenuItem;
 import mambo5.Entity.Order;
 import mambo5.Entity.OrderDetail;
@@ -39,12 +41,14 @@ public class CamsMainFrame extends JFrame implements JInterfaceController {
 	private JButton mainMenuButton;
 	private int posX = 0, posY = 0, stallID = 5, menuID = 5;
 	
+	private ArrayList<Menu> menuList = new ArrayList<Menu>();
 	private ArrayList<MenuItem> menuItemList = new ArrayList<MenuItem>();
 	private MenuItemController menuItemController = new MenuItemController();
 	private ArrayList<OrderDetail> orderDetailList = new ArrayList<OrderDetail>();
 	private ArrayList<Order> orderList = new ArrayList<Order>();
 	private OrderDetailController orderDetailController = new OrderDetailController();
 	private OrderController orderController = new OrderController();
+	private MenuController menuController = new MenuController();
 
 	public CamsMainFrame() {
 		// the frame
@@ -147,7 +151,7 @@ public class CamsMainFrame extends JFrame implements JInterfaceController {
 			camsPendingOrderForm = new CamsPendingOrderForm(this, orderDetailList, orderList, menuItemList, stallID, menuID);
 			replacePanel(camsPendingOrderForm);
 		} else if (panelName.equals("CamsLoginForm")) {
-			camsLoginForm = new CamsLoginForm(this);
+			camsLoginForm = new CamsLoginForm(this, menuList);
 			replacePanel(camsLoginForm);
 		} else if (panelName.equals("CamsRefundOrderForm")) {
 			replacePanel(camsRefundOrderForm);
@@ -158,6 +162,7 @@ public class CamsMainFrame extends JFrame implements JInterfaceController {
 	
 	public void init() {
 		if (selectPanel == null) {
+			menuController.retrieveMenuList(menuList);
 			menuItemController.retrieveMenuItemList(menuItemList);
 			orderDetailController.retrieveOrderDetailList(orderDetailList);
 			orderController.retrieveOrderList(orderList);
