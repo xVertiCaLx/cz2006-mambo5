@@ -14,7 +14,9 @@ import javax.swing.JTextField;
 
 import mambo5.Controller.CustomerController;
 import mambo5.Controller.OrderController;
+import mambo5.Controller.OrderDetailController;
 import mambo5.Entity.Order;
+import mambo5.Entity.OrderDetail;
 
 public class CamsRefundOrderForm extends JPanel {
 
@@ -23,7 +25,9 @@ public class CamsRefundOrderForm extends JPanel {
 	
 	private int num;
 	private ArrayList<Order> orderIDList;
+	private ArrayList<OrderDetail> orderDetailList;
 	private OrderController OrderController;
+	private OrderDetailController OrderDetailController;
 	private CustomerController cc;
 	
 	JButton numPad_1 = new JButton("1");
@@ -44,6 +48,7 @@ public class CamsRefundOrderForm extends JPanel {
 	public CamsRefundOrderForm(final CamsMainFrame mainFrame) {
 	
 		orderIDList = new ArrayList<Order>();
+		orderDetailList = new ArrayList<OrderDetail>();
 		OrderController = new OrderController();
 		OrderController.retrieveOrderIDList(orderIDList, 5, "Processing");
 		
@@ -224,6 +229,8 @@ public class CamsRefundOrderForm extends JPanel {
 	public void submitOrderID() 
 	{		
 		double currentCardValue = 0.0;
+		double totalPrice = 0.0;
+		
 		String message = "Order: " + txtOrderId.getText() + " is not in the system";
 
 			int orderID=Integer.parseInt(txtOrderId.getText());
@@ -235,15 +242,23 @@ public class CamsRefundOrderForm extends JPanel {
 					cc = new CustomerController();
 					int custID = (Integer.parseInt(JOptionPane.showInputDialog 
 							( "Please enter Customer ID: " )));;
-
+							
 					if(cc.retrieveCustomerInfo(custID) != null)
 					{
 						currentCardValue = cc.retrieveCustomerInfo(custID).getCardBalance();
 						OrderController = new OrderController();
+						OrderDetailController = new OrderDetailController();
+						OrderDetailController.retrieveOrderDetailTotalPrice(orderDetailList,orderID);
+						
+						for(i=0; i<orderDetailList.size(); i++)
+							totalPrice += (orderDetailList.get(i).getActualPrice() * 
+									orderDetailList.get(i).getQuantity());
+						
+						
 						if (OrderController.validateRefundOrder(orderID) == 1)
 						{
 							message = "Order " + orderID + " successfuly refunded";
-							cc.updateCustomerCardBalance(custID, (currentCardValue+50));
+							cc.updateCustomerCardBalance(custID, (currentCardValue+totalPrice));
 							for (int k=0; k<orderIDList.size(); k++) 
 							{
 								 int val = orderIDList.get(k).getOrderID();

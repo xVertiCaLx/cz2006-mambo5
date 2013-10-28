@@ -43,6 +43,7 @@ public interface DataStoreInterface {
 	//ORDERDETAIL
 	int createOrderDetail(int orderID, int menuItemID, double actualPrice, int quantity);
 	ArrayList<OrderDetail> retrieveOrderDetailList(ArrayList<OrderDetail> orderDetailList);
+	ArrayList<OrderDetail> retrieveOrderDetailTotalPrice(ArrayList<OrderDetail> orderDetailList, int orderID);
 	
 	//CUSTOMER
 	int createCustomer(double cardBalance, String fullName, int accessID);

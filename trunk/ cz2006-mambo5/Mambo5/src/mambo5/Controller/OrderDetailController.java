@@ -29,4 +29,11 @@ public class OrderDetailController {
 			
 			return dataStore.retrieveOrderDetailList(orderDetailList);
 		}
+		
+		public ArrayList<OrderDetail> retrieveOrderDetailTotalPrice(ArrayList<OrderDetail> orderDetailList, int orderID) {
+			sysConfig = new SystemConfiguration();
+			dataStore = DataStoreFactory.createDataStore(sysConfig);
+			
+			return dataStore.retrieveOrderDetailTotalPrice(orderDetailList,orderID);
+		}
 }
