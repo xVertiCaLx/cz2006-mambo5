@@ -5,22 +5,18 @@ import java.awt.Font;
 import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
 import mambo5.Controller.JInterfaceController;
-import mambo5.Entity.Admin;
-import mambo5.Entity.MenuItem;
-import mambo5.Entity.OrderDetail;
 
 public class CamsMainMenuForm extends JPanel implements JInterfaceController {
 
 	public CamsMainMenuForm(final CamsMainFrame mainFrame) {
 		setBounds(0, 0, 800, 560);
 		setLayout(null);
-		setBackground(new Color(0, 0, 255));
+		setBackground(JPANEL_BACKGROUND_COLOUR);
 		mainFrame.setTitle("Canteen Management System");
 		
 		JButton btnLogin = new JButton("LOGOUT");

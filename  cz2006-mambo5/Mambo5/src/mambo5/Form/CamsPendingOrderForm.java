@@ -17,9 +17,7 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 import mambo5.Controller.JInterfaceController;
-import mambo5.Controller.MenuItemController;
 import mambo5.Controller.OrderController;
-import mambo5.Controller.OrderDetailController;
 import mambo5.Entity.MenuItem;
 import mambo5.Entity.Order;
 import mambo5.Entity.OrderDetail;
@@ -34,15 +32,15 @@ public class CamsPendingOrderForm extends JPanel implements JInterfaceController
 	private Map<JButton, Order> orderButtons;
 	private Map<Order, ArrayList<OrderDetail>> orderDetails;
 	private Map<Integer, MenuItem> menuItems;
-	private ArrayList<Order> orderIDList = new ArrayList<Order>();
+	private ArrayList<OrderDetail> orderDetailList;
+	private ArrayList<Order> orderList = new ArrayList<Order>();
 	private OrderController OrderController;
 	private JButton btnConfirmOrder;
 	
 	//guohao testing
-	private ArrayList<OrderDetail> orderDetailList;// = new ArrayList<OrderDetail>();
+	
 	private ArrayList<MenuItem> menuItemList = new ArrayList<MenuItem>();
-	private OrderDetailController OrderDetailController = new OrderDetailController();;
-	private MenuItemController menuItemController = new MenuItemController();
+	//private MenuItemController menuItemController = new MenuItemController();
 
 	private NumPad numpadPanel;
 	private JButton btnMainPage = new JButton("MAIN PAGE"),
@@ -50,9 +48,11 @@ public class CamsPendingOrderForm extends JPanel implements JInterfaceController
 					"PREV PAGE"), btnSearch;
 	private JTextField searchIDTextField;
 
-	public CamsPendingOrderForm(final CamsMainFrame mainFrame, int stallID) {
+	public CamsPendingOrderForm(final CamsMainFrame mainFrame, ArrayList<OrderDetail> orderDetailList, ArrayList<Order> orderList, ArrayList<MenuItem> menuItemList, int stallID, int menuID) {
 
 		this.stallID = stallID;
+		this.menuItemList = menuItemList;
+		orderDetails = new HashMap<Order, ArrayList<OrderDetail>>();
 		setSize(new Dimension(CONTENTPANE_WIDTH, CONTENTPANE_HEIGHT));
 		setLocation(posX, 40);
 		setLayout(null);
@@ -60,40 +60,11 @@ public class CamsPendingOrderForm extends JPanel implements JInterfaceController
 
 		
 		initPanels();
+		initLists(orderList, menuID);
 		initOrderIDButtons(stallID);
 		implementButtons();
 		initSidePanelButton();
-		
-		menuItems = new HashMap<Integer, MenuItem>();
-		menuItemList = new ArrayList<MenuItem>();
-		menuItemList = menuItemController.retrieveMenuItemList(menuItemList);
-		
-		for (int i = 0; i < menuItemList.size(); i++) {
-			menuItems.put(menuItemList.get(i).getMenuItemID(), menuItemList.get(i));
-		}
-		
-		//init time
-		orderDetails = new HashMap<Order, ArrayList<OrderDetail>>();
-		
-		for (int i =0; i< orderIDList.size(); i++)
-		{
-			orderDetailList = new ArrayList<OrderDetail>();
-			//OrderDetailController.retrieveOrderDetailList(orderDetailList, orderIDList.get(i).getOrderID());	
-			orderDetails.put(orderIDList.get(i), orderDetailList);
-			System.out.println((orderDetails.get(orderIDList.get(i))).get(0).getMenuItemID());
-		
-		}
-		
-		receipt.setText(receipt.getText() + "ORDER ID: " + orderDetails.get(orderIDList.get(0)).get(0).getOrderID() + "\n");
-		
-		for (int i =0; i < orderDetails.get(orderIDList.get(0)).size(); i++)
-		{
 
-		receipt.setText(receipt.getText() 
-				+ menuItems.get(orderDetails.get(orderIDList.get(0)).get(i).getMenuItemID()).getMenuItemName() + "\t\t\t"
-				+ orderDetails.get(orderIDList.get(0)).get(i).getActualPrice() + "\n");
-		}
-		
 	}
 
 	public void initPanels() {
@@ -179,15 +150,15 @@ public class CamsPendingOrderForm extends JPanel implements JInterfaceController
 				receipt.setText("ORDER: " + orderID + "\n"
 						+ "========================================" + "\n");
 				receipt.setText(receipt.getText() + "Qty"+"   ItemName"+ "\t" +"UnitPrice"+ "      " +"TotalAmount\n");
-				for (int j = 0; j < orderIDList.size(); j++) {		
-					if (orderIDList.get(j).getOrderID() == Integer.parseInt(searchIDTextField.getText())) {
-						for (int i = 0; i < orderDetails.get(orderIDList.get(j)).size(); i++) {
-							receipt.append(orderDetails.get(orderIDList.get(j)).get(i).getQuantity() + "   " +
-						menuItems.get(orderDetails.get(orderIDList.get(j)).get(i).getMenuItemID()).getMenuItemName() 
-						+ "  $" +orderDetails.get(orderIDList.get(j)).get(i).getActualPrice() + "" +
-						"\t" + "$" +(orderDetails.get(orderIDList.get(j)).get(i).getQuantity() * orderDetails.get(orderIDList.get(j)).get(i).getActualPrice())
+				for (int j = 0; j < orderList.size(); j++) {		
+					if (orderList.get(j).getOrderID() == Integer.parseInt(searchIDTextField.getText())) {
+						for (int i = 0; i < orderDetails.get(orderList.get(j)).size(); i++) {
+							receipt.append(orderDetails.get(orderList.get(j)).get(i).getQuantity() + "   " +
+						menuItems.get(orderDetails.get(orderList.get(j)).get(i).getMenuItemID()).getMenuItemName() 
+						+ "  $" +orderDetails.get(orderList.get(j)).get(i).getActualPrice() + "" +
+						"\t" + "$" +(orderDetails.get(orderList.get(j)).get(i).getQuantity() * orderDetails.get(orderList.get(j)).get(i).getActualPrice())
 						+ "\n");
-							tempTotal += (orderDetails.get(orderIDList.get(j)).get(i).getQuantity() * orderDetails.get(orderIDList.get(j)).get(i).getActualPrice());
+							tempTotal += (orderDetails.get(orderList.get(j)).get(i).getQuantity() * orderDetails.get(orderList.get(j)).get(i).getActualPrice());
 						}
 					}
 				}
@@ -226,8 +197,6 @@ public class CamsPendingOrderForm extends JPanel implements JInterfaceController
 		posY += searchIDTextField.getAlignmentY()
 				+ searchIDTextField.getHeight() + MARGIN;
 
-
-		
 		add(receiptPanel);
 		add(searchPanel);
 		add(ordersPanel);
@@ -236,17 +205,41 @@ public class CamsPendingOrderForm extends JPanel implements JInterfaceController
 
 	}
 
+	public void initLists(ArrayList<Order> orderList, int menuID) {
+		for (int i = 0; i < orderList.size(); i++) {
+			if ((orderList.get(i).getStallID() == stallID) && (orderList.get(i).getOrderStatus().equals("Pending"))) {
+				orderDetailList = new ArrayList<OrderDetail>();
+				this.orderList.add(orderList.get(i));
+				for (int j = 0; j < orderDetailList.size(); j ++) {
+					if (orderDetailList.get(i).getOrderID() == orderList.get(i).getOrderID()) {
+						this.orderDetailList.add(new OrderDetail(orderDetailList.get(i).getDetailID(), orderDetailList.get(i).getMenuItemID(), orderDetailList.get(i).getActualPrice(), orderDetailList.get(i).getQuantity()));
+					}
+				}
+				orderDetails.put(orderList.get(i), this.orderDetailList);
+			}
+		}
+		
+		menuItems = new HashMap<Integer, MenuItem>();
+		for (int i = 0; i < menuItemList.size(); i++) {
+			if (menuItemList.get(i).getMenuID() == menuID)
+				menuItems.put(menuItemList.get(i).getMenuItemID(), menuItemList.get(i));
+		}
+		
+		/*for (int i =0; i < orderDetails.get(this.orderList.get(0)).size(); i++)
+		{
+
+			receipt.setText(receipt.getText() 
+				+ menuItems.get(orderDetails.get(orderList.get(0)).get(i).getMenuItemID()).getMenuItemName() + "\t\t\t"
+				+ orderDetails.get(orderList.get(0)).get(i).getActualPrice() + "\n");
+		}*/
+	}
 	
 	
 	// initialise order item buttons
 	public void initOrderIDButtons(int stallID) {
-		orderButtons = new HashMap<JButton, Order>();
-		orderIDList = new ArrayList<Order>();
-		OrderController = new OrderController();
-		OrderController.retrieveOrderIDList(orderIDList, stallID, "Processing");
-		
-		for (int i = 0; i < orderIDList.size(); i++) {
-			addOrderIDButtons(orderIDList.get(i));
+		orderButtons = new HashMap<JButton, Order>();		
+		for (int i = 0; i < orderList.size(); i++) {
+			addOrderIDButtons(orderList.get(i));
 		}
 
 	}
@@ -264,15 +257,15 @@ public class CamsPendingOrderForm extends JPanel implements JInterfaceController
 				receipt.setText("ORDER: " + orderID + "\n"
 						+ "========================================" + "\n");
 				receipt.setText(receipt.getText() + "Qty"+"   ItemName"+ "\t" +"UnitPrice"+ "      " +"TotalAmount\n");
-				for (int j = 0; j < orderIDList.size(); j++) {		
-					if (orderIDList.get(j).getOrderID() == orderDetails.get(orderButtons.get(e.getSource())).get(0).getOrderID()) {
-						for (int i = 0; i < orderDetails.get(orderIDList.get(j)).size(); i++) {
-							receipt.append(orderDetails.get(orderIDList.get(j)).get(i).getQuantity() + "   " +
-						menuItems.get(orderDetails.get(orderIDList.get(j)).get(i).getMenuItemID()).getMenuItemName() 
-						+ "  $" +orderDetails.get(orderIDList.get(j)).get(i).getActualPrice() + "" +
-						"\t" + "$" +(orderDetails.get(orderIDList.get(j)).get(i).getQuantity() * orderDetails.get(orderIDList.get(j)).get(i).getActualPrice())
+				for (int j = 0; j < orderList.size(); j++) {		
+					if (orderList.get(j).getOrderID() == orderDetails.get(orderButtons.get(e.getSource())).get(0).getOrderID()) {
+						for (int i = 0; i < orderDetails.get(orderList.get(j)).size(); i++) {
+							receipt.append(orderDetails.get(orderList.get(j)).get(i).getQuantity() + "   " +
+						menuItems.get(orderDetails.get(orderList.get(j)).get(i).getMenuItemID()).getMenuItemName() 
+						+ "  $" +orderDetails.get(orderList.get(j)).get(i).getActualPrice() + "" +
+						"\t" + "$" +(orderDetails.get(orderList.get(j)).get(i).getQuantity() * orderDetails.get(orderList.get(j)).get(i).getActualPrice())
 						+ "\n");
-							tempTotal += (orderDetails.get(orderIDList.get(j)).get(i).getQuantity() * orderDetails.get(orderIDList.get(j)).get(i).getActualPrice());
+							tempTotal += (orderDetails.get(orderList.get(j)).get(i).getQuantity() * orderDetails.get(orderList.get(j)).get(i).getActualPrice());
 						}
 					}
 				}

@@ -6,7 +6,6 @@ import java.awt.Dimension;
 //import javax.swing.JComboBox;
 //import java.awt.Font;
 import java.awt.Font;
-import java.awt.SplashScreen;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -22,8 +21,10 @@ import javax.swing.SwingConstants;
 
 import mambo5.Controller.JInterfaceController;
 import mambo5.Controller.MenuItemController;
+import mambo5.Controller.OrderController;
 import mambo5.Controller.OrderDetailController;
 import mambo5.Entity.MenuItem;
+import mambo5.Entity.Order;
 import mambo5.Entity.OrderDetail;
 
 public class CamsMainFrame extends JFrame implements JInterfaceController {
@@ -36,12 +37,14 @@ public class CamsMainFrame extends JFrame implements JInterfaceController {
 	
 	private JLabel titleLabel = new JLabel("#Canteen");
 	private JButton mainMenuButton;
-	private int posX = 0, posY = 0, stallID = 5;
+	private int posX = 0, posY = 0, stallID = 5, menuID = 5;
 	
 	private ArrayList<MenuItem> menuItemList = new ArrayList<MenuItem>();
 	private MenuItemController menuItemController = new MenuItemController();
 	private ArrayList<OrderDetail> orderDetailList = new ArrayList<OrderDetail>();
+	private ArrayList<Order> orderList = new ArrayList<Order>();
 	private OrderDetailController orderDetailController = new OrderDetailController();
+	private OrderController orderController = new OrderController();
 
 	public CamsMainFrame() {
 		// the frame
@@ -119,8 +122,9 @@ public class CamsMainFrame extends JFrame implements JInterfaceController {
 			mainMenuButton.setVisible(true);
 	}
 	
-	public void setStallID(int stallID) {
+	public void setID(int stallID, int menuID) {
 		this.stallID = stallID;
+		this.menuID = menuID;
 	}
 	
 	public void replacePanel(String panelName) {
@@ -139,6 +143,8 @@ public class CamsMainFrame extends JFrame implements JInterfaceController {
 			camsCreateMenuItemForm = new CamsCreateMenuItemForm(this, stallID);
 			replacePanel(camsCreateMenuItemForm);
 		} else if (panelName.equals("CamsPendingOrderForm")) {
+			//final CamsMainFrame mainFrame, ArrayList<OrderDetail> orderDetailList, ArrayList<Order> orderList, ArrayList<MenuItem> menuItemList, int stallID, int menuID
+			camsPendingOrderForm = new CamsPendingOrderForm(this, orderDetailList, orderList, menuItemList, stallID, menuID);
 			replacePanel(camsPendingOrderForm);
 		} else if (panelName.equals("CamsLoginForm")) {
 			camsLoginForm = new CamsLoginForm(this);
@@ -154,6 +160,7 @@ public class CamsMainFrame extends JFrame implements JInterfaceController {
 		if (selectPanel == null) {
 			menuItemController.retrieveMenuItemList(menuItemList);
 			orderDetailController.retrieveOrderDetailList(orderDetailList);
+			orderController.retrieveOrderList(orderList);
 			System.out.println("Initialising Complete. Loading Main Screen.");
 			
 			selectPanel = new SelectPanel(this);

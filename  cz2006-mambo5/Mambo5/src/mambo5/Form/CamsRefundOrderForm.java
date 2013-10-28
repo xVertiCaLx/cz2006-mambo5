@@ -43,7 +43,7 @@ public class CamsRefundOrderForm extends JPanel {
 	
 		orderIDList = new ArrayList<Order>();
 		OrderController = new OrderController();
-		OrderController.retrieveOrderIDList(orderIDList, 5, "Processing");
+		//OrderController.retrieveOrderIDList(orderIDList, 5, "Processing");
 		
 		for (int i = 0; i < orderIDList.size(); i++) {
 			System.out.println("element" + i + ":" + orderIDList.get(i).getOrderID());
