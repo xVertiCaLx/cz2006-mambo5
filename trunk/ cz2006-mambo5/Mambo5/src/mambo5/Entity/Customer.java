@@ -3,6 +3,7 @@ package mambo5.Entity;
 import mambo5.Controller.DBController;
 
 import java.sql.*;
+import java.util.ArrayList;
 
 public class Customer  {
 	
@@ -11,6 +12,7 @@ public class Customer  {
 	private String fullName;
 	private int accessID;
 	private Customer cust;
+	private ArrayList<Customer> customerPurchaseDate;
 	DBController dbc;
 	
 	public int getCustID() {
@@ -74,6 +76,18 @@ public class Customer  {
 			}
 		}
 		return cust;
+	}
+
+	public ArrayList<Customer> retrieveCustomerPurchaseDate(int custID) {
+		
+		customerPurchaseDate = new ArrayList<Customer>();
+		boolean status = false;
+		ResultSet rs = null;
+		String sql = "SELECT purchaseDate FROM orders where custID=1 Order By purchaseDate DESC LIMIT 5;";
+		rs = dbc.execute(sql);
+
+		
+		return customerPurchaseDate;
 	}
 }
 	
