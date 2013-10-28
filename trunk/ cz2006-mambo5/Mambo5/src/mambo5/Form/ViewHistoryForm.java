@@ -5,6 +5,7 @@ import java.awt.Color;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JList;
@@ -24,13 +25,19 @@ import javax.swing.JComboBox;
 import mambo5.Controller.CustomerController;
 import mambo5.Entity.Customer;
 
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+
 public class ViewHistoryForm extends JPanel {
 
-	private CustomerController cust;
+	private Customer cust;
 	private ArrayList<Customer> retrieveOrderHistory;
 	private JTextField txtCardNumber;
 	private JTextField txtName;
 	private JTextField txtCurrentValue;
+	private CustomerController customerCon;
+	private JComboBox<String> comboBoxHistory = new JComboBox<String>();
+	;
 
 	public ViewHistoryForm(final CamsMainFrame mainFrame) {
 		
@@ -54,6 +61,28 @@ public class ViewHistoryForm extends JPanel {
 		add(lblCardNumber);
 		
 		txtCardNumber = new JTextField();
+		txtCardNumber.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				String custID = JOptionPane.showInputDialog("Please enter custID");
+				txtCardNumber.setText(custID);
+				customerCon = new CustomerController();
+				cust = customerCon.retrieveCustomerInfo(Integer.parseInt(custID));
+				txtName.setText(cust.getFullName());
+				txtCurrentValue.setText(String.valueOf(cust.getCardBalance()));
+				
+				ArrayList<String> date = new ArrayList<String>();
+				date = customerCon.getCustomerPuchaseDate(Integer.parseInt(custID));
+				comboBoxHistory.removeAllItems();
+				if(date.size() != 0) {
+					for(int i = 0; i<date.size(); i++ ) {
+						comboBoxHistory.addItem(date.get(i));
+					}
+				}
+				else 
+					JOptionPane.showMessageDialog(null, "No Purchase History Available");
+			}
+		});
 		txtCardNumber.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		txtCardNumber.setEnabled(false);
 		txtCardNumber.setEditable(false);
@@ -103,7 +132,6 @@ public class ViewHistoryForm extends JPanel {
 		lblViewHistor.setBounds(4, 0, 108, 27);
 		add(lblViewHistor);
 		
-		JComboBox comboBoxHistory = new JComboBox();
 		comboBoxHistory.setBounds(116, 92, 204, 20);
 		add(comboBoxHistory);
 		
