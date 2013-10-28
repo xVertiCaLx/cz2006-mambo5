@@ -80,8 +80,18 @@ public class AnalyzeCanteenForm extends JPanel  {
 		add(availableCB);
 		
 		JScrollPane scrollPane = new JScrollPane(menuTable);
-		scrollPane.setBounds(147, 201, 424, 314);
+		scrollPane.setBounds(147, 201, 424, 286);
 		add(scrollPane);
+		
+		JButton btnBack = new JButton("Back");
+		btnBack.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				mainFrame.setTitle("Please select a Function to perform:");
+				mainFrame.replacePanel(new OFSFunction(mainFrame));
+			}
+		});
+		btnBack.setBounds(482, 498, 89, 23);
+		add(btnBack);
 	}
 	
 	private void getJTableMenu() {

@@ -112,6 +112,16 @@ public class RetrieveStallForm extends JPanel {
 		});
 		
 		add(stallCB);
+		
+		JButton btnBack = new JButton("Back");
+		btnBack.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				mainFrame.setTitle("Please select a Function to perform:");
+				mainFrame.replacePanel(new OFSFunction(mainFrame));
+			}
+		});
+		btnBack.setBounds(482, 382, 89, 23);
+		add(btnBack);
 	}
 	
 	private void submitsStall(ActionEvent e) {

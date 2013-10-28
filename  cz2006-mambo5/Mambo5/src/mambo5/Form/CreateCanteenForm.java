@@ -98,6 +98,16 @@ public class CreateCanteenForm extends JPanel {
 		JLabel maxStallLabel = new JLabel("Max Stalls");
 		maxStallLabel.setBounds(147, 383, 127, 14);
 		add(maxStallLabel);
+		
+		JButton btnBack = new JButton("Back");
+		btnBack.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				mainFrame.setTitle("Please select a Function to perform:");
+				mainFrame.replacePanel(new OFSFunction(mainFrame));
+			}
+		});
+		btnBack.setBounds(384, 425, 89, 23);
+		add(btnBack);
 	}
 	
 	public void submitsCanteenDetails(ActionEvent e) {
