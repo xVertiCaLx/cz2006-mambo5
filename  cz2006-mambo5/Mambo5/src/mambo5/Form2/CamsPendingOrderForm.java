@@ -24,7 +24,7 @@ import mambo5.Entity.MenuItem;
 import mambo5.Entity.Order;
 import mambo5.Entity.OrderDetail;
 
-public class PendingOrderForm extends JPanel implements JInterfaceController {
+public class CamsPendingOrderForm extends JPanel implements JInterfaceController {
 
 	private JPanel receiptPanel, ordersPanel, sidePanel, searchPanel;
 
@@ -50,7 +50,7 @@ public class PendingOrderForm extends JPanel implements JInterfaceController {
 					"PREV PAGE"), btnSearch;
 	private JTextField searchIDTextField;
 
-	public PendingOrderForm(final CamsMainFrame mainFrame, int stallID) {
+	public CamsPendingOrderForm(final CamsMainFrame mainFrame, int stallID) {
 
 		this.stallID = stallID;
 		setSize(new Dimension(CONTENTPANE_WIDTH, CONTENTPANE_HEIGHT));
@@ -78,7 +78,7 @@ public class PendingOrderForm extends JPanel implements JInterfaceController {
 		for (int i =0; i< orderIDList.size(); i++)
 		{
 			orderDetailList = new ArrayList<OrderDetail>();
-			OrderDetailController.retrieveOrderDetailList(orderDetailList, orderIDList.get(i).getOrderID());	
+			//OrderDetailController.retrieveOrderDetailList(orderDetailList, orderIDList.get(i).getOrderID());	
 			orderDetails.put(orderIDList.get(i), orderDetailList);
 			System.out.println((orderDetails.get(orderIDList.get(i))).get(0).getMenuItemID());
 		

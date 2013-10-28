@@ -15,7 +15,7 @@ import javax.swing.JTextField;
 import mambo5.Controller.OrderController;
 import mambo5.Entity.Order;
 
-public class RefundOrderForm extends JPanel {
+public class CamsRefundOrderForm extends JPanel {
 
 	JPanel refundPanel; 
 	final JTextField txtOrderId = new JTextField();
@@ -39,7 +39,7 @@ public class RefundOrderForm extends JPanel {
 	JLabel lblOrderId = new JLabel("ORDER ID:");
 	JButton btnRefund = new JButton("REFUND");
 	
-	public RefundOrderForm(final CamsMainFrame mainFrame) {
+	public CamsRefundOrderForm(final CamsMainFrame mainFrame) {
 	
 		orderIDList = new ArrayList<Order>();
 		OrderController = new OrderController();

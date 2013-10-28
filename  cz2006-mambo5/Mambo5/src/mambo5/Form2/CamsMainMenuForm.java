@@ -17,7 +17,7 @@ import mambo5.Entity.OrderDetail;
 
 public class CamsMainMenuForm extends JPanel implements JInterfaceController {
 
-	public CamsMainMenuForm(final CamsMainFrame mainFrame, final Admin admin, final ArrayList<MenuItem> menuItemList, final ArrayList<OrderDetail> orderDetailList) {
+	public CamsMainMenuForm(final CamsMainFrame mainFrame) {
 		setBounds(0, 0, 800, 560);
 		setLayout(null);
 		setBackground(new Color(0, 0, 255));
@@ -26,7 +26,7 @@ public class CamsMainMenuForm extends JPanel implements JInterfaceController {
 		JButton btnLogin = new JButton("LOGOUT");
 		btnLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				mainFrame.replacePanel(new CamsLoginForm(mainFrame));
+				mainFrame.replacePanel("CamsLoginForm");
 			}
 		});
 		btnLogin.setForeground(new Color(255, 255, 255));
@@ -38,7 +38,7 @@ public class CamsMainMenuForm extends JPanel implements JInterfaceController {
 		JButton btnNewOrder = new JButton("NEW ORDER");
 		btnNewOrder.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				mainFrame.replacePanel(new CamsCreateOrderForm(mainFrame, menuItemList, orderDetailList, 5));
+				mainFrame.replacePanel("CamsCreateOrderForm");
 			}
 		});
 		btnNewOrder.setForeground(Color.WHITE);
@@ -50,7 +50,7 @@ public class CamsMainMenuForm extends JPanel implements JInterfaceController {
 		JButton btnAddMenuItem = new JButton("ADD NEW ITEM");
 		btnAddMenuItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				mainFrame.replacePanel(new CamsCreateMenuItemForm(mainFrame, admin, 5));
+				mainFrame.replacePanel("CamsCreateMenuItemForm");
 			}
 		});
 		btnAddMenuItem.setForeground(Color.WHITE);
@@ -66,7 +66,7 @@ public class CamsMainMenuForm extends JPanel implements JInterfaceController {
 		btnPending.setBounds(20, 251, 234, 80);
 		btnPending.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				mainFrame.replacePanel(new PendingOrderForm(mainFrame, 5));
+				mainFrame.replacePanel("CamsPendingOrderForm");
 			}
 		});
 		add(btnPending);
@@ -79,7 +79,7 @@ public class CamsMainMenuForm extends JPanel implements JInterfaceController {
 		btnRefund.setBounds(274, 251, 234, 80);
 		btnRefund.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				mainFrame.replacePanel(new RefundOrderForm(mainFrame));
+				mainFrame.replacePanel("CamsRefundOrderForm");
 			}
 		});
 		add(btnRefund);
