@@ -39,11 +39,6 @@ public class RefundCardForm extends JPanel {
 		setLayout(null);	
 		setBackground(new Color(255, 255, 255));
 		
-		JLabel lblCustomerId = new JLabel("Customer ID:");
-		lblCustomerId.setFont(new Font("Arial", Font.BOLD, 19));
-		lblCustomerId.setBounds(32, 122, 141, 26);
-		add(lblCustomerId);
-		
 		txtCardNumber = new JTextField();
 		txtCardNumber.addMouseListener(new MouseAdapter() {
 			@Override
@@ -135,6 +130,10 @@ public class RefundCardForm extends JPanel {
 		});
 		btnBackToMain.setBounds(516, 400, 200, 40);
 		add(btnBackToMain);
+		
+		JLabel lblCustomerId = new JLabel("Cust ID:");
+		lblCustomerId.setFont(new Font("Arial", Font.BOLD, 19));
+		lblCustomerId.setBounds(32, 120, 104, 29);
+		add(lblCustomerId);
 	}
-
 }
