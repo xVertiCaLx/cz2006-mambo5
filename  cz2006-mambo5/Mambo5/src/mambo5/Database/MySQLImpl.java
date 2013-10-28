@@ -2,6 +2,7 @@ package mambo5.Database;
 
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.Date;
 
 import mambo5.Controller.DBController;
 import mambo5.Entity.Admin;
@@ -260,6 +261,7 @@ public class MySQLImpl implements DataStoreInterface {
 		return menuItemList;
 	}
 
+	//delete!!
 	public ArrayList<Order> retrieveOrderID(ArrayList<Order> orderIDList,
 			int stallID, String orderStatus) {
 		try {
@@ -277,6 +279,26 @@ public class MySQLImpl implements DataStoreInterface {
 			dbc.terminate();
 		}
 		return orderIDList;
+	}
+	
+	
+	//int orderID, int custID, Date purchaseDate, String orderStatus, int stallID
+	public ArrayList<Order> retrieveOrderList(ArrayList<Order> orderList) {
+		try {
+			String sql = "SELECT * FROM mambojumbo.orderdetails;";
+			rs = dbc.execute(sql);
+
+			while (rs.next()) {
+				System.out.println("add once");
+				orderList.add(new Order(rs.getInt("orderID"), rs
+						.getInt("custID"), rs.getDate("purchaseDate"),rs.getString("orderStatus"),rs.getInt("stallID")));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			dbc.terminate();
+		}
+		return orderList;
 	}
 
 	public ArrayList<OrderDetail> retrieveOrderDetailList(ArrayList<OrderDetail> orderDetailList) {
