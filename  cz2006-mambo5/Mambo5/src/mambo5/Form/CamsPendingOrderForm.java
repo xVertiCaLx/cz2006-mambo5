@@ -206,6 +206,7 @@ public class CamsPendingOrderForm extends JPanel implements JInterfaceController
 	}
 
 	public void initLists(ArrayList<Order> orderList, int menuID) {
+		//System.out.println("orderList in initLists is " +orderList.size());
 		for (int i = 0; i < orderList.size(); i++) {
 			if ((orderList.get(i).getStallID() == stallID) && (orderList.get(i).getOrderStatus().equals("Pending"))) {
 				orderDetailList = new ArrayList<OrderDetail>();

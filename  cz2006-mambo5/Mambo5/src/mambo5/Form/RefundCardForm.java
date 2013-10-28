@@ -32,7 +32,6 @@ public class RefundCardForm extends JPanel {
 	private JTextField txtCardNumber;
 	private JTextField txtName;
 	private JTextField txtCurrentValue;
-	private int custID;
 
 	public RefundCardForm(final CamsMainFrame mainFrame) {
 		
