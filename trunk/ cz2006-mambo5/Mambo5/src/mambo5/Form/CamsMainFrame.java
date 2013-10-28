@@ -43,9 +43,9 @@ public class CamsMainFrame extends JFrame implements JInterfaceController {
 	
 	private ArrayList<Menu> menuList = new ArrayList<Menu>();
 	private ArrayList<MenuItem> menuItemList = new ArrayList<MenuItem>();
-	private MenuItemController menuItemController = new MenuItemController();
 	private ArrayList<OrderDetail> orderDetailList = new ArrayList<OrderDetail>();
 	private ArrayList<Order> orderList = new ArrayList<Order>();
+	private MenuItemController menuItemController = new MenuItemController();
 	private OrderDetailController orderDetailController = new OrderDetailController();
 	private OrderController orderController = new OrderController();
 	private MenuController menuController = new MenuController();
