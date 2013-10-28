@@ -29,14 +29,6 @@ public class OrderDetail {
 		this.quantity = quantity;
 	}
 	
-/*	public OrderDetail(int detailID, int menuItemID, int orderID, double actualPrice) 
-	{
-		this.detailID = detailID;
-		this.menuItemID = menuItemID;
-		this.orderID = orderID;
-		this.actualPrice = actualPrice;
-	}*/
-	
 	public int getDetailID() {
 		return detailID;
 	}
@@ -60,26 +52,11 @@ public class OrderDetail {
 	public void setQuantity(int quantity) {
 		this.quantity = quantity;
 	}
-
+/*
 	public int createOrderDetail(int orderID, int menuItemID, double actualPrice, int quantity) 
 	{
 		dbc = new DBController();
-		int result = 0;
-		String sql = "INSERT INTO orderdetails (orderID, menuItemID, actualPrice, quantity)"
-					+ "VALUES ( '"+ orderID +"', '" + menuItemID + "' , '" + actualPrice + "' , '" + quantity + "');";
 		
-		result = dbc.executeNonQuery(sql);
-		return result;
 	}
-	
-	public int deleteOrderDetail(int detailID)
-	{	
-		dbc = new DBController();
-		int result = 0;
-		
-		String sql = "DELETE FROM orderDetails WHERE detailID = " + detailID + ";";
-				
-		result = dbc.executeNonQuery(sql);
-		return result;
-	}
+	*/
 }

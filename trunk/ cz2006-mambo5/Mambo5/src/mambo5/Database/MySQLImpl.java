@@ -14,7 +14,6 @@ import mambo5.Entity.OrderDetail;
 import mambo5.Entity.Stall;
 
 //Concrete data store object for data access in MySQL database
-
 public class MySQLImpl implements DataStoreInterface {
 	// declaration
 	private ArrayList<Canteen> canteenList;
@@ -281,8 +280,19 @@ public class MySQLImpl implements DataStoreInterface {
 		return orderIDList;
 	}
 	
+
+	//---------------------------------------OrderDetail--------------------------------------------------
+	@Override
+	public int createOrderDetail(int orderID, int menuItemID,
+			double actualPrice, int quantity) {
+		int result = 0;
+		String sql = "INSERT INTO orderdetails (orderID, menuItemID, actualPrice, quantity)"
+					+ "VALUES ( '"+ orderID +"', '" + menuItemID + "' , '" + actualPrice + "' , '" + quantity + "');";
+		
+		result = dbc.executeNonQuery(sql);
+		return result;
+	}
 	
-	//int orderID, int custID, Date purchaseDate, String orderStatus, int stallID
 	public ArrayList<Order> retrieveOrderList(ArrayList<Order> orderList) {
 		try {
 			String sql = "SELECT * FROM mambojumbo.orderdetails;";
@@ -351,6 +361,7 @@ public class MySQLImpl implements DataStoreInterface {
 		result = dbc.executeNonQuery(sql);
 		return result;
 	}
+
 
 
 
