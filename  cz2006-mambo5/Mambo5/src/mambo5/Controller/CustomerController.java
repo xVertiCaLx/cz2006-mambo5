@@ -57,12 +57,11 @@ public class CustomerController {
 		return cust;
 	}
 	
-	public ArrayList<Customer> getCustomerPuchaseDate() {
-		sysConfig = new SystemConfiguration();
-		dataStore = DataStoreFactory.createDataStore(sysConfig);
+	public ArrayList<String> getCustomerPuchaseDate(int custID) {
+	
+		cust = new Customer();
+		return cust.retrieveCustomerPurchaseDate(custID);
 		
-		return null;		
 	}
-		
 	
 }
