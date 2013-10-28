@@ -1,9 +1,15 @@
 package mambo5.Controller;
 
 import java.util.ArrayList;
+import java.util.Date;
+
 import mambo5.Database.*;
+import mambo5.Entity.Canteen;
+import mambo5.Entity.Customer;
 import mambo5.Entity.Order;
+import mambo5.Entity.MenuItem;
 import mambo5.Entity.OrderDetail;
+import mambo5.Form2.CamsCreateMenuItemForm;
 
 public class OrderDetailController { 
 
@@ -14,16 +20,16 @@ public class OrderDetailController {
 	public OrderDetailController() { }
 
 		//validating createOrderDetail
-		public int validateCreateOrderDetail(int orderID,int menuItemID, double actualPrice){
+		public int validateCreateOrderDetail(int orderID,int menuItemID, double actualPrice, int quantity){
 			int validate = 0;
 			
 			od = new OrderDetail();
-			validate = od.createOrderDetail(orderID, menuItemID, actualPrice);
+			validate = od.createOrderDetail(orderID, menuItemID, actualPrice, quantity);
 			
 			return validate;
 		}
 		
-		//Retrieving orderID
+		//guohao
 		public ArrayList<Order> retrieveOrderIDList(ArrayList<Order> orderIDList, int stallID, String orderStatus) {
 			sysConfig = new SystemConfiguration();
 			dataStore = DataStoreFactory.createDataStore(sysConfig);
@@ -31,11 +37,11 @@ public class OrderDetailController {
 			return dataStore.retrieveOrderID(orderIDList, stallID, orderStatus);
 		}
 		
-		//Retrieving orderDetails
-		public ArrayList<OrderDetail> retrieveOrderDetailList(ArrayList<OrderDetail> orderDetailList, int orderID) {
+		//guohao - testing
+		public ArrayList<OrderDetail> retrieveOrderDetailList(ArrayList<OrderDetail> orderDetailList) {
 			sysConfig = new SystemConfiguration();
 			dataStore = DataStoreFactory.createDataStore(sysConfig);
 			
-			return dataStore.retrieveOrderDetailList(orderDetailList, orderID);
+			return dataStore.retrieveOrderDetailList(orderDetailList);
 		}
 }
