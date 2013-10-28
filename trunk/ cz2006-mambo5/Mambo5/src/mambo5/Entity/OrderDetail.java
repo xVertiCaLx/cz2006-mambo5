@@ -56,13 +56,17 @@ public class OrderDetail {
 	public int getQuantity() {
 		return quantity;
 	}
+	
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
+	}
 
-	public int createOrderDetail(int orderID, int menuItemID, double actualPrice) 
+	public int createOrderDetail(int orderID, int menuItemID, double actualPrice, int quantity) 
 	{
 		dbc = new DBController();
 		int result = 0;
-		String sql = "INSERT INTO orderdetails (orderID, menuItemID, actualPrice)"
-					+ "VALUES ( '"+ orderID +"', '" + menuItemID + "' , '" + actualPrice + "');";
+		String sql = "INSERT INTO orderdetails (orderID, menuItemID, actualPrice, quantity)"
+					+ "VALUES ( '"+ orderID +"', '" + menuItemID + "' , '" + actualPrice + "' , '" + quantity + "');";
 		
 		result = dbc.executeNonQuery(sql);
 		return result;
