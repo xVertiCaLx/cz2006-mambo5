@@ -195,22 +195,14 @@ public class MySQLImpl implements DataStoreInterface {
 
 	// ------------------------------------------Menu-----------------------------------------------------------------------
 	@Override
-	public ArrayList<Menu> retrieveMenu(ArrayList<Stall> stallList) {
-		ArrayList<Menu> menuList = new ArrayList<Menu>();
+	public ArrayList<Menu> retrieveMenu(ArrayList<Menu> menuList) {
 		try {
 			if (stallList.size() > 0) {
-				String sql = "SELECT * FROM MENU WHERE stallID in (";
-				for (int i = 0; i < stallList.size(); i++) {
-					sql += "'" + stallList.get(i).getStallId() + "'";
-					if (i + 1 < stallList.size())
-						sql += ",";
-				}
-				sql += ");";
+				String sql = "SELECT * FROM MENU;";
 				rs = dbc.execute(sql);
 				while (rs.next()) {
-					Menu m = new Menu(rs.getInt("menuID"),
-							rs.getInt("stallID"), rs.getString("menuType"));
-					menuList.add(m);
+					menuList.add(new Menu(rs.getInt("menuID"),
+							rs.getInt("stallID"), rs.getString("menuType")));
 				}
 				dbc.terminate();
 			}
