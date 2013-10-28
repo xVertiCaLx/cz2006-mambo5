@@ -97,4 +97,28 @@ public class Customer  {
 		}
 		return customerPurchaseDate;
 	}
+	
+	public ArrayList<MenuItem> retrieveSpecificPurchaseDate(String purchaseDate, int custID) {
+		dbc = new DBController();
+		ArrayList<MenuItem> itemList = new ArrayList<MenuItem>();
+		ResultSet rs = null;
+		
+		String sql = "SELECT customer.custID, orders.orderID, menuitem.menuItemName, menuitem.menuItemPrice" +
+					" FROM customer" + 
+					" INNER JOIN ((menuitem INNER JOIN orderdetails ON menuitem.menuItemID = orderdetails.menuitemID)" + 
+					" INNER JOIN orders ON orderdetails.orderID = orders.orderID) ON customer.custID = orders.custID" +
+					" WHERE orders.purchaseDate = '" +purchaseDate+ "' and customer.custID = "+custID+ ";";
+		rs = dbc.execute(sql);
+		try {
+			while(rs.next()) {
+				MenuItem mi = new MenuItem(rs.getString("menuItemName"), rs.getDouble("menuItemPrice"));
+				itemList.add(mi);
+			}	
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			dbc.terminate();
+		}
+		return itemList;	
+	}
 }
