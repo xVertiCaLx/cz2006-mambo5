@@ -25,13 +25,13 @@ public class OrderDetailController {
 			return validate;
 		}
 		
-		public ArrayList<Order> retrieveOrderIDList(ArrayList<Order> orderIDList, int stallID, String orderStatus) {
+		/*public ArrayList<Order> retrieveOrderIDList(ArrayList<Order> orderIDList, int stallID, String orderStatus) {
 			sysConfig = new SystemConfiguration();
 			dataStore = DataStoreFactory.createDataStore(sysConfig);
 			
 			return dataStore.retrieveOrderID(orderIDList, stallID, orderStatus);
 		}
-		
+		*/
 		public ArrayList<OrderDetail> retrieveOrderDetailList(ArrayList<OrderDetail> orderDetailList) {
 			sysConfig = new SystemConfiguration();
 			dataStore = DataStoreFactory.createDataStore(sysConfig);
