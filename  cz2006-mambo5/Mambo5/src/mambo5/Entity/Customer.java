@@ -3,7 +3,6 @@ package mambo5.Entity;
 import mambo5.Controller.DBController;
 
 import java.sql.*;
-import java.util.ArrayList;
 
 public class Customer  {
 	
@@ -81,31 +80,20 @@ public class Customer  {
 		}
 		return cust;
 	}
-	
+/*	
 	public int updateCustomerCardValue(int custID, double cardBalance)
 	{
 		dbc = new DBController();
-		int result = 0;
-		
-		String sql = "UPDATE customer SET cardBalance = '" + cardBalance + "' WHERE custID = " + custID + ";";
-				
-		result = dbc.executeNonQuery(sql);
-				
-		return result;
-		}	
+
+	}	
 	
 	public int refundCustomerCard(int custID)
 	{	
 		dbc = new DBController();
-		int result = 0;
 		
-		String sql = "DELETE FROM customer WHERE custID = " + custID + ";";
-				
-		result = dbc.executeNonQuery(sql);
-		return result;
 	}
-
-	}
+	*/
+}
 	
 	
 
