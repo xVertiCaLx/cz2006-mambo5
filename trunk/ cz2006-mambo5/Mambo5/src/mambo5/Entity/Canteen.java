@@ -1,7 +1,5 @@
 package mambo5.Entity;
 
-import mambo5.Controller.DBController;
-
 public class Canteen {
 	private int canteenID;
 	private String canteenName;
