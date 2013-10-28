@@ -28,6 +28,7 @@ public interface DataStoreInterface {
 	ArrayList<Menu> retrieveMenu(ArrayList<Stall> stallList);
 	
 	//MENUITEM
+	int createMenuItem(int menuID, String menuItemName, double menuItemPrice, double discount);
 	ArrayList<MenuItem> retrieveMenuItem(ArrayList<MenuItem> menuItemList);
 	ArrayList<MenuItem> retrieveMenuItem(ArrayList<MenuItem> menuItemList, int menuItemID);
 	
@@ -38,7 +39,7 @@ public interface DataStoreInterface {
 	ArrayList<Order> retrieveOrderID(ArrayList<Order> orderIDList, int stallID, String orderStatus);
 	ArrayList<Order> retrieveOrderList(ArrayList<Order> orderList);
 
-	//ORDERDETAIL - testing
+	//ORDERDETAIL
 	int createOrderDetail(int orderID, int menuItemID, double actualPrice, int quantity);
 	ArrayList<OrderDetail> retrieveOrderDetailList(ArrayList<OrderDetail> orderDetailList);
 	
