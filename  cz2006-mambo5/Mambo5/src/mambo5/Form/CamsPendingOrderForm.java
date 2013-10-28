@@ -241,6 +241,7 @@ public class CamsPendingOrderForm extends JPanel implements JInterfaceController
 		for (int i = 0; i < orderList.size(); i++) {
 			addOrderIDButtons(orderList.get(i));
 		}
+		System.out.println("orderList.size() is: " +orderList.size());
 
 	}
 
