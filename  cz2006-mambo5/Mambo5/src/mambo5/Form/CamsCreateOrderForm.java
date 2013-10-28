@@ -208,6 +208,7 @@ public class CamsCreateOrderForm extends JPanel implements JInterfaceController 
 							( "Please enter Customer ID: " ))); ;					
 					if(submitsOrder(custID) == 1)
 						submitsOrderDetails();
+					
 				}
 			}
 		});
