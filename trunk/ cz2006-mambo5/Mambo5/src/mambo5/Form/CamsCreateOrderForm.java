@@ -192,7 +192,9 @@ public class CamsCreateOrderForm extends JPanel implements JInterfaceController 
 		numpadPanel.delete().addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				receipt.setText("NEW ORDER \n"
-						+ "=======================================\n");
+						+ "=======================================\n"
+						+"Quantity" + "\tItemName" + "\t" + "             " 
+						+ "Amount\n");
 				orderDetailList.removeAll(orderDetailList);
 				totalPrice = 0;
 			}
@@ -263,7 +265,9 @@ public class CamsCreateOrderForm extends JPanel implements JInterfaceController 
 			public void actionPerformed(ActionEvent e) {
 				writeEnable = true;
 				receiptDetail = "NEW ORDER \n"
-						+ "=======================================\n";
+						+ "=======================================\n"
+						+"Quantity" + "\tItemName" + "\t" + "             " 
+						+ "Amount\n";
 				
 				int menuItemID = menuItemButtons.get(e.getSource()).getMenuItemID(), quantityInt;
 				
@@ -279,20 +283,23 @@ public class CamsCreateOrderForm extends JPanel implements JInterfaceController 
 						orderDetailList.get(i).setQuantity(orderDetailList.get(i).getQuantity() + quantityInt);
 					}
 					
-					receiptDetail += orderDetailList.get(i).getQuantity() + "\t" + menuItems.get(orderDetailList.get(i).getMenuItemID()).getMenuItemName() + "\t $" + orderDetailList.get(i).getActualPrice() + "\n";
-					receiptDetail += "\t\t $" + (orderDetailList.get(i).getQuantity() * orderDetailList.get(i).getActualPrice()) + "\n";
+					receiptDetail += orderDetailList.get(i).getQuantity() +
+							"\t" + menuItems.get(orderDetailList.get(i).getMenuItemID()).getMenuItemName() 
+							+ "\t " + "               " +orderDetailList.get(i).getActualPrice() + "\n";
+					
+					receiptDetail += "\t\t " + "               " + (orderDetailList.get(i).getQuantity() * orderDetailList.get(i).getActualPrice()) + "\n";
 			
 				}
 				
 				if (writeEnable) {
 					orderDetailList.add(new OrderDetail(menuItemID, actualPrice, quantityInt));
-					receiptDetail += quantityInt + "\t" + menuItemButtons.get(e.getSource()).getMenuItemName()  + "\t $" + actualPrice + "\n";
-					receiptDetail += "\t\t $" + (quantityInt * actualPrice) + "\n";
+					receiptDetail += quantityInt + "\t" + menuItemButtons.get(e.getSource()).getMenuItemName()  + "\t " + "               " +actualPrice + "\n";
+					receiptDetail += "\t\t " + "               " + (quantityInt * actualPrice) + "\n";
 				}
 	
 				totalPrice +=  (quantityInt * actualPrice);
 				receiptDetail += "\n\n" + "======================================="
-						 + "\nTOTAL PRICE: " + "\t\t $" + df.format(totalPrice)
+						 + "\nTOTAL PRICE: " + "\t\t " + "               $" + df.format(totalPrice)
 						 + "\n=======================================";
 
 				System.out.println("totalPrice is: " +totalPrice);
