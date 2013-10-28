@@ -9,6 +9,7 @@ public interface DataStoreInterface {
 	//methods
 	
 	//CANTEEN
+	int createCanteen( String canteenName, String canteenDesc, String canteenAddress, int  maxStall);
 	ArrayList<Canteen> retrieveCanteenList();
 	int updateCanteenDetail(int canteenID, String canteenName, String canteenDesc, String canteenAddress, int maxStall);
 	int deleteCanteen(int canteenID);

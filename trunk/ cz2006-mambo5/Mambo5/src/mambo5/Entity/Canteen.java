@@ -46,17 +46,4 @@ public class Canteen {
 	public int getMaxStall() {
 		return maxStall;
 	}
-
-	public int createCanteen( String canteenName, String canteenDesc, String canteenAddress, int  maxStall) {
-		dbc = new DBController();
-		int result = 0;
-		
-		String sql = "INSERT INTO canteen ( canteenName, canteenDesc, canteenAddress, maxStall) "
-					+ "VALUES ( '" + canteenName + "' , '" + canteenDesc + "' , '" + canteenAddress + "' , '" + maxStall +"');";
-		
-		result = dbc.executeNonQuery(sql);
-				
-		return result;
-	}
-	
 }

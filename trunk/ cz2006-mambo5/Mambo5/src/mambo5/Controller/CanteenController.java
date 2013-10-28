@@ -14,18 +14,18 @@ public class CanteenController {
 	private SystemConfiguration sysConfig;
 	
 	public CanteenController() {}
-	
-	// FOLLOW THIS METHOD FIRST
+
 	public int validateCanteenDetail(String canteenName, String canteenDesc, String canteenAddress, int maxStall){
 		int validate = 0;
 		
-		c = new Canteen();
-		validate = c.createCanteen(canteenName, canteenDesc, canteenAddress, maxStall);
-		
+		sysConfig = new SystemConfiguration();
+		dataStore = DataStoreFactory.createDataStore(sysConfig);
+		validate = dataStore.createCanteen(canteenName, canteenDesc, canteenAddress, maxStall);
+			
 		return validate;
+		
 	}
-	
-	//this is later on
+		
 	public int validateCanteenDetail(int canteenID, String canteenName, String canteenDesc, String canteenAddress, int maxStall){
 		int validate = 0;
 		

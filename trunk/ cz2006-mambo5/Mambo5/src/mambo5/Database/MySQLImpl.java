@@ -34,6 +34,17 @@ public class MySQLImpl implements DataStoreInterface {
 
 	// -----------------------------------------Canteen-------------------------------------------
 	@Override
+	public int createCanteen(String canteenName, String canteenDesc, String canteenAddress, int maxStall) {
+		// TODO Auto-generated method stub
+		int result = 0;
+		
+		String sql = "INSERT INTO canteen ( canteenName, canteenDesc, canteenAddress, maxStall) "
+					+ "VALUES ( '" + canteenName + "' , '" + canteenDesc + "' , '" + canteenAddress + "' , '" + maxStall +"');";
+		
+		result = dbc.executeNonQuery(sql);
+		return result;
+	}
+	@Override
 	public ArrayList<Canteen> retrieveCanteenList() {
 		Canteen c;
 		canteenList = new ArrayList<Canteen>();
@@ -285,6 +296,8 @@ public class MySQLImpl implements DataStoreInterface {
 		}
 		return orderDetailList;
 	}
+
+
 
 	/*
 	 * public ArrayList<OrderDetail>
