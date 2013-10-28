@@ -12,7 +12,6 @@ public class Customer  {
 	private String fullName;
 	private int accessID;
 	private Customer cust;
-	private ArrayList<Customer> customerPurchaseDate;
 	DBController dbc;
 	
 	public int getCustID() {
@@ -78,18 +77,22 @@ public class Customer  {
 		return cust;
 	}
 
-	public ArrayList<Customer> retrieveCustomerPurchaseDate(int custID) {
+	public ArrayList<String> retrieveCustomerPurchaseDate(int custID) {
 		
-		customerPurchaseDate = new ArrayList<Customer>();
-		boolean status = false;
+		ArrayList<String> customerPurchaseDate = new ArrayList<String>();
 		ResultSet rs = null;
 		String sql = "SELECT purchaseDate FROM orders where custID=1 Order By purchaseDate DESC LIMIT 5;";
 		rs = dbc.execute(sql);
-
-		
+		try {
+			while(rs.next()) {
+				String purchaseDate = rs.getDate("purchaseDate").toString();
+				customerPurchaseDate.add(purchaseDate);
+			}	
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			dbc.terminate();
+		}
 		return customerPurchaseDate;
 	}
 }
-	
-	
-
