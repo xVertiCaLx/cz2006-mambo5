@@ -27,11 +27,11 @@ public class SystemConfiguration {
 		return dbuser;
 	}
 
-	public String getDatabase() {
+	public String getDatabase() { 
 		return database;
 	}
 
-	public void setup() {
+	private void setup() {
     	Properties prop = new Properties();
 
 		FileInputStream stream = null;
@@ -69,7 +69,6 @@ public class SystemConfiguration {
 	
 	public static void main(String[] args) {
 		SystemConfiguration sc = new SystemConfiguration();
-		//sc.setup();
 	}
 	
 }
