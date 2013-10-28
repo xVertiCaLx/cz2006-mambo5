@@ -338,7 +338,6 @@ public class MySQLImpl implements DataStoreInterface {
 		}
 		return orderIDList;
 	}
-	
 
 	//---------------------------------------OrderDetail--------------------------------------------------
 	@Override
@@ -354,7 +353,7 @@ public class MySQLImpl implements DataStoreInterface {
 	
 	public ArrayList<Order> retrieveOrderList(ArrayList<Order> orderList) {
 		try {
-			String sql = "SELECT * FROM mambojumbo.orderdetails;";
+			String sql = "SELECT * FROM mambojumbo.orders;";//i changed this
 			rs = dbc.execute(sql);
 
 			while (rs.next()) {
