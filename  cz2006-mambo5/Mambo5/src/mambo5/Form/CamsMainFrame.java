@@ -169,11 +169,9 @@ public class CamsMainFrame extends JFrame implements JInterfaceController {
 			System.out.println("Initialising Complete. Loading Main Screen.");
 			
 			selectPanel = new SelectPanel(this);
-			//camsCreateOrderForm = new CamsCreateOrderForm(this, menuItemList, orderDetailList, stallID);
 			camsMainMenuForm = new CamsMainMenuForm(this);
 			
 			camsRefundOrderForm = new CamsRefundOrderForm(this);
-			//camsCreateOrderForm, camsEditMenuItemForm, camsListMenuItemForm, camsMainMenuForm
 		}
 	}
 
