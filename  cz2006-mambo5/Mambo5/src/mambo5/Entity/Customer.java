@@ -53,19 +53,12 @@ public class Customer  {
 		this.fullName = fullName;
 		this.accessID = accessID;
 	}
-	
+	/*
 	public int createCustomer(double cardBalance, String fullName, int accessID) {
 		dbc = new DBController();
-		int result = 0;
-		
-		String sql = "INSERT INTO customer (fullName, cardBalance, accessID) "
-					+ "VALUES ( '" + fullName + "' , '" + cardBalance + "' , " + accessID + ");";
-		
-		result = dbc.executeNonQuery(sql);
-				
-		return result;
+
 	}
-	
+	*/
 	public Customer retrieveCustomerDetail(int custID) {
 		
 		dbc = new DBController();

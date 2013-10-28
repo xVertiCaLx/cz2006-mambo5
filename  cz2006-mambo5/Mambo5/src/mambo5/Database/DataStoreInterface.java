@@ -27,13 +27,16 @@ public interface DataStoreInterface {
 	ArrayList<Menu> retrieveMenu(ArrayList<Stall> stallList);
 	
 	//MENUITEM
-	public ArrayList<MenuItem> retrieveMenuItem(ArrayList<MenuItem> menuItemList);
-	public ArrayList<MenuItem> retrieveMenuItem(ArrayList<MenuItem> menuItemList, int menuItemID);
+	ArrayList<MenuItem> retrieveMenuItem(ArrayList<MenuItem> menuItemList);
+	ArrayList<MenuItem> retrieveMenuItem(ArrayList<MenuItem> menuItemList, int menuItemID);
 	
 	//ORDER
-	public ArrayList<Order> retrieveOrderID(ArrayList<Order> orderIDList, int stallID, String orderStatus);
-	public ArrayList<Order> retrieveOrderList(ArrayList<Order> orderList);
+	ArrayList<Order> retrieveOrderID(ArrayList<Order> orderIDList, int stallID, String orderStatus);
+	ArrayList<Order> retrieveOrderList(ArrayList<Order> orderList);
 
 	//ORDERDETAIL - testing
-	public ArrayList<OrderDetail> retrieveOrderDetailList(ArrayList<OrderDetail> orderDetailList);
+	ArrayList<OrderDetail> retrieveOrderDetailList(ArrayList<OrderDetail> orderDetailList);
+	
+	//CUSTOMER
+	int createCustomer(double cardBalance, String fullName, int accessID);
 }
