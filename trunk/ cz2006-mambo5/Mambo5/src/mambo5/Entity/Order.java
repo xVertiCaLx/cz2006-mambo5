@@ -44,35 +44,14 @@ public class Order {
 	public int getStallID() {
 		return stallID;
 	}
-	
+	/*
 	//New Order
 	public int createOrder(int custID, Date purchaseDate, String orderStatus, int stallID) 
 	{
 		dbc = new DBController();
-		int result = 0;
-		String sql = "INSERT INTO mambojumbo.orders (custID, purchaseDate, orderStatus, stallID) "
-					+ "VALUES ( '" + custID + "' , '" + purchaseDate + "' , '" + orderStatus +"', '" + stallID +"');";
 		
-		result = dbc.executeNonQuery(sql);
-		
-		if(result==1)
-		{
-			sql = "Select orderID from mambojumbo.orders order by orderID desc limit 1;";
-			
-			try {
-				rs = dbc.execute(sql);
-				rs.next();
-				result = rs.getInt("orderID"); 
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		}
-		else
-			result = -1;
-		
-		return result;
 	}
-	
+*/	
 	//Refund Order
 	public int refundOrder(int orderID)
 	{

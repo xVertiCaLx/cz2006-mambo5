@@ -1,6 +1,7 @@
 package mambo5.Database;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 import mambo5.Entity.*;
 
@@ -31,6 +32,7 @@ public interface DataStoreInterface {
 	ArrayList<MenuItem> retrieveMenuItem(ArrayList<MenuItem> menuItemList, int menuItemID);
 	
 	//ORDER
+	int createOrder(int custID, Date purchaseDate, String orderStatus, int stallID);
 	ArrayList<Order> retrieveOrderID(ArrayList<Order> orderIDList, int stallID, String orderStatus);
 	ArrayList<Order> retrieveOrderList(ArrayList<Order> orderList);
 

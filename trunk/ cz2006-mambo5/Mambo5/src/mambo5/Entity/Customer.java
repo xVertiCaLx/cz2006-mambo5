@@ -53,12 +53,7 @@ public class Customer  {
 		this.fullName = fullName;
 		this.accessID = accessID;
 	}
-	/*
-	public int createCustomer(double cardBalance, String fullName, int accessID) {
-		dbc = new DBController();
-
-	}
-	*/
+	
 	public Customer retrieveCustomerDetail(int custID) {
 		
 		dbc = new DBController();
@@ -80,19 +75,6 @@ public class Customer  {
 		}
 		return cust;
 	}
-/*	
-	public int updateCustomerCardValue(int custID, double cardBalance)
-	{
-		dbc = new DBController();
-
-	}	
-	
-	public int refundCustomerCard(int custID)
-	{	
-		dbc = new DBController();
-		
-	}
-	*/
 }
 	
 	
