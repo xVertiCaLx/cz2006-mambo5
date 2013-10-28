@@ -9,9 +9,7 @@ import mambo5.Entity.Menu;
 import mambo5.Entity.Stall;
 
 public class MenuController {
-
-	private DBController dbcon;
-	private Menu m;
+	
 	private DataStoreInterface dataStore;
 	private SystemConfiguration sysConfig;
 	
