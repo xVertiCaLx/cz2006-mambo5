@@ -1,4 +1,4 @@
-package mambo5.Form2;
+package mambo5.Form;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
