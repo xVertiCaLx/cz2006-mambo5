@@ -25,7 +25,7 @@ public class CamsCreateMenuItemForm extends JPanel implements JInterfaceControll
 	private CamsMainFrame mainFrame;
 	private Admin admin;
 	
-	public CamsCreateMenuItemForm(final CamsMainFrame mainFrame, final Admin admin, int menuID) {
+	public CamsCreateMenuItemForm(final CamsMainFrame mainFrame, int stallID) {
 		this.mainFrame = mainFrame;
 		this.menuID = menuID;
 		this.admin = admin;
@@ -128,7 +128,7 @@ public class CamsCreateMenuItemForm extends JPanel implements JInterfaceControll
 					JOptionPane.showMessageDialog(null, "Canteen cannot be created");
 				else {
 					JOptionPane.showMessageDialog(null, "Canteen successfully created");
-					//mainFrame.replacePanel(new CamsMainMenuForm(mainFrame, admin));
+					mainFrame.replacePanel("SelectPanel");
 				}
 			}catch (NumberFormatException exception) {
 				JOptionPane.showMessageDialog(null, "Please Enter Only Integer Value for Price and Discount");
