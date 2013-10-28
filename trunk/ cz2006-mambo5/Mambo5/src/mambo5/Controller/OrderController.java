@@ -52,8 +52,9 @@ public class OrderController {
 	public int validateConfirmOrder(int orderID) {
 		int validate = 0;
 
-		o = new Order();
-		validate = o.confirmOrder(orderID);
+		sysConfig = new SystemConfiguration();
+		dataStore = DataStoreFactory.createDataStore(sysConfig);
+		validate = dataStore.confirmOrder(orderID);
 
 		return validate;
 	}
