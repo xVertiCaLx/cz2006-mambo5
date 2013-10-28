@@ -1,9 +1,5 @@
 package mambo5.Entity;
 
-import java.sql.ResultSet;
-
-import mambo5.Controller.DBController;
-
 public class Access {
 	private int accessID;
 	private String accessDesc;

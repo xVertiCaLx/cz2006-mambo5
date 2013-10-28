@@ -1,6 +1,5 @@
 package mambo5.Controller;
 
-import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -11,18 +10,11 @@ import mambo5.Entity.Order;
 
 public class OrderController {
 
-	private Order o;
-	private DBController dbc;
-	private ResultSet rs;
-	private Order order;
-	// private CamsCreateMenuItemForm form;
 	private DataStoreInterface dataStore;
 	private SystemConfiguration sysConfig;
 
 	public OrderController() {
 	}
-
-	// TODO Auto-generated constructor stub
 
 	// validating create order
 	public int validateCreateOrder(int custID, Date purchaseDate,
@@ -59,8 +51,6 @@ public class OrderController {
 		return validate;
 	}
 
-	// guohao
-	// remove later
 	public ArrayList<Order> retrieveOrderIDList(ArrayList<Order> orderIDList,
 			int stallID, String orderStatus) {
 		sysConfig = new SystemConfiguration();
