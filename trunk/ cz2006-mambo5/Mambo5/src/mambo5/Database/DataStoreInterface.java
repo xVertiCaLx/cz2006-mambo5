@@ -25,7 +25,8 @@ public interface DataStoreInterface {
 	ArrayList<Admin> retrieveAdminList();
 	
 	//MENU
-	ArrayList<Menu> retrieveMenu(ArrayList<Menu> menuList);
+	ArrayList<Menu> retrieveMenu(ArrayList<Stall> stallList);
+	ArrayList<Menu> retrieveMenuList(ArrayList<Menu> menuList);
 	
 	//MENUITEM
 	int createMenuItem(int menuID, String menuItemName, double menuItemPrice, double discount);
