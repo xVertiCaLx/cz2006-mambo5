@@ -14,12 +14,20 @@ import java.awt.Font;
 
 import javax.swing.JTextField;
 import javax.swing.JButton;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.util.ArrayList;
+
+import javax.swing.JComboBox;
+
+import mambo5.Controller.CustomerController;
+import mambo5.Entity.Customer;
 
 public class ViewHistoryForm extends JPanel {
 
-	
+	private CustomerController cust;
+	private ArrayList<Customer> retrieveOrderHistory;
 	private JTextField txtCardNumber;
 	private JTextField txtName;
 	private JTextField txtCurrentValue;
@@ -29,12 +37,6 @@ public class ViewHistoryForm extends JPanel {
 		setBounds(0, 40, 800, 560);
 		setLayout(null);	
 		setBackground(new Color(255, 255, 255));
-		
-		JList listHistory = new JList();
-		listHistory.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		listHistory.setEnabled(false);
-		listHistory.setBounds(22, 112, 369, 103);
-		add(listHistory);
 		
 		JLabel lblHistory = new JLabel("Purchase History");
 		lblHistory.setFont(new Font("Tahoma", Font.PLAIN, 10));
@@ -100,5 +102,12 @@ public class ViewHistoryForm extends JPanel {
 		lblViewHistor.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		lblViewHistor.setBounds(4, 0, 108, 27);
 		add(lblViewHistor);
+		
+		JComboBox comboBoxHistory = new JComboBox();
+		comboBoxHistory.setBounds(116, 92, 204, 20);
+		add(comboBoxHistory);
+		
+		
 	}
+	
 }
