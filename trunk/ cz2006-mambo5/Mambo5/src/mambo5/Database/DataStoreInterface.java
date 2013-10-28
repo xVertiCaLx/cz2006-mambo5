@@ -48,4 +48,7 @@ public interface DataStoreInterface {
 	int createCustomer(double cardBalance, String fullName, int accessID);
 	int updateCustomerCardValue(int custID, double cardBalance);
 	int refundCustomerCard(int custID);
+	Customer retrieveCustomerDetail(int custID);
+	ArrayList<String> retrieveCustomerPurchaseDate(int custID);
+	ArrayList<MenuItem> retrieveSpecificPurchaseDate(String purchaseDate, int custID);
 }
