@@ -119,21 +119,29 @@ public class CamsMainFrame extends JFrame implements JInterfaceController {
 			mainMenuButton.setVisible(true);
 	}
 	
+	public void setStallID(int stallID) {
+		this.stallID = stallID;
+	}
+	
 	public void replacePanel(String panelName) {
 		if (panelName.equals("CamsCreateOrderForm")) {
 			camsCreateOrderForm = new CamsCreateOrderForm(this, menuItemList, orderDetailList, stallID);
 			replacePanel(camsCreateOrderForm);
 		} else if (panelName.equals("CamsEditMenuItemForm")) {
+			camsEditMenuItemForm = new CamsEditMenuItemForm(this);
 			replacePanel(camsEditMenuItemForm);
 		} else if (panelName.equals("CamsListMenuItemForm")) {
+			camsListMenuItemForm = new CamsListMenuItemForm(this, menuItemList, stallID);
 			replacePanel(camsListMenuItemForm);
 		} else if (panelName.equals("CamsMainMenuForm")) {
 			replacePanel(camsMainMenuForm);
 		} else if (panelName.equals("CamsCreateMenuItemForm")) {
+			camsCreateMenuItemForm = new CamsCreateMenuItemForm(this, stallID);
 			replacePanel(camsCreateMenuItemForm);
 		} else if (panelName.equals("CamsPendingOrderForm")) {
 			replacePanel(camsPendingOrderForm);
 		} else if (panelName.equals("CamsLoginForm")) {
+			camsLoginForm = new CamsLoginForm(this);
 			replacePanel(camsLoginForm);
 		} else if (panelName.equals("CamsRefundOrderForm")) {
 			replacePanel(camsRefundOrderForm);
@@ -149,13 +157,9 @@ public class CamsMainFrame extends JFrame implements JInterfaceController {
 			System.out.println("Initialising Complete. Loading Main Screen.");
 			
 			selectPanel = new SelectPanel(this);
-			camsCreateOrderForm = new CamsCreateOrderForm(this, menuItemList, orderDetailList, stallID);
-			camsEditMenuItemForm = new CamsEditMenuItemForm(this);
-			camsListMenuItemForm = new CamsListMenuItemForm(this, menuItemList, stallID);
+			//camsCreateOrderForm = new CamsCreateOrderForm(this, menuItemList, orderDetailList, stallID);
 			camsMainMenuForm = new CamsMainMenuForm(this);
-			camsCreateMenuItemForm = new CamsCreateMenuItemForm(this, stallID);
-			//camsPendingOrderForm = new CamsPendingOrderForm(this, stallID);
-			camsLoginForm = new CamsLoginForm(this);
+			
 			camsRefundOrderForm = new CamsRefundOrderForm(this);
 			//camsCreateOrderForm, camsEditMenuItemForm, camsListMenuItemForm, camsMainMenuForm
 		}
