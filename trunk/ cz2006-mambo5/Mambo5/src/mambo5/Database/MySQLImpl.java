@@ -268,11 +268,9 @@ public class MySQLImpl implements DataStoreInterface {
 		return orderIDList;
 	}
 
-	public ArrayList<OrderDetail> retrieveOrderDetailList(
-			ArrayList<OrderDetail> orderDetailList, int orderID) {
+	public ArrayList<OrderDetail> retrieveOrderDetailList(ArrayList<OrderDetail> orderDetailList) {
 		try {
-			String sql = "SELECT * FROM mambojumbo.orderdetails WHERE orderID = "
-					+ orderID + ";";
+			String sql = "SELECT * FROM mambojumbo.orderdetails;";
 			rs = dbc.execute(sql);
 
 			while (rs.next()) {
