@@ -1,18 +1,18 @@
 package mambo5.Entity;
 
 public class Visitor extends Customer{
-	private String vistorID;
+	private String visitorID;
 	
 	public Visitor(String vistorID) {
-		this.vistorID = vistorID;
+		this.visitorID = vistorID;
 	}
 
 	public void setVistorID(String vistorID) {
-		this.vistorID = vistorID;
+		this.visitorID = vistorID;
 	}
 
 	public String getVistorID() {
-		return vistorID;
+		return visitorID;
 	}
 	
 }
