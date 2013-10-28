@@ -147,7 +147,7 @@ public class CamsMainFrame extends JFrame implements JInterfaceController {
 			camsCreateMenuItemForm = new CamsCreateMenuItemForm(this, stallID);
 			replacePanel(camsCreateMenuItemForm);
 		} else if (panelName.equals("CamsPendingOrderForm")) {
-			//final CamsMainFrame mainFrame, ArrayList<OrderDetail> orderDetailList, ArrayList<Order> orderList, ArrayList<MenuItem> menuItemList, int stallID, int menuID
+			System.out.println("order:" + orderList.size());
 			camsPendingOrderForm = new CamsPendingOrderForm(this, orderDetailList, orderList, menuItemList, stallID, menuID);
 			replacePanel(camsPendingOrderForm);
 		} else if (panelName.equals("CamsLoginForm")) {
@@ -166,7 +166,7 @@ public class CamsMainFrame extends JFrame implements JInterfaceController {
 			menuItemController.retrieveMenuItemList(menuItemList);
 			orderDetailController.retrieveOrderDetailList(orderDetailList);
 			orderController.retrieveOrderList(orderList);
-			System.out.println("Initialising Complete. Loading Main Screen.");
+			System.out.println("Initialising Complete. Loading Main Screen." + orderList.size());
 			
 			selectPanel = new SelectPanel(this);
 			camsMainMenuForm = new CamsMainMenuForm(this);

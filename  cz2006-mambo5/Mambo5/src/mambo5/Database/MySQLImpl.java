@@ -224,7 +224,7 @@ public class MySQLImpl implements DataStoreInterface {
 	
 	public ArrayList<Menu> retrieveMenuList(ArrayList<Menu> menuList) {
 		try {
-			if (stallList.size() > 0) {
+			if (menuList.size() > 0) {
 				String sql = "SELECT * FROM MENU;";
 				rs = dbc.execute(sql);
 				while (rs.next()) {
@@ -373,13 +373,11 @@ public class MySQLImpl implements DataStoreInterface {
 	
 	public ArrayList<Order> retrieveOrderList(ArrayList<Order> orderList) {
 		try {
-			String sql = "SELECT * FROM mambojumbo.orders;";//i changed this
+			String sql = "SELECT * FROM mambojumbo.orders;";
 			rs = dbc.execute(sql);
 
 			while (rs.next()) {
-				System.out.println("add once");
-				orderList.add(new Order(rs.getInt("orderID"), rs
-						.getInt("custID"), rs.getDate("purchaseDate"),rs.getString("orderStatus"),rs.getInt("stallID")));
+				orderList.add(new Order(rs.getInt("orderID"), rs.getInt("custID"), rs.getDate("purchaseDate"),rs.getString("orderStatus"),rs.getInt("stallID")));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -395,7 +393,6 @@ public class MySQLImpl implements DataStoreInterface {
 			rs = dbc.execute(sql);
 
 			while (rs.next()) {
-				System.out.println("add once");
 				orderDetailList.add(new OrderDetail(rs.getInt("menuItemID"), rs
 						.getInt("orderID"), rs.getDouble("actualPrice"),rs.getInt("quantity")));
 			}

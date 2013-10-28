@@ -10,6 +10,8 @@ public class LoginController {
 	private DBController dbc;
 	private String sql;
 	private ResultSet rs;
+	
+	//login remind wei long should be in interface
 
 	public LoginController() {
 		System.out.println("Login Controller Initialised");
