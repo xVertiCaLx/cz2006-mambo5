@@ -8,7 +8,6 @@ public class Canteen {
 	private String canteenDesc;
 	private String canteenAddress;
 	private int maxStall;
-	private DBController dbc;
 	
 	
 	public Canteen(){}
