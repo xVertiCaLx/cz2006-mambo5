@@ -54,4 +54,12 @@ public class CustomerController {
 		return cust;
 	}
 	
+	public ArrayList<Customer> getCustomerPuchaseDate() {
+		sysConfig = new SystemConfiguration();
+		dataStore = DataStoreFactory.createDataStore(sysConfig);
+		
+		return null;		
+	}
+		
+	
 }
