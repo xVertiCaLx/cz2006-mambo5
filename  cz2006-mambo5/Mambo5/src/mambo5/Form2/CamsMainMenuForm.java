@@ -13,10 +13,11 @@ import javax.swing.JPanel;
 import mambo5.Controller.JInterfaceController;
 import mambo5.Entity.Admin;
 import mambo5.Entity.MenuItem;
+import mambo5.Entity.OrderDetail;
 
 public class CamsMainMenuForm extends JPanel implements JInterfaceController {
 
-	public CamsMainMenuForm(final CamsMainFrame mainFrame, final Admin admin, final ArrayList<MenuItem> menuItemList) {
+	public CamsMainMenuForm(final CamsMainFrame mainFrame, final Admin admin, final ArrayList<MenuItem> menuItemList, final ArrayList<OrderDetail> orderDetailList) {
 		setBounds(0, 0, 800, 560);
 		setLayout(null);
 		setBackground(new Color(0, 0, 255));
@@ -37,10 +38,7 @@ public class CamsMainMenuForm extends JPanel implements JInterfaceController {
 		JButton btnNewOrder = new JButton("NEW ORDER");
 		btnNewOrder.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				removeAll();
-				add(new CamsCreateOrderForm(mainFrame, menuItemList, 5));
-				revalidate();
-				repaint();
+				mainFrame.replacePanel(new CamsCreateOrderForm(mainFrame, menuItemList, orderDetailList, 5));
 			}
 		});
 		btnNewOrder.setForeground(Color.WHITE);
