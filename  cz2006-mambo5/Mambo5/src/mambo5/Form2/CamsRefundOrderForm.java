@@ -224,7 +224,7 @@ public class CamsRefundOrderForm extends JPanel {
 
 	public void submitOrderID() 
 	{		
-		String message = "Order: " + txtOrderId.getText() + "is not in the system";
+		String message = "Order: " + txtOrderId.getText() + " is not in the system";
 		try
 		{
 			int orderID=Integer.parseInt(txtOrderId.getText());
@@ -242,8 +242,10 @@ public class CamsRefundOrderForm extends JPanel {
 						{
 							 int val = orderIDList.get(k).getOrderID();
 							 if(val==orderID)
+							 {
 								orderIDList.remove(k);
 							 	break;
+							 }
 						}			
 						break;
 					}
