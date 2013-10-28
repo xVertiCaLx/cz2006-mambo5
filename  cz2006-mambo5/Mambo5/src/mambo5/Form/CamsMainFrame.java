@@ -133,7 +133,7 @@ public class CamsMainFrame extends JFrame implements JInterfaceController {
 	
 	public void replacePanel(String panelName) {
 		if (panelName.equals("CamsCreateOrderForm")) {
-			camsCreateOrderForm = new CamsCreateOrderForm(this, menuItemList, orderDetailList, stallID);
+			camsCreateOrderForm = new CamsCreateOrderForm(this, menuItemList, orderDetailList, stallID, menuID);
 			replacePanel(camsCreateOrderForm);
 		} else if (panelName.equals("CamsEditMenuItemForm")) {
 			camsEditMenuItemForm = new CamsEditMenuItemForm(this);
