@@ -50,14 +50,6 @@ public class OrderController {
 
 		return validate;
 	}
-
-/*	public ArrayList<Order> retrieveOrderIDList(ArrayList<Order> orderIDList,
-			int stallID, String orderStatus) {
-		sysConfig = new SystemConfiguration();
-		dataStore = DataStoreFactory.createDataStore(sysConfig);
-
-		return dataStore.retrieveOrderID(orderIDList, stallID, orderStatus);
-	}*/
 	
 	public ArrayList<Order> retrieveOrderList(ArrayList<Order> orderList) {
 		
