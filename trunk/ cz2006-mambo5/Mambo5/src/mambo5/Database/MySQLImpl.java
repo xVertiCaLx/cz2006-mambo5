@@ -318,6 +318,18 @@ public class MySQLImpl implements DataStoreInterface {
 		}
 		return orderDetailList;
 	}
+	//--------------------------------------------------Customer---------------------------------------------------
+	@Override
+	public int createCustomer(double cardBalance, String fullName, int accessID) {
+		int result = 0;
+		
+		String sql = "INSERT INTO customer (fullName, cardBalance, accessID) "
+					+ "VALUES ( '" + fullName + "' , '" + cardBalance + "' , " + accessID + ");";
+		
+		result = dbc.executeNonQuery(sql);
+				
+		return result;
+	}
 
 
 

@@ -9,7 +9,6 @@ import mambo5.Entity.Stall;
 
 public class CanteenController {
 
-	private Canteen c;
 	private DataStoreInterface dataStore;
 	private SystemConfiguration sysConfig;
 	

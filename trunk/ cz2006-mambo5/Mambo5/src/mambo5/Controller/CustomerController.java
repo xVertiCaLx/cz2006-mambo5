@@ -10,7 +10,7 @@ public class CustomerController {
 	
 
 	private Customer cust;
-	DataStoreInterface dataStore;
+	private DataStoreInterface dataStore;
 	private SystemConfiguration sysConfig;
 	
 	public CustomerController() {}
@@ -19,8 +19,9 @@ public class CustomerController {
 		
 		int validate = 0;
 		
-		cust = new Customer();
-		validate = cust.createCustomer(cardBalance, fullName, accessID);
+		sysConfig = new SystemConfiguration();
+		dataStore = DataStoreFactory.createDataStore(sysConfig);
+		validate = dataStore.createCustomer(cardBalance, fullName, accessID);
 				
 		return validate;
 	}
