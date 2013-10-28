@@ -69,7 +69,7 @@ public class CamsCreateOrderForm extends JPanel implements JInterfaceController 
 		setLocation(posX, 40);
 		setLayout(null);
 		setBackground(JPANEL_BACKGROUND_COLOUR);
-		
+		cc = new CustomerController();
 		initPanels();
 		implementButtons();	
 	}
@@ -191,8 +191,10 @@ public class CamsCreateOrderForm extends JPanel implements JInterfaceController 
 
 		numpadPanel.delete().addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				receipt.setText(receipt.getText().substring(0,
-						receipt.getText().length() - 1));
+				receipt.setText("NEW ORDER \n"
+						+ "=======================================\n");
+				orderDetailList.removeAll(orderDetailList);
+				totalPrice = 0;
 			}
 		});
 
@@ -203,9 +205,15 @@ public class CamsCreateOrderForm extends JPanel implements JInterfaceController 
 						JOptionPane.YES_NO_OPTION);
 				if (reply == JOptionPane.YES_OPTION) {
 					int custID = (Integer.parseInt(JOptionPane.showInputDialog 
-							( "Please enter Customer ID: " ))); ;					
-					if(submitsOrder(custID) == 1)
-						submitsOrderDetails();
+							( "Please enter Customer ID: " ))); ;
+					if(cc.retrieveCustomerInfo(custID) != null)
+					{
+						if(submitsOrder(custID) == 1)
+							submitsOrderDetails();
+					}
+					else
+						JOptionPane.showMessageDialog(null, "Invalid Customer ID");
+					
 					
 				}
 			}
@@ -282,7 +290,7 @@ public class CamsCreateOrderForm extends JPanel implements JInterfaceController 
 					receiptDetail += "\t\t $" + (quantityInt * actualPrice) + "\n";
 				}
 	
-				totalPrice = totalPrice +  (quantityInt * actualPrice);
+				totalPrice +=  (quantityInt * actualPrice);
 				receiptDetail += "\n\n" + "======================================="
 						 + "\nTOTAL PRICE: " + "\t\t $" + df.format(totalPrice)
 						 + "\n=======================================";
@@ -326,8 +334,7 @@ public class CamsCreateOrderForm extends JPanel implements JInterfaceController 
 		
 		double currentCardValue = 0.0;
 		int validOrder = 0;
-		
-		cc = new CustomerController();	
+				
 		cc.retrieveCustomerInfo(custID);
 		currentCardValue = cc.retrieveCustomerInfo(custID).getCardBalance();
 		
