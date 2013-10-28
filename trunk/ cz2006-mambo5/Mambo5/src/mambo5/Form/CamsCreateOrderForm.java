@@ -27,17 +27,14 @@ public class CamsCreateOrderForm extends JPanel implements JInterfaceController 
 
 	private OrderController oc;
 	private OrderDetailController odc;
-
 	private Map<JButton, MenuItem> menuItemButtons;
 	private Map<Integer, MenuItem> menuItems = new HashMap<Integer, MenuItem>();
 	
 	// HashMap<OrderDetail, Integer>();
 
 	// For Order
-	private int custID;
 	private Timestamp purchaseDate;
 	private String orderStatus, receiptDetail, quantity = "";
-
 	private int order, menuID, stallID, posX = 0, posY = 0, totalWidth = 0,
 			totalHeight = 0, currentMenuItem = 0;
 
@@ -206,7 +203,9 @@ public class CamsCreateOrderForm extends JPanel implements JInterfaceController 
 						"Confirm Order?", "Confirmation",
 						JOptionPane.YES_NO_OPTION);
 				if (reply == JOptionPane.YES_OPTION) {
-					submitsOrder();
+					int custID = (Integer.parseInt(JOptionPane.showInputDialog 
+							( "Please enter Customer ID: " ))); ;		
+					submitsOrder(custID);
 					submitsOrderDetails();
 				}
 			}
@@ -288,10 +287,6 @@ public class CamsCreateOrderForm extends JPanel implements JInterfaceController 
 		menuItemPanel.add(menuItemButton);
 	};
 
-	public void repaintReceipt() {
-		
-	}
-
 	public void initSidePanelButton() {
 		btnMainPage.setForeground(Color.WHITE);
 		btnMainPage.setFont(new Font("Tahoma", Font.BOLD, 12));
@@ -318,10 +313,9 @@ public class CamsCreateOrderForm extends JPanel implements JInterfaceController 
 		return timestamp;
 	}
 
-	public void submitsOrder() {
+	public void submitsOrder(int custID) {
 		purchaseDate = getTimeStamp();
 		orderStatus = "Processing";
-		custID = 1; // Need to know how to retrieve custID
 		stallID = 2; // Need to know how to retrieve stallID
 
 		oc = new OrderController();
