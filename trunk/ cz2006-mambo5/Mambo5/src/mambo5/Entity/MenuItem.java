@@ -8,7 +8,6 @@ public class MenuItem {
 	private String menuItemName;
 	private double menuItemPrice;
 	private double discount;
-	ArrayList<String> menuItemList = new ArrayList<String>();
 	
 	public MenuItem() {}
 	
