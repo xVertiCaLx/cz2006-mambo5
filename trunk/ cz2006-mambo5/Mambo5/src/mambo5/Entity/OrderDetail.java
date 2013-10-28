@@ -1,7 +1,5 @@
 package mambo5.Entity;
 
-import mambo5.Controller.DBController;
-
 public class OrderDetail {
 	private int detailID;
 	private int menuItemID;
@@ -51,11 +49,4 @@ public class OrderDetail {
 	public void setQuantity(int quantity) {
 		this.quantity = quantity;
 	}
-/*
-	public int createOrderDetail(int orderID, int menuItemID, double actualPrice, int quantity) 
-	{
-		dbc = new DBController();
-		
-	}
-	*/
 }
