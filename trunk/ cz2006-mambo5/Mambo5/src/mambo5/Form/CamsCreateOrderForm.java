@@ -11,12 +11,12 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.swing.JButton;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
+import mambo5.Controller.CustomerController;
 import mambo5.Controller.JInterfaceController;
 import mambo5.Controller.OrderController;
 import mambo5.Controller.OrderDetailController;
@@ -27,6 +27,7 @@ public class CamsCreateOrderForm extends JPanel implements JInterfaceController 
 
 	private OrderController oc;
 	private OrderDetailController odc;
+	private CustomerController cc;
 	private Map<JButton, MenuItem> menuItemButtons;
 	private Map<Integer, MenuItem> menuItems = new HashMap<Integer, MenuItem>();
 	
@@ -35,9 +36,9 @@ public class CamsCreateOrderForm extends JPanel implements JInterfaceController 
 	// For Order
 	private Timestamp purchaseDate;
 	private String orderStatus, receiptDetail, quantity = "";
-	private int order, menuID, stallID, posX = 0, posY = 0, totalWidth = 0,
+	private int order, menuID, stallID, posX = 0, posY = 0, totalWidth = 0 ,
 			totalHeight = 0, currentMenuItem = 0;
-
+	private double totalPrice = 0.0;
 	// For MenuItem
 	private ArrayList<OrderDetail> orderDetailList = new ArrayList<OrderDetail>();
 	private ArrayList<MenuItem> menuItemList;
@@ -57,7 +58,7 @@ public class CamsCreateOrderForm extends JPanel implements JInterfaceController 
 	JButton btnNextPage = new JButton("NEXT PAGE");
 	JButton btnPrevPage = new JButton("PREV PAGE");
 
-	JLabel totalPrice = new JLabel();
+	
 
 	public CamsCreateOrderForm(final CamsMainFrame mainFrame, ArrayList<MenuItem> menuItemList, final ArrayList<OrderDetail> orderDetailList, int menuID) {
 		this.menuItemList = menuItemList;
@@ -70,7 +71,7 @@ public class CamsCreateOrderForm extends JPanel implements JInterfaceController 
 		setBackground(JPANEL_BACKGROUND_COLOUR);
 
 		initPanels();
-		implementButtons();
+		implementButtons();	
 	}
 
 	public void initPanels() {
@@ -204,9 +205,9 @@ public class CamsCreateOrderForm extends JPanel implements JInterfaceController 
 						JOptionPane.YES_NO_OPTION);
 				if (reply == JOptionPane.YES_OPTION) {
 					int custID = (Integer.parseInt(JOptionPane.showInputDialog 
-							( "Please enter Customer ID: " ))); ;		
-					submitsOrder(custID);
-					submitsOrderDetails();
+							( "Please enter Customer ID: " ))); ;					
+					if(submitsOrder(custID) == 1)
+						submitsOrderDetails();
 				}
 			}
 		});
@@ -272,6 +273,7 @@ public class CamsCreateOrderForm extends JPanel implements JInterfaceController 
 					
 					receiptDetail += orderDetailList.get(i).getQuantity() + "\t" + menuItems.get(orderDetailList.get(i).getMenuItemID()).getMenuItemName() + "\t $" + orderDetailList.get(i).getActualPrice() + "\n";
 					receiptDetail += "\t\t $" + (orderDetailList.get(i).getQuantity() * orderDetailList.get(i).getActualPrice()) + "\n";
+			
 				}
 				
 				if (writeEnable) {
@@ -279,6 +281,8 @@ public class CamsCreateOrderForm extends JPanel implements JInterfaceController 
 					receiptDetail += quantityInt + "\t" + menuItemButtons.get(e.getSource()).getMenuItemName()  + "\t $" + actualPrice + "\n";
 					receiptDetail += "\t\t $" + (quantityInt * actualPrice) + "\n";
 				}
+				totalPrice += (quantityInt * actualPrice);
+				System.out.println("totalPrice is: " +totalPrice);
 				quantity = "";
 				receipt.setText(receiptDetail);
 			}
@@ -313,20 +317,41 @@ public class CamsCreateOrderForm extends JPanel implements JInterfaceController 
 		return timestamp;
 	}
 
-	public void submitsOrder(int custID) {
+	public int submitsOrder(int custID) {
+		
+		double currentCardValue = 0.0;
+		int validOrder = 0;
+		
+		cc = new CustomerController();	
+		cc.retrieveCustomerInfo(custID);
+		currentCardValue = cc.retrieveCustomerInfo(custID).getCardBalance();
+		
 		purchaseDate = getTimeStamp();
 		orderStatus = "Processing";
 		stallID = 2; // Need to know how to retrieve stallID
 
-		oc = new OrderController();
-		order = oc.validateCreateOrder(custID, purchaseDate, orderStatus,
-				stallID);
-		if (custID == 0 || purchaseDate.equals("") || orderStatus.equals("")
-				|| stallID == 0)
-			JOptionPane.showMessageDialog(null, "Order cannot be created");
+		
+		if (currentCardValue>totalPrice)		
+		{
+			oc = new OrderController();
+			order = oc.validateCreateOrder(custID, purchaseDate, orderStatus,
+					stallID);
+			if (custID == 0 || purchaseDate.equals("") || orderStatus.equals("")|| stallID == 0)
+			{		
+				JOptionPane.showMessageDialog(null, "Order cannot be created");
+			}
+			else
+			{
+				JOptionPane.showMessageDialog(null, "Order ID: " + order);
+			}
+			validOrder = 1;
+		}
 		else
-			JOptionPane.showMessageDialog(null, "Order ID: " + order);
-	}
+			JOptionPane.showMessageDialog(null, "Card has not enough Value");
+	
+		return validOrder;
+	}//end submitsOrder()
+	
 
 	public void submitsOrderDetails() {
 		for (int i = 0; i < orderDetailList.size(); i++) {
