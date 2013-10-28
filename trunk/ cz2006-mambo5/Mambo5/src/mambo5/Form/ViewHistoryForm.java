@@ -7,7 +7,9 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.JList;
 import javax.swing.JLabel;
 
@@ -22,11 +24,16 @@ import java.util.ArrayList;
 
 import javax.swing.JComboBox;
 
+import mambo5.Controller.CanteenController;
 import mambo5.Controller.CustomerController;
 import mambo5.Entity.Customer;
+import mambo5.Entity.Menu;
+import mambo5.Entity.MenuItem;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+
+import javax.swing.JScrollPane;
 
 public class ViewHistoryForm extends JPanel {
 
@@ -37,7 +44,7 @@ public class ViewHistoryForm extends JPanel {
 	private JTextField txtCurrentValue;
 	private CustomerController customerCon;
 	private JComboBox<String> comboBoxHistory = new JComboBox<String>();
-	;
+	private JTable transactionTable;
 
 	public ViewHistoryForm(final CamsMainFrame mainFrame) {
 		
@@ -78,6 +85,8 @@ public class ViewHistoryForm extends JPanel {
 					for(int i = 0; i<date.size(); i++ ) {
 						comboBoxHistory.addItem(date.get(i));
 					}
+					
+					displayMenuItem(comboBoxHistory.getSelectedItem().toString(), Integer.parseInt(custID));
 				}
 				else 
 					JOptionPane.showMessageDialog(null, "No Purchase History Available");
@@ -124,18 +133,56 @@ public class ViewHistoryForm extends JPanel {
 			}
 		});
 		btnBackToMain.setFont(new Font("Tahoma", Font.PLAIN, 11));
-		btnBackToMain.setBounds(279, 223, 112, 28);
+		btnBackToMain.setBounds(279, 329, 112, 28);
 		add(btnBackToMain);
 		
 		JLabel lblViewHistor = new JLabel("View History");
 		lblViewHistor.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		lblViewHistor.setBounds(4, 0, 108, 27);
 		add(lblViewHistor);
+		comboBoxHistory.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				displayMenuItem(comboBoxHistory.getSelectedItem().toString(),Integer.parseInt(txtCardNumber.getText().toString()));
+			}
+		});
 		
 		comboBoxHistory.setBounds(116, 92, 204, 20);
 		add(comboBoxHistory);
+	
+		getJTableMenu();
+		transactionTable.setBounds(10, 52, 414, 163);
+		add(transactionTable);
+		JScrollPane scrollPane = new JScrollPane(transactionTable);
+		scrollPane.setBounds(22, 149, 368, 147);
+		add(scrollPane);
 		
 		
+	}
+	private void getJTableMenu() {
+		transactionTable = new JTable();
+		transactionTable.setEnabled(false);
+		transactionTable.setFont(new java.awt.Font("Dialog", java.awt.Font.BOLD, 14));
+		transactionTable.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_SUBSEQUENT_COLUMNS);	
+	}
+	
+	private void displayMenuItem(String purchaseDate, int custID) {
+		DefaultTableModel tableModel = (DefaultTableModel) transactionTable.getModel();
+		tableModel.setRowCount(0);
+		String[] colName = {"Menu Item", "Item Price"};
+		tableModel.setColumnIdentifiers(colName);
+
+		CustomerController cc = new CustomerController();
+		ArrayList<MenuItem> itemList = cc.getCustomerMenuItem(purchaseDate, custID);
+		for(int i=0; i<itemList.size(); i++) {
+			
+			Object[] objects = new Object[2];
+			objects[0] = itemList.get(i).getMenuItemName();
+			objects[1] = itemList.get(i).getMenuItemPrice();
+			
+			tableModel.addRow(objects);	
+		}
+		
+		transactionTable.setModel(tableModel);
 	}
 	
 }

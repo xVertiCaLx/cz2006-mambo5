@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import mambo5.Database.*;
 import mambo5.Entity.Canteen;
 import mambo5.Entity.Customer;
+import mambo5.Entity.MenuItem;
 
 public class CustomerController {
 	
@@ -58,10 +59,15 @@ public class CustomerController {
 	}
 	
 	public ArrayList<String> getCustomerPuchaseDate(int custID) {
-	
+		
 		cust = new Customer();
 		return cust.retrieveCustomerPurchaseDate(custID);
 		
+	}
+	
+	public ArrayList<MenuItem> getCustomerMenuItem(String purchaseDate, int custID) {
+		cust = new Customer();
+		return cust.retrieveSpecificPurchaseDate(purchaseDate, custID);	
 	}
 	
 }
