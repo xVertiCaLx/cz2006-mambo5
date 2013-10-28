@@ -1,9 +1,6 @@
 package mambo5.Entity;
 
-import java.sql.ResultSet;
 import java.util.ArrayList;
-
-import mambo5.Controller.DBController;
 
 public class MenuItem {
 	private int menuItemID;
@@ -11,11 +8,6 @@ public class MenuItem {
 	private String menuItemName;
 	private double menuItemPrice;
 	private double discount;
-	private MenuItem menuItem;
-	
-	private DBController dbc;
-	private ResultSet rs;
-	String sql;
 	ArrayList<String> menuItemList = new ArrayList<String>();
 	
 	public MenuItem() {}
@@ -46,17 +38,5 @@ public class MenuItem {
 
 	public double getDiscount() {
 		return discount;
-	}
-
-	public int createMenuItem(int menuID, String menuItemName, double menuItemPrice, double discount) 
-	{
-		dbc = new DBController();
-		int result = 0;
-		sql = "INSERT INTO mambojumbo.menuitem (menuID, menuItemName, menuItemPrice, discount)"
-					+ "VALUES ( '"+ menuID +"', '"+ menuItemName +"', '" + menuItemPrice + "' , '" + discount + "');";
-		
-		result = dbc.executeNonQuery(sql);
-		
-		return result;
 	}
 }

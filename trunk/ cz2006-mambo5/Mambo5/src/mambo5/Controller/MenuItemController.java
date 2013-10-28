@@ -17,15 +17,15 @@ public class MenuItemController {
 	private DataStoreInterface dataStore;
 	private SystemConfiguration sysConfig;
 	
-	private MenuItem menuItem;
-	
 	public MenuItemController() {}
 	
 	public int validateMenuItemDetail(int menuID, String menuItemName, double menuItemPrice, double discount){
 		int validate = 0;
 		
-		menuItem = new MenuItem();
-		validate = menuItem.createMenuItem(menuID, menuItemName, menuItemPrice, discount);
+		sysConfig = new SystemConfiguration();
+		dataStore = DataStoreFactory.createDataStore(sysConfig);
+		
+		validate = dataStore.createMenuItem(menuID, menuItemName, menuItemPrice, discount);
 		
 		return validate;
 	}

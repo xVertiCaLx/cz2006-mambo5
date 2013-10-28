@@ -219,7 +219,21 @@ public class MySQLImpl implements DataStoreInterface {
 		}
 		return menuList;
 	}
+	//------------------------------------MENU ITEM------------------------------------------------
+	
 
+	@Override
+	public int createMenuItem(int menuID, String menuItemName,
+			double menuItemPrice, double discount) {
+		int result = 0;
+		String sql = "INSERT INTO mambojumbo.menuitem (menuID, menuItemName, menuItemPrice, discount)"
+					+ "VALUES ( '"+ menuID +"', '"+ menuItemName +"', '" + menuItemPrice + "' , '" + discount + "');";
+		
+		result = dbc.executeNonQuery(sql);
+		
+		return result;
+	}
+	
 	@Override
 	public ArrayList<MenuItem> retrieveMenuItem(
 			ArrayList<MenuItem> menuItemList, int menuItemID) {
