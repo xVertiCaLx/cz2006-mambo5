@@ -224,7 +224,7 @@ public class CamsRefundOrderForm extends JPanel {
 
 	public void submitOrderID() 
 	{		
-		String message = "Unable to refund Order: " + txtOrderId.getText();
+		String message = "Order: " + txtOrderId.getText() + "is not in the system";
 		try
 		{
 			int orderID=Integer.parseInt(txtOrderId.getText());
