@@ -260,7 +260,36 @@ public class MySQLImpl implements DataStoreInterface {
 		return menuItemList;
 	}
 
-	//delete!!
+	//----------------------------------------------Order------------------------------------------------------
+	
+	
+	@Override
+	public int createOrder(int custID, Date purchaseDate, String orderStatus,
+			int stallID) {
+		int result = 0;
+		String sql = "INSERT INTO mambojumbo.orders (custID, purchaseDate, orderStatus, stallID) "
+					+ "VALUES ( '" + custID + "' , '" + purchaseDate + "' , '" + orderStatus +"', '" + stallID +"');";
+		
+		result = dbc.executeNonQuery(sql);
+		
+		if(result==1)
+		{
+			sql = "Select orderID from mambojumbo.orders order by orderID desc limit 1;";
+			
+			try {
+				rs = dbc.execute(sql);
+				rs.next();
+				result = rs.getInt("orderID"); 
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		else
+			result = -1;
+		
+		return result;
+	}
+	
 	public ArrayList<Order> retrieveOrderID(ArrayList<Order> orderIDList,
 			int stallID, String orderStatus) {
 		try {
@@ -361,6 +390,8 @@ public class MySQLImpl implements DataStoreInterface {
 		result = dbc.executeNonQuery(sql);
 		return result;
 	}
+
+	
 
 
 

@@ -29,8 +29,10 @@ public class OrderController {
 			String orderStatus, int stallID) {
 		int validate = 0;
 
-		o = new Order();
-		validate = o.createOrder(custID, purchaseDate, orderStatus, stallID);
+		sysConfig = new SystemConfiguration();
+		dataStore = DataStoreFactory.createDataStore(sysConfig);
+
+		validate = dataStore.createOrder(custID, purchaseDate, orderStatus, stallID);
 
 		return validate;
 	}
