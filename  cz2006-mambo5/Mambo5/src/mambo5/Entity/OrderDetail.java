@@ -7,7 +7,6 @@ public class OrderDetail {
 	private int menuItemID;
 	private int orderID, quantity;
 	private double actualPrice;
-	DBController dbc;
 	
 	public OrderDetail() {}
 	
