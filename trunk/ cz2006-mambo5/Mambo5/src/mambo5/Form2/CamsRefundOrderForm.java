@@ -238,7 +238,13 @@ public class CamsRefundOrderForm extends JPanel {
 					if (OrderController.validateRefundOrder(orderID) == 1)
 					{
 						message = "Order " + orderID + " successfuly refunded";
-						//need to know how to remove the selected arraylist object.
+						for (int k=0; k<orderIDList.size(); k++) 
+						{
+							 int val = orderIDList.get(k).getOrderID();
+							 if(val==orderID)
+								orderIDList.remove(k);
+							 	break;
+						}			
 						break;
 					}
 					else
