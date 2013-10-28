@@ -78,14 +78,16 @@ public class Customer  {
 	}
 
 	public ArrayList<String> retrieveCustomerPurchaseDate(int custID) {
-		
+		dbc = new DBController();
 		ArrayList<String> customerPurchaseDate = new ArrayList<String>();
 		ResultSet rs = null;
-		String sql = "SELECT purchaseDate FROM orders where custID=1 Order By purchaseDate DESC LIMIT 5;";
+		
+		String sql = "SELECT purchaseDate FROM orders where custID =" + custID + " Order By purchaseDate DESC LIMIT 5;";
+		
 		rs = dbc.execute(sql);
 		try {
 			while(rs.next()) {
-				String purchaseDate = rs.getDate("purchaseDate").toString();
+				String purchaseDate = rs.getTimestamp("purchaseDate").toString();
 				customerPurchaseDate.add(purchaseDate);
 			}	
 		} catch (Exception e) {
