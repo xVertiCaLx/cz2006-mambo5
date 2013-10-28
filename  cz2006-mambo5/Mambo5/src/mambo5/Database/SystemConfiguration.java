@@ -50,9 +50,7 @@ public class SystemConfiguration {
             System.out.println(prop.getProperty("dbuser"));
             System.out.println(prop.getProperty("dbpassword"));
             System.out.println(prop.getProperty("access"));
-			
-
- 
+            
     	}catch (IOException ex) {
     		ex.printStackTrace();
         }finally {
