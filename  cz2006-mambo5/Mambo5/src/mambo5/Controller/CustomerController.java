@@ -3,7 +3,6 @@ package mambo5.Controller;
 import java.util.ArrayList;
 
 import mambo5.Database.*;
-import mambo5.Entity.Canteen;
 import mambo5.Entity.Customer;
 import mambo5.Entity.MenuItem;
 
@@ -52,22 +51,25 @@ public class CustomerController {
 	
 	public Customer retrieveCustomerInfo(int custID)
 	{
-		cust = new Customer();
-		cust = cust.retrieveCustomerDetail(custID);
+		sysConfig = new SystemConfiguration();
+		dataStore = DataStoreFactory.createDataStore(sysConfig);
+		cust = dataStore.retrieveCustomerDetail(custID);
 	
 		return cust;
 	}
 	
 	public ArrayList<String> getCustomerPuchaseDate(int custID) {
 		
-		cust = new Customer();
-		return cust.retrieveCustomerPurchaseDate(custID);
+		sysConfig = new SystemConfiguration();
+		dataStore = DataStoreFactory.createDataStore(sysConfig);
+		return dataStore.retrieveCustomerPurchaseDate(custID);
 		
 	}
 	
 	public ArrayList<MenuItem> getCustomerMenuItem(String purchaseDate, int custID) {
-		cust = new Customer();
-		return cust.retrieveSpecificPurchaseDate(purchaseDate, custID);	
+		sysConfig = new SystemConfiguration();
+		dataStore = DataStoreFactory.createDataStore(sysConfig);
+		return dataStore.retrieveSpecificPurchaseDate(purchaseDate, custID);	
 	}
 	
 }

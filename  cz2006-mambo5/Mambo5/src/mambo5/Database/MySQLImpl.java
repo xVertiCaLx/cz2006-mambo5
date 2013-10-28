@@ -1,12 +1,14 @@
 package mambo5.Database;
 
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 
 import mambo5.Controller.DBController;
 import mambo5.Entity.Admin;
 import mambo5.Entity.Canteen;
+import mambo5.Entity.Customer;
 import mambo5.Entity.Menu;
 import mambo5.Entity.MenuItem;
 import mambo5.Entity.Order;
@@ -437,4 +439,68 @@ public class MySQLImpl implements DataStoreInterface {
 		result = dbc.executeNonQuery(sql);
 		return result;
 	}
+
+	@Override
+	public Customer retrieveCustomerDetail(int custID) {
+		Customer cust = null;
+		String sql = "SELECT * FROM Customer WHERE custID = " + custID + ";";
+		rs = dbc.execute(sql);
+		
+		if(rs != null) {
+	        try {
+	        	if(rs.next()) {   // Move the cursor to the next row
+	        		cust = new Customer(rs.getInt("custID"),rs.getDouble("cardBalance"),rs.getString("fullName"),rs.getInt("accessID"));				    
+				 }
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return cust;
+	}
+
+	@Override
+	public ArrayList<String> retrieveCustomerPurchaseDate(int custID) {
+		ArrayList<String> customerPurchaseDate = new ArrayList<String>();
+		
+		String sql = "SELECT purchaseDate FROM orders where custID =" + custID + " Order By purchaseDate DESC LIMIT 5;";
+		
+		rs = dbc.execute(sql);
+		try {
+			while(rs.next()) {
+				String purchaseDate = rs.getTimestamp("purchaseDate").toString();
+				customerPurchaseDate.add(purchaseDate);
+			}	
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			dbc.terminate();
+		}
+		return customerPurchaseDate;
+	}
+
+	@Override
+	public ArrayList<MenuItem> retrieveSpecificPurchaseDate(
+			String purchaseDate, int custID) {
+		ArrayList<MenuItem> itemList = new ArrayList<MenuItem>();
+		ResultSet rs = null;
+		
+		String sql = "SELECT customer.custID, orders.orderID, menuitem.menuItemName, menuitem.menuItemPrice" +
+					" FROM customer" + 
+					" INNER JOIN ((menuitem INNER JOIN orderdetails ON menuitem.menuItemID = orderdetails.menuitemID)" + 
+					" INNER JOIN orders ON orderdetails.orderID = orders.orderID) ON customer.custID = orders.custID" +
+					" WHERE orders.purchaseDate = '" +purchaseDate+ "' and customer.custID = "+custID+ ";";
+		rs = dbc.execute(sql);
+		try {
+			while(rs.next()) {
+				MenuItem mi = new MenuItem(rs.getString("menuItemName"), rs.getDouble("menuItemPrice"));
+				itemList.add(mi);
+			}	
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			dbc.terminate();
+		}
+		return itemList;
+	}
+	
 }
