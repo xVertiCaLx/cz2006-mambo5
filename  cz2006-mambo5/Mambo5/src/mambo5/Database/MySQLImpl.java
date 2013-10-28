@@ -403,6 +403,25 @@ public class MySQLImpl implements DataStoreInterface {
 		}
 		return orderDetailList;
 	}
+	
+	//For retrieving total price when refunding order
+	public ArrayList<OrderDetail> retrieveOrderDetailTotalPrice(ArrayList<OrderDetail> orderDetailList, int orderID) {
+		try {
+
+			String sql = "SELECT * FROM mambojumbo.orderdetails WHERE orderID = " + orderID + ";";
+			rs = dbc.execute(sql);
+
+			while (rs.next()) {
+				orderDetailList.add(new OrderDetail(rs.getInt("menuItemID"), rs
+						.getInt("orderID"), rs.getDouble("actualPrice"),rs.getInt("quantity")));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			dbc.terminate();
+		}
+		return orderDetailList;
+	}
 	//--------------------------------------------------Customer---------------------------------------------------
 	@Override
 	public int createCustomer(double cardBalance, String fullName, int accessID) {
