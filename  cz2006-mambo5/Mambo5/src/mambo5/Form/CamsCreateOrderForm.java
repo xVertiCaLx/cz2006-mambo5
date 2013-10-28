@@ -85,7 +85,6 @@ public class CamsCreateOrderForm extends JPanel implements JInterfaceController 
 		receipt.setEditable(false);
 		receipt.setBackground(RECEIPT_BACKGROUND_COLOUR);
 		receiptScrollPane = new JScrollPane(receipt);
-
 		receiptPanel.add(receiptScrollPane);
 
 		posX += receiptPanel.getWidth();
@@ -255,7 +254,8 @@ public class CamsCreateOrderForm extends JPanel implements JInterfaceController 
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				writeEnable = true;
-				receiptDetail = "";
+				receiptDetail = "NEW ORDER \n"
+						+ "=======================================\n";
 				
 				int menuItemID = menuItemButtons.get(e.getSource()).getMenuItemID(), quantityInt;
 				
@@ -283,9 +283,9 @@ public class CamsCreateOrderForm extends JPanel implements JInterfaceController 
 				}
 	
 				totalPrice = totalPrice +  (quantityInt * actualPrice);
-				receiptDetail += "\n\n" + "=============================="
+				receiptDetail += "\n\n" + "======================================="
 						 + "\nTOTAL PRICE: " + "\t\t $" + df.format(totalPrice)
-						 + "\n==============================";
+						 + "\n=======================================";
 
 				System.out.println("totalPrice is: " +totalPrice);
 				quantity = "";
