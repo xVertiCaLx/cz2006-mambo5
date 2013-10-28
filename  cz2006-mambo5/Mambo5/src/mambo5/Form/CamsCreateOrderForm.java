@@ -328,9 +328,7 @@ public class CamsCreateOrderForm extends JPanel implements JInterfaceController 
 		
 		purchaseDate = getTimeStamp();
 		orderStatus = "Processing";
-		stallID = 2; // Need to know how to retrieve stallID
 
-		
 		if (currentCardValue>totalPrice)		
 		{
 			oc = new OrderController();
