@@ -35,6 +35,7 @@ public interface DataStoreInterface {
 	ArrayList<Order> retrieveOrderList(ArrayList<Order> orderList);
 
 	//ORDERDETAIL - testing
+	int createOrderDetail(int orderID, int menuItemID, double actualPrice, int quantity);
 	ArrayList<OrderDetail> retrieveOrderDetailList(ArrayList<OrderDetail> orderDetailList);
 	
 	//CUSTOMER

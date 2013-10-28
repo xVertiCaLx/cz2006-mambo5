@@ -19,12 +19,14 @@ public class OrderDetailController {
 	
 	public OrderDetailController() { }
 
-		//validating createOrderDetail
+		//create order details
 		public int validateCreateOrderDetail(int orderID,int menuItemID, double actualPrice, int quantity){
 			int validate = 0;
 			
-			od = new OrderDetail();
-			validate = od.createOrderDetail(orderID, menuItemID, actualPrice, quantity);
+			sysConfig = new SystemConfiguration();
+			dataStore = DataStoreFactory.createDataStore(sysConfig);
+			
+			validate = dataStore.createOrderDetail(orderID, menuItemID, actualPrice, quantity);
 			
 			return validate;
 		}
