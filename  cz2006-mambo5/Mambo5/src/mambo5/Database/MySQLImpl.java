@@ -261,8 +261,7 @@ public class MySQLImpl implements DataStoreInterface {
 	}
 
 	//----------------------------------------------Order------------------------------------------------------
-	
-	
+		
 	@Override
 	public int createOrder(int custID, Date purchaseDate, String orderStatus,
 			int stallID) {
@@ -339,6 +338,16 @@ public class MySQLImpl implements DataStoreInterface {
 		}
 		return orderList;
 	}
+	
+	@Override
+	public int refundOrder(int orderID) {
+		int result = 0;
+		String sql = "UPDATE mambojumbo.orders SET orderStatus = '" + "Refunded" + "' WHERE orderID = '" + orderID + "';";
+				
+		result = dbc.executeNonQuery(sql);
+		return result;
+	}
+
 
 	public ArrayList<OrderDetail> retrieveOrderDetailList(ArrayList<OrderDetail> orderDetailList) {
 		try {
@@ -390,7 +399,6 @@ public class MySQLImpl implements DataStoreInterface {
 		result = dbc.executeNonQuery(sql);
 		return result;
 	}
-
 	
 
 

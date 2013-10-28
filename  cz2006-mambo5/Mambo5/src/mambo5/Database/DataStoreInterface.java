@@ -33,6 +33,7 @@ public interface DataStoreInterface {
 	
 	//ORDER
 	int createOrder(int custID, Date purchaseDate, String orderStatus, int stallID);
+	int refundOrder(int orderID);
 	ArrayList<Order> retrieveOrderID(ArrayList<Order> orderIDList, int stallID, String orderStatus);
 	ArrayList<Order> retrieveOrderList(ArrayList<Order> orderList);
 

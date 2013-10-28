@@ -41,8 +41,9 @@ public class OrderController {
 	public int validateRefundOrder(int orderID) {
 		int validate = 0;
 
-		o = new Order();
-		validate = o.refundOrder(orderID);
+		sysConfig = new SystemConfiguration();
+		dataStore = DataStoreFactory.createDataStore(sysConfig);
+		validate = dataStore.refundOrder(orderID);
 
 		return validate;
 	}
