@@ -133,6 +133,16 @@ public class CreateStallForm extends JPanel {
 		createBtn.setBounds(482, 408, 89, 23);
 		add(createBtn);
 		
+		JButton btnBack = new JButton("Back");
+		btnBack.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				mainFrame.setTitle("Please select a Function to perform:");
+				mainFrame.replacePanel(new OFSFunction(mainFrame));
+			}
+		});
+		btnBack.setBounds(383, 408, 89, 23);
+		add(btnBack);
+		
 
 	}
 	

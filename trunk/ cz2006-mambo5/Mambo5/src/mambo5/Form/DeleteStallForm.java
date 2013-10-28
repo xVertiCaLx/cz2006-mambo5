@@ -87,6 +87,16 @@ public class DeleteStallForm extends JPanel {
 		JLabel stallLabel = new JLabel("Available Stall:");
 		stallLabel.setBounds(147, 185, 99, 14);
 		add(stallLabel);
+		
+		JButton btnBack = new JButton("Back");
+		btnBack.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				mainFrame.setTitle("Please select a Function to perform:");
+				mainFrame.replacePanel(new OFSFunction(mainFrame));
+			}
+		});
+		btnBack.setBounds(383, 213, 89, 23);
+		add(btnBack);
 	}
 	
 	private JComboBox<String> getCanteenList() {

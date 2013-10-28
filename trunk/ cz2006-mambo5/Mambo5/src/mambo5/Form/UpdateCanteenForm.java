@@ -131,6 +131,16 @@ public class UpdateCanteenForm extends JPanel {
         });
 
 		add(availableCB);
+		
+		JButton btnBack = new JButton("Back");
+		btnBack.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				mainFrame.setTitle("Please select a Function to perform:");
+				mainFrame.replacePanel(new OFSFunction(mainFrame));
+			}
+		});
+		btnBack.setBounds(383, 411, 89, 23);
+		add(btnBack);
 	}
 	
 	private JComboBox<String> getCanteenList() {

@@ -49,11 +49,7 @@ public class OFSFunction extends JPanel {
 		JButton createCanteenBtn = new JButton("Create Canteen");
 		createCanteenBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				mainFrame.remove(mainFrame.getSelectPanel());
-				mainFrame.setSelectPanel(new CreateCanteenForm(mainFrame));
-				mainFrame.getContentPane().add(mainFrame.getSelectPanel());
-				mainFrame.revalidate();
-				mainFrame.repaint();
+				mainFrame.replacePanel(new CreateCanteenForm(mainFrame));
 			}
 		});
 		createCanteenBtn.setFont(new Font("Arial", Font.BOLD, 16));
@@ -63,11 +59,8 @@ public class OFSFunction extends JPanel {
 		JButton analyzeCanteenBtn = new JButton("Analyze Canteen");
 		analyzeCanteenBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				mainFrame.remove(mainFrame.getSelectPanel());
-				mainFrame.setSelectPanel(new AnalyzeCanteenForm(mainFrame));
-				mainFrame.getContentPane().add(mainFrame.getSelectPanel());
-				mainFrame.revalidate();
-				mainFrame.repaint();
+				mainFrame.replacePanel(new AnalyzeCanteenForm(mainFrame));
+				
 			}
 		});
 		analyzeCanteenBtn.setFont(new Font("Arial", Font.BOLD, 16));
@@ -77,11 +70,7 @@ public class OFSFunction extends JPanel {
 		JButton updateCanteenBtn = new JButton("Update Canteen");
 		updateCanteenBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				mainFrame.remove(mainFrame.getSelectPanel());
-				mainFrame.setSelectPanel(new UpdateCanteenForm(mainFrame));
-				mainFrame.getContentPane().add(mainFrame.getSelectPanel());
-				mainFrame.revalidate();
-				mainFrame.repaint();
+				mainFrame.replacePanel(new UpdateCanteenForm(mainFrame));
 			}
 		});
 		updateCanteenBtn.setFont(new Font("Arial", Font.BOLD, 16));
@@ -91,11 +80,7 @@ public class OFSFunction extends JPanel {
 		JButton deleteCanteenBtn = new JButton("Delete Canteen");
 		deleteCanteenBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				mainFrame.remove(mainFrame.getSelectPanel());
-				mainFrame.setSelectPanel(new DeleteCanteenForm(mainFrame));
-				mainFrame.getContentPane().add(mainFrame.getSelectPanel());
-				mainFrame.revalidate();
-				mainFrame.repaint();
+				mainFrame.replacePanel(new DeleteCanteenForm(mainFrame));
 			}
 		});
 		deleteCanteenBtn.setFont(new Font("Arial", Font.BOLD, 16));
@@ -105,11 +90,9 @@ public class OFSFunction extends JPanel {
 		JButton createStallBtn = new JButton("Create Stall");
 		createStallBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				mainFrame.remove(mainFrame.getSelectPanel());
-				mainFrame.setSelectPanel(new CreateStallForm(mainFrame));
-				mainFrame.getContentPane().add(mainFrame.getSelectPanel());
-				mainFrame.revalidate();
-				mainFrame.repaint();
+				
+				mainFrame.replacePanel(new CreateStallForm(mainFrame));
+				
 			}
 		});
 		createStallBtn.setFont(new Font("Arial", Font.BOLD, 16));
@@ -119,11 +102,9 @@ public class OFSFunction extends JPanel {
 		JButton retrieveStallBtn = new JButton("Retrieve Stall");
 		retrieveStallBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				mainFrame.remove(mainFrame.getSelectPanel());
-				mainFrame.setSelectPanel(new RetrieveStallForm(mainFrame));
-				mainFrame.getContentPane().add(mainFrame.getSelectPanel());
-				mainFrame.revalidate();
-				mainFrame.repaint();
+				
+				mainFrame.replacePanel(new RetrieveStallForm(mainFrame));
+				
 			}
 		});
 		retrieveStallBtn.setFont(new Font("Arial", Font.BOLD, 16));
@@ -133,11 +114,7 @@ public class OFSFunction extends JPanel {
 		JButton updateStallBtn = new JButton("Update Stall");
 		updateStallBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				mainFrame.remove(mainFrame.getSelectPanel());
-				mainFrame.setSelectPanel(new UpdateStallForm(mainFrame));
-				mainFrame.getContentPane().add(mainFrame.getSelectPanel());
-				mainFrame.revalidate();
-				mainFrame.repaint();
+				mainFrame.replacePanel(new UpdateStallForm(mainFrame));
 			}
 		});
 		updateStallBtn.setFont(new Font("Arial", Font.BOLD, 16));
@@ -147,11 +124,7 @@ public class OFSFunction extends JPanel {
 		JButton deleteStallBtn = new JButton("Delete Stall");
 		deleteStallBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				mainFrame.remove(mainFrame.getSelectPanel());
-				mainFrame.setSelectPanel(new DeleteStallForm(mainFrame));
-				mainFrame.getContentPane().add(mainFrame.getSelectPanel());
-				mainFrame.revalidate();
-				mainFrame.repaint();
+				mainFrame.replacePanel(new DeleteStallForm(mainFrame));
 			}
 		});
 		deleteStallBtn.setFont(new Font("Arial", Font.BOLD, 16));
