@@ -12,6 +12,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import mambo5.Controller.CustomerController;
 import mambo5.Controller.OrderController;
 import mambo5.Entity.Order;
 
@@ -23,6 +24,7 @@ public class CamsRefundOrderForm extends JPanel {
 	private int num;
 	private ArrayList<Order> orderIDList;
 	private OrderController OrderController;
+	private CustomerController cc;
 	
 	JButton numPad_1 = new JButton("1");
 	JButton numPad_2 = new JButton("2");
@@ -43,7 +45,7 @@ public class CamsRefundOrderForm extends JPanel {
 	
 		orderIDList = new ArrayList<Order>();
 		OrderController = new OrderController();
-		//OrderController.retrieveOrderIDList(orderIDList, 5, "Processing");
+		OrderController.retrieveOrderIDList(orderIDList, 5, "Processing");
 		
 		for (int i = 0; i < orderIDList.size(); i++) {
 			System.out.println("element" + i + ":" + orderIDList.get(i).getOrderID());
@@ -58,9 +60,6 @@ public class CamsRefundOrderForm extends JPanel {
 		refundPanel.setLayout(null);
 		refundPanel.setBackground(new Color(250,250,250));
 		add(refundPanel);
-		
-	//	btnRefund.setBounds(210, 100, 90, 25);
-	//	refundPanel.add(btnRefund);
 		
 		txtOrderId.setBounds(90, 80, 211, 30);
 		refundPanel.add(txtOrderId);
@@ -224,46 +223,51 @@ public class CamsRefundOrderForm extends JPanel {
 
 	public void submitOrderID() 
 	{		
+		double currentCardValue = 0.0;
 		String message = "Order: " + txtOrderId.getText() + " is not in the system";
-		try
-		{
+
 			int orderID=Integer.parseInt(txtOrderId.getText());
-			txtOrderId.requestFocusInWindow();
 			for (int i=0; i<orderIDList.size(); i++)
 			{
 				
 				if(orderIDList.get(i).getOrderID() == orderID)
 				{
-					OrderController = new OrderController();
-					if (OrderController.validateRefundOrder(orderID) == 1)
+					cc = new CustomerController();
+					int custID = (Integer.parseInt(JOptionPane.showInputDialog 
+							( "Please enter Customer ID: " )));;
+
+					if(cc.retrieveCustomerInfo(custID) != null)
 					{
-						message = "Order " + orderID + " successfuly refunded";
-						for (int k=0; k<orderIDList.size(); k++) 
+						currentCardValue = cc.retrieveCustomerInfo(custID).getCardBalance();
+						OrderController = new OrderController();
+						if (OrderController.validateRefundOrder(orderID) == 1)
 						{
-							 int val = orderIDList.get(k).getOrderID();
-							 if(val==orderID)
-							 {
-								orderIDList.remove(k);
-							 	break;
-							 }
-						}			
-						break;
+							message = "Order " + orderID + " successfuly refunded";
+							cc.updateCustomerCardBalance(custID, (currentCardValue+50));
+							for (int k=0; k<orderIDList.size(); k++) 
+							{
+								 int val = orderIDList.get(k).getOrderID();
+								 if(val==orderID)
+								 {
+									orderIDList.remove(k);
+								 	break;
+								 }
+							}			
+							break;
+						}
+					
+						else
+						{
+							repaint();
+							break;
+						}
 					}
 					else
-					{
-						repaint();
-						break;
-					}
-				}//end outer if
+						JOptionPane.showMessageDialog(null, "Invalid Customer ID");
+				}//end if(orderIDList.get(i).getOrderID() == orderID)
 			}//end for loop
-		}
-		catch (Exception z)
-		{
-			JOptionPane.showMessageDialog(this, "Incorrect Data Type! Numbers Only!",  
-	                "Input Error", JOptionPane.ERROR_MESSAGE);   
-				 txtOrderId.requestFocusInWindow();  
-	             return;  
-		} //end catch
+		
+
 		
 		txtOrderId.setText("");
 		JOptionPane.showMessageDialog(null, message);

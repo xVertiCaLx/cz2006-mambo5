@@ -59,4 +59,11 @@ public class OrderController {
 		return dataStore.retrieveOrderList(orderList);
 	}
 	
+	public ArrayList<Order> retrieveOrderIDList(ArrayList<Order> orderList, int stallID, String orderStatus) {
+		
+		sysConfig = new SystemConfiguration();
+		dataStore = DataStoreFactory.createDataStore(sysConfig);
+
+		return dataStore.retrieveOrderID(orderList,stallID,orderStatus);
+	}
 }
