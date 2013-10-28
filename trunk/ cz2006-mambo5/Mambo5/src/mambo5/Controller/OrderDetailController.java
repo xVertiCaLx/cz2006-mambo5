@@ -3,7 +3,6 @@ package mambo5.Controller;
 import java.util.ArrayList;
 
 import mambo5.Database.*;
-import mambo5.Entity.Order;
 import mambo5.Entity.OrderDetail;
 
 public class OrderDetailController { 
@@ -24,14 +23,6 @@ public class OrderDetailController {
 			
 			return validate;
 		}
-		
-		/*public ArrayList<Order> retrieveOrderIDList(ArrayList<Order> orderIDList, int stallID, String orderStatus) {
-			sysConfig = new SystemConfiguration();
-			dataStore = DataStoreFactory.createDataStore(sysConfig);
-			
-			return dataStore.retrieveOrderID(orderIDList, stallID, orderStatus);
-		}
-		*/
 		public ArrayList<OrderDetail> retrieveOrderDetailList(ArrayList<OrderDetail> orderDetailList) {
 			sysConfig = new SystemConfiguration();
 			dataStore = DataStoreFactory.createDataStore(sysConfig);
