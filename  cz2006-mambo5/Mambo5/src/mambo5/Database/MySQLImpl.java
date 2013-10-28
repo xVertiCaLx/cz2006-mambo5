@@ -19,7 +19,6 @@ public class MySQLImpl implements DataStoreInterface {
 	private ArrayList<Canteen> canteenList;
 	private ArrayList<Stall> stallList;
 	private ArrayList<Admin> adminList;
-	// private ArrayList<Order> orderList; // guohao
 	private ResultSet rs;
 
 	// setup Connections
@@ -407,21 +406,4 @@ public class MySQLImpl implements DataStoreInterface {
 		result = dbc.executeNonQuery(sql);
 		return result;
 	}
-
-	/*
-	 * public ArrayList<OrderDetail>
-	 * retrieveOrderDetailList(ArrayList<OrderDetail> orderDetailList, int
-	 * orderID) { try { String sql =
-	 * "SELECT od.orderID, od.actualPrice, mi.menuItemName, mi.discount " +
-	 * "FROM mambojumbo.orderdetails od INNER JOIN mambojumbo.menuitem mi " +
-	 * "ON mi.menuItemID = od.menuItemID WHERE orderID = " + orderID +";"; rs =
-	 * dbc.execute(sql);
-	 * 
-	 * while(rs.next()) orderDetailList.add(new
-	 * OrderDetail(rs.getInt("orderID"), rs.getDouble("actualPrice"),
-	 * rs.getString("menuItemName"), rs.getDouble("discount"))); } catch
-	 * (Exception e) { e.printStackTrace(); } finally { dbc.terminate(); }
-	 * return orderDetailList; }
-	 */
-	
 }

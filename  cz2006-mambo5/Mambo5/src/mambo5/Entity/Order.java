@@ -1,9 +1,6 @@
 package mambo5.Entity;
 
-import java.sql.ResultSet;
 import java.util.Date;
-
-import mambo5.Controller.DBController;
 
 public class Order {
 	
@@ -12,8 +9,6 @@ public class Order {
 	private String orderStatus;
 	private Date purchaseDate;
 	private int stallID;
-	DBController dbc;
-	private ResultSet rs;
 	
 	public Order() {};
 	
