@@ -1,54 +1,52 @@
-package mambo5.Form2;
+package mambo5.Form;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.EventQueue;
+
+
 import java.awt.Font;
+
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
 import java.util.ArrayList;
-import java.util.Collections;
 
 import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import javax.swing.JLabel;
-import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
-import javax.swing.JTextArea;
+import javax.swing.JPanel;
+import javax.swing.JLabel;
+import javax.swing.JComboBox;
+import javax.swing.JButton;
 
 import mambo5.Controller.CanteenController;
 import mambo5.Controller.StallController;
 import mambo5.Entity.Canteen;
 import mambo5.Entity.Stall;
 
-public class RetrieveStallForm extends JPanel {
-
+public class DeleteStallForm extends JPanel {
+	private CamsMainFrame mainFrame;
+	private JFrame frame;
+	
 	private CanteenController cc;
 	private StallController sc;
-	private JComboBox<String> availableCB;
-	private JComboBox<String> stallCB;
+	
 	private ArrayList<Canteen> retrieveCanteenList;
 	private ArrayList<Stall> retrieveStallList;
-	private JLabel nameText = new JLabel();
-	private JLabel statusText = new JLabel();
-	private JTextArea descArea = new JTextArea();
-	private CamsMainFrame mainFrame;
+	
+	private JComboBox<String> availableCB;
+	private JComboBox<String> stallCB;
+	private JButton deleteBtn = new JButton("Delete");
+	
 
-
-	/**
-	 * Create the frame.
-	 */
-	public RetrieveStallForm(final CamsMainFrame mainFrame) {
+	public DeleteStallForm(final CamsMainFrame mainFrame) {
+		
 		setBounds(0, 40, 800, 560);
 		setLayout(null);
 		setBackground(new Color(240, 240, 240));
 		
 		this.mainFrame = mainFrame;
-		mainFrame.setTitle("Retrieve Stall");
+		mainFrame.setTitle("Delete Stall");
 		
 		JPanel titlePanel2 = new JPanel();
 		titlePanel2.setBackground(new Color(0, 0, 102));
@@ -56,73 +54,39 @@ public class RetrieveStallForm extends JPanel {
 		add(titlePanel2);
 		titlePanel2.setLayout(null);
 		
-		JLabel canteenTitle = new JLabel("Please select Stall to retrieve");
+		JLabel canteenTitle = new JLabel("Please select Stall to delete");
 		canteenTitle.setBounds(10, 0, 279, 50);
 		titlePanel2.add(canteenTitle);
 		canteenTitle.setForeground(Color.WHITE);
 		canteenTitle.setFont(new Font("Arial", Font.BOLD, 16));
 		
 		JLabel availableLabel = new JLabel("Available Canteen:");
-		availableLabel.setBounds(147, 161, 123, 14);
+		availableLabel.setBounds(147, 160, 118, 14);
 		add(availableLabel);
 		
-		JLabel stallLabel = new JLabel("Available Stall:");
-		stallLabel.setBounds(147, 196, 123, 14);
-		add(stallLabel);
-		
-		JLabel nameLabel = new JLabel("Stall Name");
-		nameLabel.setBounds(147, 223, 99, 14);
-		add(nameLabel);
-		
-		JLabel statusLabel = new JLabel("Stall Status");
-		statusLabel.setBounds(147, 247, 109, 14);
-		add(statusLabel);
-		
-		JLabel descriptionLabel = new JLabel("Stall Description:");
-		descriptionLabel.setBounds(147, 272, 109, 14);
-		add(descriptionLabel);
-		
 		availableCB = getCanteenList();
-		availableCB.setBounds(280, 158, 291, 20);
+		availableCB.setBounds(275, 158, 296, 20);
 		availableCB.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				submitsCanteen(e);
 			}
 		});
 		add(availableCB);
-		
-		
-		descArea.setEditable(false);
-		descArea.setBounds(280, 272, 291, 99);
-		add(descArea);
-		
-		nameText.setBounds(280, 223, 291, 14);
-		add(nameText);
-		
-		
-		statusText.setBounds(280, 247, 291, 14);
-		add(statusText);
-		
-		stallCB.setBounds(280, 193, 291, 20);
-		
-		stallCB.addActionListener(new ActionListener() {
+		deleteBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				submitsStall(e);
+				submitsDeleteStall(e);
 			}
 		});
 		
+		deleteBtn.setBounds(482, 213, 89, 23);
+		add(deleteBtn);
+		
+		stallCB.setBounds(275, 182, 296, 20);
 		add(stallCB);
-	}
-	
-	private void submitsStall(ActionEvent e) {
-		int index = stallCB.getSelectedIndex();
-		if(index >= 0)
-			displayStallDetail(index);
-		else {
-			nameText.setText("");
-			statusText.setText("");
-			descArea.setText("");
-		}
+		
+		JLabel stallLabel = new JLabel("Available Stall:");
+		stallLabel.setBounds(147, 185, 99, 14);
+		add(stallLabel);
 	}
 	
 	private JComboBox<String> getCanteenList() {
@@ -135,7 +99,6 @@ public class RetrieveStallForm extends JPanel {
 				canteenList.addItem(retrieveCanteenList.get(i).getCanteenName());
 			stallCB = new JComboBox<String>();
 			getStallList(retrieveCanteenList.get(0).getCanteenID());
-			displayStallDetail(0);
 		}
 		else
 			JOptionPane.showMessageDialog(null, "No Canteen Available");
@@ -151,9 +114,12 @@ public class RetrieveStallForm extends JPanel {
 		if(retrieveStallList.size() != 0) {
 			for(int i = 0; i<retrieveStallList.size();i++) 
 				stallCB.addItem(retrieveStallList.get(i).getStallUnit());
+			deleteBtn.setEnabled(true);
 		}
-		else 
+		else {
 			JOptionPane.showMessageDialog(null, "No Stall Available");
+			deleteBtn.setEnabled(false);
+		}
     	
 	}
 	
@@ -162,14 +128,21 @@ public class RetrieveStallForm extends JPanel {
     	getStallList(retrieveCanteenList.get(index).getCanteenID());
 	}
 	
-	private void displayStallDetail(int index) {
+	public void submitsDeleteStall(ActionEvent e) {
+		int resp = JOptionPane.showConfirmDialog(frame, "Do you want to Delete Canteen? ", "Confirm Deletion", JOptionPane.YES_NO_OPTION);
+		if (resp == JOptionPane.YES_OPTION) {
+			int index = stallCB.getSelectedIndex();
+			if(sc.processDeleteStall(retrieveStallList.get(index).getStallId()) == 1) {
+				JOptionPane.showMessageDialog(null, "Stall successfully deleted");
+				mainFrame.setTitle("Please select a Function to perform:");
+				mainFrame.replacePanel(new OFSFunction(mainFrame));
+			}
+			else {
+				JOptionPane.showMessageDialog(null, "Error when deleting from database");
+			}
+				
+		}
 		
-		nameText.setText(retrieveStallList.get(index).getStallName());
-		
-		descArea.setText(retrieveStallList.get(index).getStallDesc());
-		if(retrieveStallList.get(index).getStallStatus() == true) 
-			statusText.setText("Open");
-		else
-			statusText.setText("Closed");
 	}
+
 }

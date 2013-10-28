@@ -5,7 +5,7 @@ import javax.swing.SwingUtilities;
 import mambo5.Controller.LoginController;
 import mambo5.Entity.Menu;
 import mambo5.Entity.Stall;
-import mambo5.Form2.CamsMainFrame;
+import mambo5.Form.CamsMainFrame;
 
 public class CamsApp {
 
