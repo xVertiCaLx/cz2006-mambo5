@@ -1,17 +1,17 @@
 package mambo5.Entity;
 
 public class Staff extends Customer {
-	private int staffID;
+	private String staffID;
 	
-	public Staff(int staffID) {
+	public Staff(String staffID) {
 		this.staffID = staffID;
 	}
 	
-	public int getStaffID() {
+	public String getStaffID() {
 		return staffID;
 	}
 
-	public void setStaffID(int staffID) {
+	public void setStaffID(String staffID) {
 		this.staffID = staffID;
 	}
 	
