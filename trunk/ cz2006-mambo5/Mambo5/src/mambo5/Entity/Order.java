@@ -44,25 +44,6 @@ public class Order {
 	public int getStallID() {
 		return stallID;
 	}
-	/*
-	//New Order
-	public int createOrder(int custID, Date purchaseDate, String orderStatus, int stallID) 
-	{
-		dbc = new DBController();
-		
-	}
-*/	
-	//Refund Order
-	public int refundOrder(int orderID)
-	{
-		dbc = new DBController();
-		int result = 0;
-		String sql = "UPDATE mambojumbo.orders SET orderStatus = '" + "Refunded" + "' WHERE orderID = '" + orderID + "';";
-				
-		result = dbc.executeNonQuery(sql);
-		System.out.println(result);
-		return result;
-	}	
 	
 	public int confirmOrder(int orderID)
 	{
