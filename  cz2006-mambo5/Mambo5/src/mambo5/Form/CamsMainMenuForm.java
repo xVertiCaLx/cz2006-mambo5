@@ -13,7 +13,7 @@ import mambo5.Controller.JInterfaceController;
 
 public class CamsMainMenuForm extends JPanel implements JInterfaceController {
 
-	int posX = 0, posY = 0, totalWidth = 0, totalHeight = 0;
+int posX = 0, posY = 0, totalWidth = 0, totalHeight = 0;
 	
 	public CamsMainMenuForm(final CamsMainFrame mainFrame) {		
 		setBounds(posX, posY, CONTENTPANE_WIDTH, CONTENTPANE_HEIGHT);
@@ -27,7 +27,7 @@ public class CamsMainMenuForm extends JPanel implements JInterfaceController {
 				mainFrame.replacePanel("CamsLoginForm");
 			}
 		});
-		btnLogin.setForeground(WHITE_COLOUR);
+		btnLogin.setForeground(new Color(255, 255, 255));
 		btnLogin.setFont(new Font("Arial", Font.BOLD, 16));
 		btnLogin.setBackground(new Color(105, 105, 105)); 
 		btnLogin.setBounds(20, 151, 234, 80);
@@ -70,6 +70,7 @@ public class CamsMainMenuForm extends JPanel implements JInterfaceController {
 		add(btnPending);
 
 		JButton btnRefund = new JButton("REFUND");
+		//btnRefund.setEnabled(false);
 		btnRefund.setForeground(Color.WHITE);
 		btnRefund.setFont(new Font("Arial", Font.BOLD, 16));
 		btnRefund.setBackground(SystemColor.controlDkShadow);
@@ -81,16 +82,18 @@ public class CamsMainMenuForm extends JPanel implements JInterfaceController {
 		});
 		add(btnRefund);
 		
-		JButton btnUpdateMenuItem = new JButton("REFUND");
-		btnUpdateMenuItem.setForeground(Color.WHITE);
-		btnUpdateMenuItem.setFont(new Font("Arial", Font.BOLD, 16));
-		btnUpdateMenuItem.setBackground(SystemColor.controlDkShadow);
-		btnUpdateMenuItem.setBounds(274, 251, 234, 80);
-		btnUpdateMenuItem.addActionListener(new ActionListener() {
+		JButton btnEditMenu = new JButton("EDIT MENU");
+		//btnRefund.setEnabled(false);
+		btnRefund.setForeground(Color.WHITE);
+		btnRefund.setFont(new Font("Arial", Font.BOLD, 16));
+		btnRefund.setBackground(SystemColor.controlDkShadow);
+		btnRefund.setBounds(528, 251, 234, 80);
+		btnRefund.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				mainFrame.replacePanel("CamsRefundOrderForm");
 			}
 		});
-		add(btnUpdateMenuItem);
+		add(btnRefund);
 	}
+	
 }
