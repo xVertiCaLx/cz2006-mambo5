@@ -27,7 +27,7 @@ public class CamsLoginForm extends JPanel implements JInterfaceController {
 	private LoginController loginController;
 	private Admin admin;
 	
-	public CamsLoginForm(final CamsMainFrame mainFrame, final ArrayList<Menu> menuList) {
+	public CamsLoginForm(final CamsMainFrame mainFrame) {
 		setSize(new Dimension(CONTENTPANE_WIDTH, CONTENTPANE_HEIGHT));
 		setLocation(0, POS_CONTENTPANE_OFFSET_Y);
 		setLayout(null);
@@ -58,12 +58,8 @@ public class CamsLoginForm extends JPanel implements JInterfaceController {
 				admin = loginController.login(useridTextField.getText(), passwordField.getText());
 				if(admin != null) {
 					if (admin.getStallID() != -1) {
-						for (int i = 0; i < menuList.size(); i++) {
-							if (menuList.get(i).getStallID() == admin.getStallID()) {
-								menuID = menuList.get(i).getMenuID();
-							}
-						}
-						mainFrame.setID(admin.getStallID(), menuID);
+						
+						mainFrame.setID(admin.getStallID());
 						mainFrame.replacePanel("CamsMainMenuForm");
 					} else {
 						JOptionPane.showMessageDialog(mainFrame,"This account is not authorised to access this page.");
