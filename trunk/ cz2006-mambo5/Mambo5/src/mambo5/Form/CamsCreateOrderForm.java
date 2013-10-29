@@ -31,20 +31,17 @@ public class CamsCreateOrderForm extends JPanel implements JInterfaceController 
 	private CustomerController cc;
 	private Map<JButton, MenuItem> menuItemButtons;
 	private Map<Integer, MenuItem> menuItems = new HashMap<Integer, MenuItem>();
-	
-	// HashMap<OrderDetail, Integer>();
-
-	// For Order
 	private Timestamp purchaseDate;
 	private String orderStatus, receiptDetail, quantity = "";
-	private int order, menuID, stallID, posX = 0, posY = 0, totalWidth = 0 ,
-			totalHeight = 0, currentMenuItem = 0;
+	private int order, menuID, stallID, posX = 0, posY = 0, totalWidth = 0,
+			totalHeight = 0, currentMenuItem = 0, page = 1;
 	private double totalPrice = 0.0;
-	// For MenuItem
 	private ArrayList<OrderDetail> orderDetailList = new ArrayList<OrderDetail>();
 	private ArrayList<MenuItem> menuItemList;
 
 	private JPanel receiptPanel, menuItemPanel, sidePanel;
+
+	private final CamsMainFrame mainFrame;
 
 	private JTextArea receipt;
 	private JScrollPane receiptScrollPane;
@@ -52,26 +49,35 @@ public class CamsCreateOrderForm extends JPanel implements JInterfaceController 
 	private NumPad numpadPanel;
 	private boolean writeEnable = true;
 
-	JButton btnClear = new JButton("CLEAR");
-	JButton btnConfirmOrder = new JButton();
-
-	JButton btnMainPage = new JButton("MAIN PAGE");
-	JButton btnNextPage = new JButton("NEXT PAGE");
-	JButton btnPrevPage = new JButton("PREV PAGE");
+	private JButton btnMainPage, btnNextPage, btnPrevPage;
 	DecimalFormat df = new DecimalFormat("#.##");
-	
 
-	public CamsCreateOrderForm(final CamsMainFrame mainFrame, ArrayList<MenuItem> menuItemList, final ArrayList<OrderDetail> orderDetailList, int stallID, int menuID) {
-		this.menuItemList = menuItemList;
+	public CamsCreateOrderForm(final CamsMainFrame mainFrame,
+			ArrayList<MenuItem> menuItemList,
+			final ArrayList<OrderDetail> orderDetailList, int stallID,
+			int menuID) {
+		menuItemButtons = new HashMap<JButton, MenuItem>();
+		this.menuItemList = new ArrayList<MenuItem>();
 		this.menuID = menuID;
 		this.stallID = stallID;
+		this.mainFrame = mainFrame;
+		
+		for(int i = 0; i < menuItemList.size(); i++) {
+			if (menuItemList.get(i).getMenuID() == menuID) {
+				menuItems.put(
+						menuItemList.get(i).getMenuItemID(),
+						menuItemList.get(i));
+				this.menuItemList.add(menuItemList.get(i));
+			}
+		}
+		
 		setSize(new Dimension(CONTENTPANE_WIDTH, CONTENTPANE_HEIGHT));
 		setLocation(posX, 40);
 		setLayout(null);
 		setBackground(JPANEL_BACKGROUND_COLOUR);
 		cc = new CustomerController();
 		initPanels();
-		implementButtons();	
+		implementButtons();
 	}
 
 	public void initPanels() {
@@ -88,7 +94,7 @@ public class CamsCreateOrderForm extends JPanel implements JInterfaceController 
 		receiptPanel.add(receiptScrollPane);
 
 		posX += receiptPanel.getWidth();
-	
+
 		menuItemPanel = new JPanel();
 		menuItemPanel.setLayout(null);
 		menuItemPanel.setSize(new Dimension(MENUITEMPANE_WIDTH,
@@ -109,7 +115,7 @@ public class CamsCreateOrderForm extends JPanel implements JInterfaceController 
 		sidePanel.setLocation(posX, posY);
 		sidePanel.setBackground(JPANEL_BACKGROUND_COLOUR);
 
-		initMenuItemButtons(menuID);
+		initMenuItemButtons();
 		initSidePanelButton();
 		add(receiptPanel);
 		add(menuItemPanel);
@@ -118,7 +124,6 @@ public class CamsCreateOrderForm extends JPanel implements JInterfaceController 
 	}
 
 	public void implementButtons() {
-		// actual implementation
 		numpadPanel.num1().addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				receipt.setText(receipt.getText() + "1");
@@ -181,8 +186,8 @@ public class CamsCreateOrderForm extends JPanel implements JInterfaceController 
 				quantity += "9";
 			}
 		});
-		
-		numpadPanel.num9().addActionListener(new ActionListener() {
+
+		numpadPanel.num0().addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				receipt.setText(receipt.getText() + "0");
 				quantity += "0";
@@ -193,7 +198,7 @@ public class CamsCreateOrderForm extends JPanel implements JInterfaceController 
 			public void actionPerformed(ActionEvent e) {
 				receipt.setText("NEW ORDER \n"
 						+ "=======================================\n"
-						+"Quantity" + "\tItemName" + "\t" + "             " 
+						+ "Quantity" + "\tItemName" + "\t" + "             "
 						+ "Amount\n");
 				orderDetailList.removeAll(orderDetailList);
 				totalPrice = 0;
@@ -206,50 +211,72 @@ public class CamsCreateOrderForm extends JPanel implements JInterfaceController 
 						"Confirm Order?", "Confirmation",
 						JOptionPane.YES_NO_OPTION);
 				if (reply == JOptionPane.YES_OPTION) {
-					int custID = (Integer.parseInt(JOptionPane.showInputDialog 
-							( "Please enter Customer ID: " ))); ;
-					if(cc.retrieveCustomerInfo(custID) != null)
-					{
-						if(submitsOrder(custID) == 1)
+					int custID = (Integer.parseInt(JOptionPane
+							.showInputDialog("Please enter Customer ID: ")));
+					;
+					if (cc.retrieveCustomerInfo(custID) != null) {
+						if (submitsOrder(custID) == 1)
 							submitsOrderDetails();
-					}
-					else
-						JOptionPane.showMessageDialog(null, "Invalid Customer ID");
-					
-					
+					} else
+						JOptionPane.showMessageDialog(null,
+								"Invalid Customer ID");
+
 				}
 			}
 		});
 	}
 
-	public void initMenuItemButtons(int menuID) {
+	public void initMenuItemButtons() {
 		posX = 0;
 		posY = MARGIN;
 		totalWidth = (MENUITEM_BUTTON_WIDTH + MARGIN);
 		totalHeight = 2 * (MENUITEM_BUTTON_HEIGHT + MARGIN);
-		menuItemButtons = new HashMap<JButton, MenuItem>();
+		
+		
 		for (; currentMenuItem < menuItemList.size(); currentMenuItem++) {
-			if (menuItemList.get(currentMenuItem).getMenuID() == menuID) {
+			//if (menuItemList.get(currentMenuItem).getMenuID() == menuID) {
 				if (totalWidth >= menuItemPanel.getWidth()) {
-					if (totalHeight >= menuItemPanel.getHeight()) {
-						totalHeight = 0;
-						posX = 0;
-						posY = MARGIN;
+					if (totalHeight >= menuItemPanel.getHeight())
 						break;
-					} else {
+					else {
 						posX = 0;
-						totalWidth = (MENUITEM_BUTTON_WIDTH + MARGIN);
+						totalWidth = 2 * (MENUITEM_BUTTON_WIDTH + MARGIN);
 						posY += MENUITEM_BUTTON_HEIGHT + MARGIN;
 						totalHeight += MENUITEM_BUTTON_HEIGHT + MARGIN;
 					}
 				} else {
 					totalWidth += MENUITEM_BUTTON_WIDTH + MARGIN;
 				}
-				menuItems.put(menuItemList.get(currentMenuItem).getMenuItemID(), menuItemList.get(currentMenuItem));
+				System.out.println(menuItemList.get(currentMenuItem).getMenuItemName() + menuItemList.get(currentMenuItem).getMenuItemID());
 				addMenuItemButtons(menuItemList.get(currentMenuItem));
-			}
-
-			posX += MENUITEM_BUTTON_WIDTH + MARGIN;
+				posX += MENUITEM_BUTTON_WIDTH + MARGIN;
+			//}
+		}
+	}
+	
+	public void refreshButton() {
+		posX = 0;
+		posY = MARGIN;
+		totalWidth = (MENUITEM_BUTTON_WIDTH + MARGIN);
+		totalHeight = 2 * (MENUITEM_BUTTON_HEIGHT + MARGIN);
+		menuItemButtons = new HashMap<JButton, MenuItem>();
+		for (; currentMenuItem < menuItemList.size(); currentMenuItem++) {
+			//if (menuItemList.get(currentMenuItem).getMenuID() == menuID) {
+				if (totalWidth >= menuItemPanel.getWidth()) {
+					if (totalHeight >= menuItemPanel.getHeight())
+						break;
+					else {
+						posX = 0;
+						totalWidth = 2 * (MENUITEM_BUTTON_WIDTH + MARGIN);
+						posY += MENUITEM_BUTTON_HEIGHT + MARGIN;
+						totalHeight += MENUITEM_BUTTON_HEIGHT + MARGIN;
+					}
+				} else {
+					totalWidth += MENUITEM_BUTTON_WIDTH + MARGIN;
+				}
+				addMenuItemButtons(menuItemList.get(currentMenuItem));
+				posX += MENUITEM_BUTTON_WIDTH + MARGIN;
+			//}
 		}
 	}
 
@@ -266,43 +293,65 @@ public class CamsCreateOrderForm extends JPanel implements JInterfaceController 
 				writeEnable = true;
 				receiptDetail = "NEW ORDER \n"
 						+ "=======================================\n"
-						+"Quantity" + "\tItemName" + "\t" + "             " 
+						+ "Quantity" + "\tItemName" + "\t" + "             "
 						+ "Amount\n";
-				
-				int menuItemID = menuItemButtons.get(e.getSource()).getMenuItemID(), quantityInt;
-				
+
+				int menuItemID = menuItemButtons.get(e.getSource())
+						.getMenuItemID(), quantityInt;
+
 				if (quantity.isEmpty())
 					quantityInt = 1;
 				else
 					quantityInt = Integer.parseInt(quantity);
-				double actualPrice = menuItemButtons.get(e.getSource()).getMenuItemPrice() * (1-(menuItemButtons.get(e.getSource()).getDiscount()/100));
-				
-				for (int i = 0; i < orderDetailList.size(); i++) {
-					if ((orderDetailList.get(i).getMenuItemID() == menuItemButtons.get(e.getSource()).getMenuItemID())){
-						writeEnable = false;
-						orderDetailList.get(i).setQuantity(orderDetailList.get(i).getQuantity() + quantityInt);
-					}
-					
-					receiptDetail += orderDetailList.get(i).getQuantity() +
-							"\t" + menuItems.get(orderDetailList.get(i).getMenuItemID()).getMenuItemName() 
-							+ "\t " + "               " +orderDetailList.get(i).getActualPrice() + "\n";
-					
-					receiptDetail += "\t\t " + "               " + (orderDetailList.get(i).getQuantity() * orderDetailList.get(i).getActualPrice()) + "\n";
-			
-				}
-				
-				if (writeEnable) {
-					orderDetailList.add(new OrderDetail(menuItemID, actualPrice, quantityInt));
-					receiptDetail += quantityInt + "\t" + menuItemButtons.get(e.getSource()).getMenuItemName()  + "\t " + "               " +actualPrice + "\n";
-					receiptDetail += "\t\t " + "               " + (quantityInt * actualPrice) + "\n";
-				}
-	
-				totalPrice +=  (quantityInt * actualPrice);
-				receiptDetail += "\n\n" + "======================================="
-						 + "\nTOTAL PRICE: " + "\t\t " + "               $" + df.format(totalPrice)
-						 + "\n=======================================";
+				double actualPrice = menuItemButtons.get(e.getSource())
+						.getMenuItemPrice()
+						* (1 - (menuItemButtons.get(e.getSource())
+								.getDiscount() / 100));
 
-				System.out.println("totalPrice is: " +totalPrice);
+				for (int i = 0; i < orderDetailList.size(); i++) {
+					if ((orderDetailList.get(i).getMenuItemID() == menuItemButtons
+							.get(e.getSource()).getMenuItemID())) {
+						writeEnable = false;
+						orderDetailList.get(i).setQuantity(
+								orderDetailList.get(i).getQuantity()
+										+ quantityInt);
+					}
+
+					receiptDetail += orderDetailList.get(i).getQuantity()
+							+ "\t"
+							+ menuItems.get(
+									orderDetailList.get(i).getMenuItemID())
+									.getMenuItemName() + "\t "
+							+ "               "
+							+ orderDetailList.get(i).getActualPrice() + "\n";
+
+					receiptDetail += "\t\t "
+							+ "               "
+							+ (orderDetailList.get(i).getQuantity() * orderDetailList
+									.get(i).getActualPrice()) + "\n";
+
+				}
+
+				if (writeEnable) {
+					orderDetailList.add(new OrderDetail(menuItemID,
+							actualPrice, quantityInt));
+					receiptDetail += quantityInt
+							+ "\t"
+							+ menuItemButtons.get(e.getSource())
+									.getMenuItemName() + "\t "
+							+ "               " + actualPrice + "\n";
+					receiptDetail += "\t\t " + "               "
+							+ (quantityInt * actualPrice) + "\n";
+				}
+
+				totalPrice += (quantityInt * actualPrice);
+				receiptDetail += "\n\n"
+						+ "======================================="
+						+ "\nTOTAL PRICE: " + "\t\t " + "               $"
+						+ df.format(totalPrice)
+						+ "\n=======================================";
+
+				System.out.println("totalPrice is: " + totalPrice);
 				quantity = "";
 				receipt.setText(receiptDetail);
 			}
@@ -312,22 +361,87 @@ public class CamsCreateOrderForm extends JPanel implements JInterfaceController 
 	};
 
 	public void initSidePanelButton() {
+		btnMainPage = new JButton("MAIN PAGE");
+		btnNextPage = new JButton("NEXT PAGE");
+		btnPrevPage = new JButton("PREV PAGE");
+
+		posX = MARGIN;
+		posY = MARGIN;
+
 		btnMainPage.setForeground(Color.WHITE);
-		btnMainPage.setFont(new Font("Tahoma", Font.BOLD, 12));
+		btnMainPage.setFont(SIDEPANEL_BUTTON_FONT);
 		btnMainPage.setBackground(new Color(255, 0, 0));
-		btnMainPage.setBounds(10, 10, 110, 70);
+		btnMainPage.setBounds(posX, posY, SIDEBUTTON_WIDTH, SIDEBUTTON_HEIGHT);
+		btnMainPage.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				mainFrame.replacePanel("CamsMainMenuForm");
+			}
+
+		});
 		sidePanel.add(btnMainPage);
 
+		posY += SIDEBUTTON_HEIGHT + MARGIN;
+
 		btnNextPage.setForeground(Color.WHITE);
-		btnNextPage.setFont(new Font("Tahoma", Font.BOLD, 12));
+		btnNextPage.setFont(SIDEPANEL_BUTTON_FONT);
 		btnNextPage.setBackground(new Color(100, 149, 237));
-		btnNextPage.setBounds(10, 90, 110, 50);
+		btnNextPage.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				if (currentMenuItem < menuItemList.size()) {
+					btnNextPage.setEnabled(true);
+					btnPrevPage.setEnabled(true);
+					currentMenuItem = (page * 9) + 1;
+					page++;
+					menuItemPanel.removeAll();
+					refreshButton();
+					revalidate();
+					repaint();
+					System.out.println("Page: " + page);
+				}
+			}
+
+		});
+		btnNextPage.setBounds(posX, posY, SIDEBUTTON_WIDTH, SIDEBUTTON_HEIGHT);
 		sidePanel.add(btnNextPage);
 
+		posY += SIDEBUTTON_HEIGHT + MARGIN;
+
 		btnPrevPage.setForeground(Color.WHITE);
-		btnPrevPage.setFont(new Font("Tahoma", Font.BOLD, 12));
+		btnPrevPage.setFont(SIDEPANEL_BUTTON_FONT);
 		btnPrevPage.setBackground(new Color(100, 149, 237));
-		btnPrevPage.setBounds(10, 150, 110, 50);
+		btnPrevPage.setEnabled(false);
+		btnPrevPage.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				if (page > 2) {
+					btnNextPage.setEnabled(true);
+					btnPrevPage.setEnabled(true);
+					currentMenuItem = (--page-1) * 9 +1;
+					menuItemPanel.removeAll();
+					refreshButton();
+					revalidate();
+					repaint();
+					System.out.println("Page: " + page);
+				} else {
+					page = 1;
+					btnNextPage.setEnabled(true);
+					btnPrevPage.setEnabled(true);
+					currentMenuItem = 0;
+					menuItemPanel.removeAll();
+					refreshButton();
+					revalidate();
+					repaint();
+					System.out.println("Page: " + page);
+				}
+			}
+
+		});
+		btnPrevPage.setBounds(posX, posY, SIDEBUTTON_WIDTH, SIDEBUTTON_HEIGHT);
 		sidePanel.add(btnPrevPage);
 	}
 
@@ -338,47 +452,44 @@ public class CamsCreateOrderForm extends JPanel implements JInterfaceController 
 	}
 
 	public int submitsOrder(int custID) {
-		
+
 		double currentCardValue = 0.0;
 		int validOrder = 0;
-				
+
 		cc.retrieveCustomerInfo(custID);
 		currentCardValue = cc.retrieveCustomerInfo(custID).getCardBalance();
-		
+
 		purchaseDate = getTimeStamp();
 		orderStatus = "Processing";
 
-		if (currentCardValue>totalPrice)		
-		{
+		if (currentCardValue > totalPrice) {
 			oc = new OrderController();
 			order = oc.validateCreateOrder(custID, purchaseDate, orderStatus,
 					stallID);
-			if (custID == 0 || purchaseDate.equals("") || orderStatus.equals("")|| stallID == 0)
-			{		
+			if (custID == 0 || purchaseDate.equals("")
+					|| orderStatus.equals("") || stallID == 0) {
 				JOptionPane.showMessageDialog(null, "Order cannot be created");
-			}
-			else
-			{
+			} else {
 				JOptionPane.showMessageDialog(null, "Order ID: " + order);
 			}
 			validOrder = 1;
-			
-			cc.updateCustomerCardBalance(custID, (currentCardValue-totalPrice));
-						JOptionPane.showMessageDialog(null, "Your card value is "
-								+ "now: " +df.format((currentCardValue-totalPrice)));
-		}
-		else
+
+			cc.updateCustomerCardBalance(custID,
+					(currentCardValue - totalPrice));
+			JOptionPane.showMessageDialog(null, "Your card value is " + "now: "
+					+ df.format((currentCardValue - totalPrice)));
+		} else
 			JOptionPane.showMessageDialog(null, "Card has not enough Value");
-	
+
 		return validOrder;
-	}//end submitsOrder()
-	
+	}
 
 	public void submitsOrderDetails() {
 		for (int i = 0; i < orderDetailList.size(); i++) {
 			odc = new OrderDetailController();
 			odc.validateCreateOrderDetail(order, orderDetailList.get(i)
-					.getMenuItemID(), orderDetailList.get(i).getActualPrice(), orderDetailList.get(i).getQuantity());
+					.getMenuItemID(), orderDetailList.get(i).getActualPrice(),
+					orderDetailList.get(i).getQuantity());
 		}
 	}
 }
