@@ -149,7 +149,7 @@ public class CamsMainFrame extends JFrame implements JInterfaceController {
 		} else if (panelName.equals("CamsMainMenuForm")) {
 			replacePanel(camsMainMenuForm);
 		} else if (panelName.equals("CamsCreateMenuItemForm")) {
-			camsCreateMenuItemForm = new CamsCreateMenuItemForm(this, stallID);
+			camsCreateMenuItemForm = new CamsCreateMenuItemForm(this, menuList, stallID);
 			replacePanel(camsCreateMenuItemForm);
 		} else if (panelName.equals("CamsPendingOrderForm")) {
 			System.out.println("order:" + orderList.size());

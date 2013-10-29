@@ -3,6 +3,7 @@ package mambo5.Form;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -12,19 +13,20 @@ import javax.swing.JTextField;
 
 import mambo5.Controller.JInterfaceController;
 import mambo5.Controller.MenuItemController;
-import mambo5.Entity.Admin;
+import mambo5.Entity.Menu;
 
 public class CamsCreateMenuItemForm extends JPanel implements JInterfaceController {
 
-	private JLabel menuItemLabel, menuItemPriceLabel, menuItemDiscountLabel;
-	private JTextField menuItemTextField, menuItemPriceTextField, menuItemDiscountTextField;
+	private JLabel menuLabel, menuItemLabel, menuItemPriceLabel, menuItemDiscountLabel;
+	private JTextField menuTextField, menuItemTextField, menuItemPriceTextField, menuItemDiscountTextField;
 	private JButton addButton, clearAllButton;
 	private int posY = 0, posX = 0, totalHeight = 0, TEXTFIELD_WIDTH = 300, TEXTLABEL_WIDTH = 300, menuID;
 	private double price, discount;
 	private MenuItemController mic;
 	private CamsMainFrame mainFrame;
+	private boolean createMenu = true;
 	
-	public CamsCreateMenuItemForm(final CamsMainFrame mainFrame, int stallID) {
+	public CamsCreateMenuItemForm(final CamsMainFrame mainFrame, ArrayList<Menu> menuList,int stallID) {
 		this.mainFrame = mainFrame;
 		posX = 40;
 		mainFrame.setTitle("Create Menu Item");
@@ -34,6 +36,21 @@ public class CamsCreateMenuItemForm extends JPanel implements JInterfaceControll
 		setBackground(JPANEL_BACKGROUND_COLOUR);
 				
 		posX = ((CONTENTPANE_WIDTH - TEXTFIELD_WIDTH)/2);
+		
+		for (int i = 0; i < menuList.size(); i++) {
+			if (menuList.get(i).getStallID() == stallID)
+				createMenu = false;
+		}
+		
+		if (createMenu) {
+			menuLabel = new JLabel("Item Name:");
+			menuLabel.setSize(TEXTLABEL_WIDTH, JLABEL_HEIGHT);
+			totalHeight += menuLabel.getHeight();
+			
+			menuTextField = new JTextField();
+			menuTextField.setSize(TEXTFIELD_WIDTH, JTEXTFIELD_HEIGHT);
+			totalHeight += (menuTextField.getHeight() + MARGIN);
+		}
 		
 		menuItemLabel = new JLabel("Item Name:");
 		menuItemLabel.setSize(TEXTLABEL_WIDTH, JLABEL_HEIGHT);
@@ -80,6 +97,18 @@ public class CamsCreateMenuItemForm extends JPanel implements JInterfaceControll
 		
 		posX = (CONTENTPANE_WIDTH - menuItemTextField.getWidth())/2;
 		posY = (CONTENTPANE_HEIGHT - totalHeight)/2;
+
+		if (createMenu) {
+			menuLabel.setLocation(posX, posY);
+			add(menuLabel);
+			
+			posY += menuLabel.getHeight() + MARGIN;
+			menuTextField.setLocation(posX, posY);
+			add(menuTextField);
+		}
+		
+		posY += menuItemTextField.getHeight() + MARGIN;
+		
 		menuItemLabel.setLocation(posX, posY);
 		add(menuItemLabel);
 		
@@ -126,6 +155,10 @@ public class CamsCreateMenuItemForm extends JPanel implements JInterfaceControll
 				else {
 					JOptionPane.showMessageDialog(null, "Canteen successfully created");
 					mainFrame.replacePanel("SelectPanel");
+				}
+				
+				if (createMenu) {
+					//do something
 				}
 			}catch (NumberFormatException exception) {
 				JOptionPane.showMessageDialog(null, "Please Enter Only Integer Value for Price and Discount");

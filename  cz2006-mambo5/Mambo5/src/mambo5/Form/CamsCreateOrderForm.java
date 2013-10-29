@@ -2,7 +2,6 @@ package mambo5.Form;
 
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Timestamp;
@@ -18,6 +17,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
 import mambo5.Controller.CustomerController;
+import mambo5.Controller.EmailController;
 import mambo5.Controller.JInterfaceController;
 import mambo5.Controller.OrderController;
 import mambo5.Controller.OrderDetailController;
@@ -29,6 +29,7 @@ public class CamsCreateOrderForm extends JPanel implements JInterfaceController 
 	private OrderController oc;
 	private OrderDetailController odc;
 	private CustomerController cc;
+	private EmailController emailController;
 	private Map<JButton, MenuItem> menuItemButtons;
 	private Map<Integer, MenuItem> menuItems = new HashMap<Integer, MenuItem>();
 	private Timestamp purchaseDate;
@@ -61,16 +62,15 @@ public class CamsCreateOrderForm extends JPanel implements JInterfaceController 
 		this.menuID = menuID;
 		this.stallID = stallID;
 		this.mainFrame = mainFrame;
-		
-		for(int i = 0; i < menuItemList.size(); i++) {
+
+		for (int i = 0; i < menuItemList.size(); i++) {
 			if (menuItemList.get(i).getMenuID() == menuID) {
-				menuItems.put(
-						menuItemList.get(i).getMenuItemID(),
+				menuItems.put(menuItemList.get(i).getMenuItemID(),
 						menuItemList.get(i));
 				this.menuItemList.add(menuItemList.get(i));
 			}
 		}
-		
+
 		setSize(new Dimension(CONTENTPANE_WIDTH, CONTENTPANE_HEIGHT));
 		setLocation(posX, 40);
 		setLayout(null);
@@ -231,29 +231,30 @@ public class CamsCreateOrderForm extends JPanel implements JInterfaceController 
 		posY = MARGIN;
 		totalWidth = (MENUITEM_BUTTON_WIDTH + MARGIN);
 		totalHeight = 2 * (MENUITEM_BUTTON_HEIGHT + MARGIN);
-		
-		
+
 		for (; currentMenuItem < menuItemList.size(); currentMenuItem++) {
-			//if (menuItemList.get(currentMenuItem).getMenuID() == menuID) {
-				if (totalWidth >= menuItemPanel.getWidth()) {
-					if (totalHeight >= menuItemPanel.getHeight())
-						break;
-					else {
-						posX = 0;
-						totalWidth = 2 * (MENUITEM_BUTTON_WIDTH + MARGIN);
-						posY += MENUITEM_BUTTON_HEIGHT + MARGIN;
-						totalHeight += MENUITEM_BUTTON_HEIGHT + MARGIN;
-					}
-				} else {
-					totalWidth += MENUITEM_BUTTON_WIDTH + MARGIN;
+			// if (menuItemList.get(currentMenuItem).getMenuID() == menuID) {
+			if (totalWidth >= menuItemPanel.getWidth()) {
+				if (totalHeight >= menuItemPanel.getHeight())
+					break;
+				else {
+					posX = 0;
+					totalWidth = 2 * (MENUITEM_BUTTON_WIDTH + MARGIN);
+					posY += MENUITEM_BUTTON_HEIGHT + MARGIN;
+					totalHeight += MENUITEM_BUTTON_HEIGHT + MARGIN;
 				}
-				System.out.println(menuItemList.get(currentMenuItem).getMenuItemName() + menuItemList.get(currentMenuItem).getMenuItemID());
-				addMenuItemButtons(menuItemList.get(currentMenuItem));
-				posX += MENUITEM_BUTTON_WIDTH + MARGIN;
-			//}
+			} else {
+				totalWidth += MENUITEM_BUTTON_WIDTH + MARGIN;
+			}
+			System.out.println(menuItemList.get(currentMenuItem)
+					.getMenuItemName()
+					+ menuItemList.get(currentMenuItem).getMenuItemID());
+			addMenuItemButtons(menuItemList.get(currentMenuItem));
+			posX += MENUITEM_BUTTON_WIDTH + MARGIN;
+			// }
 		}
 	}
-	
+
 	public void refreshButton() {
 		posX = 0;
 		posY = MARGIN;
@@ -261,22 +262,20 @@ public class CamsCreateOrderForm extends JPanel implements JInterfaceController 
 		totalHeight = 2 * (MENUITEM_BUTTON_HEIGHT + MARGIN);
 		menuItemButtons = new HashMap<JButton, MenuItem>();
 		for (; currentMenuItem < menuItemList.size(); currentMenuItem++) {
-			//if (menuItemList.get(currentMenuItem).getMenuID() == menuID) {
-				if (totalWidth >= menuItemPanel.getWidth()) {
-					if (totalHeight >= menuItemPanel.getHeight())
-						break;
-					else {
-						posX = 0;
-						totalWidth = 2 * (MENUITEM_BUTTON_WIDTH + MARGIN);
-						posY += MENUITEM_BUTTON_HEIGHT + MARGIN;
-						totalHeight += MENUITEM_BUTTON_HEIGHT + MARGIN;
-					}
-				} else {
-					totalWidth += MENUITEM_BUTTON_WIDTH + MARGIN;
+			if (totalWidth >= menuItemPanel.getWidth()) {
+				if (totalHeight >= menuItemPanel.getHeight())
+					break;
+				else {
+					posX = 0;
+					totalWidth = 2 * (MENUITEM_BUTTON_WIDTH + MARGIN);
+					posY += MENUITEM_BUTTON_HEIGHT + MARGIN;
+					totalHeight += MENUITEM_BUTTON_HEIGHT + MARGIN;
 				}
-				addMenuItemButtons(menuItemList.get(currentMenuItem));
-				posX += MENUITEM_BUTTON_WIDTH + MARGIN;
-			//}
+			} else {
+				totalWidth += MENUITEM_BUTTON_WIDTH + MARGIN;
+			}
+			addMenuItemButtons(menuItemList.get(currentMenuItem));
+			posX += MENUITEM_BUTTON_WIDTH + MARGIN;
 		}
 	}
 
@@ -421,7 +420,7 @@ public class CamsCreateOrderForm extends JPanel implements JInterfaceController 
 				if (page > 2) {
 					btnNextPage.setEnabled(true);
 					btnPrevPage.setEnabled(true);
-					currentMenuItem = (--page-1) * 9 +1;
+					currentMenuItem = (--page - 1) * 9 + 1;
 					menuItemPanel.removeAll();
 					refreshButton();
 					revalidate();
@@ -478,8 +477,15 @@ public class CamsCreateOrderForm extends JPanel implements JInterfaceController 
 					(currentCardValue - totalPrice));
 			JOptionPane.showMessageDialog(null, "Your card value is " + "now: "
 					+ df.format((currentCardValue - totalPrice)));
-		} else
+			if ((currentCardValue - totalPrice)<=5) {
+				emailController = new EmailController();
+				emailController.sendBalanceAlertEmail(cc.retrieveCustomerInfo(custID).getEmail(), (currentCardValue - totalPrice));
+			}
+		} else {
+			emailController = new EmailController();
+			emailController.sendBalanceAlertEmail(cc.retrieveCustomerInfo(custID).getEmail(), currentCardValue);
 			JOptionPane.showMessageDialog(null, "Card has not enough Value");
+		}
 
 		return validOrder;
 	}

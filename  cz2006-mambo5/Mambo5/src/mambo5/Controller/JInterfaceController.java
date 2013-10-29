@@ -48,7 +48,7 @@ public interface JInterfaceController {
 	public static final int JLABEL_HEIGHT = 15;
 	public static final int JTEXTFIELD_HEIGHT = 25;
 	
-	public static final int SIDEBUTTON_WIDTH = (SIDEPANE_WIDTH - 2*MARGIN), SIDEBUTTON_HEIGHT = 70;
+	public static final int SIDEBUTTON_WIDTH = (SIDEPANE_WIDTH - 2*MARGIN), SIDEBUTTON_HEIGHT = 30;
 	
 	public static final int STAFF = 1, STALLOWNER = 2, STALLEMPLOYEE = 3;
 }

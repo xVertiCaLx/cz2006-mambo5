@@ -488,7 +488,7 @@ public class MySQLImpl implements DataStoreInterface {
 		if(rs != null) {
 	        try {
 	        	if(rs.next()) {   // Move the cursor to the next row
-	        		cust = new Customer(rs.getInt("custID"),rs.getDouble("cardBalance"),rs.getString("fullName"),rs.getInt("accessID"));				    
+	        		cust = new Customer(rs.getInt("custID"),rs.getDouble("cardBalance"),rs.getString("fullName"),rs.getInt("accessID"), rs.getString("Email"));				    
 				 }
 			} catch (SQLException e) {
 				e.printStackTrace();
