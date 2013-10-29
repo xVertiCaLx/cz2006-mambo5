@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
@@ -94,9 +95,21 @@ public class CamsEditMenuItemForm extends JPanel implements JInterfaceController
 		deleteButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				MenuItemController = new MenuItemController();
-				MenuItemController.validateDeleteMenuItem(menuItem.getMenuItemID());
-				mainFrame.reloadMenuItemList();
-				mainFrame.replacePanel("CamsListMenuItemForm");
+				
+				int reply = JOptionPane.showConfirmDialog(null,
+						"Confirm Delete?", "Confirmation",
+						JOptionPane.YES_NO_OPTION);
+				if (reply == JOptionPane.YES_OPTION) {
+					if(MenuItemController.validateDeleteMenuItem(menuItem.getMenuItemID()) == 1)
+					{			
+						JOptionPane.showMessageDialog(null, "Item successfully removed");
+						mainFrame.reloadMenuItemList();
+						mainFrame.replacePanel("CamsListMenuItemForm");
+					}
+					else
+						JOptionPane.showMessageDialog(null, "Unable to remove item");
+				}//end YES_OPTION
+				
 			}
 		});
 		
