@@ -144,7 +144,7 @@ public class CamsMainFrame extends JFrame implements JInterfaceController {
 			//camsEditMenuItemForm = new CamsEditMenuItemForm(this,menuItem);
 			replacePanel(camsEditMenuItemForm);
 		} else if (panelName.equals("CamsListMenuItemForm")) {
-			camsListMenuItemForm = new CamsListMenuItemForm(this, menuItemList, stallID);
+			camsListMenuItemForm = new CamsListMenuItemForm(this, menuItemList, menuID);
 			replacePanel(camsListMenuItemForm);
 		} else if (panelName.equals("CamsMainMenuForm")) {
 			replacePanel(camsMainMenuForm);
@@ -179,6 +179,11 @@ public class CamsMainFrame extends JFrame implements JInterfaceController {
 			
 			camsRefundOrderForm = new CamsRefundOrderForm(this);
 		}
+	}
+	
+	public void reloadMenuItemList() {
+		menuItemList = new ArrayList<MenuItem>();
+		menuItemController.retrieveMenuItemList(menuItemList);
 	}
 
 }
