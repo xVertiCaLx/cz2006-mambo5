@@ -22,10 +22,11 @@ public class CamsListMenuItemForm extends JPanel implements JInterfaceController
 	private int menuID, posX = 0, posY = 0, totalWidth = 0 ,
 			totalHeight = 0, currentMenuItem = 0;
 	
-	public CamsListMenuItemForm(final CamsMainFrame mainFrame, final ArrayList<MenuItem> menuItemList, int menuID)
+	private CamsMainFrame mainFrame;
+	public CamsListMenuItemForm(final CamsMainFrame mainFrame, final ArrayList<MenuItem> menuItemList, int stallID)
 	{
 		//setLayout(null);
-		this.menuID = menuID;
+		this.mainFrame = mainFrame;
 		this.menuItemList = menuItemList;
 		setSize(new Dimension(CONTENTPANE_WIDTH, CONTENTPANE_HEIGHT));
 		setLocation(posX, 40);
@@ -33,7 +34,7 @@ public class CamsListMenuItemForm extends JPanel implements JInterfaceController
 		setBackground(JPANEL_BACKGROUND_COLOUR);
 		
 		initPanels();
-		
+
 	}
 	
 	public void initPanels()
@@ -80,7 +81,7 @@ public class CamsListMenuItemForm extends JPanel implements JInterfaceController
 		}
 	}
 	
-	public void addMenuItemButtons(MenuItem menuItem) {
+	public void addMenuItemButtons(final MenuItem menuItem) {
 		JButton menuItemButton = new JButton(menuItem.getMenuItemName());
 		menuItemButton.setSize(new Dimension(MENUITEM_BUTTON_WIDTH,
 				MENUITEM_BUTTON_HEIGHT));
@@ -89,9 +90,8 @@ public class CamsListMenuItemForm extends JPanel implements JInterfaceController
 		menuItemButtons.put(menuItemButton, menuItem);
 		menuItemButton.addActionListener(new ActionListener() {
 			@Override
-			public void actionPerformed(ActionEvent e) {
-				
-					//do something
+			public void actionPerformed(ActionEvent e) {	
+				mainFrame.replacePanel(new CamsEditMenuItemForm(mainFrame, menuItem));
 			}
 		});
 

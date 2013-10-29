@@ -30,6 +30,7 @@ public interface DataStoreInterface {
 	
 	//MENUITEM
 	int createMenuItem(int menuID, String menuItemName, double menuItemPrice, double discount);
+	int updateMenuItem(String menuItemName,double menuItemPrice,double discount, int menuItemID);
 	ArrayList<MenuItem> retrieveMenuItem(ArrayList<MenuItem> menuItemList);
 	ArrayList<MenuItem> retrieveMenuItem(ArrayList<MenuItem> menuItemList, int menuItemID);
 	
