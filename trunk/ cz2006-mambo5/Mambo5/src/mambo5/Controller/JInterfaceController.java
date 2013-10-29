@@ -6,6 +6,9 @@ import java.awt.Toolkit;
 
 public interface JInterfaceController {
 	
+	public static final Color WHITE_COLOUR = new Color(255, 255, 255);
+	public static final Color BLACK_COLOUR = new Color(0, 0, 0);
+	
 	public static final Color SPLASHSCREEN_TITLE_COLOUR = new Color(110,110,110), WHITE_BACKGROUND_COLOUR = new Color(255,255,255);
 	
 	public static final Dimension SCREENSIZE = Toolkit.getDefaultToolkit().getScreenSize();
