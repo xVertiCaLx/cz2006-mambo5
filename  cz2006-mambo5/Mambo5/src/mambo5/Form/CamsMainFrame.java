@@ -126,9 +126,14 @@ public class CamsMainFrame extends JFrame implements JInterfaceController {
 			mainMenuButton.setVisible(true);
 	}
 	
-	public void setID(int stallID, int menuID) {
+	public void setID(int stallID) {
 		this.stallID = stallID;
-		this.menuID = menuID;
+		for (int i = 0; i < menuList.size(); i++) {
+			if (menuList.get(i).getStallID() == stallID) {
+				menuID = menuList.get(i).getMenuID();
+				break;
+			}
+		} System.out.println(menuID);
 	}
 	
 	public void replacePanel(String panelName) {
@@ -151,7 +156,7 @@ public class CamsMainFrame extends JFrame implements JInterfaceController {
 			camsPendingOrderForm = new CamsPendingOrderForm(this, orderDetailList, orderList, menuItemList, stallID, menuID);
 			replacePanel(camsPendingOrderForm);
 		} else if (panelName.equals("CamsLoginForm")) {
-			camsLoginForm = new CamsLoginForm(this, menuList);
+			camsLoginForm = new CamsLoginForm(this);
 			replacePanel(camsLoginForm);
 		} else if (panelName.equals("CamsRefundOrderForm")) {
 			replacePanel(camsRefundOrderForm);
