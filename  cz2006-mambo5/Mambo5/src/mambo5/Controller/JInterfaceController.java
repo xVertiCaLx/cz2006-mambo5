@@ -2,12 +2,15 @@ package mambo5.Controller;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Toolkit;
 
 public interface JInterfaceController {
 	
 	public static final Color WHITE_COLOUR = new Color(255, 255, 255);
 	public static final Color BLACK_COLOUR = new Color(0, 0, 0);
+	
+	public static final Font SIDEPANEL_BUTTON_FONT = new Font("Arial", Font.BOLD, 12);
 	
 	public static final Color SPLASHSCREEN_TITLE_COLOUR = new Color(110,110,110), WHITE_BACKGROUND_COLOUR = new Color(255,255,255);
 	
@@ -44,6 +47,8 @@ public interface JInterfaceController {
 	public static final Color JPANEL_BACKGROUND_COLOUR = new Color(240, 240, 240);
 	public static final int JLABEL_HEIGHT = 15;
 	public static final int JTEXTFIELD_HEIGHT = 25;
+	
+	public static final int SIDEBUTTON_WIDTH = (SIDEPANE_WIDTH - 2*MARGIN), SIDEBUTTON_HEIGHT = 70;
 	
 	public static final int STAFF = 1, STALLOWNER = 2, STALLEMPLOYEE = 3;
 }

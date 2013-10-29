@@ -160,7 +160,6 @@ public class CamsMainFrame extends JFrame implements JInterfaceController {
 			replacePanel(camsLoginForm);
 		} else if (panelName.equals("CamsRefundOrderForm")) {
 			replacePanel(camsRefundOrderForm);
-			
 		} else {
 			replacePanel(selectPanel);
 		}
