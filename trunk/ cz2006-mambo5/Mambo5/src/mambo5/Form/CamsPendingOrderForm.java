@@ -49,7 +49,6 @@ public class CamsPendingOrderForm extends JPanel implements JInterfaceController
 		System.out.println("STALL: " + stallID);
 		this.stallID = stallID;
 		this.menuItemList = menuItemList;
-		//this.orderList = orderList;
 		orderDetails = new HashMap<Order, ArrayList<OrderDetail>>();
 		setSize(new Dimension(CONTENTPANE_WIDTH, CONTENTPANE_HEIGHT));
 		setLocation(posX, 40);
@@ -58,11 +57,7 @@ public class CamsPendingOrderForm extends JPanel implements JInterfaceController
 
 		initLists(orderList, orderDetailList, menuID);
 		initPanels();
-		
-		
-		initOrderIDButtons(stallID, this.orderList);
-		
-		
+		initOrderButtons(stallID, this.orderList);
 		implementButtons();
 		initSidePanelButton();
 
@@ -234,7 +229,7 @@ public class CamsPendingOrderForm extends JPanel implements JInterfaceController
 		}
 	}
 	
-	public void initOrderIDButtons(int stallID, ArrayList<Order> orderList) {
+	public void initOrderButtons(int stallID, ArrayList<Order> orderList) {
 		orderButtons = new HashMap<JButton, Order>();		
 		for (int i = 0; i < orderList.size(); i++) {
 			addOrderIDButtons(orderList.get(i));
