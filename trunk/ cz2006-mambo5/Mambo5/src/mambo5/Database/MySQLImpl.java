@@ -266,6 +266,17 @@ public class MySQLImpl implements DataStoreInterface {
 		
 	}
 	
+	public int deleteMenuItem(int menuItemID) {
+		
+		int result = 0;
+		
+		String sql = "DELETE FROM menuitem WHERE menuItemID = " + menuItemID + ";";
+				
+		result = dbc.executeNonQuery(sql);
+		return result;
+		
+	}
+	
 	@Override
 	public ArrayList<MenuItem> retrieveMenuItem(
 			ArrayList<MenuItem> menuItemList, int menuItemID) {

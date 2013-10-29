@@ -3,7 +3,6 @@ package mambo5.Form;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -22,7 +21,7 @@ public class CamsEditMenuItemForm extends JPanel implements JInterfaceController
 	private JTextField menuItemTextField, menuItemPriceTextField, menuItemDiscountTextField;
 	private JButton addButton, clearAllButton, deleteButton;
 	private int posY = 0, posX = 0, totalHeight = 0, TEXTFIELD_WIDTH = 300, TEXTLABEL_WIDTH = 300, menuID;
-	private Admin admin;
+
 	
 	private MenuItemController MenuItemController;
 	
@@ -94,7 +93,10 @@ public class CamsEditMenuItemForm extends JPanel implements JInterfaceController
 		deleteButton.setSize(new Dimension(STANDARDBUTTON_WIDTH, STANDARDBUTTON_HEIGHT));
 		deleteButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-					
+				MenuItemController = new MenuItemController();
+				MenuItemController.validateDeleteMenuItem(menuItem.getMenuItemID());
+				mainFrame.reloadMenuItemList();
+				mainFrame.replacePanel("CamsListMenuItemForm");
 			}
 		});
 		
@@ -133,6 +135,10 @@ public class CamsEditMenuItemForm extends JPanel implements JInterfaceController
 		
 		clearAllButton.setLocation(posX, posY);
 		add(clearAllButton);
+		posX += clearAllButton.getWidth() + MARGIN;
+		
+		deleteButton.setLocation(posX, posY);
+		add(deleteButton);
 	}
 
 }

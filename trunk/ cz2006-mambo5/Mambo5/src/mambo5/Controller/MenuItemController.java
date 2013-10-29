@@ -36,6 +36,17 @@ public class MenuItemController {
 		return validate;
 	}
 	
+	public int validateDeleteMenuItem(int menuItemID){
+		int validate = 0;
+		
+		sysConfig = new SystemConfiguration();
+		dataStore = DataStoreFactory.createDataStore(sysConfig);
+		
+		validate = dataStore.deleteMenuItem(menuItemID);
+		
+		return validate;
+	}
+	
 	public ArrayList<MenuItem> retrieveMenuItemList(ArrayList<MenuItem> menuItemList) {
 		sysConfig = new SystemConfiguration();
 		dataStore = DataStoreFactory.createDataStore(sysConfig);
