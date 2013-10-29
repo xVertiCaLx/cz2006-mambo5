@@ -84,16 +84,16 @@ int posX = 0, posY = 0, totalWidth = 0, totalHeight = 0;
 		
 		JButton btnEditMenu = new JButton("EDIT MENU");
 		//btnRefund.setEnabled(false);
-		btnRefund.setForeground(Color.WHITE);
-		btnRefund.setFont(new Font("Arial", Font.BOLD, 16));
-		btnRefund.setBackground(SystemColor.controlDkShadow);
-		btnRefund.setBounds(528, 251, 234, 80);
-		btnRefund.addActionListener(new ActionListener() {
+		btnEditMenu.setForeground(Color.WHITE);
+		btnEditMenu.setFont(new Font("Arial", Font.BOLD, 16));
+		btnEditMenu.setBackground(SystemColor.controlDkShadow);
+		btnEditMenu.setBounds(528, 251, 234, 80);
+		btnEditMenu.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				mainFrame.replacePanel("CamsRefundOrderForm");
+				mainFrame.replacePanel("CamsListMenuItemForm");
 			}
 		});
-		add(btnRefund);
+		add(btnEditMenu);
 	}
 	
 }

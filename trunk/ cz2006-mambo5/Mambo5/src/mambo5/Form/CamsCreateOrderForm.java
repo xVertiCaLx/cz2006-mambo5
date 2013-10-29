@@ -88,7 +88,7 @@ public class CamsCreateOrderForm extends JPanel implements JInterfaceController 
 		receiptPanel.add(receiptScrollPane);
 
 		posX += receiptPanel.getWidth();
-
+	
 		menuItemPanel = new JPanel();
 		menuItemPanel.setLayout(null);
 		menuItemPanel.setSize(new Dimension(MENUITEMPANE_WIDTH,
