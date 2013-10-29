@@ -254,6 +254,18 @@ public class MySQLImpl implements DataStoreInterface {
 		return result;
 	}
 	
+	public int updateMenuItem(String menuItemName,double menuItemPrice, 
+			double discount, int menuItemID) {
+		
+		int result = 0;
+		String sql = "UPDATE mambojumbo.menuitem SET menuItemName = '" + menuItemName + "',"
+				+ "menuItemPrice = '" + menuItemPrice + "', discount = '" + discount + "' WHERE menuItemID = '" + menuItemID + "';";
+				
+		result = dbc.executeNonQuery(sql);
+		return result;
+		
+	}
+	
 	@Override
 	public ArrayList<MenuItem> retrieveMenuItem(
 			ArrayList<MenuItem> menuItemList, int menuItemID) {

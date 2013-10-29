@@ -25,6 +25,17 @@ public class MenuItemController {
 		return validate;
 	}
 	
+	public int validateUpdateMenuItem(String menuItemName, double menuItemPrice, double discount, int menuItemID){
+		int validate = 0;
+		
+		sysConfig = new SystemConfiguration();
+		dataStore = DataStoreFactory.createDataStore(sysConfig);
+		
+		validate = dataStore.updateMenuItem(menuItemName, menuItemPrice, discount, menuItemID);
+		
+		return validate;
+	}
+	
 	public ArrayList<MenuItem> retrieveMenuItemList(ArrayList<MenuItem> menuItemList) {
 		sysConfig = new SystemConfiguration();
 		dataStore = DataStoreFactory.createDataStore(sysConfig);

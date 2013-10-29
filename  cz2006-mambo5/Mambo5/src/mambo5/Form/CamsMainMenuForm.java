@@ -14,6 +14,8 @@ import mambo5.Controller.JInterfaceController;
 public class CamsMainMenuForm extends JPanel implements JInterfaceController {
 
 int posX = 0, posY = 0, totalWidth = 0, totalHeight = 0;
+
+
 	
 	public CamsMainMenuForm(final CamsMainFrame mainFrame) {		
 		setBounds(posX, posY, CONTENTPANE_WIDTH, CONTENTPANE_HEIGHT);

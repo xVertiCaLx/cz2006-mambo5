@@ -3,6 +3,7 @@ package mambo5.Form;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -11,20 +12,24 @@ import javax.swing.JTextField;
 
 import mambo5.Controller.JInterfaceController;
 import mambo5.Controller.MenuItemController;
+import mambo5.Controller.OrderController;
 import mambo5.Entity.Admin;
+import mambo5.Entity.MenuItem;
 
 public class CamsEditMenuItemForm extends JPanel implements JInterfaceController {
 
 	private JLabel menuItemLabel, menuItemPriceLabel, menuItemDiscountLabel;
 	private JTextField menuItemTextField, menuItemPriceTextField, menuItemDiscountTextField;
-	private JButton addButton, clearAllButton;
+	private JButton addButton, clearAllButton, deleteButton;
 	private int posY = 0, posX = 0, totalHeight = 0, TEXTFIELD_WIDTH = 300, TEXTLABEL_WIDTH = 300, menuID;
 	private double price, discount;
 	private MenuItemController mic;
 	private CamsMainFrame mainFrame;
 	private Admin admin;
 	
-	public CamsEditMenuItemForm(final CamsMainFrame mainFrame) {
+	private MenuItemController MenuItemController;
+	
+	public CamsEditMenuItemForm(final CamsMainFrame mainFrame,final MenuItem menuItem) {
 		/*this.mainFrame = mainFrame;
 		this.menuID = menuID;
 		this.admin = admin;*/
@@ -42,6 +47,7 @@ public class CamsEditMenuItemForm extends JPanel implements JInterfaceController
 		
 		menuItemTextField = new JTextField();
 		menuItemTextField.setSize(TEXTFIELD_WIDTH, JTEXTFIELD_HEIGHT);
+		menuItemTextField.setText(menuItem.getMenuItemName());
 		totalHeight += (menuItemTextField.getHeight() + MARGIN);
 		
 		menuItemPriceLabel = new JLabel("Item Price: ");
@@ -50,6 +56,7 @@ public class CamsEditMenuItemForm extends JPanel implements JInterfaceController
 		
 		menuItemPriceTextField = new JTextField();
 		menuItemPriceTextField.setSize(TEXTFIELD_WIDTH, JTEXTFIELD_HEIGHT);
+		menuItemPriceTextField.setText(Double.toString(menuItem.getMenuItemPrice()));
 		totalHeight += (menuItemPriceTextField.getHeight() + MARGIN);
 		
 		menuItemDiscountLabel = new JLabel("Item Discount Price: ");
@@ -58,18 +65,21 @@ public class CamsEditMenuItemForm extends JPanel implements JInterfaceController
 		
 		menuItemDiscountTextField = new JTextField();
 		menuItemDiscountTextField.setSize(TEXTFIELD_WIDTH, JTEXTFIELD_HEIGHT);
+		menuItemDiscountTextField.setText(Double.toString(menuItem.getDiscount()));
 		totalHeight += (menuItemDiscountTextField.getHeight() + MARGIN);
 		
-		addButton = new JButton("Add to Menu");
+		addButton = new JButton("UPDATE");
 		addButton.setSize(new Dimension(STANDARDBUTTON_WIDTH, STANDARDBUTTON_HEIGHT));
 		addButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//submitMenuItem(e);
+				MenuItemController = new MenuItemController();
+				MenuItemController.validateUpdateMenuItem(menuItemTextField.getText(), 
+						Double.parseDouble(menuItemPriceTextField.getText()), Double.parseDouble(menuItemDiscountTextField.getText()),menuItem.getMenuItemID());
 			}
 		});
 		totalHeight += addButton.getHeight();
 		
-		clearAllButton = new JButton("Clear All");
+		clearAllButton = new JButton("CLEAR TEXT");
 		clearAllButton.setSize(new Dimension(STANDARDBUTTON_WIDTH, STANDARDBUTTON_HEIGHT));
 		clearAllButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -78,6 +88,17 @@ public class CamsEditMenuItemForm extends JPanel implements JInterfaceController
 				menuItemDiscountTextField.setText("");
 			}
 		});
+		
+		totalHeight += clearAllButton.getHeight();
+		
+		deleteButton = new JButton("DELETE");
+		deleteButton.setSize(new Dimension(STANDARDBUTTON_WIDTH, STANDARDBUTTON_HEIGHT));
+		deleteButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+					
+			}
+		});
+		
 		
 		posX = (CONTENTPANE_WIDTH - menuItemTextField.getWidth())/2;
 		posY = (CONTENTPANE_HEIGHT - totalHeight)/2;
