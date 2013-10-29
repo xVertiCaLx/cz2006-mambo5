@@ -6,9 +6,14 @@ public class Customer  {
 	private double cardBalance;
 	private String fullName;
 	private int accessID;
+	private String email;
 	
 	public int getCustID() {
 		return custID;
+	}
+	
+	public String getEmail() {
+		return email;
 	}
 
 	public void setCustID(int custID) {
@@ -41,10 +46,12 @@ public class Customer  {
 	
 	public Customer() {}
 	
-	public Customer(int custID, double cardBalance, String fullName, int accessID){
+	//1
+	public Customer(int custID, double cardBalance, String fullName, int accessID, String email){
 		this.custID = custID;
 		this.cardBalance = cardBalance;
 		this.fullName = fullName;
 		this.accessID = accessID;
+		this.email = email;
 	}
 }
