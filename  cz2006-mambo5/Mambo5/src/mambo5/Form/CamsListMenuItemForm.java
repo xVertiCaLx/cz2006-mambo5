@@ -23,11 +23,12 @@ public class CamsListMenuItemForm extends JPanel implements JInterfaceController
 			totalHeight = 0, currentMenuItem = 0;
 	
 	private CamsMainFrame mainFrame;
-	public CamsListMenuItemForm(final CamsMainFrame mainFrame, final ArrayList<MenuItem> menuItemList, int stallID)
+	public CamsListMenuItemForm(final CamsMainFrame mainFrame, final ArrayList<MenuItem> menuItemList, int menuID)
 	{
 		//setLayout(null);
 		this.mainFrame = mainFrame;
 		this.menuItemList = menuItemList;
+		this.menuID = menuID;
 		setSize(new Dimension(CONTENTPANE_WIDTH, CONTENTPANE_HEIGHT));
 		setLocation(posX, 40);
 		setLayout(null);
@@ -57,7 +58,9 @@ public class CamsListMenuItemForm extends JPanel implements JInterfaceController
 		totalHeight = 2 * (MENUITEM_BUTTON_HEIGHT + MARGIN);
 		menuItemButtons = new HashMap<JButton, MenuItem>();
 		for (; currentMenuItem < menuItemList.size(); currentMenuItem++) {
+			System.out.println("add"+currentMenuItem+" "+menuItemList.get(currentMenuItem).getMenuID());
 			if (menuItemList.get(currentMenuItem).getMenuID() == menuID) {
+				System.out.println("MENU ID IS: " +menuID);
 				if (totalWidth >= menuItemPanel.getWidth()) {
 					if (totalHeight >= menuItemPanel.getHeight()) {
 						totalHeight = 0;
@@ -73,7 +76,8 @@ public class CamsListMenuItemForm extends JPanel implements JInterfaceController
 				} else {
 					totalWidth += MENUITEM_BUTTON_WIDTH + MARGIN;
 				}
-				menuItems.put(menuItemList.get(currentMenuItem).getMenuItemID(), menuItemList.get(currentMenuItem));
+				//menuItems.put(menuItemList.get(currentMenuItem).getMenuItemID(), menuItemList.get(currentMenuItem));
+				System.out.println("add");
 				addMenuItemButtons(menuItemList.get(currentMenuItem));
 			}
 

@@ -22,9 +22,6 @@ public class CamsEditMenuItemForm extends JPanel implements JInterfaceController
 	private JTextField menuItemTextField, menuItemPriceTextField, menuItemDiscountTextField;
 	private JButton addButton, clearAllButton, deleteButton;
 	private int posY = 0, posX = 0, totalHeight = 0, TEXTFIELD_WIDTH = 300, TEXTLABEL_WIDTH = 300, menuID;
-	private double price, discount;
-	private MenuItemController mic;
-	private CamsMainFrame mainFrame;
 	private Admin admin;
 	
 	private MenuItemController MenuItemController;
@@ -75,6 +72,8 @@ public class CamsEditMenuItemForm extends JPanel implements JInterfaceController
 				MenuItemController = new MenuItemController();
 				MenuItemController.validateUpdateMenuItem(menuItemTextField.getText(), 
 						Double.parseDouble(menuItemPriceTextField.getText()), Double.parseDouble(menuItemDiscountTextField.getText()),menuItem.getMenuItemID());
+						mainFrame.reloadMenuItemList();
+						mainFrame.replacePanel("CamsListMenuItemForm");
 			}
 		});
 		totalHeight += addButton.getHeight();
