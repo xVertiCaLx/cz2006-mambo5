@@ -50,7 +50,7 @@ public class CamsCreateMenuItemForm extends JPanel implements JInterfaceControll
 		}
 		
 		if (createMenu) {
-			menuLabel = new JLabel("Item Name:");
+			menuLabel = new JLabel("Menu Type:");
 			menuLabel.setSize(TEXTLABEL_WIDTH, JLABEL_HEIGHT);
 			totalHeight += menuLabel.getHeight();
 			
