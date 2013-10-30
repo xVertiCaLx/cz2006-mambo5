@@ -469,14 +469,14 @@ public class CamsCreateOrderForm extends JPanel implements JInterfaceController 
 					|| orderStatus.equals("") || stallID == 0) {
 				JOptionPane.showMessageDialog(null, "Order cannot be created");
 			} else {
-				JOptionPane.showMessageDialog(null, "Order ID: " + order);
+				JOptionPane.showMessageDialog(null, "Order created\n"
+						+ "Order ID: " + order);
 			}
 			validOrder = 1;
 
 			cc.updateCustomerCardBalance(custID,
 					(currentCardValue - totalPrice));
-			JOptionPane.showMessageDialog(null, "Your card value is " + "now: "
-					+ df.format((currentCardValue - totalPrice)));
+			JOptionPane.showMessageDialog(null, "Card balance :" + df.format((currentCardValue - totalPrice)));
 			if ((currentCardValue - totalPrice)<=5) {
 				emailController = new EmailController();
 				emailController.sendBalanceAlertEmail(cc.retrieveCustomerInfo(custID).getEmail(), (currentCardValue - totalPrice));
