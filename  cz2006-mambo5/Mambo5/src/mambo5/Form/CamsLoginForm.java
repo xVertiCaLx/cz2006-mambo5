@@ -58,8 +58,8 @@ public class CamsLoginForm extends JPanel implements JInterfaceController {
 				admin = loginController.login(useridTextField.getText(), passwordField.getText());
 				if(admin != null) {
 					if (admin.getStallID() != -1) {
-						
-						mainFrame.setID(admin.getStallID());
+						System.out.println("Stall ID is " + admin.getStallID());
+						mainFrame.setID(admin.getStallID(), admin.getAccessID());
 						mainFrame.replacePanel("CamsMainMenuForm");
 					} else {
 						JOptionPane.showMessageDialog(mainFrame,"This account is not authorised to access this page.");

@@ -12,6 +12,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import mambo5.Controller.JInterfaceController;
+import mambo5.Controller.MenuController;
 import mambo5.Controller.MenuItemController;
 import mambo5.Entity.Menu;
 
@@ -20,14 +21,17 @@ public class CamsCreateMenuItemForm extends JPanel implements JInterfaceControll
 	private JLabel menuLabel, menuItemLabel, menuItemPriceLabel, menuItemDiscountLabel;
 	private JTextField menuTextField, menuItemTextField, menuItemPriceTextField, menuItemDiscountTextField;
 	private JButton addButton, clearAllButton;
-	private int posY = 0, posX = 0, totalHeight = 0, TEXTFIELD_WIDTH = 300, TEXTLABEL_WIDTH = 300, menuID;
+	private int posY = 0, posX = 0, totalHeight = 0, TEXTFIELD_WIDTH = 300, TEXTLABEL_WIDTH = 300, menuID, stallID, accessID;
 	private double price, discount;
+	private MenuController menuController;
 	private MenuItemController mic;
 	private CamsMainFrame mainFrame;
 	private boolean createMenu = true;
 	
-	public CamsCreateMenuItemForm(final CamsMainFrame mainFrame, ArrayList<Menu> menuList,int stallID) {
+	public CamsCreateMenuItemForm(final CamsMainFrame mainFrame, final ArrayList<Menu> menuList,int stallID, int accessID) {
 		this.mainFrame = mainFrame;
+		this.stallID = stallID;
+		this.accessID = accessID;
 		posX = 40;
 		mainFrame.setTitle("Create Menu Item");
 		setSize(new Dimension(CONTENTPANE_WIDTH, CONTENTPANE_HEIGHT));
@@ -38,8 +42,11 @@ public class CamsCreateMenuItemForm extends JPanel implements JInterfaceControll
 		posX = ((CONTENTPANE_WIDTH - TEXTFIELD_WIDTH)/2);
 		
 		for (int i = 0; i < menuList.size(); i++) {
-			if (menuList.get(i).getStallID() == stallID)
+			if (menuList.get(i).getStallID() == stallID) {
+				this.menuID = menuList.get(i).getMenuID();
 				createMenu = false;
+				break;
+			}
 		}
 		
 		if (createMenu) {
@@ -80,7 +87,7 @@ public class CamsCreateMenuItemForm extends JPanel implements JInterfaceControll
 		addButton.setSize(new Dimension(STANDARDBUTTON_WIDTH, STANDARDBUTTON_HEIGHT));
 		addButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				submitMenuItem(e);
+				submitMenuItem(e, menuList);
 			}
 		});
 		totalHeight += addButton.getHeight();
@@ -143,23 +150,40 @@ public class CamsCreateMenuItemForm extends JPanel implements JInterfaceControll
 		add(clearAllButton);
 	}
 
-	public void submitMenuItem(ActionEvent e) {
+	public void submitMenuItem(ActionEvent e, ArrayList<Menu> menuList) {
 		if(menuItemTextField.getText().isEmpty() || menuItemPriceTextField.getText().isEmpty() || menuItemDiscountTextField.getText().isEmpty()) {
 			JOptionPane.showMessageDialog(null, "Error! Please ensure that all fields contains information.\nNo fields should be empty.");
 		} else {
 			try {
 				price = Double.parseDouble(menuItemPriceTextField.getText());
+				menuController = new MenuController();
 				mic = new MenuItemController();
-				if(mic.validateMenuItemDetail(menuID, menuItemTextField.getText(), price, discount)==0)
-					JOptionPane.showMessageDialog(null, "Menu Item cannot be created");
-				else {
-					JOptionPane.showMessageDialog(null, "MenuItem successfully created");
-					mainFrame.replacePanel("SelectPanel");
+				if (createMenu) {
+					if (menuTextField.getText().isEmpty())
+						JOptionPane.showMessageDialog(null, "Error! Please ensure that all fields contains information.\nNo fields should be empty.");
+					else {
+						menuID = menuController.validateInsertMenu(stallID, menuTextField.getText());
+						mainFrame.setID(stallID,accessID);
+						menuList.add(new Menu(menuID, stallID, menuTextField.getText()));
+						if(mic.validateMenuItemDetail(menuID, menuItemTextField.getText(), price, discount)==0)
+							JOptionPane.showMessageDialog(null, "Menu Item cannot be created");
+						else {
+							JOptionPane.showMessageDialog(null, "MenuItem successfully created");
+							mainFrame.replacePanel("CamsMainMenuForm");
+						}
+					}
+					mainFrame.reloadMenuItemList();
+				} else {
+					//later check if got add into arraylist of menuitem or not
+					if(mic.validateMenuItemDetail(menuID, menuItemTextField.getText(), price, discount)==0)
+						JOptionPane.showMessageDialog(null, "Menu Item cannot be created");
+					else {
+						JOptionPane.showMessageDialog(null, "MenuItem successfully created");
+						mainFrame.replacePanel("CamsMainMenuForm");
+					}
+					mainFrame.reloadMenuItemList();
 				}
 				
-				if (createMenu) {
-					//do something
-				}
 			}catch (NumberFormatException exception) {
 				JOptionPane.showMessageDialog(null, "Please Enter Only Integer Value for Price and Discount");
 			}

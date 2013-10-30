@@ -39,7 +39,7 @@ public class CamsMainFrame extends JFrame implements JInterfaceController {
 	
 	private JLabel titleLabel = new JLabel("#Canteen");
 	private JButton mainMenuButton;
-	private int posX = 0, posY = 0, stallID = 5, menuID = 5;
+	private int posX = 0, posY = 0, stallID = -1, menuID = -1, accessID = -1;
 	
 	private ArrayList<Menu> menuList = new ArrayList<Menu>();
 	private ArrayList<MenuItem> menuItemList = new ArrayList<MenuItem>();
@@ -97,9 +97,9 @@ public class CamsMainFrame extends JFrame implements JInterfaceController {
 		titlePanel.add(titleLabel);
 
 		init();
-		
-		applicationPanel = selectPanel;
-		contentPane.add(applicationPanel);
+			applicationPanel = selectPanel;
+			contentPane.add(applicationPanel);
+
 	}
 
 	public void setSelectPanel(JPanel applicationPanel) {
@@ -126,14 +126,16 @@ public class CamsMainFrame extends JFrame implements JInterfaceController {
 			mainMenuButton.setVisible(true);
 	}
 	
-	public void setID(int stallID) {
+	public void setID(int stallID, int accessID) {
 		this.stallID = stallID;
+		this.accessID = accessID;
 		for (int i = 0; i < menuList.size(); i++) {
 			if (menuList.get(i).getStallID() == stallID) {
 				menuID = menuList.get(i).getMenuID();
+				System.out.println("MenuID: "+menuID+"StallID:"+menuList.get(i).getStallID());
 				break;
 			}
-		} System.out.println(menuID);
+		}		
 	}
 	
 	public void replacePanel(String panelName) {
@@ -141,15 +143,19 @@ public class CamsMainFrame extends JFrame implements JInterfaceController {
 			camsCreateOrderForm = new CamsCreateOrderForm(this, menuItemList, orderDetailList, stallID, menuID);
 			replacePanel(camsCreateOrderForm);
 		} else if (panelName.equals("CamsEditMenuItemForm")) {
-			//camsEditMenuItemForm = new CamsEditMenuItemForm(this,menuItem);
 			replacePanel(camsEditMenuItemForm);
 		} else if (panelName.equals("CamsListMenuItemForm")) {
 			camsListMenuItemForm = new CamsListMenuItemForm(this, menuItemList, menuID);
 			replacePanel(camsListMenuItemForm);
 		} else if (panelName.equals("CamsMainMenuForm")) {
-			replacePanel(camsMainMenuForm);
+			if (menuID== -1)
+				replacePanel("CamsCreateMenuItemForm");
+			else  {
+				camsMainMenuForm = new CamsMainMenuForm(this, accessID);
+				replacePanel(camsMainMenuForm);
+			}
 		} else if (panelName.equals("CamsCreateMenuItemForm")) {
-			camsCreateMenuItemForm = new CamsCreateMenuItemForm(this, menuList, stallID);
+			camsCreateMenuItemForm = new CamsCreateMenuItemForm(this, menuList, stallID, accessID);
 			replacePanel(camsCreateMenuItemForm);
 		} else if (panelName.equals("CamsPendingOrderForm")) {
 			System.out.println("order:" + orderList.size());
@@ -174,7 +180,7 @@ public class CamsMainFrame extends JFrame implements JInterfaceController {
 			System.out.println("Initialising Complete. Loading Main Screen." + orderList.size());
 			
 			selectPanel = new SelectPanel(this);
-			camsMainMenuForm = new CamsMainMenuForm(this);
+			
 			
 			camsRefundOrderForm = new CamsRefundOrderForm(this);
 		}

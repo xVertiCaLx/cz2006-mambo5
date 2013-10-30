@@ -224,19 +224,42 @@ public class MySQLImpl implements DataStoreInterface {
 	
 	public ArrayList<Menu> retrieveMenuList(ArrayList<Menu> menuList) {
 		try {
-			if (menuList.size() > 0) {
 				String sql = "SELECT * FROM MENU;";
 				rs = dbc.execute(sql);
 				while (rs.next()) {
 					menuList.add(new Menu(rs.getInt("menuID"),
 							rs.getInt("stallID"), rs.getString("menuType")));
+					System.out.println(rs.getInt("menuID") + " " + 
+							rs.getInt("stallID") + " " + rs.getString("menuType"));
 				}
 				dbc.terminate();
-			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return menuList;
+	}
+	
+	@Override
+	public int createMenu(int stallID, String menuType) {
+		int result = 0;
+		String sql = "INSERT INTO mambojumbo.menu (stallID, menuType)"
+					+ "VALUES ( '"+ stallID +"', '"+ menuType +"');";
+		dbc.executeNonQuery(sql);
+		
+		try {
+			sql = "SELECT MENUID FROM MENU WHERE STALLID = '"
+					+ stallID + "';";
+			rs = dbc.execute(sql);
+
+			if(rs.next())
+				result = rs.getInt("menuID");
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			dbc.terminate();
+		}
+		
+		return result;
 	}
 	
 	//------------------------------------MENU ITEM------------------------------------------------

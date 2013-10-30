@@ -13,16 +13,14 @@ import mambo5.Controller.JInterfaceController;
 
 public class CamsMainMenuForm extends JPanel implements JInterfaceController {
 
-int posX = 0, posY = 40, totalWidth = 0, totalHeight = 0;
+	int posX = 0, posY = 40, totalWidth = 0, totalHeight = 0;
 
-
-	
-	public CamsMainMenuForm(final CamsMainFrame mainFrame) {		
+	public CamsMainMenuForm(final CamsMainFrame mainFrame, int accessID) {
 		setBounds(posX, posY, CONTENTPANE_WIDTH, CONTENTPANE_HEIGHT);
 		setLayout(null);
 		setBackground(JPANEL_BACKGROUND_COLOUR);
 		mainFrame.setTitle("Canteen Management System");
-		
+
 		JButton btnLogin = new JButton("LOGOUT");
 		btnLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -31,10 +29,10 @@ int posX = 0, posY = 40, totalWidth = 0, totalHeight = 0;
 		});
 		btnLogin.setForeground(new Color(255, 255, 255));
 		btnLogin.setFont(new Font("Arial", Font.BOLD, 16));
-		btnLogin.setBackground(new Color(105, 105, 105)); 
+		btnLogin.setBackground(new Color(105, 105, 105));
 		btnLogin.setBounds(20, 151, 234, 80);
 		add(btnLogin);
-		
+
 		JButton btnNewOrder = new JButton("NEW ORDER");
 		btnNewOrder.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -46,7 +44,7 @@ int posX = 0, posY = 40, totalWidth = 0, totalHeight = 0;
 		btnNewOrder.setBackground(SystemColor.controlDkShadow);
 		btnNewOrder.setBounds(274, 151, 234, 80);
 		add(btnNewOrder);
-		
+
 		JButton btnAddMenuItem = new JButton("ADD NEW ITEM");
 		btnAddMenuItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -58,7 +56,7 @@ int posX = 0, posY = 40, totalWidth = 0, totalHeight = 0;
 		btnAddMenuItem.setBackground(SystemColor.controlDkShadow);
 		btnAddMenuItem.setBounds(528, 151, 234, 80);
 		add(btnAddMenuItem);
-		
+
 		JButton btnPending = new JButton("PENDING ORDERS");
 		btnPending.setForeground(Color.WHITE);
 		btnPending.setFont(new Font("Arial", Font.BOLD, 16));
@@ -72,7 +70,7 @@ int posX = 0, posY = 40, totalWidth = 0, totalHeight = 0;
 		add(btnPending);
 
 		JButton btnRefund = new JButton("REFUND");
-		//btnRefund.setEnabled(false);
+		// btnRefund.setEnabled(false);
 		btnRefund.setForeground(Color.WHITE);
 		btnRefund.setFont(new Font("Arial", Font.BOLD, 16));
 		btnRefund.setBackground(SystemColor.controlDkShadow);
@@ -83,9 +81,9 @@ int posX = 0, posY = 40, totalWidth = 0, totalHeight = 0;
 			}
 		});
 		add(btnRefund);
-		
+
 		JButton btnEditMenu = new JButton("EDIT MENU");
-		//btnRefund.setEnabled(false);
+		// btnRefund.setEnabled(false);
 		btnEditMenu.setForeground(Color.WHITE);
 		btnEditMenu.setFont(new Font("Arial", Font.BOLD, 16));
 		btnEditMenu.setBackground(SystemColor.controlDkShadow);
@@ -96,6 +94,13 @@ int posX = 0, posY = 40, totalWidth = 0, totalHeight = 0;
 			}
 		});
 		add(btnEditMenu);
+
+		if (accessID != 2) {
+			btnRefund.setEnabled(false);
+			btnEditMenu.setEnabled(false);
+			btnAddMenuItem.setEnabled(false);
+		}
+
 	}
-	
+
 }
