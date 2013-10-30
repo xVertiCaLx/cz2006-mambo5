@@ -30,5 +30,16 @@ public class MenuController {
 		
 		return dataStore.retrieveMenuList(menuList);
 	}
+	
+	public int validateInsertMenu(int stallID, String menuType) {
+		int validate = 0;
+		
+		sysConfig = new SystemConfiguration();
+		dataStore = DataStoreFactory.createDataStore(sysConfig);
+		
+		validate = dataStore.createMenu(stallID, menuType);
+		
+		return validate;
+	}
 
 }
