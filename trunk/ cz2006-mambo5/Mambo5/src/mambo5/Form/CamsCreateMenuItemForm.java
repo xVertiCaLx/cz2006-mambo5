@@ -151,9 +151,9 @@ public class CamsCreateMenuItemForm extends JPanel implements JInterfaceControll
 				price = Double.parseDouble(menuItemPriceTextField.getText());
 				mic = new MenuItemController();
 				if(mic.validateMenuItemDetail(menuID, menuItemTextField.getText(), price, discount)==0)
-					JOptionPane.showMessageDialog(null, "Canteen cannot be created");
+					JOptionPane.showMessageDialog(null, "Menu Item cannot be created");
 				else {
-					JOptionPane.showMessageDialog(null, "Canteen successfully created");
+					JOptionPane.showMessageDialog(null, "MenuItem successfully created");
 					mainFrame.replacePanel("SelectPanel");
 				}
 				
