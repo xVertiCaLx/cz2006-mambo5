@@ -165,6 +165,7 @@ public class CamsMainFrame extends JFrame implements JInterfaceController {
 			camsLoginForm = new CamsLoginForm(this);
 			replacePanel(camsLoginForm);
 		} else if (panelName.equals("CamsRefundOrderForm")) {
+			camsRefundOrderForm = new CamsRefundOrderForm(this,stallID);
 			replacePanel(camsRefundOrderForm);
 		} else {
 			replacePanel(selectPanel);
@@ -180,10 +181,17 @@ public class CamsMainFrame extends JFrame implements JInterfaceController {
 			System.out.println("Initialising Complete. Loading Main Screen." + orderList.size());
 			
 			selectPanel = new SelectPanel(this);
-			
-			
-			camsRefundOrderForm = new CamsRefundOrderForm(this);
+		} else {
+			menuController.retrieveMenuList(menuList);
+			menuItemController.retrieveMenuItemList(menuItemList);
+			orderDetailController.retrieveOrderDetailList(orderDetailList);
+			orderController.retrieveOrderList(orderList);
 		}
+	}
+	
+	public void reloadMenuList() {
+		menuList = new ArrayList<Menu>();
+		menuController.retrieveMenuList(menuList);
 	}
 	
 	public void reloadMenuItemList() {
