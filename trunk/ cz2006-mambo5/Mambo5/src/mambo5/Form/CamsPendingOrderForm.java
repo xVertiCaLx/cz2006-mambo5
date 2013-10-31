@@ -325,8 +325,7 @@ public class CamsPendingOrderForm extends JPanel implements
 				for (int j = 0; j < orderList.size(); j++) {
 					if (orderList.get(j).getOrderID() == orderButtons.get(
 							e.getSource()).getOrderID()) {
-						for (int i = 0; i < orderDetails.get(orderList.get(j))
-								.size(); i++) {
+						for (int i = 0; i < orderDetails.get(orderList.get(j)).size(); i++) {
 							receipt.append(orderDetails.get(orderList.get(j))
 									.get(i).getQuantity()
 									+ "   "
