@@ -45,7 +45,7 @@ public class CamsRefundOrderForm extends JPanel {
 	JButton btnEnter = new JButton("ENTER");
 	JButton btnDelete = new JButton("DELETE");
 	JLabel lblOrderId = new JLabel("ORDER ID:");
-	JButton btnRefund = new JButton("REFUND");s
+	JButton btnRefund = new JButton("REFUND");
 	
 	public CamsRefundOrderForm(final CamsMainFrame mainFrame, int stallID) {
 
