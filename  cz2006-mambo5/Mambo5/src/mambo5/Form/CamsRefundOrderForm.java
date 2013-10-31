@@ -291,7 +291,7 @@ public class CamsRefundOrderForm extends JPanel {
 				}
 			}// end if(orderIDList.get(i).getOrderID() == orderID)
 		}// end for loop
-		JOptionPane.showMessageDialog(null, "Check the input and try again.");
+		JOptionPane.showMessageDialog(null, "Invalid input. Please try again.");
 		txtOrderId.setText("");
 	}
 }// end JPanel
