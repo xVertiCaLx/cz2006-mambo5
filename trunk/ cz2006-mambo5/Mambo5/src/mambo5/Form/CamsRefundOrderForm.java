@@ -45,12 +45,12 @@ public class CamsRefundOrderForm extends JPanel {
 	JLabel lblOrderId = new JLabel("ORDER ID:");
 	JButton btnRefund = new JButton("REFUND");
 	
-	public CamsRefundOrderForm(final CamsMainFrame mainFrame) {
+	public CamsRefundOrderForm(final CamsMainFrame mainFrame, int stallID) {
 	
 		orderIDList = new ArrayList<Order>();
 		orderDetailList = new ArrayList<OrderDetail>();
 		OrderController = new OrderController();
-		OrderController.retrieveOrderIDList(orderIDList, 5, "Processing");
+		OrderController.retrieveOrderIDList(orderIDList, stallID, "Processing");
 		
 		for (int i = 0; i < orderIDList.size(); i++) {
 			System.out.println("element" + i + ":" + orderIDList.get(i).getOrderID());

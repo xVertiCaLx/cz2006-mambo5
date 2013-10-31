@@ -169,19 +169,22 @@ public class CamsCreateMenuItemForm extends JPanel implements JInterfaceControll
 							JOptionPane.showMessageDialog(null, "Menu Item cannot be created");
 						else {
 							JOptionPane.showMessageDialog(null, "MenuItem successfully created");
+							mainFrame.reloadMenuList();
+							mainFrame.reloadMenuItemList();
+							mainFrame.setID(stallID, accessID);
 							mainFrame.replacePanel("CamsMainMenuForm");
 						}
 					}
-					mainFrame.reloadMenuItemList();
+					
 				} else {
 					//later check if got add into arraylist of menuitem or not
 					if(mic.validateMenuItemDetail(menuID, menuItemTextField.getText(), price, discount)==0)
 						JOptionPane.showMessageDialog(null, "Menu Item cannot be created");
 					else {
-						JOptionPane.showMessageDialog(null, "MenuItem successfully created");
+						JOptionPane.showMessageDialog(null, "Item had been succcesfully added to the Menu.");
+						mainFrame.reloadMenuItemList();
 						mainFrame.replacePanel("CamsMainMenuForm");
 					}
-					mainFrame.reloadMenuItemList();
 				}
 				
 			}catch (NumberFormatException exception) {
