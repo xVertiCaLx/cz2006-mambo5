@@ -27,6 +27,7 @@ public class CamsPendingOrderForm extends JPanel implements
 
 	private JPanel receiptPanel, ordersPanel, sidePanel, searchPanel;
 
+	private CamsMainFrame mainFrame;
 	private int stallID, posX = 0, posY = 0, orderID, totalHeight = 0,
 			totalWidth = 0, currentItem = 0, page = 1;
 	private JTextArea receipt;
@@ -35,10 +36,9 @@ public class CamsPendingOrderForm extends JPanel implements
 	private Map<Order, ArrayList<OrderDetail>> orderDetails;
 	private Map<Integer, MenuItem> menuItems;
 	private ArrayList<OrderDetail> orderDetailList;
-	private ArrayList<Order> orderList = new ArrayList<Order>();
+	private ArrayList<Order> orderIDList = new ArrayList<Order>();
 	private OrderController OrderController;
 	private JButton btnConfirmOrder;
-	private CamsMainFrame mainFrame;
 	
 	private ArrayList<MenuItem> menuItemList = new ArrayList<MenuItem>();
 
@@ -50,7 +50,9 @@ public class CamsPendingOrderForm extends JPanel implements
 
 	public CamsPendingOrderForm(final CamsMainFrame mainFrame,
 			ArrayList<OrderDetail> orderDetailList, ArrayList<Order> orderList,
-			ArrayList<MenuItem> menuItemList, int stallID, int menuID) {
+			ArrayList<MenuItem> menuItemList, int stallID, int menuID)
+	{
+		this.mainFrame = mainFrame;
 		System.out.println("STALL: " + stallID);
 		this.stallID = stallID;
 		this.menuItemList = menuItemList;
@@ -63,7 +65,7 @@ public class CamsPendingOrderForm extends JPanel implements
 
 		initLists(orderList, orderDetailList, menuID);
 		initPanels();
-		initOrderButtons(stallID, this.orderList);
+		initOrderButtons(stallID, this.orderIDList);
 		implementButtons();
 		initSidePanelButton();
 
@@ -122,17 +124,29 @@ public class CamsPendingOrderForm extends JPanel implements
 
 		btnConfirmOrder.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-
+				int val =0;
 				String message = "Order " + orderID + " was not confirmed!";
 
 				OrderController = new OrderController();
 				if (OrderController.validateConfirmOrder(orderID) == 1)
+				{
 					message = "Order " + orderID + " has completed";
-				else
-					repaint();
-
-				searchIDTextField.setText("");
-				JOptionPane.showMessageDialog(null, message);
+					System.out.println("val is(before): " +val);
+					//Iterate through the arraylist and remove the orderID from it
+					for (int k = 0; k < orderIDList.size(); k++) {
+						val = orderIDList.get(k).getOrderID();
+						if (val == orderID) {
+							System.out.println("val is(after): " +val);
+							System.out.println("CAME INTO val == orderID");
+							orderIDList.remove(k);
+							break;
+						}	
+					}
+					mainFrame.init();
+					mainFrame.replacePanel("CamsPendingOrderForm");
+				}
+				else		
+					JOptionPane.showMessageDialog(null, message);			
 			}
 		});
 
@@ -143,32 +157,31 @@ public class CamsPendingOrderForm extends JPanel implements
 				receipt.setText("ORDER: " + orderID + "\n"
 						+ "========================================" + "\n");
 				receipt.setText(receipt.getText() + "Qty" + "   ItemName"
-						+ "\t" + "UnitPrice" + "      " + "TotalAmount\n");
-				for (int j = 0; j < orderList.size(); j++) {
-					if (orderList.get(j).getOrderID() == Integer
+						+ "\t" + "      " + "TotalAmount\n");
+				for (int i = 0; i < orderIDList.size(); i++) {
+					if (orderIDList.get(i).getOrderID() == Integer
 							.parseInt(searchIDTextField.getText())) {
-						for (int i = 0; i < orderDetails.get(orderList.get(j))
-								.size(); i++) {
-							receipt.append(orderDetails.get(orderList.get(j))
-									.get(i).getQuantity()
+						for (int j = 0; j < orderDetails.get(orderIDList.get(i))
+								.size(); j++) {
+							receipt.append(orderDetails.get(orderIDList.get(i)).get(j).getQuantity()
 									+ "   "
 									+ menuItems.get(
-											orderDetails.get(orderList.get(j))
-													.get(i).getMenuItemID())
+											orderDetails.get(orderIDList.get(i))
+													.get(j).getMenuItemID())
 											.getMenuItemName()
 									+ "  $"
-									+ orderDetails.get(orderList.get(j)).get(i)
+									+ orderDetails.get(orderIDList.get(i)).get(j)
 											.getActualPrice()
 									+ ""
 									+ "\t"
 									+ "$"
-									+ (orderDetails.get(orderList.get(j))
-											.get(i).getQuantity() * orderDetails
-											.get(orderList.get(j)).get(i)
+									+ (orderDetails.get(orderIDList.get(i))
+											.get(j).getQuantity() * orderDetails
+											.get(orderIDList.get(i)).get(j)
 											.getActualPrice()) + "\n");
-							tempTotal += (orderDetails.get(orderList.get(j))
-									.get(i).getQuantity() * orderDetails
-									.get(orderList.get(j)).get(i)
+							tempTotal += (orderDetails.get(orderIDList.get(i))
+									.get(j).getQuantity() * orderDetails
+									.get(orderIDList.get(i)).get(j)
 									.getActualPrice());
 						}
 					}
@@ -238,7 +251,7 @@ public class CamsPendingOrderForm extends JPanel implements
 			if ((orderList.get(i).getStallID() == stallID)
 					&& (orderList.get(i).getOrderStatus().equals("Processing"))) {
 				this.orderDetailList = new ArrayList<OrderDetail>();
-				this.orderList.add(orderList.get(i));
+				this.orderIDList.add(orderList.get(i));
 				for (int j = 0; j < orderDetailList.size(); j++) {
 					if (orderDetailList.get(j).getOrderID() == orderList.get(i)
 							.getOrderID()) {
@@ -247,14 +260,19 @@ public class CamsPendingOrderForm extends JPanel implements
 								orderDetailList.get(j).getOrderID(),
 								orderDetailList.get(j).getActualPrice(),
 								orderDetailList.get(j).getQuantity()));
+						System.out.println(orderDetailList.get(j).getMenuItemID());
 						write = true;
 					}
 				}
-				if (write)
+				if (write) {
+					System.out.println("add to list");
 					orderDetails.put(orderList.get(i), this.orderDetailList);
+				}
 				write = false;
 			}
 		}
+		
+		System.out.println("orderIDList size is after initialization" + orderIDList.size());
 	}
 
 	public void initOrderButtons(int stallID, ArrayList<Order> orderList) {
@@ -287,7 +305,7 @@ public class CamsPendingOrderForm extends JPanel implements
 		posY = MARGIN;
 		totalWidth = (MENUITEM_BUTTON_WIDTH + MARGIN);
 		totalHeight = 2 * (MENUITEM_BUTTON_HEIGHT + MARGIN);
-		for (; currentItem < orderList.size(); currentItem++) {
+		for (; currentItem < orderIDList.size(); currentItem++) {
 			if (totalWidth >= ordersPanel.getWidth()) {
 				if (totalHeight >= ordersPanel.getHeight())
 					break;
@@ -300,7 +318,7 @@ public class CamsPendingOrderForm extends JPanel implements
 			} else {
 				totalWidth += MENUITEM_BUTTON_WIDTH + MARGIN;
 			}
-			addOrderIDButtons(orderList.get(currentItem));
+			addOrderIDButtons(orderIDList.get(currentItem));
 			posX += MENUITEM_BUTTON_WIDTH + MARGIN;
 		}
 	}
@@ -321,31 +339,37 @@ public class CamsPendingOrderForm extends JPanel implements
 				receipt.setText("ORDER: " + orderID + "\n"
 						+ "========================================" + "\n");
 				receipt.setText(receipt.getText() + "Qty" + "   ItemName"
-						+ "\t" + "UnitPrice" + "      " + "TotalAmount\n");
-				for (int j = 0; j < orderList.size(); j++) {
-					if (orderList.get(j).getOrderID() == orderButtons.get(
+						+ "\t" + "      " + "TotalAmount\n");
+				System.out.println("orderIDList size is " + orderIDList.size());
+				System.out.println("orderDetails size is " + orderDetails.size());
+				System.out.println("menuItems size is " + menuItems.size());
+				for (int j = 0; j < orderIDList.size(); j++) {
+					
+					if (orderIDList.get(j).getOrderID() == orderButtons.get(
 							e.getSource()).getOrderID()) {
-						for (int i = 0; i < orderDetails.get(orderList.get(j)).size(); i++) {
-							receipt.append(orderDetails.get(orderList.get(j))
+						for (int i = 0; i < orderDetails.get(orderIDList.get(j)).size(); i++) {
+								System.out.println(orderDetails.get(orderIDList.get(j)).size());
+								System.out.println(orderDetails.get(orderIDList.get(j)).get(i).getMenuItemID());
+							receipt.append(orderDetails.get(orderIDList.get(j))
 									.get(i).getQuantity()
 									+ "   "
 									+ menuItems.get(
-											orderDetails.get(orderList.get(j))
+											orderDetails.get(orderIDList.get(j))
 													.get(i).getMenuItemID())
 											.getMenuItemName()
 									+ "  $"
-									+ orderDetails.get(orderList.get(j)).get(i)
+									+ orderDetails.get(orderIDList.get(j)).get(i)
 											.getActualPrice()
 									+ ""
 									+ "\t"
 									+ "$"
-									+ (orderDetails.get(orderList.get(j))
+									+ (orderDetails.get(orderIDList.get(j))
 											.get(i).getQuantity() * orderDetails
-											.get(orderList.get(j)).get(i)
+											.get(orderIDList.get(j)).get(i)
 											.getActualPrice()) + "\n");
-							tempTotal += (orderDetails.get(orderList.get(j))
+							tempTotal += (orderDetails.get(orderIDList.get(j))
 									.get(i).getQuantity() * orderDetails
-									.get(orderList.get(j)).get(i)
+									.get(orderIDList.get(j)).get(i)
 									.getActualPrice());
 						}
 					}

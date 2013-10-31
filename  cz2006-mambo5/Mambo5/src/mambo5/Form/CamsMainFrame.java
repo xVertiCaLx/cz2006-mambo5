@@ -182,6 +182,10 @@ public class CamsMainFrame extends JFrame implements JInterfaceController {
 			
 			selectPanel = new SelectPanel(this);
 		} else {
+			menuList = new ArrayList<Menu>();
+			menuItemList = new ArrayList<MenuItem>();
+			orderList = new ArrayList<Order>();
+			orderDetailList = new ArrayList<OrderDetail>();
 			menuController.retrieveMenuList(menuList);
 			menuItemController.retrieveMenuItemList(menuItemList);
 			orderDetailController.retrieveOrderDetailList(orderDetailList);

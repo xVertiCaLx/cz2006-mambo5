@@ -180,7 +180,7 @@ public class NumPad extends JPanel implements JInterfaceController {
 		return enter;
 	}
 	
-	public void setEnterName(String name) {
+	public void setEnterButtonName(String name) {
 		enter.setText(name);
 	}
 
