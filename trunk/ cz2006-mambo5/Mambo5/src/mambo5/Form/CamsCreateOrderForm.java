@@ -211,21 +211,30 @@ public class CamsCreateOrderForm extends JPanel implements JInterfaceController 
 						"Confirm Order?", "Confirmation",
 						JOptionPane.YES_NO_OPTION);
 				if (reply == JOptionPane.YES_OPTION) {
+				try
+				{
 					int custID = (Integer.parseInt(JOptionPane
 							.showInputDialog("Please enter Customer ID: ")));
 					;
 					if (cc.retrieveCustomerInfo(custID) != null) {
-						if (submitsOrder(custID) == 1){
+						if (submitsOrder(custID) == 1)
+						{
 							submitsOrderDetails();
 							mainFrame.init();
 							mainFrame.replacePanel("CamsMainMenuForm");
 						}
 					} else
 						JOptionPane.showMessageDialog(null,
-								"Invalid Customer ID");
-
+								"Not a valid Customer ID");
 				}
-			}
+				catch (NumberFormatException e) 
+				{
+					JOptionPane.showMessageDialog(null,
+							"Please Enter Only Integer Value for Customer ID");
+				}//end catch
+
+				}// end YES_OPTION
+			} // end actionPerformed()
 		});
 	}
 
