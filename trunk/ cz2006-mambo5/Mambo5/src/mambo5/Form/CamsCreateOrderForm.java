@@ -215,8 +215,11 @@ public class CamsCreateOrderForm extends JPanel implements JInterfaceController 
 							.showInputDialog("Please enter Customer ID: ")));
 					;
 					if (cc.retrieveCustomerInfo(custID) != null) {
-						if (submitsOrder(custID) == 1)
+						if (submitsOrder(custID) == 1){
 							submitsOrderDetails();
+							mainFrame.init();
+							mainFrame.replacePanel("CamsMainMenuForm");
+						}
 					} else
 						JOptionPane.showMessageDialog(null,
 								"Invalid Customer ID");
@@ -477,9 +480,6 @@ public class CamsCreateOrderForm extends JPanel implements JInterfaceController 
 			cc.updateCustomerCardBalance(custID,
 					(currentCardValue - totalPrice));
 			JOptionPane.showMessageDialog(null, "Card balance :" + df.format((currentCardValue - totalPrice)));
-			
-			mainFrame.init();
-			mainFrame.replacePanel("CamsMainMenuForm");
 			
 		} else {
 			emailController = new EmailController();
