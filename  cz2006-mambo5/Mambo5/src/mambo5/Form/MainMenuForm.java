@@ -71,12 +71,12 @@ public class MainMenuForm extends JPanel {
 		
 		JLabel lblWelcomeToThe = new JLabel("Welcome to the CaMs Ticketing Machine");
 		lblWelcomeToThe.setFont(new Font("Arial", Font.BOLD, 18));
-		lblWelcomeToThe.setBounds(225, 11, 385, 40);
+		lblWelcomeToThe.setBounds(225, 25, 385, 40);
 		add(lblWelcomeToThe);
 		
 		JLabel lblSelectAnOption = new JLabel("Select an option");
 		lblSelectAnOption.setFont(new Font("Arial", Font.BOLD, 17));
-		lblSelectAnOption.setBounds(346, 44, 134, 40);
+		lblSelectAnOption.setBounds(345, 61, 134, 40);
 		add(lblSelectAnOption);
 	}
 }
