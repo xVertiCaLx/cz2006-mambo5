@@ -40,8 +40,8 @@ public class PurchaseCardForm extends JPanel {
 		setBackground(new Color(255, 255, 255));
 		
 		JLabel lblPleaseInsertSgs = new JLabel("Please insert notes");
-		lblPleaseInsertSgs.setFont(new Font("Arial", Font.BOLD, 22));
-		lblPleaseInsertSgs.setBounds(73, 186, 208, 27);
+		lblPleaseInsertSgs.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblPleaseInsertSgs.setBounds(169, 138, 208, 27);
 		add(lblPleaseInsertSgs);
 		
 		txtAmountInserted = new JTextField();
@@ -56,63 +56,63 @@ public class PurchaseCardForm extends JPanel {
 		});
 		txtAmountInserted.setEditable(false);
 		txtAmountInserted.setText("-.--");
-		txtAmountInserted.setFont(new Font("Tahoma", Font.PLAIN, 19));
-		txtAmountInserted.setBounds(131, 298, 150, 27);
+		txtAmountInserted.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		txtAmountInserted.setBounds(177, 219, 150, 20);
 		add(txtAmountInserted);
 		txtAmountInserted.setColumns(10);
 		
 		JLabel lblSgd = new JLabel("SGD$");
-		lblSgd.setFont(new Font("Arial", Font.BOLD, 19));
-		lblSgd.setBounds(58, 296, 65, 32);
+		lblSgd.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		lblSgd.setBounds(139, 213, 65, 32);
 		add(lblSgd);
 		
 		JLabel lblInserted = new JLabel("Amount inserted");
-		lblInserted.setFont(new Font("Arial", Font.BOLD, 19));
-		lblInserted.setBounds(87, 234, 171, 27);
+		lblInserted.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		lblInserted.setBounds(179, 176, 97, 27);
 		add(lblInserted);
 		
 		JButton btnCancel = new JButton("Back to main");
-		btnCancel.setFont(new Font("Arial", Font.BOLD, 19));
+		btnCancel.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		btnCancel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				mainFrame.replacePanel(new MainMenuForm(mainFrame));
 			}
 		});
-		btnCancel.setBounds(569, 443, 200, 40);
+		btnCancel.setBounds(550, 315, 119, 23);
 		add(btnCancel);
 		
 		JLabel lblMinimumOfSgd = new JLabel("Minimum of SGD$10.00");
-		lblMinimumOfSgd.setFont(new Font("Arial", Font.BOLD, 10));
-		lblMinimumOfSgd.setBounds(131, 324, 156, 27);
+		lblMinimumOfSgd.setFont(new Font("Tahoma", Font.PLAIN, 8));
+		lblMinimumOfSgd.setBounds(176, 238, 89, 27);
 		add(lblMinimumOfSgd);
 		
 		JLabel lblNotesAccepted = new JLabel("Notes accepted");
-		lblNotesAccepted.setFont(new Font("Arial", Font.BOLD, 22));
-		lblNotesAccepted.setBounds(491, 186, 200, 27);
+		lblNotesAccepted.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblNotesAccepted.setBounds(463, 138, 200, 27);
 		add(lblNotesAccepted);
 		
 		JLabel lblSgd_1 = new JLabel("SGD$2.00");
-		lblSgd_1.setFont(new Font("Arial", Font.BOLD, 19));
-		lblSgd_1.setBounds(448, 237, 125, 20);
+		lblSgd_1.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		lblSgd_1.setBounds(438, 179, 89, 20);
 		add(lblSgd_1);
 		
 		JLabel lblSgd_2 = new JLabel("SGD$5.00");
-		lblSgd_2.setFont(new Font("Arial", Font.BOLD, 19));
-		lblSgd_2.setBounds(613, 237, 97, 20);
+		lblSgd_2.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		lblSgd_2.setBounds(550, 179, 74, 20);
 		add(lblSgd_2);
 		
 		JLabel lblSgd_3 = new JLabel("SGD$10.00");
-		lblSgd_3.setFont(new Font("Arial", Font.BOLD, 19));
-		lblSgd_3.setBounds(448, 302, 125, 20);
+		lblSgd_3.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		lblSgd_3.setBounds(438, 225, 74, 20);
 		add(lblSgd_3);
 		
 		JLabel lblSgd_4 = new JLabel("SGD$50.00");
-		lblSgd_4.setFont(new Font("Arial", Font.BOLD, 19));
-		lblSgd_4.setBounds(613, 302, 108, 20);
+		lblSgd_4.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		lblSgd_4.setBounds(550, 225, 108, 20);
 		add(lblSgd_4);
 		
 		JButton btnOk = new JButton("Ok");
-		btnOk.setFont(new Font("Arial", Font.BOLD, 19));
+		btnOk.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		btnOk.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) 
 			{	
@@ -147,13 +147,20 @@ public class PurchaseCardForm extends JPanel {
 				}
 			
 		});
-		btnOk.setBounds(311, 443, 200, 40);
+		btnOk.setBounds(420, 315, 89, 23);
 		add(btnOk);
 		
-		JLabel lblPurchaseCard_1 = new JLabel("Purchase Card");
-		lblPurchaseCard_1.setFont(new Font("Arial", Font.BOLD, 34));
-		lblPurchaseCard_1.setBounds(287, 97, 253, 32);
-		add(lblPurchaseCard_1);
+		JPanel panel = new JPanel();
+		panel.setLayout(null);
+		panel.setBackground(new Color(0, 0, 102));
+		panel.setBounds(112, 42, 613, 40);
+		add(panel);
+		
+		JLabel lblPurchaseCard = new JLabel("Purchase Card");
+		lblPurchaseCard.setForeground(Color.WHITE);
+		lblPurchaseCard.setFont(new Font("Arial", Font.BOLD, 16));
+		lblPurchaseCard.setBounds(254, 0, 116, 38);
+		panel.add(lblPurchaseCard);
 	}
 
 }

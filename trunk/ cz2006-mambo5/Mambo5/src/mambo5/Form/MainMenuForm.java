@@ -31,8 +31,8 @@ public class MainMenuForm extends JPanel {
 				mainFrame.replacePanel(new PurchaseCardForm(mainFrame));
 			}
 		});
-		btnPurchaseCard.setFont(new Font("Arial", Font.BOLD, 16));
-		btnPurchaseCard.setBounds(120, 151, 234, 80);
+		btnPurchaseCard.setFont(new Font("Arial", Font.PLAIN, 15));
+		btnPurchaseCard.setBounds(185, 171, 154, 40);
 		add(btnPurchaseCard);
 		
 		JButton btnCheckHistory = new JButton("Check History");
@@ -41,8 +41,8 @@ public class MainMenuForm extends JPanel {
 				mainFrame.replacePanel(new ViewHistoryForm(mainFrame));
 			}
 		});
-		btnCheckHistory.setFont(new Font("Arial", Font.BOLD, 16));
-		btnCheckHistory.setBounds(120, 301, 234, 80);
+		btnCheckHistory.setFont(new Font("Arial", Font.PLAIN, 15));
+		btnCheckHistory.setBounds(185, 282, 154, 40);
 		add(btnCheckHistory);
 		
 		JButton btnTopUpCard = new JButton("Top-up Card");
@@ -51,8 +51,8 @@ public class MainMenuForm extends JPanel {
 				mainFrame.replacePanel(new AddValueForm(mainFrame));
 			}
 		});
-		btnTopUpCard.setFont(new Font("Arial", Font.BOLD, 16));
-		btnTopUpCard.setBounds(474, 151, 234, 80);
+		btnTopUpCard.setFont(new Font("Arial", Font.PLAIN, 15));
+		btnTopUpCard.setBounds(475, 171, 154, 40);
 		add(btnTopUpCard);
 		
 		JButton btnRefundCard = new JButton("Refund Card");
@@ -61,22 +61,30 @@ public class MainMenuForm extends JPanel {
 				mainFrame.replacePanel(new RefundCardForm(mainFrame));
 			}
 		});
-		btnRefundCard.setFont(new Font("Arial", Font.BOLD, 16));
-		btnRefundCard.setBounds(474, 301, 234, 80);
+		btnRefundCard.setFont(new Font("Arial", Font.PLAIN, 15));
+		btnRefundCard.setBounds(475, 282, 154, 40);
 		add(btnRefundCard);
 		
 		JSeparator separator = new JSeparator();
 		separator.setBounds(228, 44, -30, 21);
 		add(separator);
 		
+		JPanel panel = new JPanel();
+		panel.setLayout(null);
+		panel.setBackground(new Color(0, 0, 102));
+		panel.setBounds(95, 76, 613, 60);
+		add(panel);
+		
 		JLabel lblWelcomeToThe = new JLabel("Welcome to the CaMs Ticketing Machine");
-		lblWelcomeToThe.setFont(new Font("Arial", Font.BOLD, 18));
-		lblWelcomeToThe.setBounds(225, 25, 385, 40);
-		add(lblWelcomeToThe);
+		lblWelcomeToThe.setForeground(Color.WHITE);
+		lblWelcomeToThe.setBounds(175, 0, 296, 32);
+		panel.add(lblWelcomeToThe);
+		lblWelcomeToThe.setFont(new Font("Arial", Font.PLAIN, 16));
 		
 		JLabel lblSelectAnOption = new JLabel("Select an option");
-		lblSelectAnOption.setFont(new Font("Arial", Font.BOLD, 17));
-		lblSelectAnOption.setBounds(345, 61, 134, 40);
-		add(lblSelectAnOption);
+		lblSelectAnOption.setForeground(Color.WHITE);
+		lblSelectAnOption.setBounds(266, 28, 134, 32);
+		panel.add(lblSelectAnOption);
+		lblSelectAnOption.setFont(new Font("Arial", Font.PLAIN, 15));
 	}
 }

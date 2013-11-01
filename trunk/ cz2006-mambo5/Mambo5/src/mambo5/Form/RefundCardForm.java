@@ -61,47 +61,47 @@ public class RefundCardForm extends JPanel {
 				
 			}
 		});
-		txtCardNumber.setFont(new Font("Arial", Font.BOLD, 19));
+		txtCardNumber.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		txtCardNumber.setEnabled(false);
 		txtCardNumber.setEditable(false);
 		txtCardNumber.setColumns(10);
-		txtCardNumber.setBounds(182, 163, 195, 27);
+		txtCardNumber.setBounds(208, 153, 195, 20);
 		add(txtCardNumber);
 		
 		txtName = new JTextField();
-		txtName.setFont(new Font("Arial", Font.BOLD, 19));
+		txtName.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		txtName.setEnabled(false);
 		txtName.setEditable(false);
 		txtName.setColumns(10);
-		txtName.setBounds(182, 222, 195, 27);
+		txtName.setBounds(208, 197, 195, 20);
 		add(txtName);
 		
 		JLabel label_1 = new JLabel("Name:");
-		label_1.setFont(new Font("Arial", Font.BOLD, 19));
-		label_1.setBounds(32, 221, 104, 29);
+		label_1.setFont(new Font("Arial", Font.PLAIN, 11));
+		label_1.setBounds(123, 193, 96, 29);
 		add(label_1);
 		
 		JLabel label_2 = new JLabel("Current Card Value");
-		label_2.setFont(new Font("Arial", Font.BOLD, 22));
-		label_2.setBounds(500, 160, 223, 31);
+		label_2.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		label_2.setBounds(497, 146, 223, 31);
 		add(label_2);
 		
 		txtCurrentValue = new JTextField();
 		txtCurrentValue.setText("-.--");
-		txtCurrentValue.setFont(new Font("Arial", Font.BOLD, 19));
+		txtCurrentValue.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		txtCurrentValue.setEnabled(false);
 		txtCurrentValue.setEditable(false);
 		txtCurrentValue.setColumns(10);
-		txtCurrentValue.setBounds(573, 222, 150, 27);
+		txtCurrentValue.setBounds(497, 197, 150, 20);
 		add(txtCurrentValue);
 		
 		JLabel label_3 = new JLabel("SGD$");
-		label_3.setFont(new Font("Arial", Font.BOLD, 19));
-		label_3.setBounds(475, 225, 59, 20);
+		label_3.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		label_3.setBounds(452, 197, 59, 20);
 		add(label_3);
 		
 		JButton btnConfirmRefund = new JButton("Confirm refund");
-		btnConfirmRefund.setFont(new Font("Arial", Font.BOLD, 19));
+		btnConfirmRefund.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		btnConfirmRefund.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
@@ -127,27 +127,34 @@ public class RefundCardForm extends JPanel {
 				}
 			}
 		});
-		btnConfirmRefund.setBounds(294, 400, 200, 40);
+		btnConfirmRefund.setBounds(392, 303, 119, 23);
 		add(btnConfirmRefund);
 		
 		JButton btnBackToMain = new JButton("Back to main");
-		btnBackToMain.setFont(new Font("Arial", Font.BOLD, 19));
+		btnBackToMain.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		btnBackToMain.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				mainFrame.replacePanel(new MainMenuForm(mainFrame));
 			}
 		});
-		btnBackToMain.setBounds(524, 400, 200, 40);
+		btnBackToMain.setBounds(547, 303, 119, 23);
 		add(btnBackToMain);
 		
 		JLabel lblCustomerId = new JLabel("Customer ID:");
-		lblCustomerId.setFont(new Font("Arial", Font.BOLD, 19));
-		lblCustomerId.setBounds(32, 162, 140, 29);
+		lblCustomerId.setFont(new Font("Arial", Font.PLAIN, 11));
+		lblCustomerId.setBounds(123, 149, 96, 29);
 		add(lblCustomerId);
 		
+		JPanel panel = new JPanel();
+		panel.setLayout(null);
+		panel.setBackground(new Color(0, 0, 102));
+		panel.setBounds(101, 56, 613, 40);
+		add(panel);
+		
 		JLabel lblRefundCard = new JLabel("Refund Card");
-		lblRefundCard.setFont(new Font("Arial", Font.BOLD, 34));
-		lblRefundCard.setBounds(319, 86, 223, 31);
-		add(lblRefundCard);
+		lblRefundCard.setForeground(Color.WHITE);
+		lblRefundCard.setFont(new Font("Arial", Font.BOLD, 16));
+		lblRefundCard.setBounds(258, 0, 116, 38);
+		panel.add(lblRefundCard);
 	}
 }
