@@ -193,7 +193,8 @@ public class CamsCreateOrderForm extends JPanel implements JInterfaceController 
 				quantity += "0";
 			}
 		});
-
+		
+		numpadPanel.delete().setText("CLEAR");
 		numpadPanel.delete().addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				receipt.setText("NEW ORDER \n"
