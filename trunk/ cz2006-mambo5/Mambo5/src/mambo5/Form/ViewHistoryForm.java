@@ -53,28 +53,31 @@ public class ViewHistoryForm extends JPanel {
 		setBackground(new Color(255, 255, 255));
 		
 		JLabel lblHistory = new JLabel("Purchase History");
-		lblHistory.setFont(new Font("Tahoma", Font.PLAIN, 10));
-		lblHistory.setBounds(22, 86, 90, 28);
+		lblHistory.setFont(new Font("Arial", Font.BOLD, 19));
+		lblHistory.setBounds(59, 224, 165, 28);
 		add(lblHistory);
 		
 		JLabel lblName = new JLabel("Name:");
-		lblName.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		lblName.setBounds(22, 64, 46, 14);
+		lblName.setFont(new Font("Arial", Font.BOLD, 19));
+		lblName.setBounds(59, 190, 81, 14);
 		add(lblName);
 		
-		JLabel lblCardNumber = new JLabel("Card Number:");
-		lblCardNumber.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		lblCardNumber.setBounds(22, 36, 90, 14);
+		JLabel lblCardNumber = new JLabel("Customer ID:");
+		lblCardNumber.setFont(new Font("Arial", Font.BOLD, 19));
+		lblCardNumber.setBounds(59, 127, 155, 28);
 		add(lblCardNumber);
 		
 		txtCardNumber = new JTextField();
 		txtCardNumber.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				String custID = JOptionPane.showInputDialog("Please enter custID");
-				txtCardNumber.setText(custID);
+				String custID = JOptionPane.showInputDialog("Please enter Customer ID");
 				customerCon = new CustomerController();
 				cust = customerCon.retrieveCustomerInfo(Integer.parseInt(custID));
+				
+				if (cust!= null)
+				{
+				txtCardNumber.setText(custID);
 				txtName.setText(cust.getFullName());
 				txtCurrentValue.setText(String.valueOf(cust.getCardBalance()));
 				
@@ -91,11 +94,16 @@ public class ViewHistoryForm extends JPanel {
 				else 
 					JOptionPane.showMessageDialog(null, "No Purchase History Available");
 			}
+				else
+				{
+					JOptionPane.showMessageDialog(null, "Error in retrieving customer information.");
+				}
+			}
 		});
-		txtCardNumber.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		txtCardNumber.setFont(new Font("Arial", Font.BOLD, 19));
 		txtCardNumber.setEnabled(false);
 		txtCardNumber.setEditable(false);
-		txtCardNumber.setBounds(106, 33, 141, 20);
+		txtCardNumber.setBounds(212, 128, 195, 27);
 		add(txtCardNumber);
 		txtCardNumber.setColumns(10);
 		
@@ -104,26 +112,26 @@ public class ViewHistoryForm extends JPanel {
 		txtName.setEnabled(false);
 		txtName.setEditable(false);
 		txtName.setColumns(10);
-		txtName.setBounds(106, 61, 141, 20);
+		txtName.setBounds(212, 186, 195, 27);
 		add(txtName);
 		
 		JLabel lblCardValue = new JLabel("Current Card Value");
-		lblCardValue.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		lblCardValue.setBounds(283, 36, 119, 14);
+		lblCardValue.setFont(new Font("Arial", Font.BOLD, 22));
+		lblCardValue.setBounds(475, 126, 233, 28);
 		add(lblCardValue);
 		
 		txtCurrentValue = new JTextField();
 		txtCurrentValue.setEnabled(false);
 		txtCurrentValue.setEditable(false);
-		txtCurrentValue.setFont(new Font("Tahoma", Font.PLAIN, 19));
+		txtCurrentValue.setFont(new Font("Arial", Font.BOLD, 19));
 		txtCurrentValue.setText("-.--");
-		txtCurrentValue.setBounds(332, 54, 59, 28);
+		txtCurrentValue.setBounds(534, 184, 150, 27);
 		add(txtCurrentValue);
 		txtCurrentValue.setColumns(10);
 		
 		JLabel lblSgd = new JLabel("SGD$");
-		lblSgd.setFont(new Font("Tahoma", Font.PLAIN, 19));
-		lblSgd.setBounds(276, 58, 59, 20);
+		lblSgd.setFont(new Font("Arial", Font.BOLD, 19));
+		lblSgd.setBounds(468, 187, 59, 20);
 		add(lblSgd);
 		
 		JButton btnBackToMain = new JButton("Back to main");
@@ -132,28 +140,29 @@ public class ViewHistoryForm extends JPanel {
 				mainFrame.replacePanel(new MainMenuForm(mainFrame));
 			}
 		});
-		btnBackToMain.setFont(new Font("Tahoma", Font.PLAIN, 11));
-		btnBackToMain.setBounds(279, 329, 112, 28);
+		btnBackToMain.setFont(new Font("Arial", Font.BOLD, 19));
+		btnBackToMain.setBounds(508, 487, 200, 40);
 		add(btnBackToMain);
 		
-		JLabel lblViewHistor = new JLabel("View History");
-		lblViewHistor.setFont(new Font("Tahoma", Font.PLAIN, 11));
-		lblViewHistor.setBounds(4, 0, 108, 27);
+		JLabel lblViewHistor = new JLabel("View Purchase History");
+		lblViewHistor.setFont(new Font("Arial", Font.BOLD, 34));
+		lblViewHistor.setBounds(243, 45, 440, 34);
 		add(lblViewHistor);
+		comboBoxHistory.setFont(new Font("Arial", Font.BOLD, 19));
 		comboBoxHistory.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				displayMenuItem(comboBoxHistory.getSelectedItem().toString(),Integer.parseInt(txtCardNumber.getText().toString()));
 			}
 		});
 		
-		comboBoxHistory.setBounds(116, 92, 204, 20);
+		comboBoxHistory.setBounds(59, 255, 233, 28);
 		add(comboBoxHistory);
 	
 		getJTableMenu();
 		transactionTable.setBounds(10, 52, 414, 163);
 		add(transactionTable);
 		JScrollPane scrollPane = new JScrollPane(transactionTable);
-		scrollPane.setBounds(22, 149, 368, 147);
+		scrollPane.setBounds(59, 294, 347, 148);
 		add(scrollPane);
 		
 		

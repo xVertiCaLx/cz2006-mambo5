@@ -43,12 +43,21 @@ public class RefundCardForm extends JPanel {
 		txtCardNumber.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				String custID = JOptionPane.showInputDialog("Please enter custID");
-				txtCardNumber.setText(custID);
+				String custID = JOptionPane.showInputDialog("Please enter Customer ID");
 				customerCon = new CustomerController();
 				cust = customerCon.retrieveCustomerInfo(Integer.parseInt(custID));
-				txtName.setText(cust.getFullName());
-				txtCurrentValue.setText(String.valueOf(cust.getCardBalance()));
+				
+				if (cust != null)
+				{
+					txtCardNumber.setText(custID);
+					txtName.setText(cust.getFullName());
+					txtCurrentValue.setText(String.valueOf(cust.getCardBalance()));
+				}
+				else 
+				{
+					JOptionPane.showMessageDialog(null, "Error in retrieving customer information.");
+				}
+				
 				
 			}
 		});
@@ -56,7 +65,7 @@ public class RefundCardForm extends JPanel {
 		txtCardNumber.setEnabled(false);
 		txtCardNumber.setEditable(false);
 		txtCardNumber.setColumns(10);
-		txtCardNumber.setBounds(182, 122, 195, 27);
+		txtCardNumber.setBounds(182, 163, 195, 27);
 		add(txtCardNumber);
 		
 		txtName = new JTextField();
@@ -64,17 +73,17 @@ public class RefundCardForm extends JPanel {
 		txtName.setEnabled(false);
 		txtName.setEditable(false);
 		txtName.setColumns(10);
-		txtName.setBounds(182, 162, 195, 27);
+		txtName.setBounds(182, 222, 195, 27);
 		add(txtName);
 		
 		JLabel label_1 = new JLabel("Name:");
 		label_1.setFont(new Font("Arial", Font.BOLD, 19));
-		label_1.setBounds(32, 162, 104, 29);
+		label_1.setBounds(32, 221, 104, 29);
 		add(label_1);
 		
 		JLabel label_2 = new JLabel("Current Card Value");
 		label_2.setFont(new Font("Arial", Font.BOLD, 22));
-		label_2.setBounds(475, 119, 223, 31);
+		label_2.setBounds(500, 160, 223, 31);
 		add(label_2);
 		
 		txtCurrentValue = new JTextField();
@@ -83,12 +92,12 @@ public class RefundCardForm extends JPanel {
 		txtCurrentValue.setEnabled(false);
 		txtCurrentValue.setEditable(false);
 		txtCurrentValue.setColumns(10);
-		txtCurrentValue.setBounds(574, 162, 150, 27);
+		txtCurrentValue.setBounds(573, 222, 150, 27);
 		add(txtCurrentValue);
 		
 		JLabel label_3 = new JLabel("SGD$");
 		label_3.setFont(new Font("Arial", Font.BOLD, 19));
-		label_3.setBounds(475, 166, 59, 20);
+		label_3.setBounds(475, 225, 59, 20);
 		add(label_3);
 		
 		JButton btnConfirmRefund = new JButton("Confirm refund");
@@ -98,11 +107,11 @@ public class RefundCardForm extends JPanel {
 				
 				if (txtCardNumber.getText().equals(""))
 				{
-					JOptionPane.showMessageDialog(null, "No record entered to be searched.");
+					JOptionPane.showMessageDialog(null, "Please place card on reader.");
 				}
 				else 
 				{	
-					if(customerCon.removeCustomerAccount(Integer.parseInt(txtCardNumber.getText()))==0)
+					if(customerCon.removeCustomerAccount(Integer.parseInt(txtCardNumber.getText())) == 0)
 					{
 						JOptionPane.showMessageDialog(null, "Error");
 					}
@@ -128,12 +137,17 @@ public class RefundCardForm extends JPanel {
 				mainFrame.replacePanel(new MainMenuForm(mainFrame));
 			}
 		});
-		btnBackToMain.setBounds(516, 400, 200, 40);
+		btnBackToMain.setBounds(524, 400, 200, 40);
 		add(btnBackToMain);
 		
-		JLabel lblCustomerId = new JLabel("Cust ID:");
+		JLabel lblCustomerId = new JLabel("Customer ID:");
 		lblCustomerId.setFont(new Font("Arial", Font.BOLD, 19));
-		lblCustomerId.setBounds(32, 120, 104, 29);
+		lblCustomerId.setBounds(32, 162, 140, 29);
 		add(lblCustomerId);
+		
+		JLabel lblRefundCard = new JLabel("Refund Card");
+		lblRefundCard.setFont(new Font("Arial", Font.BOLD, 34));
+		lblRefundCard.setBounds(319, 86, 223, 31);
+		add(lblRefundCard);
 	}
 }
