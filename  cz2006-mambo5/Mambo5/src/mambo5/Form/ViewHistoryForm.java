@@ -53,18 +53,18 @@ public class ViewHistoryForm extends JPanel {
 		setBackground(new Color(255, 255, 255));
 		
 		JLabel lblHistory = new JLabel("Purchase History");
-		lblHistory.setFont(new Font("Arial", Font.BOLD, 19));
-		lblHistory.setBounds(59, 224, 165, 28);
+		lblHistory.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblHistory.setBounds(121, 216, 165, 28);
 		add(lblHistory);
 		
 		JLabel lblName = new JLabel("Name:");
-		lblName.setFont(new Font("Arial", Font.BOLD, 19));
-		lblName.setBounds(59, 190, 81, 14);
+		lblName.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		lblName.setBounds(121, 164, 103, 22);
 		add(lblName);
 		
 		JLabel lblCardNumber = new JLabel("Customer ID:");
-		lblCardNumber.setFont(new Font("Arial", Font.BOLD, 19));
-		lblCardNumber.setBounds(59, 127, 155, 28);
+		lblCardNumber.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		lblCardNumber.setBounds(121, 126, 103, 27);
 		add(lblCardNumber);
 		
 		txtCardNumber = new JTextField();
@@ -103,7 +103,7 @@ public class ViewHistoryForm extends JPanel {
 		txtCardNumber.setFont(new Font("Arial", Font.BOLD, 19));
 		txtCardNumber.setEnabled(false);
 		txtCardNumber.setEditable(false);
-		txtCardNumber.setBounds(212, 128, 195, 27);
+		txtCardNumber.setBounds(212, 128, 195, 20);
 		add(txtCardNumber);
 		txtCardNumber.setColumns(10);
 		
@@ -112,26 +112,26 @@ public class ViewHistoryForm extends JPanel {
 		txtName.setEnabled(false);
 		txtName.setEditable(false);
 		txtName.setColumns(10);
-		txtName.setBounds(212, 186, 195, 27);
+		txtName.setBounds(212, 164, 195, 20);
 		add(txtName);
 		
 		JLabel lblCardValue = new JLabel("Current Card Value");
-		lblCardValue.setFont(new Font("Arial", Font.BOLD, 22));
-		lblCardValue.setBounds(475, 126, 233, 28);
+		lblCardValue.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblCardValue.setBounds(511, 123, 130, 28);
 		add(lblCardValue);
 		
 		txtCurrentValue = new JTextField();
 		txtCurrentValue.setEnabled(false);
 		txtCurrentValue.setEditable(false);
-		txtCurrentValue.setFont(new Font("Arial", Font.BOLD, 19));
+		txtCurrentValue.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		txtCurrentValue.setText("-.--");
-		txtCurrentValue.setBounds(534, 184, 150, 27);
+		txtCurrentValue.setBounds(511, 166, 150, 20);
 		add(txtCurrentValue);
 		txtCurrentValue.setColumns(10);
 		
 		JLabel lblSgd = new JLabel("SGD$");
-		lblSgd.setFont(new Font("Arial", Font.BOLD, 19));
-		lblSgd.setBounds(468, 187, 59, 20);
+		lblSgd.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		lblSgd.setBounds(473, 165, 59, 20);
 		add(lblSgd);
 		
 		JButton btnBackToMain = new JButton("Back to main");
@@ -140,30 +140,37 @@ public class ViewHistoryForm extends JPanel {
 				mainFrame.replacePanel(new MainMenuForm(mainFrame));
 			}
 		});
-		btnBackToMain.setFont(new Font("Arial", Font.BOLD, 19));
-		btnBackToMain.setBounds(508, 487, 200, 40);
+		btnBackToMain.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		btnBackToMain.setBounds(542, 476, 119, 23);
 		add(btnBackToMain);
-		
-		JLabel lblViewHistor = new JLabel("View Purchase History");
-		lblViewHistor.setFont(new Font("Arial", Font.BOLD, 34));
-		lblViewHistor.setBounds(243, 45, 440, 34);
-		add(lblViewHistor);
-		comboBoxHistory.setFont(new Font("Arial", Font.BOLD, 19));
+		comboBoxHistory.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		comboBoxHistory.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				displayMenuItem(comboBoxHistory.getSelectedItem().toString(),Integer.parseInt(txtCardNumber.getText().toString()));
 			}
 		});
 		
-		comboBoxHistory.setBounds(59, 255, 233, 28);
+		comboBoxHistory.setBounds(121, 250, 195, 20);
 		add(comboBoxHistory);
 	
 		getJTableMenu();
 		transactionTable.setBounds(10, 52, 414, 163);
 		add(transactionTable);
 		JScrollPane scrollPane = new JScrollPane(transactionTable);
-		scrollPane.setBounds(59, 294, 347, 148);
+		scrollPane.setBounds(121, 292, 347, 148);
 		add(scrollPane);
+		
+		JPanel panel = new JPanel();
+		panel.setLayout(null);
+		panel.setBackground(new Color(0, 0, 102));
+		panel.setBounds(112, 42, 613, 40);
+		add(panel);
+		
+		JLabel label = new JLabel("Purchase Card");
+		label.setForeground(Color.WHITE);
+		label.setFont(new Font("Arial", Font.BOLD, 16));
+		label.setBounds(254, 0, 116, 38);
+		panel.add(label);
 		
 		
 	}
