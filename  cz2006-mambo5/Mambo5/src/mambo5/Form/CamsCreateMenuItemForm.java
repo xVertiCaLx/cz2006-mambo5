@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -19,6 +20,7 @@ import mambo5.Entity.Menu;
 public class CamsCreateMenuItemForm extends JPanel implements JInterfaceController {
 
 	private JLabel menuLabel, menuItemLabel, menuItemPriceLabel, menuItemDiscountLabel;
+	private JComboBox<String> menuTypeBox;
 	private JTextField menuTextField, menuItemTextField, menuItemPriceTextField, menuItemDiscountTextField;
 	private JButton addButton, clearAllButton;
 	private int posY = 0, posX = 0, totalHeight = 0, TEXTFIELD_WIDTH = 300, TEXTLABEL_WIDTH = 300, menuID, stallID, accessID;
@@ -27,6 +29,7 @@ public class CamsCreateMenuItemForm extends JPanel implements JInterfaceControll
 	private MenuItemController mic;
 	private CamsMainFrame mainFrame;
 	private boolean createMenu = true;
+	private String[] menuType = {"Western", "Chinese", "Indian", "Halal", "Vegetarian"};
 	
 	public CamsCreateMenuItemForm(final CamsMainFrame mainFrame, final ArrayList<Menu> menuList,int stallID, int accessID) {
 		this.mainFrame = mainFrame;
@@ -54,9 +57,9 @@ public class CamsCreateMenuItemForm extends JPanel implements JInterfaceControll
 			menuLabel.setSize(TEXTLABEL_WIDTH, JLABEL_HEIGHT);
 			totalHeight += menuLabel.getHeight();
 			
-			menuTextField = new JTextField();
-			menuTextField.setSize(TEXTFIELD_WIDTH, JTEXTFIELD_HEIGHT);
-			totalHeight += (menuTextField.getHeight() + MARGIN);
+			menuTypeBox = new JComboBox<String>(menuType);
+			menuTypeBox.setSize(TEXTFIELD_WIDTH, JTEXTFIELD_HEIGHT);
+			totalHeight += (menuTypeBox.getHeight() + MARGIN);
 		}
 		
 		menuItemLabel = new JLabel("Item Name:");
@@ -110,8 +113,8 @@ public class CamsCreateMenuItemForm extends JPanel implements JInterfaceControll
 			add(menuLabel);
 			
 			posY += menuLabel.getHeight() + MARGIN;
-			menuTextField.setLocation(posX, posY);
-			add(menuTextField);
+			menuTypeBox.setLocation(posX, posY);
+			add(menuTypeBox);
 		}
 		
 		posY += menuItemTextField.getHeight() + MARGIN;
@@ -156,26 +159,22 @@ public class CamsCreateMenuItemForm extends JPanel implements JInterfaceControll
 		} else {
 			try {
 				price = Double.parseDouble(menuItemPriceTextField.getText());
+				discount = Double.parseDouble(menuItemDiscountTextField.getText());
 				menuController = new MenuController();
 				mic = new MenuItemController();
 				if (createMenu) {
-					if (menuTextField.getText().isEmpty())
-						JOptionPane.showMessageDialog(null, "Error! Please ensure that all fields contains information.\nNo fields should be empty.");
+					menuID = menuController.validateInsertMenu(stallID, (String) menuTypeBox.getSelectedItem());
+					mainFrame.setID(stallID,accessID);
+					menuList.add(new Menu(menuID, stallID, (String) menuTypeBox.getSelectedItem()));
+					if(mic.validateMenuItemDetail(menuID, menuItemTextField.getText(), price, discount)==0)
+						JOptionPane.showMessageDialog(null, "Menu Item cannot be created");
 					else {
-						menuID = menuController.validateInsertMenu(stallID, menuTextField.getText());
-						mainFrame.setID(stallID,accessID);
-						menuList.add(new Menu(menuID, stallID, menuTextField.getText()));
-						if(mic.validateMenuItemDetail(menuID, menuItemTextField.getText(), price, discount)==0)
-							JOptionPane.showMessageDialog(null, "Menu Item cannot be created");
-						else {
-							JOptionPane.showMessageDialog(null, "MenuItem successfully created");
-							mainFrame.reloadMenuList();
-							mainFrame.reloadMenuItemList();
-							mainFrame.setID(stallID, accessID);
-							mainFrame.replacePanel("CamsMainMenuForm");
-						}
+						JOptionPane.showMessageDialog(null, "MenuItem successfully created");
+						mainFrame.reloadMenuList();
+						mainFrame.reloadMenuItemList();
+						mainFrame.setID(stallID, accessID);
+						mainFrame.replacePanel("CamsMainMenuForm");
 					}
-					
 				} else {
 					//later check if got add into arraylist of menuitem or not
 					if(mic.validateMenuItemDetail(menuID, menuItemTextField.getText(), price, discount)==0)

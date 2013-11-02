@@ -29,7 +29,7 @@ public class CamsLoginForm extends JPanel implements JInterfaceController {
 	
 	public CamsLoginForm(final CamsMainFrame mainFrame) {
 		setSize(new Dimension(CONTENTPANE_WIDTH, CONTENTPANE_HEIGHT));
-		setLocation(0, POS_CONTENTPANE_OFFSET_Y);
+		setLocation(0, 40);
 		setLayout(null);
 		setBackground(JPANEL_BACKGROUND_COLOUR);
 		loginController = new LoginController();

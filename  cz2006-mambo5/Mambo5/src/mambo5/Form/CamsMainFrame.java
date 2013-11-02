@@ -10,6 +10,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 /*import javax.swing.JFrame;
  import javax.swing.JLabel;
@@ -18,6 +20,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
+import javax.swing.border.MatteBorder;
 
 import mambo5.Controller.JInterfaceController;
 import mambo5.Controller.MenuController;
@@ -31,13 +34,10 @@ import mambo5.Entity.OrderDetail;
 
 public class CamsMainFrame extends JFrame implements JInterfaceController {
 
-	private JPanel titlePanel, contentPane, selectPanel, applicationPanel;
-	
-	private JPanel addValueForm, analyzeCanteenForm;
-	
+	private JPanel titlePanel, contentPane, selectPanel, applicationPanel, logoPanel;	
 	private JPanel camsLoginForm, camsCreateOrderForm, camsEditMenuItemForm, camsListMenuItemForm, camsMainMenuForm, camsCreateMenuItemForm, camsPendingOrderForm, camsRefundOrderForm;
 	
-	private JLabel titleLabel = new JLabel("#Canteen");
+	private JLabel titleLabel = new JLabel("#Title"), mambo5LogoLbl;
 	private JButton mainMenuButton;
 	private int posX = 0, posY = 0, stallID = -1, menuID = -1, accessID = -1;
 	
@@ -49,6 +49,9 @@ public class CamsMainFrame extends JFrame implements JInterfaceController {
 	private OrderDetailController orderDetailController = new OrderDetailController();
 	private OrderController orderController = new OrderController();
 	private MenuController menuController = new MenuController();
+	private Icon mambo5Logo = new ImageIcon(getClass().getResource("/mambo5/resources/img/MAMBO5.png"));
+	
+	//2xx x 57
 
 	public CamsMainFrame() {
 		// the frame
@@ -63,14 +66,15 @@ public class CamsMainFrame extends JFrame implements JInterfaceController {
 		contentPane.setLocation(posX, posY);
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-
+		
 		// the background
 		titlePanel = new JPanel();
-		titlePanel.setBackground(new Color(0, 0, 102));
+		titlePanel.setBackground(TITLEBAR_BACKGROUND_COLOUR);
 		titlePanel.setSize(new Dimension(TITLEBAR_WIDTH, TITLEBAR_HEIGHT));
 		titlePanel.setLocation(posX, posY);
 		contentPane.add(titlePanel);
 		titlePanel.setLayout(null);
+		titlePanel.setBorder(new MatteBorder(0, 0, 1, 0, TITLEBAR_BORDER_COLOUR));
 
 		posX += MARGIN;
 		posY += MARGIN;
@@ -89,27 +93,44 @@ public class CamsMainFrame extends JFrame implements JInterfaceController {
 		titlePanel.add(mainMenuButton);
 		posX += mainMenuButton.getWidth() + MARGIN;
 
-		titleLabel.setForeground(Color.WHITE);
+		titleLabel.setForeground(FOREGROUND_COLOUR);
 		titleLabel.setFont(new Font("Arial", Font.BOLD, 12));
-		titleLabel.setSize(new Dimension(TITLELABEL_WIDTH, TITLELABEL_HEIGHT));
+		titleLabel.setSize(new Dimension(TITLELABEL_WIDTH, 15));
 		titleLabel.setHorizontalAlignment(SwingConstants.RIGHT);
 		titleLabel.setLocation(posX, posY);
 		titlePanel.add(titleLabel);
 
 		init();
-			applicationPanel = selectPanel;
-			contentPane.add(applicationPanel);
-
+		applicationPanel = selectPanel;
+		contentPane.add(applicationPanel);
+		
+		posX = 0;
+		posY = TITLEBAR_HEIGHT + CONTENTPANE_HEIGHT;
+		
+		logoPanel = new JPanel();
+		logoPanel.setBackground(TITLEBAR_BACKGROUND_COLOUR);
+		logoPanel.setSize(new Dimension(TITLEBAR_WIDTH, 57));
+		logoPanel.setLocation(posX, posY);
+		logoPanel.setBorder(new MatteBorder(1, 0, 0, 0, TITLEBAR_BORDER_COLOUR));
+		logoPanel.setLayout(null);
+		contentPane.add(logoPanel);
+		
+		posX = CONTENTPANE_WIDTH - 200;
+		mambo5LogoLbl = new JLabel();
+		mambo5LogoLbl.setIcon(mambo5Logo);
+		mambo5LogoLbl.setSize(new Dimension(200,38));
+		mambo5LogoLbl.setLocation(posX,0);
+		logoPanel.add(mambo5LogoLbl);
 	}
 
-	public void setSelectPanel(JPanel applicationPanel) {
+/*	public void setSelectPanel(JPanel applicationPanel) {
 		this.applicationPanel = applicationPanel;
 	}
 
 	public JPanel getSelectPanel() {
 		return applicationPanel;
 	}
-
+*/
 	public void setTitle(String title) {
 		titleLabel.setText(title);
 	}

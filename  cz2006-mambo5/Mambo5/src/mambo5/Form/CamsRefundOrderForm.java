@@ -1,11 +1,10 @@
 package mambo5.Form;
 
 import java.awt.Color;
-import java.awt.Font;
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -14,17 +13,17 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import mambo5.Controller.CustomerController;
+import mambo5.Controller.JInterfaceController;
 import mambo5.Controller.OrderController;
 import mambo5.Controller.OrderDetailController;
 import mambo5.Entity.Order;
 import mambo5.Entity.OrderDetail;
 
-public class CamsRefundOrderForm extends JPanel {
+public class CamsRefundOrderForm extends JPanel implements JInterfaceController {
 
 	JPanel refundPanel;
 	final JTextField txtOrderId = new JTextField();
 
-	private int num;
 	private NumPad numpad = new NumPad();
 	private ArrayList<Order> orderIDList;
 	private ArrayList<OrderDetail> orderDetailList;
@@ -32,18 +31,6 @@ public class CamsRefundOrderForm extends JPanel {
 	private OrderDetailController OrderDetailController;
 	private CustomerController cc;
 
-	JButton numPad_1 = new JButton("1");
-	JButton numPad_2 = new JButton("2");
-	JButton numPad_3 = new JButton("3");
-	JButton numPad_4 = new JButton("4");
-	JButton numPad_5 = new JButton("5");
-	JButton numPad_6 = new JButton("6");
-	JButton numPad_7 = new JButton("7");
-	JButton numPad_8 = new JButton("8");
-	JButton numPad_9 = new JButton("9");
-
-	JButton btnEnter = new JButton("ENTER");
-	JButton btnDelete = new JButton("DELETE");
 	JLabel lblOrderId = new JLabel("ORDER ID:");
 	JButton btnRefund = new JButton("REFUND");
 	
@@ -75,157 +62,85 @@ public class CamsRefundOrderForm extends JPanel {
 
 		lblOrderId.setBounds(20, 80, 64, 22);
 		refundPanel.add(lblOrderId);
-
-		numPad_1.setText("1");
-		numPad_1.addActionListener(new ActionListener() {
+		
+		numpad.setLocation(20,210);
+		numpad.setSize(new Dimension(KEYPADPANE_WIDTH, KEYPADPANE_HEIGHT));
+		
+		numpad.num1().addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (e.getSource() == numPad_1) {
-					num = 1;
-					txtOrderId.setText(txtOrderId.getText() + num);
-				}
+				txtOrderId.setText(txtOrderId.getText() + "1");
 			}
 		});
-		numPad_1.setFont(new Font("Tahoma", Font.BOLD, 12));
-		numPad_1.setForeground(Color.WHITE);
-		numPad_1.setBackground(Color.BLACK);
-		numPad_1.setBounds(20, 210, 60, 60);
-		refundPanel.add(numPad_1);
-
-		numPad_2.addActionListener(new ActionListener() {
+		
+		numpad.num2().addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (e.getSource() == numPad_2) {
-					num = 2;
-					txtOrderId.setText(txtOrderId.getText() + num);
-				}
+				txtOrderId.setText(txtOrderId.getText() + "2");
 			}
 		});
-		numPad_2.setFont(new Font("Tahoma", Font.BOLD, 12));
-		numPad_2.setForeground(Color.WHITE);
-		numPad_2.setBackground(Color.BLACK);
-		numPad_2.setBounds(90, 210, 60, 60);
-		refundPanel.add(numPad_2);
-
-		numPad_3.addActionListener(new ActionListener() {
+		
+		numpad.num3().addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (e.getSource() == numPad_3) {
-					num = 3;
-					txtOrderId.setText(txtOrderId.getText() + num);
-				}
+				txtOrderId.setText(txtOrderId.getText() + "3");
 			}
 		});
-		numPad_3.setFont(new Font("Tahoma", Font.BOLD, 12));
-		numPad_3.setForeground(Color.WHITE);
-		numPad_3.setBackground(Color.BLACK);
-		numPad_3.setBounds(160, 210, 60, 60);
-		refundPanel.add(numPad_3);
-
-		numPad_4.addActionListener(new ActionListener() {
+		
+		numpad.num4().addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (e.getSource() == numPad_4) {
-					num = 4;
-					txtOrderId.setText(txtOrderId.getText() + num);
-				}
+				txtOrderId.setText(txtOrderId.getText() + "4");
 			}
 		});
-		numPad_4.setForeground(Color.WHITE);
-		numPad_4.setBackground(Color.BLACK);
-		numPad_4.setFont(new Font("Tahoma", Font.BOLD, 12));
-		numPad_4.setBounds(20, 280, 60, 60);
-		refundPanel.add(numPad_4);
-
-		numPad_5.addActionListener(new ActionListener() {
+		
+		numpad.num5().addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (e.getSource() == numPad_5) {
-					num = 5;
-					txtOrderId.setText(txtOrderId.getText() + num);
-				}
+				txtOrderId.setText(txtOrderId.getText() + "5");
 			}
 		});
-		numPad_5.setForeground(Color.WHITE);
-		numPad_5.setBackground(Color.BLACK);
-		numPad_5.setFont(new Font("Tahoma", Font.BOLD, 12));
-		numPad_5.setBounds(90, 280, 60, 60);
-		refundPanel.add(numPad_5);
-
-		numPad_6.addActionListener(new ActionListener() {
+		
+		numpad.num6().addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (e.getSource() == numPad_6) {
-					num = 6;
-					txtOrderId.setText(txtOrderId.getText() + num);
-				}
+				txtOrderId.setText(txtOrderId.getText() + "6");
 			}
 		});
-		numPad_6.setForeground(Color.WHITE);
-		numPad_6.setBackground(Color.BLACK);
-		numPad_6.setFont(new Font("Tahoma", Font.BOLD, 12));
-		numPad_6.setBounds(160, 280, 60, 60);
-		refundPanel.add(numPad_6);
-
-		numPad_7.addActionListener(new ActionListener() {
+		
+		numpad.num7().addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (e.getSource() == numPad_7) {
-					num = 7;
-					txtOrderId.setText(txtOrderId.getText() + num);
-				}
+				txtOrderId.setText(txtOrderId.getText() + "7");
 			}
 		});
-		numPad_7.setForeground(Color.WHITE);
-		numPad_7.setBackground(Color.BLACK);
-		numPad_7.setFont(new Font("Tahoma", Font.BOLD, 12));
-		numPad_7.setBounds(20, 350, 60, 60);
-		refundPanel.add(numPad_7);
-
-		numPad_8.addActionListener(new ActionListener() {
+		
+		numpad.num8().addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (e.getSource() == numPad_8) {
-					num = 8;
-					txtOrderId.setText(txtOrderId.getText() + num);
-				}
+				txtOrderId.setText(txtOrderId.getText() + "8");
 			}
 		});
-		numPad_8.setForeground(Color.WHITE);
-		numPad_8.setBackground(Color.BLACK);
-		numPad_8.setFont(new Font("Tahoma", Font.BOLD, 12));
-		numPad_8.setBounds(90, 350, 60, 60);
-		refundPanel.add(numPad_8);
-
-		numPad_9.addActionListener(new ActionListener() {
+		
+		numpad.num9().addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (e.getSource() == numPad_9) {
-					num = 9;
-					txtOrderId.setText(txtOrderId.getText() + num);
-				}
+				txtOrderId.setText(txtOrderId.getText() + "9");
 			}
 		});
-		numPad_9.setForeground(Color.WHITE);
-		numPad_9.setBackground(Color.BLACK);
-		numPad_9.setFont(new Font("Tahoma", Font.BOLD, 12));
-		numPad_9.setBounds(160, 350, 60, 60);
-		refundPanel.add(numPad_9);
-
-		btnDelete.addActionListener(new ActionListener() {
+		
+		numpad.num0().addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				txtOrderId.setText(txtOrderId.getText() + "0");
+			}
+		});
+		
+		numpad.delete().addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (!txtOrderId.getText().equals(""))
 					txtOrderId.setText(txtOrderId.getText().substring(0,
 							txtOrderId.getText().length() - 1));
 			}
 		});
-		btnDelete.setForeground(Color.WHITE);
-		btnDelete.setFont(new Font("Tahoma", Font.BOLD, 12));
-		btnDelete.setBackground(Color.RED);
-		btnDelete.setBounds(250, 230, 100, 58);
-		refundPanel.add(btnDelete);
-
-		btnEnter.setForeground(Color.WHITE);
-		btnEnter.setFont(new Font("Tahoma", Font.BOLD, 15));
-		btnEnter.setBackground(Color.GREEN);
-		btnEnter.addActionListener(new ActionListener() {
+		
+		numpad.enter().addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				submitOrderID();
 			}
 		});
-		btnEnter.setBounds(250, 300, 100, 100);
-		refundPanel.add(btnEnter);
+		
+		refundPanel.add(numpad);
 
 	}
 

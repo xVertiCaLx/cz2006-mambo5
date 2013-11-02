@@ -9,6 +9,10 @@ public interface JInterfaceController {
 	
 	public static final Color WHITE_COLOUR = new Color(255, 255, 255);
 	public static final Color BLACK_COLOUR = new Color(0, 0, 0);
+	public static final Color FOREGROUND_COLOUR = new Color(0,132,255);
+	public static final Color TITLEBAR_BACKGROUND_COLOUR = new Color(245,245,245); //new Color(0, 0, 102);
+	public static final Color TITLEBAR_BORDER_COLOUR = new Color(230,230,230);
+	public static final Color KEYPAD_ENTER_BACKGROUND_COLOUR = new Color(55,137,45), KEYPAD_ENTER_BORDER = new Color(18,100,7);
 	
 	public static final Font SIDEPANEL_BUTTON_FONT = new Font("Arial", Font.BOLD, 12);
 	
@@ -17,18 +21,18 @@ public interface JInterfaceController {
 	public static final Dimension SCREENSIZE = Toolkit.getDefaultToolkit().getScreenSize();
 	public static final int SCREEN_WIDTH = (int)SCREENSIZE.getWidth(), SCREEN_HEIGHT = (int) SCREENSIZE.getHeight();
 	//public static final int WINDOW_WIDTH = (int)(SCREEN_WIDTH*0.8), WINDOW_HEIGHT = (int)(SCREEN_HEIGHT*0.8);
-	public static final int WINDOW_WIDTH = 800, WINDOW_HEIGHT = 600;
+	public static final int WINDOW_WIDTH = 800, WINDOW_HEIGHT = 667;
 	public static final int POS_WINDOW_X = (SCREEN_WIDTH - WINDOW_WIDTH)/2, POS_WINDOW_Y = (SCREEN_HEIGHT - WINDOW_HEIGHT)/2;
 	
 	public static final int MENUBUTTON_WIDTH = 250, MENUBUTTON_HEIGHT = 80;
 	public static final int STANDARDBUTTON_WIDTH = 120, STANDARDBUTTON_HEIGHT = 30;
 	
 	public static final int MARGIN = 10;
-	public static final int TITLEBAR_WIDTH = WINDOW_WIDTH, TITLEBAR_HEIGHT = 40;
+	public static final int TITLEBAR_WIDTH = WINDOW_WIDTH, TITLEBAR_HEIGHT = 39;
 	public static final int TITLELABEL_WIDTH = WINDOW_WIDTH - (3*MARGIN) - STANDARDBUTTON_WIDTH, TITLELABEL_HEIGHT = TITLEBAR_HEIGHT - MARGIN, POS_TITLELABEL_X = MARGIN, POS_TITLELABEL_Y = MARGIN/2;
 	public static final int MAINPANE_WIDTH = WINDOW_WIDTH, MAINPANE_HEIGHT = WINDOW_HEIGHT;
 	
-	public static final int CONTENTPANE_WIDTH = WINDOW_WIDTH, CONTENTPANE_HEIGHT = MAINPANE_HEIGHT - TITLEBAR_HEIGHT;
+	public static final int CONTENTPANE_WIDTH = WINDOW_WIDTH, CONTENTPANE_HEIGHT = 559;
 	public static final int POS_CONTENTPANE_OFFSET_Y = 12;
 
 	public static final int RECEIPTPANE_WIDTH = 300, RECEIPTPANE_HEIGHT = 560, RECEIPT_WIDTH = (RECEIPTPANE_WIDTH-MARGIN-MARGIN), RECEIPT_HEIGHT = (RECEIPTPANE_HEIGHT-MARGIN-MARGIN);
@@ -44,7 +48,7 @@ public interface JInterfaceController {
 	public static final int KEYPAD_SPECIAL_WIDTH = 100, KEYPAD_SPECIAL_HEIGHT = (3*KEYPAD_WIDTH + 3*MARGIN)/2 - MARGIN;
 	
 	public static final int KEYBOARD_KEYWIDTH = 60, KEYBOARD_KEYHEIGHT = 60;
-	public static final Color JPANEL_BACKGROUND_COLOUR = new Color(240, 240, 240);
+	public static final Color JPANEL_BACKGROUND_COLOUR = new Color(255, 255, 255);
 	public static final int JLABEL_HEIGHT = 15;
 	public static final int JTEXTFIELD_HEIGHT = 25;
 	
