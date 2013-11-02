@@ -34,8 +34,7 @@ public class CamsCreateOrderForm extends JPanel implements JInterfaceController 
 	private Map<Integer, MenuItem> menuItems = new HashMap<Integer, MenuItem>();
 	private Timestamp purchaseDate;
 	private String orderStatus, receiptDetail, quantity = "";
-	private int order, menuID, stallID, posX = 0, posY = 0, totalWidth = 0,
-			totalHeight = 0, currentMenuItem = 0, page = 1;
+	private int order, /*menuID,*/ stallID, posX = 0, posY = 0, totalWidth = 0, totalHeight = 0, currentMenuItem = 0, page = 1;
 	private double totalPrice = 0.0;
 	private ArrayList<OrderDetail> orderDetailList = new ArrayList<OrderDetail>();
 	private ArrayList<MenuItem> menuItemList;
@@ -59,9 +58,10 @@ public class CamsCreateOrderForm extends JPanel implements JInterfaceController 
 			int menuID) {
 		menuItemButtons = new HashMap<JButton, MenuItem>();
 		this.menuItemList = new ArrayList<MenuItem>();
-		this.menuID = menuID;
+		//this.menuID = menuID;
 		this.stallID = stallID;
 		this.mainFrame = mainFrame;
+		mainFrame.setTitle("New Order");
 
 		for (int i = 0; i < menuItemList.size(); i++) {
 			if (menuItemList.get(i).getMenuID() == menuID) {
@@ -244,9 +244,8 @@ public class CamsCreateOrderForm extends JPanel implements JInterfaceController 
 		posY = MARGIN;
 		totalWidth = (MENUITEM_BUTTON_WIDTH + MARGIN);
 		totalHeight = 2 * (MENUITEM_BUTTON_HEIGHT + MARGIN);
-
+		
 		for (; currentMenuItem < menuItemList.size(); currentMenuItem++) {
-			// if (menuItemList.get(currentMenuItem).getMenuID() == menuID) {
 			if (totalWidth >= menuItemPanel.getWidth()) {
 				if (totalHeight >= menuItemPanel.getHeight())
 					break;
@@ -264,7 +263,6 @@ public class CamsCreateOrderForm extends JPanel implements JInterfaceController 
 					+ menuItemList.get(currentMenuItem).getMenuItemID());
 			addMenuItemButtons(menuItemList.get(currentMenuItem));
 			posX += MENUITEM_BUTTON_WIDTH + MARGIN;
-			// }
 		}
 	}
 
@@ -290,6 +288,8 @@ public class CamsCreateOrderForm extends JPanel implements JInterfaceController 
 			addMenuItemButtons(menuItemList.get(currentMenuItem));
 			posX += MENUITEM_BUTTON_WIDTH + MARGIN;
 		}
+		if (currentMenuItem >= menuItemList.size()) btnNextPage.setEnabled(false);
+		else btnNextPage.setEnabled(true);
 	}
 
 	public void addMenuItemButtons(MenuItem menuItem) {
@@ -406,7 +406,7 @@ public class CamsCreateOrderForm extends JPanel implements JInterfaceController 
 				if (currentMenuItem < menuItemList.size()) {
 					btnNextPage.setEnabled(true);
 					btnPrevPage.setEnabled(true);
-					currentMenuItem = (page * 9) + 1;
+					currentMenuItem = (page * 9);
 					page++;
 					menuItemPanel.removeAll();
 					refreshButton();
@@ -418,6 +418,7 @@ public class CamsCreateOrderForm extends JPanel implements JInterfaceController 
 
 		});
 		btnNextPage.setBounds(posX, posY, SIDEBUTTON_WIDTH, SIDEBUTTON_HEIGHT);
+		if (menuItemList.size() < 10) btnNextPage.setEnabled(false);
 		sidePanel.add(btnNextPage);
 
 		posY += SIDEBUTTON_HEIGHT + MARGIN;
@@ -442,7 +443,7 @@ public class CamsCreateOrderForm extends JPanel implements JInterfaceController 
 				} else {
 					page = 1;
 					btnNextPage.setEnabled(true);
-					btnPrevPage.setEnabled(true);
+					btnPrevPage.setEnabled(false);
 					currentMenuItem = 0;
 					menuItemPanel.removeAll();
 					refreshButton();

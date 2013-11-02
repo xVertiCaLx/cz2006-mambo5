@@ -5,6 +5,7 @@ import java.awt.Dimension;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JPanel;
+import javax.swing.border.LineBorder;
 
 import mambo5.Controller.JInterfaceController;
 
@@ -15,6 +16,7 @@ public class NumPad extends JPanel implements JInterfaceController {
 	
 	public NumPad() {
 		setLayout(null);
+		setBackground(JPANEL_BACKGROUND_COLOUR);
 		num1 = new JButton("1");
 		num2 = new JButton("2");
 		num3 = new JButton("3");
@@ -42,7 +44,20 @@ public class NumPad extends JPanel implements JInterfaceController {
 		delete.setSize(new Dimension(KEYPAD_SPECIAL_WIDTH, KEYPAD_SPECIAL_HEIGHT));
 		enter.setSize(new Dimension(KEYPAD_SPECIAL_WIDTH, KEYPAD_SPECIAL_HEIGHT));
 		
-		num1.setBorder(BorderFactory.createEmptyBorder());
+		num1.setFocusPainted(false);
+		num2.setFocusPainted(false);
+		num3.setFocusPainted(false);
+		num4.setFocusPainted(false);
+		num5.setFocusPainted(false);
+		num6.setFocusPainted(false);
+		num7.setFocusPainted(false);
+		num8.setFocusPainted(false);
+		num9.setFocusPainted(false);
+		num0.setFocusPainted(false);
+		delete.setFocusPainted(false);
+		enter.setFocusPainted(false);
+		
+		/*num1.setBorder(BorderFactory.createEmptyBorder());
 		num2.setBorder(BorderFactory.createEmptyBorder());
 		num3.setBorder(BorderFactory.createEmptyBorder());
 		num4.setBorder(BorderFactory.createEmptyBorder());
@@ -53,32 +68,45 @@ public class NumPad extends JPanel implements JInterfaceController {
 		num9.setBorder(BorderFactory.createEmptyBorder());
 		num0.setBorder(BorderFactory.createEmptyBorder());
 		delete.setBorder(BorderFactory.createEmptyBorder());
-		enter.setBorder(BorderFactory.createEmptyBorder());
+		enter.setBorder(BorderFactory.createEmptyBorder());*/
 		
-		num1.setBackground(KEYPAD_BACKGROUND_COLOUR);
-		num2.setBackground(KEYPAD_BACKGROUND_COLOUR);
-		num3.setBackground(KEYPAD_BACKGROUND_COLOUR);
-		num4.setBackground(KEYPAD_BACKGROUND_COLOUR);
-		num5.setBackground(KEYPAD_BACKGROUND_COLOUR);
-		num6.setBackground(KEYPAD_BACKGROUND_COLOUR);
-		num7.setBackground(KEYPAD_BACKGROUND_COLOUR);
-		num8.setBackground(KEYPAD_BACKGROUND_COLOUR);
-		num9.setBackground(KEYPAD_BACKGROUND_COLOUR);
-		num0.setBackground(KEYPAD_BACKGROUND_COLOUR);
-		delete.setBackground(KEYPAD_BACKGROUND_COLOUR);
-		enter.setBackground(KEYPAD_BACKGROUND_COLOUR);
+		num1.setBorder(new LineBorder(TITLEBAR_BORDER_COLOUR, 1, true));
+		num2.setBorder(new LineBorder(TITLEBAR_BORDER_COLOUR, 1, true));
+		num3.setBorder(new LineBorder(TITLEBAR_BORDER_COLOUR, 1, true));
+		num4.setBorder(new LineBorder(TITLEBAR_BORDER_COLOUR, 1, true));
+		num5.setBorder(new LineBorder(TITLEBAR_BORDER_COLOUR, 1, true));
+		num6.setBorder(new LineBorder(TITLEBAR_BORDER_COLOUR, 1, true));
+		num7.setBorder(new LineBorder(TITLEBAR_BORDER_COLOUR, 1, true));
+		num8.setBorder(new LineBorder(TITLEBAR_BORDER_COLOUR, 1, true));
+		num9.setBorder(new LineBorder(TITLEBAR_BORDER_COLOUR, 1, true));
+		num0.setBorder(new LineBorder(TITLEBAR_BORDER_COLOUR, 1, true));
+		delete.setBorder(new LineBorder(TITLEBAR_BORDER_COLOUR, 1, true));
+		enter.setBorder(new LineBorder(KEYPAD_ENTER_BORDER, 1, true));
 		
-		num1.setForeground(KEYPAD_FOREGROUND_COLOUR);
-		num2.setForeground(KEYPAD_FOREGROUND_COLOUR);
-		num3.setForeground(KEYPAD_FOREGROUND_COLOUR);
-		num4.setForeground(KEYPAD_FOREGROUND_COLOUR);
-		num5.setForeground(KEYPAD_FOREGROUND_COLOUR);
-		num6.setForeground(KEYPAD_FOREGROUND_COLOUR);
-		num7.setForeground(KEYPAD_FOREGROUND_COLOUR);
-		num8.setForeground(KEYPAD_FOREGROUND_COLOUR);
-		num9.setForeground(KEYPAD_FOREGROUND_COLOUR);
-		num0.setForeground(KEYPAD_FOREGROUND_COLOUR);
-		delete.setForeground(KEYPAD_FOREGROUND_COLOUR);
+		num1.setBackground(TITLEBAR_BACKGROUND_COLOUR);
+		num2.setBackground(TITLEBAR_BACKGROUND_COLOUR);
+		num3.setBackground(TITLEBAR_BACKGROUND_COLOUR);
+		num4.setBackground(TITLEBAR_BACKGROUND_COLOUR);
+		num5.setBackground(TITLEBAR_BACKGROUND_COLOUR);
+		num6.setBackground(TITLEBAR_BACKGROUND_COLOUR);
+		num7.setBackground(TITLEBAR_BACKGROUND_COLOUR);
+		num8.setBackground(TITLEBAR_BACKGROUND_COLOUR);
+		num9.setBackground(TITLEBAR_BACKGROUND_COLOUR);
+		num0.setBackground(TITLEBAR_BACKGROUND_COLOUR);
+		delete.setBackground(TITLEBAR_BACKGROUND_COLOUR);
+		enter.setBackground(KEYPAD_ENTER_BACKGROUND_COLOUR);
+		
+		num1.setForeground(FOREGROUND_COLOUR);
+		num2.setForeground(FOREGROUND_COLOUR);
+		num3.setForeground(FOREGROUND_COLOUR);
+		num4.setForeground(FOREGROUND_COLOUR);
+		num5.setForeground(FOREGROUND_COLOUR);
+		num6.setForeground(FOREGROUND_COLOUR);
+		num7.setForeground(FOREGROUND_COLOUR);
+		num8.setForeground(FOREGROUND_COLOUR);
+		num9.setForeground(FOREGROUND_COLOUR);
+		num0.setForeground(FOREGROUND_COLOUR);
+		delete.setForeground(FOREGROUND_COLOUR);
 		enter.setForeground(KEYPAD_FOREGROUND_COLOUR);
 		
 		//settled anything else? see here. wiat ah
