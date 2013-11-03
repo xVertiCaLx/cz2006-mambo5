@@ -1,8 +1,10 @@
+//DESIGN UNIFIED
+//FUNCTION TESTED
+//JUNIT PENDING
+
 package mambo5.Form;
 
-import java.awt.Color;
 import java.awt.Font;
-import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -107,7 +109,6 @@ public class CamsMainMenuForm extends JPanel implements JInterfaceController {
 		add(btnEditMenu);
 
 		if (accessID != 2) {
-			//btnRefund.setEnabled(false);
 			btnEditMenu.setEnabled(false);
 			btnAddMenuItem.setEnabled(false);
 		}

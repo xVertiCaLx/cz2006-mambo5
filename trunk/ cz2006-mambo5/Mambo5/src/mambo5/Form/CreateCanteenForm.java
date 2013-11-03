@@ -1,24 +1,22 @@
 package mambo5.Form;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JTextField;
+import javax.swing.JPanel;
 import javax.swing.JTextArea;
-import javax.swing.JButton;
+import javax.swing.JTextField;
+import javax.swing.border.LineBorder;
 
 import mambo5.Controller.CanteenController;
+import mambo5.Controller.JInterfaceController;
 
-public class CreateCanteenForm extends JPanel {
+public class CreateCanteenForm extends JPanel implements JInterfaceController {
 
 	private JTextField nameText;
 	private JTextField addressText;
@@ -82,6 +80,10 @@ public class CreateCanteenForm extends JPanel {
 		add(descriptionText);
 		
 		JButton createCanteenBtn = new JButton("Create");
+		createCanteenBtn.setForeground(FOREGROUND_COLOUR);
+		createCanteenBtn.setFocusPainted(false);
+		createCanteenBtn.setBorder(new LineBorder(TITLEBAR_BORDER_COLOUR, 1, true));
+		createCanteenBtn.setBackground(TITLEBAR_BACKGROUND_COLOUR);
 		createCanteenBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				submitsCanteenDetails(e);
@@ -100,6 +102,10 @@ public class CreateCanteenForm extends JPanel {
 		add(maxStallLabel);
 		
 		JButton btnBack = new JButton("Back");
+		btnBack.setForeground(FOREGROUND_COLOUR);
+		btnBack.setFocusPainted(false);
+		btnBack.setBorder(new LineBorder(TITLEBAR_BORDER_COLOUR, 1, true));
+		btnBack.setBackground(TITLEBAR_BACKGROUND_COLOUR);
 		btnBack.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				mainFrame.setTitle("Please select a Function to perform:");

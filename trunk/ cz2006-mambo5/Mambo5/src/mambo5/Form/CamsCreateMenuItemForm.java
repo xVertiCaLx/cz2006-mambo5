@@ -1,3 +1,7 @@
+//DESIGN UNIFIED
+//FUNCTION TESTED
+//JUNIT PENDING
+
 package mambo5.Form;
 
 import java.awt.Dimension;
@@ -11,6 +15,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.border.LineBorder;
 
 import mambo5.Controller.JInterfaceController;
 import mambo5.Controller.MenuController;
@@ -21,7 +26,7 @@ public class CamsCreateMenuItemForm extends JPanel implements JInterfaceControll
 
 	private JLabel menuLabel, menuItemLabel, menuItemPriceLabel, menuItemDiscountLabel;
 	private JComboBox<String> menuTypeBox;
-	private JTextField menuTextField, menuItemTextField, menuItemPriceTextField, menuItemDiscountTextField;
+	private JTextField menuItemTextField, menuItemPriceTextField, menuItemDiscountTextField;
 	private JButton addButton, clearAllButton;
 	private int posY = 0, posX = 0, totalHeight = 0, TEXTFIELD_WIDTH = 300, TEXTLABEL_WIDTH = 300, menuID, stallID, accessID;
 	private double price, discount;
@@ -68,6 +73,7 @@ public class CamsCreateMenuItemForm extends JPanel implements JInterfaceControll
 		
 		menuItemTextField = new JTextField();
 		menuItemTextField.setSize(TEXTFIELD_WIDTH, JTEXTFIELD_HEIGHT);
+		menuItemTextField.setBorder(new LineBorder(TITLEBAR_BORDER_COLOUR, 1, true));
 		totalHeight += (menuItemTextField.getHeight() + MARGIN);
 		
 		menuItemPriceLabel = new JLabel("Item Price: ");
@@ -76,6 +82,7 @@ public class CamsCreateMenuItemForm extends JPanel implements JInterfaceControll
 		
 		menuItemPriceTextField = new JTextField();
 		menuItemPriceTextField.setSize(TEXTFIELD_WIDTH, JTEXTFIELD_HEIGHT);
+		menuItemPriceTextField.setBorder(new LineBorder(TITLEBAR_BORDER_COLOUR, 1, true));
 		totalHeight += (menuItemPriceTextField.getHeight() + MARGIN);
 		
 		menuItemDiscountLabel = new JLabel("Item Discount Price: ");
@@ -84,10 +91,15 @@ public class CamsCreateMenuItemForm extends JPanel implements JInterfaceControll
 		
 		menuItemDiscountTextField = new JTextField();
 		menuItemDiscountTextField.setSize(TEXTFIELD_WIDTH, JTEXTFIELD_HEIGHT);
+		menuItemDiscountTextField.setBorder(new LineBorder(TITLEBAR_BORDER_COLOUR, 1, true));
 		totalHeight += (menuItemDiscountTextField.getHeight() + MARGIN);
 		
 		addButton = new JButton("Add to Menu");
 		addButton.setSize(new Dimension(STANDARDBUTTON_WIDTH, STANDARDBUTTON_HEIGHT));
+		addButton.setForeground(FOREGROUND_COLOUR);
+		addButton.setFocusPainted(false);
+		addButton.setBorder(new LineBorder(TITLEBAR_BORDER_COLOUR, 1, true));
+		addButton.setBackground(TITLEBAR_BACKGROUND_COLOUR);
 		addButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				submitMenuItem(e, menuList);
@@ -97,6 +109,10 @@ public class CamsCreateMenuItemForm extends JPanel implements JInterfaceControll
 		
 		clearAllButton = new JButton("Clear All");
 		clearAllButton.setSize(new Dimension(STANDARDBUTTON_WIDTH, STANDARDBUTTON_HEIGHT));
+		clearAllButton.setForeground(FOREGROUND_COLOUR);
+		clearAllButton.setFocusPainted(false);
+		clearAllButton.setBorder(new LineBorder(TITLEBAR_BORDER_COLOUR, 1, true));
+		clearAllButton.setBackground(TITLEBAR_BACKGROUND_COLOUR);
 		clearAllButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				menuItemTextField.setText("");
@@ -176,7 +192,6 @@ public class CamsCreateMenuItemForm extends JPanel implements JInterfaceControll
 						mainFrame.replacePanel("CamsMainMenuForm");
 					}
 				} else {
-					//later check if got add into arraylist of menuitem or not
 					if(mic.validateMenuItemDetail(menuID, menuItemTextField.getText(), price, discount)==0)
 						JOptionPane.showMessageDialog(null, "Menu Item cannot be created");
 					else {

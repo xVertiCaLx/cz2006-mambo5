@@ -2,22 +2,23 @@ package mambo5.Form;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.border.LineBorder;
 
 import mambo5.Controller.CustomerController;
+import mambo5.Controller.JInterfaceController;
 import mambo5.Entity.Customer;
 
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-
-public class AddValueForm extends JPanel {
+public class AddValueForm extends JPanel implements JInterfaceController {
 	
 	private Customer cust;
 	private CustomerController customerCon;
@@ -163,6 +164,10 @@ public class AddValueForm extends JPanel {
 		
 		JButton btnOk = new JButton("Ok");
 		btnOk.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		btnOk.setForeground(FOREGROUND_COLOUR);
+		btnOk.setFocusPainted(false);
+		btnOk.setBorder(new LineBorder(TITLEBAR_BORDER_COLOUR, 1, true));
+		btnOk.setBackground(TITLEBAR_BACKGROUND_COLOUR);
 		btnOk.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -207,6 +212,10 @@ public class AddValueForm extends JPanel {
 		
 		JButton btnCancel = new JButton("Back to main");
 		btnCancel.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		btnCancel.setForeground(FOREGROUND_COLOUR);
+		btnCancel.setFocusPainted(false);
+		btnCancel.setBorder(new LineBorder(TITLEBAR_BORDER_COLOUR, 1, true));
+		btnCancel.setBackground(TITLEBAR_BACKGROUND_COLOUR);
 		btnCancel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				mainFrame.replacePanel(new MainMenuForm(mainFrame));

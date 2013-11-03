@@ -1,29 +1,23 @@
 package mambo5.Form;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import javax.swing.JLabel;
-
 import java.awt.Font;
-
-import javax.swing.JTextField;
-import javax.swing.JButton;
-
-import mambo5.Controller.CustomerController;
-
-import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.*;
 
-public class PurchaseCardForm extends JPanel {
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.border.LineBorder;
+
+import mambo5.Controller.CustomerController;
+import mambo5.Controller.JInterfaceController;
+
+public class PurchaseCardForm extends JPanel implements JInterfaceController {
 
 	//private JPanel contentPane;
 	private JTextField txtAmountInserted;
@@ -72,6 +66,10 @@ public class PurchaseCardForm extends JPanel {
 		add(lblInserted);
 		
 		JButton btnCancel = new JButton("Back to main");
+		btnCancel.setForeground(FOREGROUND_COLOUR);
+		btnCancel.setFocusPainted(false);
+		btnCancel.setBorder(new LineBorder(TITLEBAR_BORDER_COLOUR, 1, true));
+		btnCancel.setBackground(TITLEBAR_BACKGROUND_COLOUR);
 		btnCancel.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		btnCancel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -113,6 +111,10 @@ public class PurchaseCardForm extends JPanel {
 		
 		JButton btnOk = new JButton("Ok");
 		btnOk.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		btnOk.setForeground(FOREGROUND_COLOUR);
+		btnOk.setFocusPainted(false);
+		btnOk.setBorder(new LineBorder(TITLEBAR_BORDER_COLOUR, 1, true));
+		btnOk.setBackground(TITLEBAR_BACKGROUND_COLOUR);
 		btnOk.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) 
 			{	

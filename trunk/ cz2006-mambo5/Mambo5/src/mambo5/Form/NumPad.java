@@ -1,8 +1,11 @@
+//DESIGN UNIFIED
+//LOGIN TESTED
+//JUNIT PENDING
+
 package mambo5.Form;
 
 import java.awt.Dimension;
 
-import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.border.LineBorder;

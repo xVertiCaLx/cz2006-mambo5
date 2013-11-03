@@ -1,41 +1,30 @@
 package mambo5.Form;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JTable;
-import javax.swing.border.EmptyBorder;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.JList;
-import javax.swing.JLabel;
-
 import java.awt.Font;
-
-import javax.swing.JTextField;
-import javax.swing.JButton;
-
-import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import java.util.ArrayList;
-
-import javax.swing.JComboBox;
-
-import mambo5.Controller.CanteenController;
-import mambo5.Controller.CustomerController;
-import mambo5.Entity.Customer;
-import mambo5.Entity.Menu;
-import mambo5.Entity.MenuItem;
-
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.JTextField;
+import javax.swing.border.LineBorder;
+import javax.swing.table.DefaultTableModel;
 
-public class ViewHistoryForm extends JPanel {
+import mambo5.Controller.CustomerController;
+import mambo5.Controller.JInterfaceController;
+import mambo5.Entity.Customer;
+import mambo5.Entity.MenuItem;
+
+public class ViewHistoryForm extends JPanel implements JInterfaceController {
 
 	private Customer cust;
 	private ArrayList<Customer> retrieveOrderHistory;
@@ -135,6 +124,10 @@ public class ViewHistoryForm extends JPanel {
 		add(lblSgd);
 		
 		JButton btnBackToMain = new JButton("Back to main");
+		btnBackToMain.setForeground(FOREGROUND_COLOUR);
+		btnBackToMain.setFocusPainted(false);
+		btnBackToMain.setBorder(new LineBorder(TITLEBAR_BORDER_COLOUR, 1, true));
+		btnBackToMain.setBackground(TITLEBAR_BACKGROUND_COLOUR);
 		btnBackToMain.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				mainFrame.replacePanel(new MainMenuForm(mainFrame));

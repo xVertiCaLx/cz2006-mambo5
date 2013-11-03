@@ -1,16 +1,18 @@
 package mambo5.Form;
 
 import java.awt.Color;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JButton;
+import javax.swing.border.LineBorder;
 
-import java.awt.Font;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
+import mambo5.Controller.JInterfaceController;
 
-public class OFSFunction extends JPanel {
+public class OFSFunction extends JPanel implements JInterfaceController{
 
 	/**
 	 * Create the panel.
@@ -47,6 +49,10 @@ public class OFSFunction extends JPanel {
 		titlePanel.add(stallTitle);
 		
 		JButton createCanteenBtn = new JButton("Create Canteen");
+		createCanteenBtn.setForeground(FOREGROUND_COLOUR);
+		createCanteenBtn.setFocusPainted(false);
+		createCanteenBtn.setBorder(new LineBorder(TITLEBAR_BORDER_COLOUR, 1, true));
+		createCanteenBtn.setBackground(TITLEBAR_BACKGROUND_COLOUR);
 		createCanteenBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				mainFrame.replacePanel(new CreateCanteenForm(mainFrame));
@@ -57,6 +63,10 @@ public class OFSFunction extends JPanel {
 		add(createCanteenBtn);
 		
 		JButton analyzeCanteenBtn = new JButton("Analyze Canteen");
+		analyzeCanteenBtn.setForeground(FOREGROUND_COLOUR);
+		analyzeCanteenBtn.setFocusPainted(false);
+		analyzeCanteenBtn.setBorder(new LineBorder(TITLEBAR_BORDER_COLOUR, 1, true));
+		analyzeCanteenBtn.setBackground(TITLEBAR_BACKGROUND_COLOUR);
 		analyzeCanteenBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				mainFrame.replacePanel(new AnalyzeCanteenForm(mainFrame));
@@ -68,6 +78,10 @@ public class OFSFunction extends JPanel {
 		add(analyzeCanteenBtn);
 		
 		JButton updateCanteenBtn = new JButton("Update Canteen");
+		updateCanteenBtn.setForeground(FOREGROUND_COLOUR);
+		updateCanteenBtn.setFocusPainted(false);
+		updateCanteenBtn.setBorder(new LineBorder(TITLEBAR_BORDER_COLOUR, 1, true));
+		updateCanteenBtn.setBackground(TITLEBAR_BACKGROUND_COLOUR);
 		updateCanteenBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				mainFrame.replacePanel(new UpdateCanteenForm(mainFrame));
@@ -78,6 +92,10 @@ public class OFSFunction extends JPanel {
 		add(updateCanteenBtn);
 		
 		JButton deleteCanteenBtn = new JButton("Delete Canteen");
+		deleteCanteenBtn.setForeground(FOREGROUND_COLOUR);
+		deleteCanteenBtn.setFocusPainted(false);
+		deleteCanteenBtn.setBorder(new LineBorder(TITLEBAR_BORDER_COLOUR, 1, true));
+		deleteCanteenBtn.setBackground(TITLEBAR_BACKGROUND_COLOUR);
 		deleteCanteenBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				mainFrame.replacePanel(new DeleteCanteenForm(mainFrame));
@@ -88,6 +106,10 @@ public class OFSFunction extends JPanel {
 		add(deleteCanteenBtn);
 		
 		JButton createStallBtn = new JButton("Create Stall");
+		createStallBtn.setForeground(FOREGROUND_COLOUR);
+		createStallBtn.setFocusPainted(false);
+		createStallBtn.setBorder(new LineBorder(TITLEBAR_BORDER_COLOUR, 1, true));
+		createStallBtn.setBackground(TITLEBAR_BACKGROUND_COLOUR);
 		createStallBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -100,6 +122,10 @@ public class OFSFunction extends JPanel {
 		add(createStallBtn);
 		
 		JButton retrieveStallBtn = new JButton("Retrieve Stall");
+		retrieveStallBtn.setForeground(FOREGROUND_COLOUR);
+		retrieveStallBtn.setFocusPainted(false);
+		retrieveStallBtn.setBorder(new LineBorder(TITLEBAR_BORDER_COLOUR, 1, true));
+		retrieveStallBtn.setBackground(TITLEBAR_BACKGROUND_COLOUR);
 		retrieveStallBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -112,6 +138,10 @@ public class OFSFunction extends JPanel {
 		add(retrieveStallBtn);
 		
 		JButton updateStallBtn = new JButton("Update Stall");
+		updateStallBtn.setForeground(FOREGROUND_COLOUR);
+		updateStallBtn.setFocusPainted(false);
+		updateStallBtn.setBorder(new LineBorder(TITLEBAR_BORDER_COLOUR, 1, true));
+		updateStallBtn.setBackground(TITLEBAR_BACKGROUND_COLOUR);
 		updateStallBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				mainFrame.replacePanel(new UpdateStallForm(mainFrame));
@@ -122,6 +152,10 @@ public class OFSFunction extends JPanel {
 		add(updateStallBtn);
 		
 		JButton deleteStallBtn = new JButton("Delete Stall");
+		deleteStallBtn.setForeground(FOREGROUND_COLOUR);
+		deleteStallBtn.setFocusPainted(false);
+		deleteStallBtn.setBorder(new LineBorder(TITLEBAR_BORDER_COLOUR, 1, true));
+		deleteStallBtn.setBackground(TITLEBAR_BACKGROUND_COLOUR);
 		deleteStallBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				mainFrame.replacePanel(new DeleteStallForm(mainFrame));
