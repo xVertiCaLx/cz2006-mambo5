@@ -52,8 +52,6 @@ public class CamsMainFrame extends JFrame implements JInterfaceController {
 	private MenuController menuController = new MenuController();
 	private Icon mambo5Logo = new ImageIcon(getClass().getResource("/mambo5/resources/img/MAMBO5.png"));
 	
-	//2xx x 57
-
 	public CamsMainFrame() {
 		// the frame
 		setResizable(false);
@@ -88,6 +86,7 @@ public class CamsMainFrame extends JFrame implements JInterfaceController {
 		mainMenuButton.setBorder(BorderFactory.createEmptyBorder());
 		mainMenuButton.setFocusPainted(false);
 		mainMenuButton.setLocation(posX, posY);
+		mainMenuButton.setHorizontalAlignment(SwingConstants.LEFT);
 		mainMenuButton.setVisible(false);
 		mainMenuButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -131,6 +130,7 @@ public class CamsMainFrame extends JFrame implements JInterfaceController {
 		systemButton.setBorder(BorderFactory.createEmptyBorder());
 		systemButton.setLocation(posX, posY);
 		systemButton.setVisible(false);
+		systemButton.setHorizontalAlignment(SwingConstants.LEFT);
 		systemButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				replacePanel(selectPanel);
@@ -139,22 +139,14 @@ public class CamsMainFrame extends JFrame implements JInterfaceController {
 
 		logoPanel.add(systemButton);
 		
-		posX = CONTENTPANE_WIDTH - 160;
+		posX = CONTENTPANE_WIDTH - 150;
 		mambo5LogoLbl = new JLabel();
 		mambo5LogoLbl.setIcon(mambo5Logo);
-		mambo5LogoLbl.setSize(new Dimension(160,38));
+		mambo5LogoLbl.setSize(new Dimension(150,38));
 		mambo5LogoLbl.setLocation(posX,0);
 		logoPanel.add(mambo5LogoLbl);
 	}
 
-/*	public void setSelectPanel(JPanel applicationPanel) {
-		this.applicationPanel = applicationPanel;
-	}
-
-	public JPanel getSelectPanel() {
-		return applicationPanel;
-	}
-*/
 	public void setTitle(String title) {
 		titleLabel.setText(title);
 	}

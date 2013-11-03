@@ -34,20 +34,22 @@ public class CamsLoginForm extends JPanel implements JInterfaceController {
 		mainFrame.setTitle("Login to Canteen Management System");
 		loginController = new LoginController();
 		
-		useridLabel = new JLabel("Enter your ID:");
+		useridLabel = new JLabel("ACCESS ID");
 		useridLabel.setSize(new Dimension(labelWidth, JLABEL_HEIGHT));
 		totalHeight += useridLabel.getHeight() + MARGIN;
 		
 		useridTextField = new JTextField();
 		useridTextField.setSize(new Dimension(textFieldWidth, JTEXTFIELD_HEIGHT));
+		useridTextField.setBorder(new LineBorder(TITLEBAR_BORDER_COLOUR, 1, true));
 		totalHeight += useridTextField.getHeight() + MARGIN;
 		
-		passwordLabel = new JLabel("Enter your password:");
+		passwordLabel = new JLabel("ACCESS PIN");
 		passwordLabel.setSize(new Dimension(labelWidth, JLABEL_HEIGHT));
 		totalHeight += passwordLabel.getHeight() + MARGIN;
 		
 		passwordField = new JPasswordField();
 		passwordField.setSize(new Dimension(textFieldWidth, JTEXTFIELD_HEIGHT));
+		passwordField.setBorder(new LineBorder(TITLEBAR_BORDER_COLOUR, 1, true));
 		totalHeight += passwordField.getHeight() + MARGIN;
 		
 		loginButton = new JButton("LOG IN");
@@ -58,7 +60,6 @@ public class CamsLoginForm extends JPanel implements JInterfaceController {
 		loginButton.setSize(new Dimension(STANDARDBUTTON_WIDTH, STANDARDBUTTON_HEIGHT));
 		loginButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				System.out.println("Login Fired!");
 				admin = loginController.login(useridTextField.getText(), passwordField.getText());
 				if(admin != null) {
 					if (admin.getStallID() != -1) {
@@ -79,7 +80,7 @@ public class CamsLoginForm extends JPanel implements JInterfaceController {
 		posY = (getHeight() - totalHeight)/2;
 		
 		useridLabel.setLocation(posX, posY);
-		posY += useridLabel.getHeight()+MARGIN;
+		posY += useridLabel.getHeight();
 		add(useridLabel);
 		
 		useridTextField.setLocation(posX, posY);
@@ -87,7 +88,7 @@ public class CamsLoginForm extends JPanel implements JInterfaceController {
 		add(useridTextField);
 		
 		passwordLabel.setLocation(posX, posY);
-		posY += passwordLabel.getHeight()+MARGIN;
+		posY += passwordLabel.getHeight();
 		add(passwordLabel);
 		
 		passwordField.setLocation(posX, posY);

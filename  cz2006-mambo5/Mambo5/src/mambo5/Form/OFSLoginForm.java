@@ -1,3 +1,7 @@
+//DESIGN UNIFIED
+//LOGIN TESTED
+//JUNIT PENDING
+
 package mambo5.Form;
 
 import java.awt.Dimension;
@@ -10,6 +14,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+import javax.swing.border.LineBorder;
 
 import mambo5.Controller.JInterfaceController;
 import mambo5.Controller.LoginController;
@@ -27,28 +32,35 @@ public class OFSLoginForm extends JPanel implements JInterfaceController {
 	
 	public OFSLoginForm(final CamsMainFrame mainFrame) {
 		setSize(new Dimension(CONTENTPANE_WIDTH, CONTENTPANE_HEIGHT));
-		setLocation(0, POS_CONTENTPANE_OFFSET_Y);
+		setLocation(0, 40);
 		setLayout(null);
 		setBackground(JPANEL_BACKGROUND_COLOUR);
+		mainFrame.setTitle("Login to OFS Management System");
 		loginController = new LoginController();
 		
-		useridLabel = new JLabel("Enter your ID:");
+		useridLabel = new JLabel("ACCESS ID");
 		useridLabel.setSize(new Dimension(labelWidth, JLABEL_HEIGHT));
 		totalHeight += useridLabel.getHeight() + MARGIN;
 		
 		useridTextField = new JTextField();
 		useridTextField.setSize(new Dimension(textFieldWidth, JTEXTFIELD_HEIGHT));
+		useridTextField.setBorder(new LineBorder(TITLEBAR_BORDER_COLOUR, 1, true));
 		totalHeight += useridTextField.getHeight() + MARGIN;
 		
-		passwordLabel = new JLabel("Enter your password:");
+		passwordLabel = new JLabel("ACCESS PIN");
 		passwordLabel.setSize(new Dimension(labelWidth, JLABEL_HEIGHT));
 		totalHeight += passwordLabel.getHeight() + MARGIN;
 		
 		passwordField = new JPasswordField();
 		passwordField.setSize(new Dimension(textFieldWidth, JTEXTFIELD_HEIGHT));
+		passwordField.setBorder(new LineBorder(TITLEBAR_BORDER_COLOUR, 1, true));
 		totalHeight += passwordField.getHeight() + MARGIN;
 		
 		loginButton = new JButton("LOG IN");
+		loginButton.setForeground(FOREGROUND_COLOUR);
+		loginButton.setFocusPainted(false);
+		loginButton.setBorder(new LineBorder(TITLEBAR_BORDER_COLOUR, 1, true));
+		loginButton.setBackground(TITLEBAR_BACKGROUND_COLOUR);
 		loginButton.setSize(new Dimension(STANDARDBUTTON_WIDTH, STANDARDBUTTON_HEIGHT));
 		loginButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -67,10 +79,10 @@ public class OFSLoginForm extends JPanel implements JInterfaceController {
 		totalHeight += loginButton.getHeight();
 		
 		posX = (getWidth() - useridTextField.getWidth())/2;
-		posY = (getHeight() - totalHeight)/2;
+		posY = (CONTENTPANE_HEIGHT - totalHeight)/2;
 		
 		useridLabel.setLocation(posX, posY);
-		posY += useridLabel.getHeight()+MARGIN;
+		posY += useridLabel.getHeight();
 		add(useridLabel);
 		
 		useridTextField.setLocation(posX, posY);
@@ -78,7 +90,7 @@ public class OFSLoginForm extends JPanel implements JInterfaceController {
 		add(useridTextField);
 		
 		passwordLabel.setLocation(posX, posY);
-		posY += passwordLabel.getHeight()+MARGIN;
+		posY += passwordLabel.getHeight();
 		add(passwordLabel);
 		
 		passwordField.setLocation(posX, posY);
