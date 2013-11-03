@@ -422,6 +422,7 @@ public class CamsCreateOrderForm extends JPanel implements JInterfaceController 
 		btnPrevPage.setBackground(MENU_PAGING_BACKGROUND);
 		btnPrevPage.setFocusPainted(false);
 		btnPrevPage.setBorder(new LineBorder(MENU_PAGING_BORDER, 1, true));
+		btnPrevPage.setEnabled(false);
 		btnPrevPage.addActionListener(new ActionListener() {
 
 			@Override
