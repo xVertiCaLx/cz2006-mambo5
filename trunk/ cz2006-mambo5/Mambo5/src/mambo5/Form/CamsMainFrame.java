@@ -10,6 +10,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
+import javax.swing.BorderFactory;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -79,19 +80,8 @@ public class CamsMainFrame extends JFrame implements JInterfaceController {
 		posX += MARGIN;
 		posY += MARGIN;
 
-		mainMenuButton = new JButton("Main Menu");
-		mainMenuButton.setSize(new Dimension(STANDARDBUTTON_WIDTH,
-				STANDARDBUTTON_HEIGHT - 10));
-		mainMenuButton.setLocation(posX, posY);
-		mainMenuButton.setVisible(false);
-		mainMenuButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				replacePanel(selectPanel);
-			}
-		});
-
-		titlePanel.add(mainMenuButton);
-		posX += mainMenuButton.getWidth() + MARGIN;
+		
+		posX += STANDARDBUTTON_WIDTH + MARGIN;
 
 		titleLabel.setForeground(FOREGROUND_COLOUR);
 		titleLabel.setFont(new Font("Arial", Font.BOLD, 12));
@@ -114,6 +104,25 @@ public class CamsMainFrame extends JFrame implements JInterfaceController {
 		logoPanel.setBorder(new MatteBorder(1, 0, 0, 0, TITLEBAR_BORDER_COLOUR));
 		logoPanel.setLayout(null);
 		contentPane.add(logoPanel);
+		
+		posX = MARGIN;
+		posY = MARGIN;
+		
+		mainMenuButton = new JButton("Main Menu");
+		mainMenuButton.setSize(new Dimension(STANDARDBUTTON_WIDTH,
+				STANDARDBUTTON_HEIGHT - 10));
+		mainMenuButton.setForeground(FOREGROUND_COLOUR);
+		mainMenuButton.setBackground(TITLEBAR_BACKGROUND_COLOUR);
+		mainMenuButton.setBorder(BorderFactory.createEmptyBorder());
+		mainMenuButton.setLocation(posX, posY);
+		mainMenuButton.setVisible(false);
+		mainMenuButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				replacePanel(selectPanel);
+			}
+		});
+
+		logoPanel.add(mainMenuButton);
 		
 		posX = CONTENTPANE_WIDTH - 200;
 		mambo5LogoLbl = new JLabel();
