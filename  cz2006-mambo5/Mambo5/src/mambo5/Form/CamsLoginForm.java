@@ -10,6 +10,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+import javax.swing.border.LineBorder;
 
 import mambo5.Controller.JInterfaceController;
 import mambo5.Controller.LoginController;
@@ -50,6 +51,10 @@ public class CamsLoginForm extends JPanel implements JInterfaceController {
 		totalHeight += passwordField.getHeight() + MARGIN;
 		
 		loginButton = new JButton("LOG IN");
+		loginButton.setForeground(FOREGROUND_COLOUR);
+		loginButton.setFocusPainted(false);
+		loginButton.setBorder(new LineBorder(TITLEBAR_BORDER_COLOUR, 1, true));
+		loginButton.setBackground(TITLEBAR_BACKGROUND_COLOUR);
 		loginButton.setSize(new Dimension(STANDARDBUTTON_WIDTH, STANDARDBUTTON_HEIGHT));
 		loginButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
