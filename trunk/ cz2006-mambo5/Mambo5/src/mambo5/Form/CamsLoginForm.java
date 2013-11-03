@@ -3,7 +3,6 @@ package mambo5.Form;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -15,7 +14,6 @@ import javax.swing.JTextField;
 import mambo5.Controller.JInterfaceController;
 import mambo5.Controller.LoginController;
 import mambo5.Entity.Admin;
-import mambo5.Entity.Menu;
 
 public class CamsLoginForm extends JPanel implements JInterfaceController {
 	private JTextField useridTextField;
@@ -23,7 +21,7 @@ public class CamsLoginForm extends JPanel implements JInterfaceController {
 	private JLabel useridLabel, passwordLabel;
 	private JButton loginButton;
 	boolean id_select = true, pwd_select = false;
-	private int labelWidth = 300, textFieldWidth = 300, totalWidth = 0, totalHeight = 0, posX=0, posY=0, menuID = -1;
+	private int labelWidth = 300, textFieldWidth = 300, totalHeight = 0, posX=0, posY=0;
 	private LoginController loginController;
 	private Admin admin;
 	
@@ -32,6 +30,7 @@ public class CamsLoginForm extends JPanel implements JInterfaceController {
 		setLocation(0, 40);
 		setLayout(null);
 		setBackground(JPANEL_BACKGROUND_COLOUR);
+		mainFrame.setTitle("Login to Canteen Management System");
 		loginController = new LoginController();
 		
 		useridLabel = new JLabel("Enter your ID:");

@@ -39,7 +39,7 @@ public class CamsMainFrame extends JFrame implements JInterfaceController {
 	private JPanel camsLoginForm, camsCreateOrderForm, camsEditMenuItemForm, camsListMenuItemForm, camsMainMenuForm, camsCreateMenuItemForm, camsPendingOrderForm, camsRefundOrderForm;
 	
 	private JLabel titleLabel = new JLabel("#Title"), mambo5LogoLbl;
-	private JButton mainMenuButton;
+	private JButton systemButton, mainMenuButton;
 	private int posX = 0, posY = 0, stallID = -1, menuID = -1, accessID = -1;
 	
 	private ArrayList<Menu> menuList = new ArrayList<Menu>();
@@ -80,7 +80,21 @@ public class CamsMainFrame extends JFrame implements JInterfaceController {
 		posX += MARGIN;
 		posY += MARGIN;
 
-		
+		mainMenuButton = new JButton("MAIN MENU");
+		mainMenuButton.setSize(new Dimension(STANDARDBUTTON_WIDTH,
+				STANDARDBUTTON_HEIGHT - 10));
+		mainMenuButton.setForeground(FOREGROUND_COLOUR);
+		mainMenuButton.setBackground(TITLEBAR_BACKGROUND_COLOUR);
+		mainMenuButton.setBorder(BorderFactory.createEmptyBorder());
+		mainMenuButton.setFocusPainted(false);
+		mainMenuButton.setLocation(posX, posY);
+		mainMenuButton.setVisible(false);
+		mainMenuButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				replacePanel("CamsMainMenuForm");
+			}
+		});
+		titlePanel.add(mainMenuButton);
 		posX += STANDARDBUTTON_WIDTH + MARGIN;
 
 		titleLabel.setForeground(FOREGROUND_COLOUR);
@@ -108,26 +122,27 @@ public class CamsMainFrame extends JFrame implements JInterfaceController {
 		posX = MARGIN;
 		posY = MARGIN;
 		
-		mainMenuButton = new JButton("Main Menu");
-		mainMenuButton.setSize(new Dimension(STANDARDBUTTON_WIDTH,
+		systemButton = new JButton("CHOOSE SYSTEM");
+		systemButton.setSize(new Dimension(STANDARDBUTTON_WIDTH,
 				STANDARDBUTTON_HEIGHT - 10));
-		mainMenuButton.setForeground(FOREGROUND_COLOUR);
-		mainMenuButton.setBackground(TITLEBAR_BACKGROUND_COLOUR);
-		mainMenuButton.setBorder(BorderFactory.createEmptyBorder());
-		mainMenuButton.setLocation(posX, posY);
-		mainMenuButton.setVisible(false);
-		mainMenuButton.addActionListener(new ActionListener() {
+		systemButton.setForeground(FOREGROUND_COLOUR);
+		systemButton.setBackground(TITLEBAR_BACKGROUND_COLOUR);
+		systemButton.setFocusPainted(false);
+		systemButton.setBorder(BorderFactory.createEmptyBorder());
+		systemButton.setLocation(posX, posY);
+		systemButton.setVisible(false);
+		systemButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				replacePanel(selectPanel);
 			}
 		});
 
-		logoPanel.add(mainMenuButton);
+		logoPanel.add(systemButton);
 		
-		posX = CONTENTPANE_WIDTH - 200;
+		posX = CONTENTPANE_WIDTH - 160;
 		mambo5LogoLbl = new JLabel();
 		mambo5LogoLbl.setIcon(mambo5Logo);
-		mambo5LogoLbl.setSize(new Dimension(200,38));
+		mambo5LogoLbl.setSize(new Dimension(160,38));
 		mambo5LogoLbl.setLocation(posX,0);
 		logoPanel.add(mambo5LogoLbl);
 	}
@@ -150,10 +165,12 @@ public class CamsMainFrame extends JFrame implements JInterfaceController {
 		contentPane.add(applicationPanel);
 		contentPane.revalidate();
 		contentPane.repaint();
-		if (this.applicationPanel instanceof SelectPanel)
+		if (this.applicationPanel instanceof SelectPanel){
+			setTitle("Canteen Management System V1.0");
+			systemButton.setVisible(false);
 			mainMenuButton.setVisible(false);
-		else
-			mainMenuButton.setVisible(true);
+		} else
+			systemButton.setVisible(true);
 	}
 	
 	public void setID(int stallID, int accessID) {
@@ -170,14 +187,18 @@ public class CamsMainFrame extends JFrame implements JInterfaceController {
 	
 	public void replacePanel(String panelName) {
 		if (panelName.equals("CamsCreateOrderForm")) {
+			mainMenuButton.setVisible(true);
 			camsCreateOrderForm = new CamsCreateOrderForm(this, menuItemList, orderDetailList, stallID, menuID);
 			replacePanel(camsCreateOrderForm);
 		} else if (panelName.equals("CamsEditMenuItemForm")) {
+			mainMenuButton.setVisible(true);
 			replacePanel(camsEditMenuItemForm);
 		} else if (panelName.equals("CamsListMenuItemForm")) {
+			mainMenuButton.setVisible(true);
 			camsListMenuItemForm = new CamsListMenuItemForm(this, menuItemList, menuID);
 			replacePanel(camsListMenuItemForm);
 		} else if (panelName.equals("CamsMainMenuForm")) {
+			mainMenuButton.setVisible(false);
 			if (menuID== -1)
 				replacePanel("CamsCreateMenuItemForm");
 			else  {
@@ -185,16 +206,19 @@ public class CamsMainFrame extends JFrame implements JInterfaceController {
 				replacePanel(camsMainMenuForm);
 			}
 		} else if (panelName.equals("CamsCreateMenuItemForm")) {
+			if (menuID != -1) mainMenuButton.setVisible(true);
 			camsCreateMenuItemForm = new CamsCreateMenuItemForm(this, menuList, stallID, accessID);
 			replacePanel(camsCreateMenuItemForm);
 		} else if (panelName.equals("CamsPendingOrderForm")) {
-			System.out.println("order:" + orderList.size());
+			mainMenuButton.setVisible(true);
 			camsPendingOrderForm = new CamsPendingOrderForm(this, orderDetailList, orderList, menuItemList, stallID, menuID);
 			replacePanel(camsPendingOrderForm);
 		} else if (panelName.equals("CamsLoginForm")) {
+			mainMenuButton.setVisible(false);
 			camsLoginForm = new CamsLoginForm(this);
 			replacePanel(camsLoginForm);
 		} else if (panelName.equals("CamsRefundOrderForm")) {
+			mainMenuButton.setVisible(true);
 			camsRefundOrderForm = new CamsRefundOrderForm(this,stallID);
 			replacePanel(camsRefundOrderForm);
 		} else {
