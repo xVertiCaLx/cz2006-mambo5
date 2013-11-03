@@ -1,10 +1,11 @@
+//DESIGN UNIFIED
+//LOGIN TESTED
+//JUNIT PENDING
+
 package mambo5.Form;
 
 import java.awt.Color;
 import java.awt.Dimension;
-//import java.awt.EventQueue;
-//import javax.swing.JComboBox;
-//import java.awt.Font;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -14,9 +15,6 @@ import javax.swing.BorderFactory;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-/*import javax.swing.JFrame;
- import javax.swing.JLabel;
- import javax.swing.JPanel;*/
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;

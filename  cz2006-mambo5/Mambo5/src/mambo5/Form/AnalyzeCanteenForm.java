@@ -1,33 +1,27 @@
 package mambo5.Form;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.EventQueue;
-
-
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
 import java.util.ArrayList;
 
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import javax.swing.table.DefaultTableModel;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.JComboBox;
-import javax.swing.JButton;
+import javax.swing.border.LineBorder;
+import javax.swing.table.DefaultTableModel;
 
 import mambo5.Controller.CanteenController;
+import mambo5.Controller.JInterfaceController;
 import mambo5.Entity.Canteen;
 import mambo5.Entity.Menu;
 
-public class AnalyzeCanteenForm extends JPanel  {
+public class AnalyzeCanteenForm extends JPanel implements JInterfaceController {
 
 	private JTable menuTable;
 	private CamsMainFrame mainFrame;
@@ -84,6 +78,10 @@ public class AnalyzeCanteenForm extends JPanel  {
 		add(scrollPane);
 		
 		JButton btnBack = new JButton("Back");
+		btnBack.setForeground(FOREGROUND_COLOUR);
+		btnBack.setFocusPainted(false);
+		btnBack.setBorder(new LineBorder(TITLEBAR_BORDER_COLOUR, 1, true));
+		btnBack.setBackground(TITLEBAR_BACKGROUND_COLOUR);
 		btnBack.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				mainFrame.setTitle("Please select a Function to perform:");

@@ -1,8 +1,10 @@
+//DESIGN UNIFIED
+//FUNCTION TESTED
+//JUNIT PENDING
+
 package mambo5.Form;
 
-import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -10,11 +12,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.border.LineBorder;
 
 import mambo5.Controller.JInterfaceController;
 import mambo5.Controller.OrderController;
@@ -28,9 +32,9 @@ public class CamsPendingOrderForm extends JPanel implements
 	private JPanel receiptPanel, ordersPanel, sidePanel, searchPanel;
 
 	private CamsMainFrame mainFrame;
-	private int stallID, posX = 0, posY = 0, orderID, totalHeight = 0,
-			totalWidth = 0, currentItem = 0, page = 1;
+	private int stallID, posX = 0, posY = 0, orderID, totalHeight = 0, totalWidth = 0, currentItem = 0, page = 1;
 	private JTextArea receipt;
+	private JLabel searchLbl;
 	private JScrollPane receiptScrollPane;
 	private Map<JButton, Order> orderButtons;
 	private Map<Order, ArrayList<OrderDetail>> orderDetails;
@@ -38,20 +42,18 @@ public class CamsPendingOrderForm extends JPanel implements
 	private ArrayList<OrderDetail> orderDetailList;
 	private ArrayList<Order> orderIDList = new ArrayList<Order>();
 	private OrderController OrderController;
-	private JButton btnConfirmOrder;
 	
 	private ArrayList<MenuItem> menuItemList = new ArrayList<MenuItem>();
 
 	private NumPad numpadPanel;
-	private JButton btnMainPage = new JButton("MAIN PAGE"),
-			btnNextPage = new JButton("NEXT PAGE"), btnPrevPage = new JButton(
-					"PREV PAGE"), btnSearch;
+	private JButton btnNextPage = new JButton("NEXT PAGE"), btnPrevPage = new JButton("PREV PAGE"), btnConfirmOrder, btnSearch;
 	private JTextField searchIDTextField;
 
 	public CamsPendingOrderForm(final CamsMainFrame mainFrame,
 			ArrayList<OrderDetail> orderDetailList, ArrayList<Order> orderList,
 			ArrayList<MenuItem> menuItemList, int stallID, int menuID)
 	{
+		mainFrame.setTitle("Pending Orders");
 		this.mainFrame = mainFrame;
 		System.out.println("STALL: " + stallID);
 		this.stallID = stallID;
@@ -90,7 +92,7 @@ public class CamsPendingOrderForm extends JPanel implements
 		receiptScrollPane.setSize(new Dimension(RECEIPT_WIDTH,
 				RECEIPT_HEIGHT / 2 + 140));
 		receiptScrollPane.setLocation(MARGIN, MARGIN);
-		receiptScrollPane.setBackground(WHITE_BACKGROUND_COLOUR);
+		receiptScrollPane.setBackground(JPANEL_BACKGROUND_COLOUR);
 		receiptScrollPane.add(receipt);
 		receiptPanel.add(receiptScrollPane);
 
@@ -102,25 +104,43 @@ public class CamsPendingOrderForm extends JPanel implements
 		searchPanel.setLocation(posX, posY);
 		searchPanel.setBackground(JPANEL_BACKGROUND_COLOUR);
 		searchPanel.setLayout(null);
+		
+		searchLbl = new JLabel("Order ID");
+		searchLbl.setLocation((MARGIN * 9), (MARGIN * 9)-JTEXTFIELD_HEIGHT);
+		searchLbl.setSize(new Dimension(RECEIPTPANE_WIDTH / 2
+				- (3 * MARGIN), JTEXTFIELD_HEIGHT));
 
 		searchIDTextField = new JTextField();
+		searchIDTextField.setBorder(new LineBorder(TITLEBAR_BORDER_COLOUR, 1, true));
 		searchIDTextField.setSize(new Dimension(RECEIPTPANE_WIDTH / 2
 				- (3 * MARGIN), JTEXTFIELD_HEIGHT));
 		searchIDTextField.setLocation(MARGIN * 9, MARGIN * 9);
 
 		btnSearch = new JButton("SEARCH");
+		
 		btnSearch.setSize(new Dimension(SIDEPANE_WIDTH,
-				STANDARDBUTTON_HEIGHT + 20));
+				STANDARDBUTTON_HEIGHT));
+		
+		btnSearch.setForeground(FOREGROUND_COLOUR);
+		btnSearch.setBackground(TITLEBAR_BACKGROUND_COLOUR);
+		btnSearch.setBorder(new LineBorder(TITLEBAR_BORDER_COLOUR, 1, true));
+		btnSearch.setFocusPainted(false);
 		btnSearch.setLocation(75, 120);
 
 		btnConfirmOrder = new JButton("CONFIRM ORDER");
 		btnConfirmOrder.setSize(new Dimension(SIDEPANE_WIDTH,
 				STANDARDBUTTON_HEIGHT));
-		btnConfirmOrder.setLocation(RECEIPT_WIDTH / 2, 0);
+		
+		btnConfirmOrder.setForeground(FOREGROUND_COLOUR);
+		btnConfirmOrder.setBackground(TITLEBAR_BACKGROUND_COLOUR);
+		btnConfirmOrder.setBorder(new LineBorder(TITLEBAR_BORDER_COLOUR, 1, true));
+		btnConfirmOrder.setFocusPainted(false);
+		btnConfirmOrder.setLocation(((searchPanel.getWidth() - btnConfirmOrder.getWidth())/2), MARGIN);
 
 		searchPanel.add(searchIDTextField);
 		searchPanel.add(btnSearch);
 		searchPanel.add(btnConfirmOrder);
+		searchPanel.add(searchLbl);
 
 		btnConfirmOrder.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -132,7 +152,6 @@ public class CamsPendingOrderForm extends JPanel implements
 				{
 					message = "Order " + orderID + " has completed";
 					System.out.println("val is(before): " +val);
-					//Iterate through the arraylist and remove the orderID from it
 					for (int k = 0; k < orderIDList.size(); k++) {
 						val = orderIDList.get(k).getOrderID();
 						if (val == orderID) {
@@ -153,6 +172,7 @@ public class CamsPendingOrderForm extends JPanel implements
 		btnSearch.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				double tempTotal = 0.00;
+				boolean exist = false;
 				try
 				{
 					orderID = Integer.parseInt(searchIDTextField.getText());
@@ -163,6 +183,7 @@ public class CamsPendingOrderForm extends JPanel implements
 					for (int i = 0; i < orderIDList.size(); i++) {
 						if (orderIDList.get(i).getOrderID() == Integer
 								.parseInt(searchIDTextField.getText())) {
+							exist = true;
 							for (int j = 0; j < orderDetails.get(orderIDList.get(i))
 									.size(); j++) {
 								receipt.append(orderDetails.get(orderIDList.get(i)).get(j).getQuantity()
@@ -183,6 +204,11 @@ public class CamsPendingOrderForm extends JPanel implements
 										.getActualPrice());
 							}
 						}
+					}
+					
+					if (!exist) {
+						JOptionPane.showMessageDialog(null,
+								"The Order ID you entered cannot be found.");
 					}
 					receipt.setText(receipt.getText() + "\n\n"
 							+ "========================================\n"
@@ -222,8 +248,9 @@ public class CamsPendingOrderForm extends JPanel implements
 		// Side Panel
 		sidePanel = new JPanel();
 		sidePanel.setLayout(null);
+		sidePanel.setBackground(JPANEL_BACKGROUND_COLOUR);
 		sidePanel.setSize(new Dimension(SIDEPANE_WIDTH, SIDEPANE_HEIGHT));
-		sidePanel.setLocation(posX, posY + 50);
+		sidePanel.setLocation(posX, posY);
 
 		posX = (RECEIPTPANE_WIDTH - btnSearch.getWidth()) / 2;
 		posY += searchIDTextField.getAlignmentY()
@@ -242,14 +269,11 @@ public class CamsPendingOrderForm extends JPanel implements
 		boolean write = false;
 
 		menuItems = new HashMap<Integer, MenuItem>();
+		orderButtons = new HashMap<JButton, Order>();
 		for (int i = 0; i < menuItemList.size(); i++) {
-			System.out.println(menuID);
 			if (menuItemList.get(i).getMenuID() == menuID) {
 				menuItems.put(menuItemList.get(i).getMenuItemID(),
 						menuItemList.get(i));
-				System.out.println(menuItemList.get(i).getMenuID()
-						+ " item id: " + menuItemList.get(i).getMenuItemID()
-						+ " " + menuItemList.get(i).getMenuItemName());
 			}
 		}
 
@@ -271,14 +295,11 @@ public class CamsPendingOrderForm extends JPanel implements
 					}
 				}
 				if (write) {
-					System.out.println("add to list");
 					orderDetails.put(orderList.get(i), this.orderDetailList);
 				}
 				write = false;
 			}
 		}
-		
-		System.out.println("orderIDList size is after initialization" + orderIDList.size());
 	}
 
 	public void initOrderButtons(int stallID, ArrayList<Order> orderList) {
@@ -286,8 +307,7 @@ public class CamsPendingOrderForm extends JPanel implements
 		posY = MARGIN;
 		totalWidth = (MENUITEM_BUTTON_WIDTH + MARGIN);
 		totalHeight = 2 * (MENUITEM_BUTTON_HEIGHT + MARGIN);
-
-		orderButtons = new HashMap<JButton, Order>();
+		
 		for (; currentItem < orderList.size(); currentItem++) {
 			if (totalWidth >= ordersPanel.getWidth()) {
 				if (totalHeight >= ordersPanel.getHeight())
@@ -311,6 +331,7 @@ public class CamsPendingOrderForm extends JPanel implements
 		posY = MARGIN;
 		totalWidth = (MENUITEM_BUTTON_WIDTH + MARGIN);
 		totalHeight = 2 * (MENUITEM_BUTTON_HEIGHT + MARGIN);
+		orderButtons = new HashMap<JButton, Order>();
 		for (; currentItem < orderIDList.size(); currentItem++) {
 			if (totalWidth >= ordersPanel.getWidth()) {
 				if (totalHeight >= ordersPanel.getHeight())
@@ -327,6 +348,9 @@ public class CamsPendingOrderForm extends JPanel implements
 			addOrderIDButtons(orderIDList.get(currentItem));
 			posX += MENUITEM_BUTTON_WIDTH + MARGIN;
 		}
+		if (currentItem >= orderIDList.size()) btnNextPage.setEnabled(false);
+		else btnNextPage.setEnabled(true);
+		
 	}
 
 	public void addOrderIDButtons(Order order) {
@@ -335,6 +359,10 @@ public class CamsPendingOrderForm extends JPanel implements
 		orderIDButton.setSize(new Dimension(MENUITEM_BUTTON_WIDTH,
 				MENUITEM_BUTTON_HEIGHT));
 		orderIDButton.setLocation(posX, posY);
+		orderIDButton.setForeground(FOREGROUND_COLOUR);
+		orderIDButton.setFocusPainted(false);
+		orderIDButton.setBorder(new LineBorder(TITLEBAR_BORDER_COLOUR, 1, true));
+		orderIDButton.setBackground(TITLEBAR_BACKGROUND_COLOUR);
 		orderIDButton.setActionCommand(Integer.toString(order.getOrderID()));
 		orderButtons.put(orderIDButton, order);
 		orderIDButton.addActionListener(new ActionListener() {
@@ -385,50 +413,33 @@ public class CamsPendingOrderForm extends JPanel implements
 	}
 
 	public void initKeypad() {
-		// initialise number pad
 		numpadPanel = new NumPad();
 		numpadPanel.setLayout(null);
 		numpadPanel.setSize(new Dimension(KEYPADPANE_WIDTH, KEYPADPANE_HEIGHT));
 		numpadPanel.setLocation(posX, posY);
-		// implement action listener
 		implementButtons();
 	}
 
 	public void initSidePanelButton() {
-		btnMainPage = new JButton("MAIN PAGE");
 		btnNextPage = new JButton("NEXT PAGE");
 		btnPrevPage = new JButton("PREV PAGE");
 
-		posX = MARGIN;
-		posY = MARGIN;
+		posX = 0;
+		posY = 0;
 
-		btnMainPage.setForeground(Color.WHITE);
-		btnMainPage.setFont(SIDEPANEL_BUTTON_FONT);
-		btnMainPage.setBackground(new Color(255, 0, 0));
-		btnMainPage.setBounds(posX, posY, SIDEBUTTON_WIDTH, SIDEBUTTON_HEIGHT);
-		btnMainPage.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				mainFrame.replacePanel("CamsMainMenuForm");
-			}
-
-		});
-		sidePanel.add(btnMainPage);
-
-		posY += SIDEBUTTON_HEIGHT + MARGIN;
-
-		btnNextPage.setForeground(Color.WHITE);
+		btnNextPage.setForeground(MENU_PAGING_FOREGROUND_COLOUR);
 		btnNextPage.setFont(SIDEPANEL_BUTTON_FONT);
-		btnNextPage.setBackground(new Color(100, 149, 237));
+		btnNextPage.setBackground(MENU_PAGING_BACKGROUND);
+		btnNextPage.setFocusPainted(false);
+		btnNextPage.setBorder(new LineBorder(MENU_PAGING_BORDER, 1, true));
 		btnNextPage.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				if (currentItem < menuItemList.size()) {
+				if (currentItem < orderIDList.size()) {
 					btnNextPage.setEnabled(true);
 					btnPrevPage.setEnabled(true);
-					currentItem = (page * 9) + 1;
+					currentItem = (page * 9);
 					page++;
 					ordersPanel.removeAll();
 					refreshButton();
@@ -439,23 +450,25 @@ public class CamsPendingOrderForm extends JPanel implements
 			}
 
 		});
-		btnNextPage.setBounds(posX, posY, SIDEBUTTON_WIDTH, SIDEBUTTON_HEIGHT);
+		btnNextPage.setBounds(posX, posY, SIDEPANE_WIDTH - MARGIN, SIDEBUTTON_HEIGHT);
+		if (orderIDList.size() < 10) btnNextPage.setEnabled(false);
 		sidePanel.add(btnNextPage);
 
 		posY += SIDEBUTTON_HEIGHT + MARGIN;
 
-		btnPrevPage.setForeground(Color.WHITE);
+		btnPrevPage.setForeground(MENU_PAGING_FOREGROUND_COLOUR);
 		btnPrevPage.setFont(SIDEPANEL_BUTTON_FONT);
-		btnPrevPage.setBackground(new Color(100, 149, 237));
+		btnPrevPage.setBackground(MENU_PAGING_BACKGROUND);
+		btnPrevPage.setFocusPainted(false);
+		btnPrevPage.setBorder(new LineBorder(MENU_PAGING_BORDER, 1, true));
 		btnPrevPage.setEnabled(false);
 		btnPrevPage.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				if (page > 2) {
-					btnNextPage.setEnabled(true);
 					btnPrevPage.setEnabled(true);
-					currentItem = (--page-1) * 9 +1;
+					currentItem = (--page - 1) * 9 + 1;
 					ordersPanel.removeAll();
 					refreshButton();
 					revalidate();
@@ -463,8 +476,7 @@ public class CamsPendingOrderForm extends JPanel implements
 					System.out.println("Page: " + page);
 				} else {
 					page = 1;
-					btnNextPage.setEnabled(true);
-					btnPrevPage.setEnabled(true);
+					btnPrevPage.setEnabled(false);
 					currentItem = 0;
 					ordersPanel.removeAll();
 					refreshButton();
@@ -472,10 +484,11 @@ public class CamsPendingOrderForm extends JPanel implements
 					repaint();
 					System.out.println("Page: " + page);
 				}
+				btnNextPage.setEnabled(true);
 			}
 
 		});
-		btnPrevPage.setBounds(posX, posY, SIDEBUTTON_WIDTH, SIDEBUTTON_HEIGHT);
+		btnPrevPage.setBounds(posX, posY, SIDEPANE_WIDTH - MARGIN, SIDEBUTTON_HEIGHT);
 		sidePanel.add(btnPrevPage);
 	}
 
@@ -532,6 +545,12 @@ public class CamsPendingOrderForm extends JPanel implements
 		numpadPanel.num9().addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				searchIDTextField.setText(searchIDTextField.getText() + "9");
+			}
+		});
+		
+		numpadPanel.num0().addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				searchIDTextField.setText(searchIDTextField.getText() + "0");
 			}
 		});
 

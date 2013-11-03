@@ -1,30 +1,27 @@
 package mambo5.Form;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.EventQueue;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.util.ArrayList;
 
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import javax.swing.JLabel;
-import javax.swing.JComboBox;
-import javax.swing.JOptionPane;
-import javax.swing.JTextField;
-import javax.swing.JTextArea;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
+import javax.swing.border.LineBorder;
 
 import mambo5.Controller.CanteenController;
+import mambo5.Controller.JInterfaceController;
 import mambo5.Entity.Canteen;
 
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-
-public class UpdateCanteenForm extends JPanel {
+public class UpdateCanteenForm extends JPanel implements JInterfaceController {
 
 	private JTextField nameText;
 	private JTextField addressText;
@@ -104,6 +101,10 @@ public class UpdateCanteenForm extends JPanel {
 		maxStallText.setColumns(10);
 		
 		JButton updateBtn = new JButton("Update");
+		updateBtn.setForeground(FOREGROUND_COLOUR);
+		updateBtn.setFocusPainted(false);
+		updateBtn.setBorder(new LineBorder(TITLEBAR_BORDER_COLOUR, 1, true));
+		updateBtn.setBackground(TITLEBAR_BACKGROUND_COLOUR);
 		updateBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				submitsCanteenDetails(e);
@@ -133,6 +134,10 @@ public class UpdateCanteenForm extends JPanel {
 		add(availableCB);
 		
 		JButton btnBack = new JButton("Back");
+		btnBack.setForeground(FOREGROUND_COLOUR);
+		btnBack.setFocusPainted(false);
+		btnBack.setBorder(new LineBorder(TITLEBAR_BORDER_COLOUR, 1, true));
+		btnBack.setBackground(TITLEBAR_BACKGROUND_COLOUR);
 		btnBack.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				mainFrame.setTitle("Please select a Function to perform:");

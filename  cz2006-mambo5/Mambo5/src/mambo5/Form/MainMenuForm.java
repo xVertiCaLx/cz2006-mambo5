@@ -1,23 +1,19 @@
 package mambo5.Form;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.EventQueue;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.JSeparator;
-import javax.swing.JTextPane;
-import javax.swing.JTextField;
+import javax.swing.border.LineBorder;
 
-import java.awt.Font;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
+import mambo5.Controller.JInterfaceController;
 
-public class MainMenuForm extends JPanel {
+public class MainMenuForm extends JPanel implements JInterfaceController {
 
 	public MainMenuForm(final CamsMainFrame mainFrame) {
 		mainFrame.setTitle("CaMS Ticketing Machine");
@@ -26,6 +22,10 @@ public class MainMenuForm extends JPanel {
 		setBackground(new Color(255, 255, 255));
 		
 		JButton btnPurchaseCard = new JButton("Purchase Card");
+		btnPurchaseCard.setForeground(FOREGROUND_COLOUR);
+		btnPurchaseCard.setFocusPainted(false);
+		btnPurchaseCard.setBorder(new LineBorder(TITLEBAR_BORDER_COLOUR, 1, true));
+		btnPurchaseCard.setBackground(TITLEBAR_BACKGROUND_COLOUR);
 		btnPurchaseCard.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				mainFrame.replacePanel(new PurchaseCardForm(mainFrame));
@@ -36,6 +36,10 @@ public class MainMenuForm extends JPanel {
 		add(btnPurchaseCard);
 		
 		JButton btnCheckHistory = new JButton("Check History");
+		btnCheckHistory.setForeground(FOREGROUND_COLOUR);
+		btnCheckHistory.setFocusPainted(false);
+		btnCheckHistory.setBorder(new LineBorder(TITLEBAR_BORDER_COLOUR, 1, true));
+		btnCheckHistory.setBackground(TITLEBAR_BACKGROUND_COLOUR);
 		btnCheckHistory.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				mainFrame.replacePanel(new ViewHistoryForm(mainFrame));
@@ -46,6 +50,10 @@ public class MainMenuForm extends JPanel {
 		add(btnCheckHistory);
 		
 		JButton btnTopUpCard = new JButton("Top-up Card");
+		btnTopUpCard.setForeground(FOREGROUND_COLOUR);
+		btnTopUpCard.setFocusPainted(false);
+		btnTopUpCard.setBorder(new LineBorder(TITLEBAR_BORDER_COLOUR, 1, true));
+		btnTopUpCard.setBackground(TITLEBAR_BACKGROUND_COLOUR);
 		btnTopUpCard.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				mainFrame.replacePanel(new AddValueForm(mainFrame));
@@ -56,6 +64,10 @@ public class MainMenuForm extends JPanel {
 		add(btnTopUpCard);
 		
 		JButton btnRefundCard = new JButton("Refund Card");
+		btnRefundCard.setForeground(FOREGROUND_COLOUR);
+		btnRefundCard.setFocusPainted(false);
+		btnRefundCard.setBorder(new LineBorder(TITLEBAR_BORDER_COLOUR, 1, true));
+		btnRefundCard.setBackground(TITLEBAR_BACKGROUND_COLOUR);
 		btnRefundCard.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				mainFrame.replacePanel(new RefundCardForm(mainFrame));
@@ -71,20 +83,20 @@ public class MainMenuForm extends JPanel {
 		
 		JPanel panel = new JPanel();
 		panel.setLayout(null);
-		panel.setBackground(new Color(0, 0, 102));
+		panel.setBackground(JPANEL_BACKGROUND_COLOUR);
 		panel.setBounds(95, 76, 613, 60);
 		add(panel);
 		
-		JLabel lblWelcomeToThe = new JLabel("Welcome to the CaMs Ticketing Machine");
-		lblWelcomeToThe.setForeground(Color.WHITE);
-		lblWelcomeToThe.setBounds(175, 0, 296, 32);
+		JLabel lblWelcomeToThe = new JLabel("Welcome to the CaMS Ticketing Machine");
+		lblWelcomeToThe.setForeground(FOREGROUND_COLOUR);
+		lblWelcomeToThe.setBounds(175, 0, 400, 32);
 		panel.add(lblWelcomeToThe);
-		lblWelcomeToThe.setFont(new Font("Arial", Font.PLAIN, 16));
+		lblWelcomeToThe.setFont(new Font("Arial", Font.BOLD, 16));
 		
-		JLabel lblSelectAnOption = new JLabel("Select an option");
-		lblSelectAnOption.setForeground(Color.WHITE);
-		lblSelectAnOption.setBounds(266, 28, 134, 32);
+		JLabel lblSelectAnOption = new JLabel("Select an option to begin.");
+		lblSelectAnOption.setForeground(FOREGROUND_COLOUR);
+		lblSelectAnOption.setBounds(266, 28, 300, 32);
 		panel.add(lblSelectAnOption);
-		lblSelectAnOption.setFont(new Font("Arial", Font.PLAIN, 15));
+		lblSelectAnOption.setFont(new Font("Arial", Font.BOLD, 15));
 	}
 }

@@ -1,30 +1,26 @@
 package mambo5.Form;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.EventQueue;
-
-
 import java.awt.Font;
-
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
+import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JLabel;
-import javax.swing.JComboBox;
-import javax.swing.JButton;
+import javax.swing.border.LineBorder;
 
 import mambo5.Controller.CanteenController;
+import mambo5.Controller.JInterfaceController;
 import mambo5.Controller.StallController;
 import mambo5.Entity.Canteen;
 import mambo5.Entity.Stall;
 
-public class DeleteStallForm extends JPanel {
+public class DeleteStallForm extends JPanel implements JInterfaceController {
 	private CamsMainFrame mainFrame;
 	private JFrame frame;
 	
@@ -72,6 +68,10 @@ public class DeleteStallForm extends JPanel {
 			}
 		});
 		add(availableCB);
+		deleteBtn.setForeground(FOREGROUND_COLOUR);
+		deleteBtn.setFocusPainted(false);
+		deleteBtn.setBorder(new LineBorder(TITLEBAR_BORDER_COLOUR, 1, true));
+		deleteBtn.setBackground(TITLEBAR_BACKGROUND_COLOUR);
 		deleteBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				submitsDeleteStall(e);
@@ -89,6 +89,10 @@ public class DeleteStallForm extends JPanel {
 		add(stallLabel);
 		
 		JButton btnBack = new JButton("Back");
+		btnBack.setForeground(FOREGROUND_COLOUR);
+		btnBack.setFocusPainted(false);
+		btnBack.setBorder(new LineBorder(TITLEBAR_BORDER_COLOUR, 1, true));
+		btnBack.setBackground(TITLEBAR_BACKGROUND_COLOUR);
 		btnBack.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				mainFrame.setTitle("Please select a Function to perform:");

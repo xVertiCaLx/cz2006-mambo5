@@ -9,6 +9,7 @@ import java.util.Map;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
+import javax.swing.border.LineBorder;
 
 import mambo5.Controller.JInterfaceController;
 import mambo5.Entity.MenuItem;
@@ -18,22 +19,20 @@ public class CamsListMenuItemForm extends JPanel implements JInterfaceController
 	private ArrayList<MenuItem> menuItemList;
 	private JPanel menuItemPanel;
 	private Map<JButton, MenuItem> menuItemButtons;
-	private Map<Integer, MenuItem> menuItems = new HashMap<Integer, MenuItem>();
 	private int menuID, posX = 0, posY = 0, totalWidth = 0 ,
 			totalHeight = 0, currentMenuItem = 0;
 	
 	private CamsMainFrame mainFrame;
 	public CamsListMenuItemForm(final CamsMainFrame mainFrame, final ArrayList<MenuItem> menuItemList, int menuID)
 	{
-		//setLayout(null);
 		this.mainFrame = mainFrame;
 		this.menuItemList = menuItemList;
 		this.menuID = menuID;
+		setLayout(null);
 		setSize(new Dimension(CONTENTPANE_WIDTH, CONTENTPANE_HEIGHT));
 		setLocation(posX, 40);
-		setLayout(null);
 		setBackground(JPANEL_BACKGROUND_COLOUR);
-		
+		menuItemButtons = new HashMap<JButton, MenuItem>();
 		initPanels();
 
 	}
@@ -42,9 +41,9 @@ public class CamsListMenuItemForm extends JPanel implements JInterfaceController
 	{
 		menuItemPanel = new JPanel();
 		menuItemPanel.setLayout(null);
-		menuItemPanel.setSize(new Dimension(MENUITEMPANE_WIDTH,
-				MENUITEMPANE_HEIGHT));
-		menuItemPanel.setLocation(300, 0); //reference from createorderform
+		menuItemPanel.setSize(new Dimension(CONTENTPANE_WIDTH-MARGIN,
+				CONTENTPANE_HEIGHT));
+		menuItemPanel.setLocation(50, 0);
 		menuItemPanel.setBackground(JPANEL_BACKGROUND_COLOUR);
 		
 		initMenuItemButtons(menuID);
@@ -52,35 +51,28 @@ public class CamsListMenuItemForm extends JPanel implements JInterfaceController
 	}
 	
 	public void initMenuItemButtons(int menuID) {
-		posX = 0;
+		posX = 70;
 		posY = MARGIN;
 		totalWidth = (MENUITEM_BUTTON_WIDTH + MARGIN);
 		totalHeight = 2 * (MENUITEM_BUTTON_HEIGHT + MARGIN);
-		menuItemButtons = new HashMap<JButton, MenuItem>();
+		
 		for (; currentMenuItem < menuItemList.size(); currentMenuItem++) {
-			System.out.println("add"+currentMenuItem+" "+menuItemList.get(currentMenuItem).getMenuID());
-			if (menuItemList.get(currentMenuItem).getMenuID() == menuID) {
-				System.out.println("MENU ID IS: " +menuID);
-				if (totalWidth >= menuItemPanel.getWidth()) {
-					if (totalHeight >= menuItemPanel.getHeight()) {
-						totalHeight = 0;
-						posX = 0;
-						posY = MARGIN;
-						break;
-					} else {
-						posX = 0;
-						totalWidth = (MENUITEM_BUTTON_WIDTH + MARGIN);
-						posY += MENUITEM_BUTTON_HEIGHT + MARGIN;
-						totalHeight += MENUITEM_BUTTON_HEIGHT + MARGIN;
-					}
-				} else {
-					totalWidth += MENUITEM_BUTTON_WIDTH + MARGIN;
+			if (totalWidth >= menuItemPanel.getWidth()) {
+				if (totalHeight >= menuItemPanel.getHeight())
+					break;
+				else {
+					posX = 70;
+					totalWidth = 2 * (MENUITEM_BUTTON_WIDTH + MARGIN);
+					posY += MENUITEM_BUTTON_HEIGHT + MARGIN;
+					totalHeight += MENUITEM_BUTTON_HEIGHT + MARGIN;
 				}
-				//menuItems.put(menuItemList.get(currentMenuItem).getMenuItemID(), menuItemList.get(currentMenuItem));
-				System.out.println("add");
-				addMenuItemButtons(menuItemList.get(currentMenuItem));
+			} else {
+				totalWidth += MENUITEM_BUTTON_WIDTH + MARGIN;
 			}
-
+			System.out.println(menuItemList.get(currentMenuItem)
+					.getMenuItemName()
+					+ menuItemList.get(currentMenuItem).getMenuItemID());
+			addMenuItemButtons(menuItemList.get(currentMenuItem));
 			posX += MENUITEM_BUTTON_WIDTH + MARGIN;
 		}
 	}
@@ -91,6 +83,10 @@ public class CamsListMenuItemForm extends JPanel implements JInterfaceController
 				MENUITEM_BUTTON_HEIGHT));
 		menuItemButton.setLocation(posX, posY);
 		menuItemButton.setActionCommand(menuItem.getMenuItemName());
+		menuItemButton.setForeground(FOREGROUND_COLOUR);
+		menuItemButton.setFocusPainted(false);
+		menuItemButton.setBorder(new LineBorder(TITLEBAR_BORDER_COLOUR, 1, true));
+		menuItemButton.setBackground(TITLEBAR_BACKGROUND_COLOUR);
 		menuItemButtons.put(menuItemButton, menuItem);
 		menuItemButton.addActionListener(new ActionListener() {
 			@Override
@@ -98,7 +94,6 @@ public class CamsListMenuItemForm extends JPanel implements JInterfaceController
 				mainFrame.replacePanel(new CamsEditMenuItemForm(mainFrame, menuItem));
 			}
 		});
-
 		add(menuItemButton);
 	}
 }

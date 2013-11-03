@@ -1,30 +1,24 @@
 package mambo5.Form;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import javax.swing.JLabel;
-
-import java.awt.Font;
-
-import javax.swing.JTextField;
-import javax.swing.JButton;
-
-import mambo5.Controller.CustomerController;
-import mambo5.Entity.Customer;
-
 import java.awt.Color;
-import java.awt.event.ActionListener;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.*;
 
-public class RefundCardForm extends JPanel {
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.border.LineBorder;
+
+import mambo5.Controller.CustomerController;
+import mambo5.Controller.JInterfaceController;
+import mambo5.Entity.Customer;
+
+public class RefundCardForm extends JPanel implements JInterfaceController {
 
 	//private JPanel contentPane;
 	private Customer cust;
@@ -102,6 +96,10 @@ public class RefundCardForm extends JPanel {
 		
 		JButton btnConfirmRefund = new JButton("Confirm refund");
 		btnConfirmRefund.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		btnConfirmRefund.setForeground(FOREGROUND_COLOUR);
+		btnConfirmRefund.setFocusPainted(false);
+		btnConfirmRefund.setBorder(new LineBorder(TITLEBAR_BORDER_COLOUR, 1, true));
+		btnConfirmRefund.setBackground(TITLEBAR_BACKGROUND_COLOUR);
 		btnConfirmRefund.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
@@ -131,6 +129,10 @@ public class RefundCardForm extends JPanel {
 		add(btnConfirmRefund);
 		
 		JButton btnBackToMain = new JButton("Back to main");
+		btnBackToMain.setForeground(FOREGROUND_COLOUR);
+		btnBackToMain.setFocusPainted(false);
+		btnBackToMain.setBorder(new LineBorder(TITLEBAR_BORDER_COLOUR, 1, true));
+		btnBackToMain.setBackground(TITLEBAR_BACKGROUND_COLOUR);
 		btnBackToMain.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		btnBackToMain.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {

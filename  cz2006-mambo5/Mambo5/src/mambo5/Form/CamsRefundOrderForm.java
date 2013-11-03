@@ -1,6 +1,9 @@
+//DESIGN UNIFIED
+//LOGIN TESTED
+//JUNIT PENDING
+
 package mambo5.Form;
 
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -11,6 +14,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.border.LineBorder;
 
 import mambo5.Controller.CustomerController;
 import mambo5.Controller.JInterfaceController;
@@ -48,22 +52,23 @@ public class CamsRefundOrderForm extends JPanel implements JInterfaceController 
 
 		setBounds(0, 40, 800, 560);
 		setLayout(null);
-		setBackground(new Color(240, 240, 240));
+		setBackground(JPANEL_BACKGROUND_COLOUR);
 
 		refundPanel = new JPanel();
 		refundPanel.setBounds(210, 50, 400, 440);
 		refundPanel.setLayout(null);
-		refundPanel.setBackground(new Color(250, 250, 250));
+		refundPanel.setBackground(JPANEL_BACKGROUND_COLOUR);
 		add(refundPanel);
 
 		txtOrderId.setBounds(90, 80, 211, 30);
+		txtOrderId.setBorder(new LineBorder(TITLEBAR_BORDER_COLOUR, 1, true));
 		refundPanel.add(txtOrderId);
 		txtOrderId.setColumns(10);
 
-		lblOrderId.setBounds(20, 80, 64, 22);
+		lblOrderId.setBounds(20, 85, 64, 22);
 		refundPanel.add(lblOrderId);
 		
-		numpad.setLocation(20,210);
+		numpad.setLocation(20,200);
 		numpad.setSize(new Dimension(KEYPADPANE_WIDTH, KEYPADPANE_HEIGHT));
 		
 		numpad.num1().addActionListener(new ActionListener() {
