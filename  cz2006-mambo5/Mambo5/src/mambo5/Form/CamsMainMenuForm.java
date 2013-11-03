@@ -19,7 +19,7 @@ public class CamsMainMenuForm extends JPanel implements JInterfaceController {
 		setBounds(posX, posY, CONTENTPANE_WIDTH, CONTENTPANE_HEIGHT);
 		setLayout(null);
 		setBackground(JPANEL_BACKGROUND_COLOUR);
-		mainFrame.setTitle("Canteen Management System");
+		mainFrame.setTitle("CaMS POS V1.0");
 
 		JButton btnLogin = new JButton("LOGOUT");
 		btnLogin.addActionListener(new ActionListener() {
@@ -27,9 +27,10 @@ public class CamsMainMenuForm extends JPanel implements JInterfaceController {
 				mainFrame.replacePanel("CamsLoginForm");
 			}
 		});
-		btnLogin.setForeground(new Color(255, 255, 255));
+		btnLogin.setForeground(FOREGROUND_COLOUR);
+		btnLogin.setFocusPainted(false);
 		btnLogin.setFont(new Font("Arial", Font.BOLD, 16));
-		btnLogin.setBackground(new Color(105, 105, 105));
+		btnLogin.setBackground(TITLEBAR_BACKGROUND_COLOUR);
 		btnLogin.setBounds(20, 151, 234, 80);
 		add(btnLogin);
 
