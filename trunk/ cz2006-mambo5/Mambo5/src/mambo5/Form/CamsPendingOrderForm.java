@@ -153,43 +153,49 @@ public class CamsPendingOrderForm extends JPanel implements
 		btnSearch.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				double tempTotal = 0.00;
-				orderID = Integer.parseInt(searchIDTextField.getText());
-				receipt.setText("ORDER: " + orderID + "\n"
-						+ "========================================" + "\n");
-				receipt.setText(receipt.getText() + "Quantity" + "\tItemName"
-						+ "\t\t" + "TotalAmount\n");
-				for (int i = 0; i < orderIDList.size(); i++) {
-					if (orderIDList.get(i).getOrderID() == Integer
-							.parseInt(searchIDTextField.getText())) {
-						for (int j = 0; j < orderDetails.get(orderIDList.get(i))
-								.size(); j++) {
-							receipt.append(orderDetails.get(orderIDList.get(i)).get(j).getQuantity()
-									+ "   "
-									+ menuItems.get(
-											orderDetails.get(orderIDList.get(i))
-													.get(j).getMenuItemID())
-											.getMenuItemName()
-									+ "  $"
-									+ orderDetails.get(orderIDList.get(i)).get(j)
-											.getActualPrice()
-									+ ""
-									+ "\t"
-									+ "$"
-									+ (orderDetails.get(orderIDList.get(i))
-											.get(j).getQuantity() * orderDetails
-											.get(orderIDList.get(i)).get(j)
-											.getActualPrice()) + "\n");
-							tempTotal += (orderDetails.get(orderIDList.get(i))
-									.get(j).getQuantity() * orderDetails
-									.get(orderIDList.get(i)).get(j)
-									.getActualPrice());
+				try
+				{
+					orderID = Integer.parseInt(searchIDTextField.getText());
+					receipt.setText("ORDER ID: " + Integer.parseInt(searchIDTextField.getText()) + "\n"
+							+ "=======================================\n"
+							+ "Quantity" + "\tItemName" + "\t" + "             "
+							+ "Amount\n");
+					for (int i = 0; i < orderIDList.size(); i++) {
+						if (orderIDList.get(i).getOrderID() == Integer
+								.parseInt(searchIDTextField.getText())) {
+							for (int j = 0; j < orderDetails.get(orderIDList.get(i))
+									.size(); j++) {
+								receipt.append(orderDetails.get(orderIDList.get(i)).get(j).getQuantity()
+										+ "\t"
+										+ menuItems.get(
+												orderDetails.get(orderIDList.get(i))
+														.get(j).getMenuItemID())
+												.getMenuItemName()
+										+ "\t"
+										+ "                "
+										+ (orderDetails.get(orderIDList.get(i))
+												.get(j).getQuantity() * orderDetails
+												.get(orderIDList.get(i)).get(j)
+												.getActualPrice()) + "\n");
+								tempTotal += (orderDetails.get(orderIDList.get(i))
+										.get(j).getQuantity() * orderDetails
+										.get(orderIDList.get(i)).get(j)
+										.getActualPrice());
+							}
 						}
 					}
+					receipt.setText(receipt.getText() + "\n\n"
+							+ "========================================\n"
+							+ "TOTAL: \t\t" + "               $" + tempTotal
+							+ "\n========================================");
 				}
-				receipt.setText(receipt.getText() + "\n\n"
-						+ "========================================\n"
-						+ "TOTAL: \t\t" + "$" + tempTotal
-						+ "\n========================================");
+				catch (NumberFormatException exception)
+				{
+					JOptionPane.showMessageDialog(null,
+							"Please Enter Only Integer Value for Order ID");
+					searchIDTextField.setText("");
+				}
+				
 
 			}
 		});
@@ -357,9 +363,6 @@ public class CamsPendingOrderForm extends JPanel implements
 											.getMenuItemName()
 									+ "\t "
 											+ "               "
-/*									+ orderDetails.get(orderIDList.get(j)).get(i)
-											.getActualPrice()
-									+ "\t"*/
 									+ (orderDetails.get(orderIDList.get(j))
 											.get(i).getQuantity() * orderDetails
 											.get(orderIDList.get(j)).get(i)
