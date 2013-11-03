@@ -57,18 +57,7 @@ public class NumPad extends JPanel implements JInterfaceController {
 		delete.setFocusPainted(false);
 		enter.setFocusPainted(false);
 		
-		/*num1.setBorder(BorderFactory.createEmptyBorder());
-		num2.setBorder(BorderFactory.createEmptyBorder());
-		num3.setBorder(BorderFactory.createEmptyBorder());
-		num4.setBorder(BorderFactory.createEmptyBorder());
-		num5.setBorder(BorderFactory.createEmptyBorder());
-		num6.setBorder(BorderFactory.createEmptyBorder());
-		num7.setBorder(BorderFactory.createEmptyBorder());
-		num8.setBorder(BorderFactory.createEmptyBorder());
-		num9.setBorder(BorderFactory.createEmptyBorder());
-		num0.setBorder(BorderFactory.createEmptyBorder());
-		delete.setBorder(BorderFactory.createEmptyBorder());
-		enter.setBorder(BorderFactory.createEmptyBorder());*/
+		/*num1.setBorder(BorderFactory.createEmptyBorder());*/
 		
 		num1.setBorder(new LineBorder(TITLEBAR_BORDER_COLOUR, 1, true));
 		num2.setBorder(new LineBorder(TITLEBAR_BORDER_COLOUR, 1, true));
@@ -80,7 +69,7 @@ public class NumPad extends JPanel implements JInterfaceController {
 		num8.setBorder(new LineBorder(TITLEBAR_BORDER_COLOUR, 1, true));
 		num9.setBorder(new LineBorder(TITLEBAR_BORDER_COLOUR, 1, true));
 		num0.setBorder(new LineBorder(TITLEBAR_BORDER_COLOUR, 1, true));
-		delete.setBorder(new LineBorder(TITLEBAR_BORDER_COLOUR, 1, true));
+		delete.setBorder(new LineBorder(KEYPAD_DELETE_BORDER, 1, true));
 		enter.setBorder(new LineBorder(KEYPAD_ENTER_BORDER, 1, true));
 		
 		num1.setBackground(TITLEBAR_BACKGROUND_COLOUR);
@@ -93,7 +82,7 @@ public class NumPad extends JPanel implements JInterfaceController {
 		num8.setBackground(TITLEBAR_BACKGROUND_COLOUR);
 		num9.setBackground(TITLEBAR_BACKGROUND_COLOUR);
 		num0.setBackground(TITLEBAR_BACKGROUND_COLOUR);
-		delete.setBackground(TITLEBAR_BACKGROUND_COLOUR);
+		delete.setBackground(KEYPAD_DELETE_BACKGROUND_COLOUR);
 		enter.setBackground(KEYPAD_ENTER_BACKGROUND_COLOUR);
 		
 		num1.setForeground(FOREGROUND_COLOUR);
@@ -106,8 +95,8 @@ public class NumPad extends JPanel implements JInterfaceController {
 		num8.setForeground(FOREGROUND_COLOUR);
 		num9.setForeground(FOREGROUND_COLOUR);
 		num0.setForeground(FOREGROUND_COLOUR);
-		delete.setForeground(FOREGROUND_COLOUR);
-		enter.setForeground(KEYPAD_FOREGROUND_COLOUR);
+		delete.setForeground(KEYPAD_DELETE_FOREGROUND_COLOUR);
+		enter.setForeground(KEYPAD_ENTER_FOREGROUND_COLOUR);
 		
 		//settled anything else? see here. wiat ah
 		num1.setLocation(posX, posY);

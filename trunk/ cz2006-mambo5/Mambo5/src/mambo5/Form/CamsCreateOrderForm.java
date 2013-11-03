@@ -15,6 +15,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
+import javax.swing.border.LineBorder;
 
 import mambo5.Controller.CustomerController;
 import mambo5.Controller.EmailController;
@@ -85,12 +86,15 @@ public class CamsCreateOrderForm extends JPanel implements JInterfaceController 
 		receiptPanel.setSize(new Dimension(RECEIPTPANE_WIDTH,
 				RECEIPTPANE_HEIGHT));
 		receiptPanel.setLocation(posX, posY);
+		receiptPanel.setLayout(null);
 		receiptPanel.setBackground(JPANEL_BACKGROUND_COLOUR);
 
-		receipt = new JTextArea(32, 26);
+		receipt = new JTextArea(31, 26);
 		receipt.setEditable(false);
 		receipt.setBackground(RECEIPT_BACKGROUND_COLOUR);
 		receiptScrollPane = new JScrollPane(receipt);
+		receiptScrollPane.setSize(new Dimension((RECEIPTPANE_WIDTH-(2*MARGIN)), (RECEIPTPANE_HEIGHT-(2*MARGIN))));
+		receiptScrollPane.setLocation(10,10);
 		receiptPanel.add(receiptScrollPane);
 
 		posX += receiptPanel.getWidth();
@@ -111,6 +115,7 @@ public class CamsCreateOrderForm extends JPanel implements JInterfaceController 
 		posX += numpadPanel.getWidth();
 
 		sidePanel = new JPanel();
+		sidePanel.setLayout(null);
 		sidePanel.setSize(SIDEPANE_WIDTH, SIDEPANE_HEIGHT);
 		sidePanel.setLocation(posX, posY);
 		sidePanel.setBackground(JPANEL_BACKGROUND_COLOUR);
@@ -297,6 +302,10 @@ public class CamsCreateOrderForm extends JPanel implements JInterfaceController 
 		menuItemButton.setSize(new Dimension(MENUITEM_BUTTON_WIDTH,
 				MENUITEM_BUTTON_HEIGHT));
 		menuItemButton.setLocation(posX, posY);
+		menuItemButton.setForeground(FOREGROUND_COLOUR);
+		menuItemButton.setFocusPainted(false);
+		menuItemButton.setBorder(new LineBorder(TITLEBAR_BORDER_COLOUR, 1, true));
+		menuItemButton.setBackground(TITLEBAR_BACKGROUND_COLOUR);
 		menuItemButton.setActionCommand(menuItem.getMenuItemName());
 		menuItemButtons.put(menuItemButton, menuItem);
 		menuItemButton.addActionListener(new ActionListener() {
@@ -373,32 +382,17 @@ public class CamsCreateOrderForm extends JPanel implements JInterfaceController 
 	};
 
 	public void initSidePanelButton() {
-		btnMainPage = new JButton("MAIN PAGE");
 		btnNextPage = new JButton("NEXT PAGE");
 		btnPrevPage = new JButton("PREV PAGE");
 
-		posX = MARGIN;
-		posY = MARGIN;
+		posX = 0;
+		posY = 0;
 
-		btnMainPage.setForeground(Color.WHITE);
-		btnMainPage.setFont(SIDEPANEL_BUTTON_FONT);
-		btnMainPage.setBackground(new Color(255, 0, 0));
-		btnMainPage.setBounds(posX, posY, SIDEBUTTON_WIDTH, SIDEBUTTON_HEIGHT);
-		btnMainPage.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				mainFrame.replacePanel("CamsMainMenuForm");
-			}
-
-		});
-		sidePanel.add(btnMainPage);
-
-		posY += SIDEBUTTON_HEIGHT + MARGIN;
-
-		btnNextPage.setForeground(Color.WHITE);
+		btnNextPage.setForeground(MENU_PAGING_FOREGROUND_COLOUR);
 		btnNextPage.setFont(SIDEPANEL_BUTTON_FONT);
-		btnNextPage.setBackground(new Color(100, 149, 237));
+		btnNextPage.setBackground(MENU_PAGING_BACKGROUND);
+		btnNextPage.setFocusPainted(false);
+		btnNextPage.setBorder(new LineBorder(MENU_PAGING_BORDER, 1, true));
 		btnNextPage.addActionListener(new ActionListener() {
 
 			@Override
@@ -417,22 +411,22 @@ public class CamsCreateOrderForm extends JPanel implements JInterfaceController 
 			}
 
 		});
-		btnNextPage.setBounds(posX, posY, SIDEBUTTON_WIDTH, SIDEBUTTON_HEIGHT);
+		btnNextPage.setBounds(posX, posY, SIDEPANE_WIDTH - MARGIN, SIDEBUTTON_HEIGHT);
 		if (menuItemList.size() < 10) btnNextPage.setEnabled(false);
 		sidePanel.add(btnNextPage);
 
 		posY += SIDEBUTTON_HEIGHT + MARGIN;
 
-		btnPrevPage.setForeground(Color.WHITE);
+		btnPrevPage.setForeground(MENU_PAGING_FOREGROUND_COLOUR);
 		btnPrevPage.setFont(SIDEPANEL_BUTTON_FONT);
-		btnPrevPage.setBackground(new Color(100, 149, 237));
-		btnPrevPage.setEnabled(false);
+		btnPrevPage.setBackground(MENU_PAGING_BACKGROUND);
+		btnPrevPage.setFocusPainted(false);
+		btnPrevPage.setBorder(new LineBorder(MENU_PAGING_BORDER, 1, true));
 		btnPrevPage.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				if (page > 2) {
-					btnNextPage.setEnabled(true);
 					btnPrevPage.setEnabled(true);
 					currentMenuItem = (--page - 1) * 9 + 1;
 					menuItemPanel.removeAll();
@@ -442,7 +436,6 @@ public class CamsCreateOrderForm extends JPanel implements JInterfaceController 
 					System.out.println("Page: " + page);
 				} else {
 					page = 1;
-					btnNextPage.setEnabled(true);
 					btnPrevPage.setEnabled(false);
 					currentMenuItem = 0;
 					menuItemPanel.removeAll();
@@ -451,10 +444,11 @@ public class CamsCreateOrderForm extends JPanel implements JInterfaceController 
 					repaint();
 					System.out.println("Page: " + page);
 				}
+				btnNextPage.setEnabled(true);
 			}
 
 		});
-		btnPrevPage.setBounds(posX, posY, SIDEBUTTON_WIDTH, SIDEBUTTON_HEIGHT);
+		btnPrevPage.setBounds(posX, posY, SIDEPANE_WIDTH - MARGIN, SIDEBUTTON_HEIGHT);
 		sidePanel.add(btnPrevPage);
 	}
 

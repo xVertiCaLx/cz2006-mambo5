@@ -12,7 +12,9 @@ public interface JInterfaceController {
 	public static final Color FOREGROUND_COLOUR = new Color(0,132,255);
 	public static final Color TITLEBAR_BACKGROUND_COLOUR = new Color(245,245,245); //new Color(0, 0, 102);
 	public static final Color TITLEBAR_BORDER_COLOUR = new Color(230,230,230);
-	public static final Color KEYPAD_ENTER_BACKGROUND_COLOUR = new Color(95,212,85), KEYPAD_ENTER_BORDER = new Color(183,255,176);
+	public static final Color KEYPAD_ENTER_BACKGROUND_COLOUR = new Color(102,170,95), KEYPAD_ENTER_BORDER = new Color(138,152,137), KEYPAD_ENTER_FOREGROUND_COLOUR = new Color(64,94,61);
+	public static final Color KEYPAD_DELETE_BACKGROUND_COLOUR = new Color(200,200,200), KEYPAD_DELETE_BORDER = new Color(115,115,115), KEYPAD_DELETE_FOREGROUND_COLOUR = new Color(80,80,80);
+	public static final Color MENU_PAGING_BACKGROUND = new Color(220,220,220), MENU_PAGING_BORDER = new Color(115,115,115), MENU_PAGING_FOREGROUND_COLOUR = new Color(60,60,60);
 	
 	public static final Font SIDEPANEL_BUTTON_FONT = new Font("Arial", Font.BOLD, 12);
 	

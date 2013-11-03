@@ -12,6 +12,8 @@ import javax.swing.ImageIcon;
 import javax.swing.border.LineBorder;
 import java.awt.Color;
 import javax.swing.border.MatteBorder;
+import javax.swing.JButton;
+import javax.swing.SwingConstants;
 
 public class Tes extends JFrame {
 
@@ -47,9 +49,9 @@ public class Tes extends JFrame {
 		JComboBox comboBox = new JComboBox();
 		contentPane.add(comboBox, BorderLayout.NORTH);
 		
-		JLabel lblNewLabel = new JLabel("New label");
-		lblNewLabel.setIcon(new ImageIcon(Tes.class.getResource("/mambo5/resources/img/MAMBO5.png")));
-		contentPane.add(lblNewLabel, BorderLayout.WEST);
+		JButton btnNewButton = new JButton("New button");
+		btnNewButton.setHorizontalAlignment(SwingConstants.LEFT);
+		contentPane.add(btnNewButton, BorderLayout.CENTER);
 	}
 
 }
