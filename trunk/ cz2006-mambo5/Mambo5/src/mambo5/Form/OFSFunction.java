@@ -164,6 +164,20 @@ public class OFSFunction extends JPanel implements JInterfaceController{
 		deleteStallBtn.setFont(new Font("Arial", Font.BOLD, 16));
 		deleteStallBtn.setBounds(590, 251, 170, 80);
 		add(deleteStallBtn);
+		
+		JButton button = new JButton("Log Out");
+		button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				mainFrame.replacePanel(new OFSLoginForm(mainFrame));
+			}
+		});
+		button.setForeground(new Color(0, 132, 255));
+		button.setFont(new Font("Arial", Font.BOLD, 16));
+		button.setFocusPainted(false);
+		button.setBorder(new LineBorder(TITLEBAR_BORDER_COLOUR, 1, true));
+		button.setBackground(new Color(245, 245, 245));
+		button.setBounds(20, 469, 170, 80);
+		add(button);
 
 	}
 }
