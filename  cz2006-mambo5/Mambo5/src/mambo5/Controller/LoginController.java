@@ -19,6 +19,8 @@ public class LoginController {
 
 	public boolean validateLoginField(String userid, String password) {
 		if (userid.isEmpty() || password.isEmpty()) return false;
+		else if (userid.length()>11 || userid.length()<1) return false;
+		else if (!userid.matches("[0-9]+")) return false;
 		else return true;
 	}
 	

@@ -21,26 +21,49 @@ public class LoginControllerTest {
 
 	@Test
 	public void testLoginPass() {
-		Admin result;
-		result = loginController.login(id, password);
-		assertNotNull(result);		
-	}
-
-	@Test
-	public void testLoginFailPassword() {
-		password = "something";
-		Admin result;
-		result = loginController.login(id, password);
-		assertNull(result);
+		boolean result;
+		result = loginController.validateLoginField(id, password);
+		assertTrue(result);
 	}
 	
 	@Test
-	public void testLoginFailID() {
-		id = "20";
-		System.out.println(password);
-		Admin result;
-		result = loginController.login(id, password);
-		assertNull(result);
+	public void testLoginPass2() {
+		id = "34";
+		boolean result;
+		result = loginController.validateLoginField(id, password);
+		assertTrue(result);
+	}
+
+	@Test
+	public void testLoginFailEmptyID() {
+		id = "";
+		boolean result;
+		result = loginController.validateLoginField(id, password);
+		assertFalse(result);
+	}
+	
+	@Test
+	public void testLoginFailMTID() {
+		id = "123456789012";
+		boolean result;
+		result = loginController.validateLoginField(id, password);
+		assertFalse(result);
+	}
+	
+	@Test
+	public void testLoginFailEmptyPassword() {
+		password ="";
+		boolean result;
+		result = loginController.validateLoginField(id, password);
+		assertFalse(result);
+	}
+	
+	@Test
+	public void testLoginFailCharID() {
+		id = "a1";
+		boolean result;
+		result = loginController.validateLoginField(id, password);
+		assertFalse(result);
 	}
 
 }
