@@ -159,7 +159,7 @@ public class ViewHistoryForm extends JPanel implements JInterfaceController {
 		panel.setBounds(112, 42, 613, 40);
 		add(panel);
 		
-		JLabel lblViewHistory = new JLabel("View History");
+		JLabel lblViewHistory = new JLabel("Check History");
 		lblViewHistory.setForeground(Color.WHITE);
 		lblViewHistory.setFont(new Font("Arial", Font.BOLD, 16));
 		lblViewHistory.setBounds(254, 0, 116, 38);
