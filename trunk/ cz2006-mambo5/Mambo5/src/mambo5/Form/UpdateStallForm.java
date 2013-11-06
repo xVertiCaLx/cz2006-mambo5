@@ -117,8 +117,6 @@ public class UpdateStallForm extends JPanel implements JInterfaceController {
 		group.add(openRB);
 		group.add(closeRB);
 		
-		
-		descArea = new JTextArea();
 		descArea.setLineWrap(true);
 		descArea.setBounds(266, 259, 305, 99);
 		add(descArea);
@@ -195,7 +193,6 @@ public class UpdateStallForm extends JPanel implements JInterfaceController {
 	
 	private void displayStallDetail(int index) {
 		nameText.setText(retrieveStallList.get(index).getStallName());
-		
 		descArea.setText(retrieveStallList.get(index).getStallDesc());
 		if(retrieveStallList.get(index).getStallStatus() == true) { 
 			openRB.setSelected(true);
