@@ -481,7 +481,7 @@ public class CamsCreateOrderForm extends JPanel implements JInterfaceController 
 					|| orderStatus.equals("") || stallID == 0) {
 				JOptionPane.showMessageDialog(null, "Order cannot be created");
 			} else {
-				JOptionPane.showMessageDialog(null, "Order: " + order + "created");
+				JOptionPane.showMessageDialog(null, "Order: " + order + " created");
 			}
 			validOrder = 1;
 
