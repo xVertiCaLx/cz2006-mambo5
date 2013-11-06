@@ -27,6 +27,7 @@ public class CamsMainMenuForm extends JPanel implements JInterfaceController {
 		JButton btnLogin = new JButton("LOGOUT");
 		btnLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				mainFrame.logout();
 				mainFrame.replacePanel("CamsLoginForm");
 			}
 		});
