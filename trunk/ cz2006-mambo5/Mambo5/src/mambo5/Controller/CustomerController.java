@@ -18,7 +18,9 @@ public class CustomerController {
 	public int validateCustomerDetail(double cardBalance, String fullName, int accessID){
 		
 		int validate = 0;
-		
+		if (fullName.isEmpty() || accessID < 1) {
+			
+		}
 		sysConfig = new SystemConfiguration();
 		dataStore = DataStoreFactory.createDataStore(sysConfig);
 		validate = dataStore.createCustomer(cardBalance, fullName, accessID);
