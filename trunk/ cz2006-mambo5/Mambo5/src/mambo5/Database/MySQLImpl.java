@@ -242,7 +242,7 @@ public class MySQLImpl implements DataStoreInterface {
 	@Override
 	public int createMenu(int stallID, String menuType) {
 		int result = 0;
-		String sql = "INSERT INTO mambojumbo.menu (stallID, menuType)"
+		String sql = "INSERT INTO menu (stallID, menuType)"
 					+ "VALUES ( '"+ stallID +"', '"+ menuType +"');";
 		dbc.executeNonQuery(sql);
 		
@@ -269,7 +269,7 @@ public class MySQLImpl implements DataStoreInterface {
 	public int createMenuItem(int menuID, String menuItemName,
 			double menuItemPrice, double discount) {
 		int result = 0;
-		String sql = "INSERT INTO mambojumbo.menuitem (menuID, menuItemName, menuItemPrice, discount)"
+		String sql = "INSERT INTO menuitem (menuID, menuItemName, menuItemPrice, discount)"
 					+ "VALUES ( '"+ menuID +"', '"+ menuItemName +"', '" + menuItemPrice + "' , '" + discount + "');";
 		
 		result = dbc.executeNonQuery(sql);
@@ -281,7 +281,7 @@ public class MySQLImpl implements DataStoreInterface {
 			double discount, int menuItemID) {
 		
 		int result = 0;
-		String sql = "UPDATE mambojumbo.menuitem SET menuItemName = '" + menuItemName + "',"
+		String sql = "UPDATE menuitem SET menuItemName = '" + menuItemName + "',"
 				+ "menuItemPrice = '" + menuItemPrice + "', discount = '" + discount + "' WHERE menuItemID = '" + menuItemID + "';";
 				
 		result = dbc.executeNonQuery(sql);
@@ -345,14 +345,14 @@ public class MySQLImpl implements DataStoreInterface {
 	public int createOrder(int custID, Date purchaseDate, String orderStatus,
 			int stallID) {
 		int result = 0;
-		String sql = "INSERT INTO mambojumbo.orders (custID, purchaseDate, orderStatus, stallID) "
+		String sql = "INSERT INTO orders (custID, purchaseDate, orderStatus, stallID) "
 					+ "VALUES ( '" + custID + "' , '" + purchaseDate + "' , '" + orderStatus +"', '" + stallID +"');";
 		
 		result = dbc.executeNonQuery(sql);
 		
 		if(result==1)
 		{
-			sql = "Select orderID from mambojumbo.orders order by orderID desc limit 1;";
+			sql = "Select orderID from orders order by orderID desc limit 1;";
 			
 			try {
 				rs = dbc.execute(sql);
@@ -371,7 +371,7 @@ public class MySQLImpl implements DataStoreInterface {
 	@Override
 	public int refundOrder(int orderID) {
 		int result = 0;
-		String sql = "UPDATE mambojumbo.orders SET orderStatus = '" + "Refunded" + "' WHERE orderID = '" + orderID + "';";
+		String sql = "UPDATE orders SET orderStatus = '" + "Refunded" + "' WHERE orderID = '" + orderID + "';";
 				
 		result = dbc.executeNonQuery(sql);
 		return result;
@@ -380,7 +380,7 @@ public class MySQLImpl implements DataStoreInterface {
 	@Override
 	public int confirmOrder(int orderID) {
 		int result = 0;
-		String sql = "UPDATE mambojumbo.orders SET orderStatus = '" + "Completed" + "' WHERE orderID = '" + orderID + "';";
+		String sql = "UPDATE orders SET orderStatus = '" + "Completed" + "' WHERE orderID = '" + orderID + "';";
 				
 		result = dbc.executeNonQuery(sql);
 		return result;
@@ -419,7 +419,7 @@ public class MySQLImpl implements DataStoreInterface {
 	
 	public ArrayList<Order> retrieveOrderList(ArrayList<Order> orderList) {
 		try {
-			String sql = "SELECT * FROM mambojumbo.orders;";
+			String sql = "SELECT * FROM orders;";
 			rs = dbc.execute(sql);
 
 			while (rs.next()) {
@@ -435,7 +435,7 @@ public class MySQLImpl implements DataStoreInterface {
 	
 	public ArrayList<OrderDetail> retrieveOrderDetailList(ArrayList<OrderDetail> orderDetailList) {
 		try {
-			String sql = "SELECT * FROM mambojumbo.orderdetails;";
+			String sql = "SELECT * FROM orderdetails;";
 			rs = dbc.execute(sql);
 
 			while (rs.next()) {
@@ -454,7 +454,7 @@ public class MySQLImpl implements DataStoreInterface {
 	public ArrayList<OrderDetail> retrieveOrderDetailTotalPrice(ArrayList<OrderDetail> orderDetailList, int orderID) {
 		try {
 
-			String sql = "SELECT * FROM mambojumbo.orderdetails WHERE orderID = " + orderID + ";";
+			String sql = "SELECT * FROM orderdetails WHERE orderID = " + orderID + ";";
 			rs = dbc.execute(sql);
 
 			while (rs.next()) {

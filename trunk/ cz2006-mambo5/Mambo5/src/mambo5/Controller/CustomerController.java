@@ -23,7 +23,8 @@ public class CustomerController {
 		} else {
 			sysConfig = new SystemConfiguration();
 			dataStore = DataStoreFactory.createDataStore(sysConfig);
-			validate = dataStore.createCustomer(cardBalance, fullName, accessID);
+			validate = 1;
+			dataStore.createCustomer(cardBalance, fullName, accessID);
 		}
 			
 		return validate;
