@@ -176,6 +176,7 @@ public class RetrieveStallForm extends JPanel implements JInterfaceController {
 		nameText.setText(retrieveStallList.get(index).getStallName());
 		
 		descArea.setText(retrieveStallList.get(index).getStallDesc());
+
 		if(retrieveStallList.get(index).getStallStatus() == true) 
 			statusText.setText("Open");
 		else
