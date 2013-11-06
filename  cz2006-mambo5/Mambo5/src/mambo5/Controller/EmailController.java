@@ -44,7 +44,7 @@ public class EmailController {
 					InternetAddress.parse(user));
 			message.setSubject(MESSAGE_BALANCE_ALERT_SUBJECT);
 			message.setText("Warning: \n Your card balance is low. You have $" + amount + " in your card. Kindly proceed to the nearest top up kiosk to top up and refresh your card balance."
-					+ "\n\n\n *** This is an automatically generated email, please do not reply ***"
+					+ "\n\n\n *** This electronic mail is automatically generated, no signatures or response is required ***"
 					+ "\n\n\n This e-mail is intended for the addressee shown. It contains information that is confidential and protected from disclosure. Any review, dissemination or use of this transmission or its contents by persons or unauthorized employees of the intended organisations is strictly prohibited. The contents of this email do not necessarily represent the views or policies of Beitu University, its employees or students.");
 
 			Transport.send(message);

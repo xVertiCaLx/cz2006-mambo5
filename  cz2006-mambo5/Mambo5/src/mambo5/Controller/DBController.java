@@ -10,7 +10,8 @@ public class DBController {
 	private String dbpassword;
 	private String dbuser;
 	private String database;
-	
+	//http://172.21.147.164/Mambo5/uploads/c/ce/MAMBO5.png
+	//*********************ORIGINAL****************************//
 	//Server: mysql1100.shared-servers.com
 	//Port:   1091
 	//User:	  mambo5
@@ -19,9 +20,9 @@ public class DBController {
 	
 	public DBController() {
 		//for temporary so to minimize changes in code
-		database = "jdbc:mysql://mysql1100.shared-servers.com:1091/MamboJumbo";
-		dbuser = "mambo5";
-		dbpassword = "anything";
+		database = "jdbc:mysql://localhost:3306/MamboJumbo";
+		dbuser = "root";
+		dbpassword = "";
 		System.out.println("DB Connection Initialised!");
 	}
 	

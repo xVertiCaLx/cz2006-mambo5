@@ -43,11 +43,12 @@ public class OrderController {
 	// validating confirm order
 	public int validateConfirmOrder(int orderID) {
 		int validate = 0;
-
-		sysConfig = new SystemConfiguration();
-		dataStore = DataStoreFactory.createDataStore(sysConfig);
-		validate = dataStore.confirmOrder(orderID);
-
+		if (orderID > 0) {
+			sysConfig = new SystemConfiguration();
+			dataStore = DataStoreFactory.createDataStore(sysConfig);
+			validate = 1;
+			dataStore.confirmOrder(orderID);
+		}
 		return validate;
 	}
 	
