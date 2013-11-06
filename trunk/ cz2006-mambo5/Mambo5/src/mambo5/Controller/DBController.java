@@ -18,13 +18,7 @@ public class DBController {
 	//Password: anything
 	//Schema: MamboJumbo
 	
-	public DBController() {
-		//for temporary so to minimize changes in code
-		database = "jdbc:mysql://localhost:3306/MamboJumbo";
-		dbuser = "root";
-		dbpassword = "";
-		System.out.println("DB Connection Initialised!");
-	}
+
 	
 	//actual implementation
 	public DBController(String database, String dbuser, String dbpassword) {

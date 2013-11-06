@@ -564,5 +564,24 @@ public class MySQLImpl implements DataStoreInterface {
 		}
 		return itemList;
 	}
+
+	@Override
+	public Admin login(String userid, String password) {
+		String sql = "SELECT * FROM admin WHERE adminID = '" + userid + "' AND password = '" + password + "';";
+		rs = dbc.execute(sql);
+		Admin admin = null;
+		try {
+			if(rs.next())
+				admin = new Admin(rs.getInt("adminID"), rs.getInt("accessID"), rs.getInt("stallID"), rs.getString("adminName"), rs.getString("password"));
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			dbc.terminate();
+		}
+		// TODO Auto-generated method stub
+		return admin;
+	}
+	
+	
 	
 }
