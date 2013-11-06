@@ -55,4 +55,7 @@ public interface DataStoreInterface {
 	Customer retrieveCustomerDetail(int custID);
 	ArrayList<String> retrieveCustomerPurchaseDate(int custID);
 	ArrayList<MenuItem> retrieveSpecificPurchaseDate(String purchaseDate, int custID);
+	
+	//LOGIN
+	public Admin login(String userid, String password);
 }
