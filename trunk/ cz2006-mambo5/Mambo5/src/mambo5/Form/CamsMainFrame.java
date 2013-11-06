@@ -175,6 +175,12 @@ public class CamsMainFrame extends JFrame implements JInterfaceController {
 		}		
 	}
 	
+	public void logout() {
+		stallID = -1;
+		accessID = -1;
+		menuID = -1;	
+	}
+	
 	public void replacePanel(String panelName) {
 		if (panelName.equals("CamsCreateOrderForm")) {
 			mainMenuButton.setVisible(true);
