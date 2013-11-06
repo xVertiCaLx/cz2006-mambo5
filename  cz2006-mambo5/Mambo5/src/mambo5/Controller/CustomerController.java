@@ -18,13 +18,14 @@ public class CustomerController {
 	public int validateCustomerDetail(double cardBalance, String fullName, int accessID){
 		
 		int validate = 0;
-		if (fullName.isEmpty() || accessID < 1) {
-			
+		if (cardBalance < 10 || fullName.isEmpty() || accessID < 1) {
+			validate = 0;
+		} else {
+			sysConfig = new SystemConfiguration();
+			dataStore = DataStoreFactory.createDataStore(sysConfig);
+			validate = dataStore.createCustomer(cardBalance, fullName, accessID);
 		}
-		sysConfig = new SystemConfiguration();
-		dataStore = DataStoreFactory.createDataStore(sysConfig);
-		validate = dataStore.createCustomer(cardBalance, fullName, accessID);
-				
+			
 		return validate;
 	}
 	
