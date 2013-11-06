@@ -491,7 +491,7 @@ public class CamsCreateOrderForm extends JPanel implements JInterfaceController 
 			if((currentCardValue - totalPrice) < 5)
 			{
 				emailController = new EmailController();
-				emailController.sendBalanceAlertEmail(cc.retrieveCustomerInfo(custID).getEmail(), currentCardValue);
+				emailController.sendBalanceAlertEmail(cc.retrieveCustomerInfo(custID).getEmail(), (currentCardValue - totalPrice));
 			}
 			
 		} else {
