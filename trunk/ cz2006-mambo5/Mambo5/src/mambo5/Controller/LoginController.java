@@ -1,5 +1,4 @@
 package mambo5.Controller;
-import java.sql.ResultSet;
 
 import mambo5.Database.DataStoreFactory;
 import mambo5.Database.DataStoreInterface;
