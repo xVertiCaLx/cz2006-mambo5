@@ -132,6 +132,10 @@ public class UpdateStallForm extends JPanel implements JInterfaceController {
 		
 		
 		updateBtn.setBounds(482, 369, 89, 23);
+		updateBtn.setForeground(FOREGROUND_COLOUR);
+		updateBtn.setFocusPainted(false);
+		updateBtn.setBorder(new LineBorder(TITLEBAR_BORDER_COLOUR, 1, true));
+		updateBtn.setBackground(TITLEBAR_BACKGROUND_COLOUR);
 		add(updateBtn);
 		
 		JButton btnBack = new JButton("Back");
