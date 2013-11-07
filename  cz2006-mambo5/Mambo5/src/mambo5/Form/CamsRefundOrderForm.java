@@ -198,6 +198,7 @@ public class CamsRefundOrderForm extends JPanel implements JInterfaceController 
 							// == 1
 
 						else {
+							JOptionPane.showMessageDialog(null, "Invalid input. Please try again.");
 							repaint();
 							break;
 						}
@@ -211,7 +212,7 @@ public class CamsRefundOrderForm extends JPanel implements JInterfaceController 
 				}
 			}// end if(orderIDList.get(i).getOrderID() == orderID)
 		}// end for loop
-		JOptionPane.showMessageDialog(null, "Invalid input. Please try again.");
+		
 		txtOrderId.setText("");
 	}
 }// end JPanel
