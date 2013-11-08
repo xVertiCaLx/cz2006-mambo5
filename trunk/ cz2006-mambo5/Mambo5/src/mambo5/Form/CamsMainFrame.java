@@ -169,7 +169,6 @@ public class CamsMainFrame extends JFrame implements JInterfaceController {
 		for (int i = 0; i < menuList.size(); i++) {
 			if (menuList.get(i).getStallID() == stallID) {
 				menuID = menuList.get(i).getMenuID();
-				System.out.println("MenuID: "+menuID+"StallID:"+menuList.get(i).getStallID());
 				break;
 			}
 		}		
@@ -228,7 +227,6 @@ public class CamsMainFrame extends JFrame implements JInterfaceController {
 			menuItemController.retrieveMenuItemList(menuItemList);
 			orderDetailController.retrieveOrderDetailList(orderDetailList);
 			orderController.retrieveOrderList(orderList);
-			System.out.println("Initialising Complete. Loading Main Screen." + orderList.size());
 			
 			selectPanel = new SelectPanel(this);
 		} else {

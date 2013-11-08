@@ -55,7 +55,6 @@ public class CamsPendingOrderForm extends JPanel implements
 	{
 		mainFrame.setTitle("Pending Orders");
 		this.mainFrame = mainFrame;
-		System.out.println("STALL: " + stallID);
 		this.stallID = stallID;
 		this.menuItemList = menuItemList;
 		this.mainFrame = mainFrame;
@@ -151,12 +150,9 @@ public class CamsPendingOrderForm extends JPanel implements
 				if (OrderController.validateConfirmOrder(orderID) == 1)
 				{
 					message = "Order " + orderID + " has completed";
-					System.out.println("val is(before): " +val);
 					for (int k = 0; k < orderIDList.size(); k++) {
 						val = orderIDList.get(k).getOrderID();
 						if (val == orderID) {
-							System.out.println("val is(after): " +val);
-							System.out.println("CAME INTO val == orderID");
 							orderIDList.remove(k);
 							break;
 						}	
@@ -290,7 +286,6 @@ public class CamsPendingOrderForm extends JPanel implements
 								orderDetailList.get(j).getOrderID(),
 								orderDetailList.get(j).getActualPrice(),
 								orderDetailList.get(j).getQuantity()));
-						System.out.println(orderDetailList.get(j).getMenuItemID());
 						write = true;
 					}
 				}
@@ -380,8 +375,6 @@ public class CamsPendingOrderForm extends JPanel implements
 					if (orderIDList.get(j).getOrderID() == orderButtons.get(
 							e.getSource()).getOrderID()) {
 						for (int i = 0; i < orderDetails.get(orderIDList.get(j)).size(); i++) {
-								System.out.println(orderDetails.get(orderIDList.get(j)).size());
-								System.out.println(orderDetails.get(orderIDList.get(j)).get(i).getMenuItemID());
 							receipt.append(orderDetails.get(orderIDList.get(j))
 									.get(i).getQuantity()
 									+ "\t"
@@ -445,7 +438,6 @@ public class CamsPendingOrderForm extends JPanel implements
 					refreshButton();
 					revalidate();
 					repaint();
-					System.out.println("Page: " + page);
 				}
 			}
 
@@ -473,7 +465,6 @@ public class CamsPendingOrderForm extends JPanel implements
 					refreshButton();
 					revalidate();
 					repaint();
-					System.out.println("Page: " + page);
 				} else {
 					page = 1;
 					btnPrevPage.setEnabled(false);
@@ -482,7 +473,6 @@ public class CamsPendingOrderForm extends JPanel implements
 					refreshButton();
 					revalidate();
 					repaint();
-					System.out.println("Page: " + page);
 				}
 				btnNextPage.setEnabled(true);
 			}

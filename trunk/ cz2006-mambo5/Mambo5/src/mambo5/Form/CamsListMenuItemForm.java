@@ -70,10 +70,6 @@ public class CamsListMenuItemForm extends JPanel implements
 				} else {
 					totalWidth += MENUITEM_BUTTON_WIDTH + MARGIN;
 				}
-				System.out.println(menuItemList.get(currentMenuItem)
-						.getMenuItemName()
-						+ menuItemList.get(currentMenuItem).getMenuItemID());
-				addMenuItemButtons(menuItemList.get(currentMenuItem));
 				posX += MENUITEM_BUTTON_WIDTH + MARGIN;
 			}
 		}
