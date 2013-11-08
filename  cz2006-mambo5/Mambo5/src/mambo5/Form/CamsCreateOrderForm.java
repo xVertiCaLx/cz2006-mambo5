@@ -266,10 +266,6 @@ public class CamsCreateOrderForm extends JPanel implements JInterfaceController 
 			} else {
 				totalWidth += MENUITEM_BUTTON_WIDTH + MARGIN;
 			}
-			System.out.println(menuItemList.get(currentMenuItem)
-					.getMenuItemName()
-					+ menuItemList.get(currentMenuItem).getMenuItemID());
-			addMenuItemButtons(menuItemList.get(currentMenuItem));
 			posX += MENUITEM_BUTTON_WIDTH + MARGIN;
 		}
 	}
@@ -375,7 +371,6 @@ public class CamsCreateOrderForm extends JPanel implements JInterfaceController 
 						+ df.format(totalPrice)
 						+ "\n=======================================";
 
-				System.out.println("totalPrice is: " + totalPrice);
 				quantity = "";
 				receipt.setText(receiptDetail);
 			}
@@ -409,7 +404,6 @@ public class CamsCreateOrderForm extends JPanel implements JInterfaceController 
 					refreshButton();
 					revalidate();
 					repaint();
-					System.out.println("Page: " + page);
 				}
 			}
 
@@ -437,7 +431,6 @@ public class CamsCreateOrderForm extends JPanel implements JInterfaceController 
 					refreshButton();
 					revalidate();
 					repaint();
-					System.out.println("Page: " + page);
 				} else {
 					page = 1;
 					btnPrevPage.setEnabled(false);
@@ -446,7 +439,6 @@ public class CamsCreateOrderForm extends JPanel implements JInterfaceController 
 					refreshButton();
 					revalidate();
 					repaint();
-					System.out.println("Page: " + page);
 				}
 				btnNextPage.setEnabled(true);
 			}

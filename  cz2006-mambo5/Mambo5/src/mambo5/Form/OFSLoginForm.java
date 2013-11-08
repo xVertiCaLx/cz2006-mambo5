@@ -64,10 +64,8 @@ public class OFSLoginForm extends JPanel implements JInterfaceController {
 		loginButton.setSize(new Dimension(STANDARDBUTTON_WIDTH, STANDARDBUTTON_HEIGHT));
 		loginButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				System.out.println("Login Fired!");
 				admin = loginController.login(useridTextField.getText(), passwordField.getText());
 				if(admin != null) {
-					System.out.println("Login Success: " + admin.getAdminID());
 					if (admin.getAccessID() == 1) {
 						mainFrame.replacePanel(new OFSFunction(mainFrame));
 					} else JOptionPane.showMessageDialog(mainFrame,"This account is not authorised to access this page.");

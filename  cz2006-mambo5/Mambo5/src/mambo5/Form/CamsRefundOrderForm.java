@@ -45,11 +45,6 @@ public class CamsRefundOrderForm extends JPanel implements JInterfaceController 
 		OrderController = new OrderController();
 		OrderController.retrieveOrderIDList(orderIDList, stallID, "Processing");
 
-		for (int i = 0; i < orderIDList.size(); i++) {
-			System.out.println("element" + i + ":"
-					+ orderIDList.get(i).getOrderID());
-		}
-
 		setBounds(0, 40, 800, 560);
 		setLayout(null);
 		setBackground(JPANEL_BACKGROUND_COLOUR);
@@ -156,9 +151,7 @@ public class CamsRefundOrderForm extends JPanel implements JInterfaceController 
 
 		try {
 			orderID = Integer.parseInt(txtOrderId.getText());
-		} catch (NumberFormatException e) {
-			System.out.println("");
-		}
+		} catch (NumberFormatException e) { }
 
 		for (int i = 0; i < orderIDList.size(); i++) {
 			if (orderIDList.get(i).getOrderID() == orderID) {
